@@ -1,0 +1,805 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "properties": {
+    "personal": {
+      "title": "Персональные данные",
+      "allOf": [
+        {
+          "properties": {
+            "lastName": {
+              "$ref": "#/definitions/lastName"
+            },
+            "firstName": {
+              "$ref": "#/definitions/firstName"
+            },
+            "hasMiddleName": {
+              "$ref": "#/definitions/hasMiddleName"
+            }
+          },
+          "dependencies": {
+            "hasMiddleName": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "hasMiddleName": {
+                      "const": false
+                    },
+                    "middleName": {
+                      "$ref": "#/definitions/middleName"
+                    }
+                  },
+                  "required": [
+                    "middleName"
+                  ]
+                }
+              ]
+            },
+            "middleName": [
+              "gender"
+            ]
+          },
+          "required": [
+            "lastName",
+            "firstName"
+          ]
+        },
+        {
+          "properties": {
+            "gender": {
+              "$ref": "#/definitions/gender"
+            },
+            "phone": {
+              "$ref": "#/definitions/phone"
+            },
+            "email": {
+              "$ref": "#/definitions/email"
+            },
+            "sopdConfirmed": {
+              "$ref": "#/definitions/sopdConfirmed"
+            }
+          },
+          "required": [
+            "gender",
+            "phone",
+            "email",
+            "sopdConfirmed"
+          ]
+        }
+      ]
+    },
+    "identity": {
+      "title": "Паспортные данные гражданина РФ",
+      "description": "Увеличьте вероятность одобрения в два раза, заполнив шаг полностью",
+      "properties": {
+        "passportSeries": {
+          "title": "Серия",
+          "type": "string",
+          "pattern": "[0-9]{2} [0-9]{2}",
+          "maxLength": 5,
+          "examples": [
+            "12 34"
+          ]
+        },
+        "passportNumber": {
+          "title": "Номер",
+          "type": "string",
+          "maxLength": 6,
+          "pattern": "[0-9]{6}",
+          "examples": [
+            "123456"
+          ]
+        },
+        "passportIssuedDate": {
+          "title": "Дата выдачи",
+          "type": "string",
+          "format": "date",
+          "examples": [
+            "21.12.2012"
+          ]
+        },
+        "passportIssuedCode": {
+          "title": "Код подразделения",
+          "type": "string",
+          "pattern": "[0-9]{3}-[0-9]{3}",
+          "maxLength": 7,
+          "examples": [
+            "123-456"
+          ]
+        },
+        "passportIssuedBy": {
+          "title": "Кем выдан",
+          "description": "Укажите точно как в паспорте. Если вводимый текст не поместится в поле - используйте сокращения.",
+          "type": "string"
+        },
+        "birthDate": {
+          "title": "Дата рождения",
+          "type": "string",
+          "format": "date",
+          "examples": [
+            "21.12.2012"
+          ]
+        },
+        "passportBirthPlace": {
+          "title": "Место рождения",
+          "description": "Укажите точно как в паспорте",
+          "type": "string"
+        },
+        "passportRegion": {
+          "title": "Регион регистрации",
+          "description": "Данные о регистрации вы найдете на 5 странице паспорта",
+          "type": "string"
+        },
+        "workRegion": {
+          "title": "Рабочий регион",
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "passportSeries",
+        "birthDate",
+        "passportBirthPlace",
+        "passportIssuedBy",
+        "passportIssuedCode",
+        "passportIssuedDate",
+        "passportNumber",
+        "passportRegion",
+        "workRegion"
+      ]
+    },
+    "employment": {
+      "title": "Сведения о занятости и образовании",
+      "description": "Получите +25% к вероятности одобрения, заполнив шаг полностью",
+      "properties": {
+        "education": {
+          "title": "Образование",
+          "type": "string",
+          "anyOf": [
+            {
+              "title": "Неполное среднее",
+              "const": "US"
+            },
+            {
+              "title": "Среднее",
+              "const": "S"
+            },
+            {
+              "title": "Среднее специальное",
+              "const": "SS"
+            },
+            {
+              "title": "Неполное высшее",
+              "const": "UH"
+            },
+            {
+              "title": "Высшее",
+              "const": "H"
+            },
+            {
+              "title": "Несколько высших",
+              "const": "HH"
+            },
+            {
+              "title": "Ученая степень / MBA",
+              "const": "A"
+            }
+          ]
+        },
+        "employed": {
+          "title": "Тип занятости",
+          "type": "string",
+          "anyOf": [
+            {
+              "title": "Работаю по найму",
+              "const": "A"
+            },
+            {
+              "title": "Работаю на себя",
+              "const": "B"
+            },
+            {
+              "title": "Не работаю",
+              "const": "C"
+            }
+          ],
+          "default": "A"
+        }
+      },
+      "dependencies": {
+        "employed": {
+          "oneOf": [
+            {
+              "properties": {
+                "employed": {
+                  "const": "A"
+                },
+                "organizationName": {
+                  "$ref": "#/definitions/organizationName"
+                },
+                "workPost": {
+                  "$ref": "#/definitions/workPost"
+                },
+                "workPhone": {
+                  "$ref": "#/definitions/workPhone"
+                },
+                "mainIncome": {
+                  "$ref": "#/definitions/mainIncome"
+                }
+              },
+              "required": [
+                "mainIncome",
+                "organizationName",
+                "workPhone",
+                "workPost"
+              ]
+            },
+            {
+              "properties": {
+                "employed": {
+                  "const": "B"
+                },
+                "employedType": {
+                  "title": "Выберите подходящее",
+                  "type": "string",
+                  "anyOf": [
+                    {
+                      "title": "Индивидуальный предприниматель",
+                      "const": "entrepreneur"
+                    },
+                    {
+                      "title": "Зарегистрированный самозанятый",
+                      "const": "self_employed_officially"
+                    },
+                    {
+                      "title": "Самозанятый неофициально",
+                      "const": "self_employed_not_officially"
+                    }
+                  ]
+                }
+              },
+              "dependencies": {
+                "employedType": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "employedType": {
+                          "const": "entrepreneur"
+                        },
+                        "organizationName": {
+                          "title": "Введите ФИО Индивидуального предпринимателя",
+                          "type": "string",
+                          "examples": [
+                            "Например, ИП им. Пирогова"
+                          ]
+                        },
+                        "workPhone": {
+                          "$ref": "#/definitions/workPhone"
+                        },
+                        "mainIncome": {
+                          "$ref": "#/definitions/mainIncome"
+                        }
+                      },
+                      "required": [
+                        "workPhone",
+                        "mainIncome",
+                        "organizationName",
+                        "employedType"
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "employedType": {
+                          "description": "Вы являетесь официально зарегистрированным самозанятым и уплачиваете налог на профессиональный доход",
+                          "const": "self_employed_officially"
+                        },
+                        "organizationName": {
+                          "title": "Наименование занятости",
+                          "type": "string"
+                        },
+                        "organizationInn": {
+                          "title": "ИНН Физического лица",
+                          "type": "string",
+                          "examples": [
+                            "526317984689"
+                          ]
+                        },
+                        "workPhone": {
+                          "$ref": "#/definitions/workPhone"
+                        },
+                        "mainIncome": {
+                          "$ref": "#/definitions/mainIncome"
+                        }
+                      },
+                      "required": [
+                        "employedType",
+                        "organizationName",
+                        "mainIncome",
+                        "workPhone",
+                        "organizationInn"
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "employedType": {
+                          "const": "self_employed_not_officially"
+                        },
+                        "organizationName": {
+                          "title": "Наименование занятости",
+                          "type": "string"
+                        },
+                        "organizationInn": {
+                          "title": "ИНН Физического лица",
+                          "type": "string",
+                          "examples": [
+                            "526317984689"
+                          ]
+                        },
+                        "workPhone": {
+                          "$ref": "#/definitions/workPhone"
+                        },
+                        "mainIncome": {
+                          "$ref": "#/definitions/mainIncome"
+                        }
+                      },
+                      "required": [
+                        "employedType",
+                        "organizationName",
+                        "mainIncome",
+                        "workPhone",
+                        "organizationInn"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "employed": {
+                  "const": "C"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "getMoney": {
+      "title": "Какую сумму хотите?",
+      "description": "Получите +10% к вероятности одобрения, заполнив шаг полностью",
+      "properties": {
+        "creditLimit": {
+          "title": "Желаемый кредитный лимит",
+          "description": "от 5 000 руб до 500 000 руб",
+          "type": "string",
+          "maxLength": 13
+        },
+        "secondaryDocument": {
+          "title": "Второй документ, удостоверяющий личность",
+          "type": "string",
+          "anyOf": [
+            {
+              "title": "Кредитная карта любого банка",
+              "const": "CDR"
+            },
+            {
+              "title": "Дебетовая карта любого банка",
+              "const": "DDR"
+            },
+            {
+              "title": "Водительское удостоверение",
+              "const": "DRL"
+            },
+            {
+              "title": "Загранпаспорт гражданина РФ",
+              "const": "002"
+            },
+            {
+              "title": "ИНН физического лица",
+              "const": "INN"
+            },
+            {
+              "title": "Полис ОМС (обязательного медицинского страхования)",
+              "const": "RMI"
+            },
+            {
+              "title": "СНИЛС (Страховое свидетельство пенсионного фонда)",
+              "const": "PFI"
+            }
+          ]
+        },
+        "proofIncomeDoc": {
+          "title": "Документ, подтверждающий доход",
+          "anyOf": [
+            {
+              "title": "Не могу предоставить",
+              "description": "Предоставив документ, подтверждающий ваш доход, вы можете получить улучшенное предложение по кредитной карте.",
+              "const": "-"
+            },
+            {
+              "title": "Справка по форме 2НДФЛ",
+              "description": "Справка, официально подтверждающая ваш доход за последние 3 месяца. Ее можно получить в бухгалтерии вашей организации. Справка действительна в течение 30 дней с момента предоставления организацией",
+              "const": "NFL"
+            },
+            {
+              "title": "Справка по форме банка",
+              "description": "Подтверждая свой доход, вы получаете более выгодные предложения по кредитной карте",
+              "const": "FBK"
+            }
+          ]
+        }
+      }
+    },
+    "additional": {
+      "title": "",
+      "description": "Поздравляем! Вы на финишной прямой",
+      "properties": {
+        "contacts": {
+          "title": "Дополнительный мобильный телефон для экстренной связи",
+          "description": "Телефон для экстренной связи не должен совпадать с номером телефона супруга.",
+          "properties": {
+            "contactFirstName": {
+              "title": "Имя контактного лица",
+              "type": "string"
+            },
+            "contactMobilePhone": {
+              "title": "Моб. телефон контактного лица",
+              "type": "string",
+              "format": "tel"
+            }
+          }
+        },
+        "security": {
+          "title": "Кодовое слово",
+          "properties": {
+            "codeWord": {
+              "title": "Буквы и цифры",
+              "description": "Кодовое слово необходимо для вашей идентификации при звонке в банк. Оно может быть на русском языке или латиницей и содержать минимум 1 цифру.",
+              "type": "string",
+              "maxLength": 35
+            }
+          }
+        },
+        "delivery": {
+          "title": "Выберите город и способ получения карты",
+          "properties": {
+            "receiptCity": {
+              "title": "Город получения карты",
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "receiptCity": {
+              "title": "Как хотите получить карту?",
+              "properties": {
+                "delivery-method": {
+                  "title": "",
+                  "type": "string",
+                  "anyOf": [
+                    {
+                      "title": "Доставить",
+                      "const": "delivery"
+                    },
+                    {
+                      "title": "Заберу сам",
+                      "const": "yourself"
+                    }
+                  ]
+                }
+              },
+              "dependencies": {
+                "delivery-method": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "delivery-method": {
+                          "const": "delivery"
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "delivery-method": {
+                          "const": "yourself"
+                        },
+                        "receipt-method": {
+                          "title": "",
+                          "type": "string",
+                          "anyOf": [
+                            {
+                              "title": "Забрать в отделении",
+                              "description": "Заберите карту в ближайшем отделении банка",
+                              "const": "office"
+                            }
+                          ]
+                        }
+                      },
+                      "dependencies": {
+                        "receipt-method": {
+                          "oneOf": [
+                            {
+                              "properties": {
+                                "receipt-method": {
+                                  "const": "office"
+                                },
+                                "receiptOffice": {
+                                  "title": "Выберите отделение",
+                                  "type": "string",
+                                  "anyOf": [
+                                    {
+                                      "title": "[м. Академическая] ул. Гражданский пр-кт, д.36",
+                                      "const": "0"
+                                    },
+                                    {
+                                      "title": "[м. Беговая] ул. Савушкина, д.127",
+                                      "const": "1"
+                                    },
+                                    {
+                                      "title": "[м. Василеостровская] В.О., 7-ая линия, д.54, лит.А, пом.3Н",
+                                      "const": "2"
+                                    },
+                                    {
+                                      "title": "[м. Василеостровская] В.О., пр-кт Средний, д.33",
+                                      "const": "3"
+                                    },
+                                    {
+                                      "title": "[м. Владимирская] Лиговский пр-кт, д.73, лит.А",
+                                      "const": "4"
+                                    },
+                                    {
+                                      "title": "[м. Гражданский Проспект] пр-кт Просвещения, д.84/1",
+                                      "const": "5"
+                                    },
+                                    {
+                                      "title": "[м. Кировский Завод] пр-кт Стачек, д.47, лит.Е",
+                                      "const": "6"
+                                    },
+                                    {
+                                      "title": "[м. Комендантский проспект] ул. Гаккелевская, д.32",
+                                      "const": "7"
+                                    },
+                                    {
+                                      "title": "[м. Крестовский Остров] Кемская улица, д.1, литера А, пом. 1Н",
+                                      "const": "8"
+                                    },
+                                    {
+                                      "title": "[м. Купчино] пр-кт Дунайский, д.31, кор.1, лит.А",
+                                      "const": "9"
+                                    },
+                                    {
+                                      "title": "[м. Ленинский Проспект] ул. Новаторов, д.8, пом. 12Н, лит.А",
+                                      "const": "10"
+                                    },
+                                    {
+                                      "title": "[м. Ломоносовская] ул. Полярников, д.6",
+                                      "const": "11"
+                                    },
+                                    {
+                                      "title": "[м. Маяковская] ул. Пушкинская, д.9, лит.А, пом.12Н",
+                                      "const": "12"
+                                    },
+                                    {
+                                      "title": "[м. Международная] ул. Бухарестская, д.74, кор.3, лит.А",
+                                      "const": "13"
+                                    },
+                                    {
+                                      "title": "[м. Московская] пр-кт Московский, д.193, пом.14Н, лит.А",
+                                      "const": "14"
+                                    },
+                                    {
+                                      "title": "[м. Невский Проспект] ул. Большая Конюшенная, 19/8, лит.А",
+                                      "const": "15"
+                                    },
+                                    {
+                                      "title": "[м. Новочеркасская] пр-кт Новочеркасский, д.43/17, лит.А",
+                                      "const": "16"
+                                    },
+                                    {
+                                      "title": "[м. Парк Победы] пр-кт Московский, д.192-194, пом. 19Н, лит.А",
+                                      "const": "17"
+                                    },
+                                    {
+                                      "title": "[м. Петроградская] пр-кт Каменноостровский, д.42Б, лит. А, пом.24Н",
+                                      "const": "18"
+                                    },
+                                    {
+                                      "title": "[м. Пионерская] аллея Поликарпова, д.2, лит.А, пом.1Н",
+                                      "const": "19"
+                                    },
+                                    {
+                                      "title": "[м. Площадь Ленина] ул. Академика Лебедева, д.31, корп.2",
+                                      "const": "20"
+                                    },
+                                    {
+                                      "title": "[м. Проспект Большевиков] пр-кт Большевиков, д.2, лит.А",
+                                      "const": "21"
+                                    },
+                                    {
+                                      "title": "[м. Проспект Ветеранов] пр-кт Дачный, д.17, корп.3",
+                                      "const": "22"
+                                    },
+                                    {
+                                      "title": "[м. Проспект Просвещения] ул. Хошимина, д.9, корп. 1",
+                                      "const": "23"
+                                    },
+                                    {
+                                      "title": "[м. Улица Дыбенко] ул. Проспект Большевиков, д.21, лит.Р",
+                                      "const": "24"
+                                    },
+                                    {
+                                      "title": "[м. Черная речка] ул. Савушкина, д.7",
+                                      "const": "25"
+                                    },
+                                    {
+                                      "title": "[м. Чернышевская] ул. Фурштадская, д.40",
+                                      "const": "26"
+                                    },
+                                    {
+                                      "title": "[м. undefined] пр-кт Наставников, д.19",
+                                      "const": "27"
+                                    }
+                                  ]
+                                }
+                              },
+                              "dependencies": {
+                                "receiptOffice": {
+                                  "$ref": "#/definitions/receipt"
+                                }
+                              }
+                            },
+                            {
+                              "properties": {
+                                "receipt-method": {
+                                  "const": "yourself"
+                                },
+                                "receiptOffice": {
+                                  "$ref": "#/definitions/receipt"
+                                },
+                                "callAgreed": {
+                                  "title": "Разрешаю звонить мне с 22:00 до 8:00 (в ночное время) для подтверждения данных по заявке",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "lastName": {
+      "title": "Фамилия",
+      "description": "Укажите точно как в паспорте",
+      "type": "string",
+      "minLength": 3
+    },
+    "firstName": {
+      "title": "Имя",
+      "description": "Укажите точно как в паспорте",
+      "type": "string",
+      "minLength": 3
+    },
+    "middleName": {
+      "title": "Отчество",
+      "description": "Укажите точно как в паспорте",
+      "type": "string"
+    },
+    "hasMiddleName": {
+      "title": "По паспорту без отчества",
+      "type": "boolean",
+      "default": false
+    },
+    "gender": {
+      "title": "Пол",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Женский",
+          "const": "f"
+        },
+        {
+          "title": "Мужской",
+          "const": "m"
+        }
+      ]
+    },
+    "phone": {
+      "title": "Мобильный телефон",
+      "description": "Мы отправим решение по заявке на указанный номер",
+      "type": "string",
+      "format": "tel",
+      "examples": [
+        "+7 (901) 123-45-67"
+      ]
+    },
+    "email": {
+      "title": "Электронная почта",
+      "description": "Мы отправим полезную информацию на указанный адрес",
+      "type": "string",
+      "format": "email",
+      "examples": [
+        "example@domain.ru"
+      ]
+    },
+    "sopdConfirmed": {
+      "title": "Я соглашаюсь с [условиями](http://example.com) и даю свое [согласие на обработку](http://example.com) и использование моих персональных данных, и разрешаю сделать запрос в бюро кредитных историй",
+      "description": "",
+      "type": "boolean",
+      "default": false
+    },
+    "organizationName": {
+      "title": "Название организации или ИП",
+      "type": "string"
+    },
+    "workPost": {
+      "title": "Должность",
+      "type": "string"
+    },
+    "workPhone": {
+      "title": "Рабочий телефон",
+      "description": "Вы можете указать стационарный или мобильный номер телефона",
+      "type": "string",
+      "format": "tel",
+      "examples": [
+        "+7 (901) 123-45-67"
+      ]
+    },
+    "mainIncome": {
+      "title": "Размер заработной платы",
+      "description": "Укажите вашу среднюю зарплату за последние три месяца. Налоги (13%) вычитать не нужно",
+      "type": "string",
+      "format": "money",
+      "pattern": "[0-9]"
+    },
+    "receipt": {
+      "properties": {
+        "cardType": {
+          "title": "Тип карты",
+          "type": "string",
+          "anyOf": [
+            {
+              "title": "Неименная карта",
+              "description": "Вы можете получить карту в течение дня. При подаче заявки до обеда - уже сегодня. На карте не будет вашего имени.",
+              "$comment": "Полноценная кредитная карта. При оплате интернет-покупок в поле \"Имя владельца карты\" вы просто вводите ваше имя, хотя его и нет на карте. Например, Ivan Petrov.",
+              "const": "unnamed"
+            },
+            {
+              "title": "Именная карта",
+              "description": "Вы получите карту через 1 – 3 дня. На карте будет указано ваше имя.",
+              "$comment": "На изготовление карты нам потребуется от 1 до 3 дней. Если карта нужна вам срочно – выберите «неименную карту».",
+              "const": "named"
+            }
+          ]
+        }
+      },
+      "dependencies": {
+        "cardType": {
+          "oneOf": [
+            {
+              "properties": {
+                "cardType": {
+                  "const": "named"
+                },
+                "embossingName": {
+                  "title": "Фамилия и имя владельца карты",
+                  "type": "string",
+                  "examples": [
+                    "IVAN IVANOV"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

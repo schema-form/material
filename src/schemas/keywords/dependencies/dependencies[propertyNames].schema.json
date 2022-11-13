@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "Зависимости всегда видны",
+	"description": "Введите \"Имя\", чтобы поля \"Фамилия\", \"Отчество\" стали обязательными",
+	"properties": {
+		"firstName": {
+			"title": "Имя",
+			"type": "string"
+		},
+		"lastName": {
+			"title": "Фамилия",
+			"type": "string"
+		},
+		"middleName": {
+			"title": "Отчество",
+			"type": "string"
+		}
+	},
+	"dependencies": {
+		"firstName": ["lastName", "middleName"]
+	},
+	"x-errorMessages": {
+		"dependencies": "обязательное"
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"registrationAddress": {
+			"title": "Адрес регистрации",
+			"$ref": "#/definitions/address"
+		},
+		"livingAddress": {
+			"title": "Адрес проживания",
+			"$ref": "#/definitions/address"
+		}
+	},
+	"definitions": {
+		"address": {
+			"properties": {
+				"country": {
+					"title": "Страна",
+					"enum": ["Россия", "Беларусь", "Украина"]
+				},
+				"city": {
+					"title": "Город",
+					"type": "string"
+				},
+				"street": {
+					"title": "Улица",
+					"type": "string"
+				},
+				"building": {
+					"title": "Дом",
+					"type": "string"
+				},
+				"block": {
+					"title": "Корпус",
+					"type": "string"
+				},
+				"flat": {
+					"title": "Квартира",
+					"type": "string"
+				}
+			},
+			"required": [
+				"city",
+				"street",
+				"building"
+			]
+		}
+	}
+}

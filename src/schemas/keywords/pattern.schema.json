@@ -1,0 +1,109 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"phoneNumber": {
+			"title": "Телефон",
+			"type": "string",
+			"pattern": "^\\+7",
+			"x-errorMessages": {
+				"pattern": "должно начинаться на \"+7\""
+			}
+		},
+		"hostName": {
+			"title": "Хост",
+			"type": "string",
+			"pattern": ".com$",
+			"x-errorMessages": {
+				"pattern": "должно заканчиваться на \".com\""
+			}
+		},
+		"gender": {
+			"title": "Пол",
+			"type": "string",
+			"pattern": "^мужской|женский$",
+			"x-errorMessages": {
+				"pattern": "должно быть \"мужской\" или \"женский\""
+			}
+		},
+		"romanNumber": {
+			"title": "Римское число",
+			"type": "string",
+			"pattern": "^[IVXLCDM]*$",
+			"x-errorMessages": {
+				"pattern": "должно состоять из символов I,V,X,L,C,D,M"
+			}
+		},
+		"firstName": {
+			"title": "Имя",
+			"type": "string",
+			"pattern": "^[А-Я][а-я]+$",
+			"x-errorMessages": {
+				"pattern": "должно начинаться с заглавной буквы А-Я"
+			}
+		},
+		"lastName": {
+			"title": "Фамилия",
+			"type": "string",
+			"pattern": "^[^ёЁ]+$",
+			"x-errorMessages": {
+				"pattern": "не должно содержать буквы \"Ё\" и \"ё\""
+			}
+		},
+		"username": {
+			"title": "Логин",
+			"type": "string",
+			"pattern": "^[^A-Z]+$",
+			"x-errorMessages": {
+				"pattern": "не должно содержать заглавные буквы A-Z"
+			}
+		},
+		"age": {
+			"title": "Возраст",
+			"type": "string",
+			"pattern": "^[0-9]+$",
+			"x-errorMessages": {
+				"pattern": "должно содержать не меньше одной цифры"
+			}
+		},
+		"email": {
+			"title": "Email",
+			"type": "string",
+			"pattern": "^user[0-9]*@example.com$",
+			"x-errorMessages": {
+				"pattern": "должно быть в формате user[123]@example.com"
+			}
+		},
+		"snils": {
+			"title": "СНИЛС",
+			"type": "string",
+			"pattern": "^[0-9]{3}-?[0-9]{3}-?[0-9]{3} ?[0-9]{2}$",
+			"x-errorMessages": {
+				"pattern": "должен соответствовать формату 123-456-789 01 или 12345678901"
+			}
+		},
+		"series": {
+			"title": "Серия паспорта РФ",
+			"type": "string",
+			"pattern": "^[0-9]{4}$",
+			"x-errorMessages": {
+				"pattern": "должно содержать 4-е цифры"
+			}
+		},
+		"cardNumber": {
+			"title": "Номер карты",
+			"type": "string",
+			"pattern": "^[0-9]{16,18}$",
+			"x-errorMessages": {
+				"pattern": "должно содержать 16-18 цифр"
+			}
+		},
+		"smsCode": {
+			"title": "SMS-код",
+			"type": "string",
+			"pattern": "^[0-9]{4,}$",
+			"x-errorMessages": {
+				"pattern": "должно содержать не меньше 4-х цифр"
+			}
+		}
+	}
+}

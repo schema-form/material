@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"firstName": {
+			"title": "Имя",
+			"$ref": "#/definitions/name"
+		},
+		"lastName": {
+			"title": "Фамилия",
+			"$ref": "#/definitions/name"
+		},
+		"middleName": {
+			"title": "Отчество",
+			"$ref": "#/definitions/name"
+		}
+	},
+	"definitions": {
+		"name": {
+			"type": "string",
+			"minLength": 2,
+			"pattern": "^[A-Za-zА-Яа-я]+$"
+		}
+	}
+}

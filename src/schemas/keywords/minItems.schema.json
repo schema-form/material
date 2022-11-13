@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Дети",
+	"description": "Укажите всех ваших детей",
+	"type": "array",
+	"items": {
+		"title": "ФИО ребенка",
+		"type": "string"
+	},
+	"minItems": 2
+}

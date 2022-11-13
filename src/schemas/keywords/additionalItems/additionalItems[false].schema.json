@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "Дополнительные элементы не разрешены",
+	"type": "array",
+	"items": [
+		{
+			"title": "Frontend-разработчик",
+			"type": "string"
+		},
+		{
+			"title": "Backend-разработчик",
+			"type": "string"
+		}
+	],
+	"additionalItems": false
+}

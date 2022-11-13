@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "Ссылка на свойство",
+	"properties": {
+		"lastName": {
+			"title": "Фамилия",
+			"type": "string",
+			"minLength": 3,
+			"maxLength": 24,
+			"pattern": "[А-Я]{1}[а-я]*"
+		},
+		"firstName": {
+			"title": "Имя",
+			"$ref": "#/properties/lastName"
+		},
+		"middleName": {
+			"title": "Отчество",
+			"$ref": "#/properties/lastName"
+		}
+	}
+}

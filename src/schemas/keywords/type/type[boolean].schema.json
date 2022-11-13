@@ -1,0 +1,6 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Я соглашаюсь с [условиями](https://example.com) и даю свое [согласие на обработку](https://example.com) и использование моих персональных данных",
+	"type": "boolean",
+	"default": false
+}

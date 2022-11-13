@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Персональная схема для каждого элемента",
+	"type": "array",
+	"items": [
+		{
+			"title": "Email",
+			"type": "string",
+			"format": "email"
+		},
+		{
+			"title": "Мобильный телефон",
+			"type": "string",
+			"pattern": "^\\+79[0-9]{9}$",
+			"x-errorMessages": {
+				"pattern": "должно быть номером мобильного телефона"
+			}
+		},
+		{
+			"title": "Telegram",
+			"type": "string",
+			"pattern": "^@.{10}$",
+			"x-errorMessages": {
+				"pattern": "должно быть логином \"Telegram\""
+			}
+		}
+	]
+}

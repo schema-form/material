@@ -1,0 +1,56 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "Объединение объектов",
+	"description": "Объекты \"Адрес\" и \"Контакт\" объединены в один общий",
+	"allOf": [
+		{
+			"title": "Адрес",
+			"properties": {
+				"city": {
+					"title": "Город",
+					"type": "string"
+				},
+				"street": {
+					"title": "Улица",
+					"type": "string"
+				},
+				"building": {
+					"type": "string",
+					"title": "Дом"
+				},
+				"block": {
+					"type": "string",
+					"title": "Корпус"
+				},
+				"flat": {
+					"type": "string",
+					"title": "Квартира"
+				}
+			},
+			"required": [
+				"city",
+				"street",
+				"building"
+			]
+		},
+		{
+			"title": "Контакт",
+			"properties": {
+				"contactName": {
+					"title": "Контактное имя",
+					"type": "string",
+					"minLength": 3
+				},
+				"contactPhone": {
+					"title": "Контактный телефон",
+					"type": "string",
+					"pattern": "^\\+7[0-9]{10}",
+					"x-errorMessages": {
+						"pattern": "должно быть номером телефона"
+					}
+				}
+			},
+			"required": ["contactName", "contactPhone"]
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"email": {
+			"title": "E-mail",
+			"type": "string"
+		},
+		"password": {
+			"title": "Пароль",
+			"type": "string",
+			"format": "password",
+			"minLength": 8
+		},
+		"fullName": {
+			"title": "ФИО",
+			"type": "string"
+		}
+	},
+	"required": [
+		"email",
+		"password"
+	]
+}

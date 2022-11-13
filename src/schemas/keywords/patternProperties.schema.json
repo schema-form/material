@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"lastName": {
+			"title": "Фамилия",
+			"type": "string"
+		},
+		"firstName": {
+			"title": "Имя",
+			"type": "string"
+		},
+		"middleName": {
+			"title": "Отчество",
+			"type": "string"
+		}
+	},
+	"patternProperties": {
+		"^.*?Name$": {
+			"minLength": 3,
+			"pattern": "^[А-яA-z ]+$",
+			"x-errorMessages": {
+				"pattern": "должно содержать только буквы и пробел"
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "array",
+	"items": {
+		"title": "Контакт",
+		"type": "string",
+		"if": {
+			"pattern": "^\\+"
+		},
+		"then": {
+			"pattern": "^\\+79[0-9]{8}",
+			"x-errorMessages": {
+				"pattern": "должно соответствовать формату \"номер телефона\""
+			}
+		},
+		"else": {
+			"if": {
+				"pattern": "@"
+			},
+			"then": {
+				"format": "email"
+			}
+		}
+	}
+}

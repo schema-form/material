@@ -1,0 +1,7 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Регулярное выражение",
+	"type": "string",
+	"format": "regex",
+	"examples": ["^[А-Яа-я0-9]$"]
+}

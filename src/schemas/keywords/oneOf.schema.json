@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Тип документа",
+	"type": "string",
+	"oneOf": [
+		{
+			"title": "Паспорт гражданина РФ",
+			"const": "006"
+		},
+		{
+			"title": "Паспорт гражданина СССР",
+			"const": "001"
+		}
+	]
+}
