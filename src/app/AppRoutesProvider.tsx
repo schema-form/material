@@ -18,21 +18,30 @@ export default AppRouteProvider;
 
 export const useAppRoutes = () => useContext(AppRoutesContext);
 
-type AppRoutePropsWithPathname = AppRouteProps & {
+export type ActiveAppRouteProps = AppRouteProps & {
     pathname: string;
 }
 
-export const useAppRoute = (): AppRoutePropsWithPathname => {
+export const useAppRoute = (pathname?: string): ActiveAppRouteProps | undefined => {
+    const location = useLocation();
+    const appRoutePathname = pathname || location?.pathname;
     const appRoutes = useAppRoutes();
-    const { pathname } = useLocation();
-    const pathSegments = pathname.split('/').slice(1);
-    const appRouteProps = pathSegments.reduce((routes, pathSegment) => {
+    const pathSegments = appRoutePathname?.split('/').slice(1);
+    const rootRoute: AppRouteProps = {
+        title: 'Root',
+        children: appRoutes
+    }
+    const appRouteProps = pathSegments.reduce((routeProps?: AppRouteProps, pathSegment = '') => {
         const path = `/${pathSegment}`;
-        return routes[path]?.children || routes[path];
-    }, appRoutes as any) as AppRouteProps;
+        return routeProps?.children?.[path];
+    }, rootRoute);
+
+    if (!appRouteProps) return;
 
     return {
         ...appRouteProps,
-        pathname,
+        pathname: appRoutePathname,
     }
 }
+
+

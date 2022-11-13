@@ -11,7 +11,9 @@ export type AppRouteProps = {
     children?: AppRoutes;
 }
 
-export const appRoutes: AppRoutes = {
+export const DEFAULT_APP_ROUTE_PATH = '/keywords/$ref/properties';
+
+export const appRoutes = ({
     '/keywords': {
         title: 'Keywords',
         children: {
@@ -414,4 +416,4 @@ export const appRoutes: AppRoutes = {
             }
         }
     }
-}
+})

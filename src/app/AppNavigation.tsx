@@ -54,13 +54,11 @@ function NavigationItem(props: NavigationItemProps) {
                         <ListItemIcon sx={{minWidth: 'auto', mr: .75}}>
                             <KeyboardArrowRightIcon
                                 fontSize="small"
-                                sx={{
-                                    transform: isExpanded ? 'rotate(90deg)' : undefined
-                                }}
+                                sx={{transform: isExpanded ? 'rotate(90deg)' : undefined}}
                             />
                         </ListItemIcon>
                         <ListItemText primary={(
-                            <Typography variant="body1" fontWeight="bold">
+                            <Typography variant="body1">
                                 {props?.title}
                             </Typography>
                         )} />
@@ -82,7 +80,15 @@ function NavigationItem(props: NavigationItemProps) {
                 sx={{ pl: level * 2.5, py: .5}}
                 onClick={closeDrawer}
             >
-                <ListItemText primary={props?.title} />
+                <ListItemText primary={(
+                    <Typography
+                        component="span"
+                        variant="body1"
+                        color={isSelected ? 'textPrimary' : 'textSecondary'}
+                    >
+                        {props?.title}
+                    </Typography>
+                )} />
             </ListItemButton>
         </ListItem>
     )

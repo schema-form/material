@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {startTransition, useEffect, useState} from "react";
-import {Container, Link, Stack, useMediaQuery, useTheme} from "@mui/material";
+import {Container, Link, Stack, Tooltip, useMediaQuery, useTheme} from "@mui/material";
 import {SchemaForm, SchemaFormProps} from "../components/SchemaForm";
 import AppNavigation from "./AppNavigation";
 import {useAppRoute} from "./AppRoutesProvider";
@@ -10,10 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import {GitHub} from "@mui/icons-material";
 import MUI from "../icons/MUI";
 import Typography from "@mui/material/Typography";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
+import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
+import JSONSchema from "../icons/JSONSchema";
 
 export default function AppLayout() {
     const appRoute = useAppRoute();
-    const formKey = appRoute.pathname;
+    const navigate = useNavigate();
+    const hasRouteSchema = Boolean(appRoute?.fetchSchema);
+    const formKey = appRoute?.pathname;
     const [editorData, setEditorData] = useState<EditorFormData>({
         schema: '',
         uiSchema: '',
@@ -23,6 +28,11 @@ export default function AppLayout() {
     const [schema, setSchema] = useState<SchemaFormProps['schema']>();
     const theme = useTheme();
     const isBreakpointUpSM = useMediaQuery(theme.breakpoints.up('sm'));
+
+    console.log('!appRoute', appRoute);
+    if (!hasRouteSchema) {
+        navigate(DEFAULT_APP_ROUTE_PATH);
+    }
 
     useEffect(() => {
         appRoute?.fetchSchema?.().then((data) => {
@@ -40,7 +50,7 @@ export default function AppLayout() {
                 console.error(e);
             }
         })
-    }, [appRoute.pathname]);
+    }, [appRoute?.pathname]);
 
     const form = schema ? (
         <SchemaForm
@@ -81,29 +91,37 @@ export default function AppLayout() {
         </Container>
     );
 
-    const gitHubLink = (
-        <IconButton
-            edge="end"
-            color="inherit"
-            component={Link}
-            target="_blank"
-            href="https://github.com/slavabelaev/mui-form"
-            sx={{p: isBreakpointUpSM ? .5 : undefined}}
-        >
-            <GitHub sx={{fontSize: 28}} />
-        </IconButton>
-    )
+    const GitHubLink = (
+        <Tooltip title="GitHub">
+            <IconButton
+                edge="end"
+                color="inherit"
+                component={Link}
+                target="_blank"
+                href="https://github.com/slavabelaev/mui-form"
+                sx={{p: isBreakpointUpSM ? .5 : undefined}}
+            >
+                <GitHub sx={{fontSize: 28}} />
+            </IconButton>
+        </Tooltip>
+    );
 
     const appLogo = (
-        <Stack direction="row" spacing={2} alignItems="center">
-            <Link href="#" color="inherit" sx={{display: 'inline-flex'}}>
-                <MUI fontSize="medium" />
-            </Link>
+        <Stack
+            component={RouterLink}
+            to="/"
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            color="inherit"
+            sx={{textDecoration: 'none'}}
+        >
+            <MUI fontSize="medium" />
             <Typography variant="body1" textTransform="uppercase" fontWeight="bold">
-                Form
+                JSON Schema Form
             </Typography>
         </Stack>
-    )
+    );
 
     return (
         <Layout
@@ -111,7 +129,7 @@ export default function AppLayout() {
             rightDrawer={sourceForm}
             AppBarProps={{
                 logo: appLogo,
-                actions: [gitHubLink]
+                actions: GitHubLink
             }}
         >
             <Container maxWidth="xl" sx={{py: 3}}>

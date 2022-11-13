@@ -5,8 +5,7 @@ export function AppRouter() {
     return (
         <HashRouter>
             <Routes>
-                <Route path="/keywords/*" element={<AppLayout />} />
-                <Route path="/" element={<AppLayout />} />
+                <Route path="*" element={<AppLayout />} />
             </Routes>
         </HashRouter>
     )
