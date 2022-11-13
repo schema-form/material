@@ -102,7 +102,7 @@ export function FormCard(props: FormCardProps) {
         <ErrorOutlined color="error" />
     ) : null;
 
-    const expandIcon = expanded ? <KeyboardArrowRight /> : <KeyboardArrowDown />;
+    const expandIcon = expanded ? <KeyboardArrowDown /> : <KeyboardArrowRight />;
 
     const title = props?.title ? (
         <Typography

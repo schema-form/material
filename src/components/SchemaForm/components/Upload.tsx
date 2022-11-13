@@ -48,12 +48,10 @@ export function Upload(props: UploadProps) {
                 borderStyle: 'dashed',
                 borderColor: props.disabled
                     ? theme.palette.grey["300"]
-                    : theme.palette.grey["400"],
-                paddingTop: theme.spacing(.5),
-                paddingBottom: theme.spacing(.5),
+                    : theme.palette.grey["400"]
             }}
         >
-            <ListItemIcon sx={{minWidth: 40}}>
+            <ListItemIcon>
                 <FileUpload />
             </ListItemIcon>
             <ListItemText

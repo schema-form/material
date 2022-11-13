@@ -73,7 +73,7 @@ export const appRoutes = ({
                     },
                     '/rules': {
                         title: 'rules',
-                        fetchSchema: async () => import('../schemas/keywords/allOf/allOf[rules].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/allOf/allOf[keywords].schema.json'),
                     },
                 }
             },
@@ -82,11 +82,11 @@ export const appRoutes = ({
                 children: {
                     '/options': {
                         title: 'options',
-                        fetchSchema: async () => import('../schemas/keywords/anyOf/anyOf[options].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/anyOf/anyOf[const].schema.json'),
                     },
                     '/rules': {
                         title: 'rules',
-                        fetchSchema: async () => import('../schemas/keywords/anyOf/anyOf[rules].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/anyOf/anyOf[keyword].schema.json'),
                     },
                 }
             },
@@ -149,15 +149,15 @@ export const appRoutes = ({
                 children: {
                     '/checkbox': {
                         title: 'checkbox',
-                        fetchSchema: async () => import('../schemas/keywords/default/default[checkbox].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/default/default[boolean].schema.json'),
                     },
                     '/select': {
                         title: 'select',
-                        fetchSchema: async () => import('../schemas/keywords/default/default[select].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/default/default[enum].schema.json'),
                     },
                     '/input': {
                         title: 'input',
-                        fetchSchema: async () => import('../schemas/keywords/default/default[input].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/default/default[integer].schema.json'),
                     },
                 }
             },
@@ -249,11 +249,11 @@ export const appRoutes = ({
                 children: {
                     '/unique': {
                         title: 'unique',
-                        fetchSchema: async () => import('../schemas/keywords/items/items[unique].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/items/items[array].schema.json'),
                     },
                     '/identical': {
                         title: 'identical',
-                        fetchSchema: async () => import('../schemas/keywords/items/items[identical].schema.json'),
+                        fetchSchema: async () => import('../schemas/keywords/items/items[schema].schema.json'),
                     },
                 }
             },

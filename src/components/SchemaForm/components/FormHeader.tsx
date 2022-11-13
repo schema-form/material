@@ -20,7 +20,8 @@ export function FormHeader(props: FormHeaderProps) {
     const label = hasLabel ? (
         <Typography
             component="legend"
-            variant="h6"
+            variant="body1"
+            color={props.error ? 'error' : 'textPrimary'}
             sx={{p: 0}}
         >
             {props?.label}
@@ -30,7 +31,7 @@ export function FormHeader(props: FormHeaderProps) {
     const helperText = hasHelperText ? (
         <Typography
             component="p"
-            variant="body2"
+            variant="caption"
             color={props.error ? 'error' : 'textSecondary'}
         >
             {props?.helperText}
@@ -39,6 +40,7 @@ export function FormHeader(props: FormHeaderProps) {
 
     return (
         <ListItem
+            component="header"
             className={props.className}
             disabled={props.disabled}
             hidden={props.hidden}
