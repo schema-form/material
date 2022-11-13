@@ -7,11 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
 import * as React from "react";
 import {Link, useLocation} from "react-router-dom";
-import {Box, Collapse, TextField} from "@mui/material";
+import {Box, Collapse} from "@mui/material";
 import isEmpty from "lodash/isEmpty";
 import {useState} from "react";
-import {FolderOpenOutlined, SearchOutlined} from "@mui/icons-material";
 import {useDrawerState} from "../components/Layout/DrawerProvider";
+import Typography from "@mui/material/Typography";
 
 type NavigationItemProps = AppRouteProps & {
     path: string;
@@ -49,18 +49,21 @@ function NavigationItem(props: NavigationItemProps) {
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={toggleExpand}
-                        sx={{ pl: level * 2}}
+                        sx={{ pl: level * 2, pr: 4, py: .5}}
                     >
-                        <ListItemText primary={props?.title} />
-                        <ListItemIcon sx={{minWidth: 'auto'}}>
+                        <ListItemIcon sx={{minWidth: 'auto', mr: .5}}>
                             <KeyboardArrowRightIcon
                                 fontSize="small"
                                 sx={{
-                                    transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                                    transition: '.240ms'
+                                    transform: isExpanded ? 'rotate(90deg)' : undefined
                                 }}
                             />
                         </ListItemIcon>
+                        <ListItemText primary={(
+                            <Typography variant="body1" fontWeight="bold">
+                                {props?.title}
+                            </Typography>
+                        )} />
                     </ListItemButton>
                 </ListItem>
                 <Collapse in={isExpanded}>
@@ -76,7 +79,7 @@ function NavigationItem(props: NavigationItemProps) {
                 component={Link}
                 to={props.path}
                 selected={isSelected}
-                sx={{ pl: level * 2}}
+                sx={{ pl: level * 2.5, py: .5}}
                 onClick={closeDrawer}
             >
                 <ListItemText primary={props?.title} />

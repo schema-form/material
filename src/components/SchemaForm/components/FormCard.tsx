@@ -7,7 +7,13 @@ import {
     ListItemButton, ListItemIcon, ListItemProps,
     ListItemText, styled,
 } from "@mui/material";
-import {ExpandMoreOutlined, ExpandLessOutlined, ErrorOutlined} from "@mui/icons-material";
+import {
+    KeyboardArrowRight,
+    KeyboardArrowDown,
+    ErrorOutlined,
+    ArrowRightOutlined,
+    ArrowDownwardOutlined
+} from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 
@@ -97,7 +103,7 @@ export function FormCard({
         <ErrorOutlined color="error" />
     );
 
-    const expandIcon = expanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />;
+    const expandIcon = expanded ? <KeyboardArrowRight /> : <KeyboardArrowDown />;
     const header = (title || subheader || secondaryAction) && (
         <ListItem
             component="header"
