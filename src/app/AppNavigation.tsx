@@ -51,7 +51,7 @@ function NavigationItem(props: NavigationItemProps) {
                         onClick={toggleExpand}
                         sx={{ pl: level * 2, pr: 4, py: .5}}
                     >
-                        <ListItemIcon sx={{minWidth: 'auto', mr: .5}}>
+                        <ListItemIcon sx={{minWidth: 'auto', mr: .75}}>
                             <KeyboardArrowRightIcon
                                 fontSize="small"
                                 sx={{
