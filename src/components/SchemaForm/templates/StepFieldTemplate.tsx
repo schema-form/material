@@ -12,12 +12,12 @@ export function StepFieldTemplate(props: FieldTemplateProps<any, SchemaFormConte
     const isObjectSchema = isObject(schema);
     const hasErrors = Boolean(rawErrors?.length);
 
-    const errorList = hasErrors && (
+    const errorList = hasErrors ? (
         <ErrorList
             className="field-error-list"
             errors={rawErrors as string[]}
         />
-    )
+    ) : null;
 
     const navigation = (
         <ButtonGroup>

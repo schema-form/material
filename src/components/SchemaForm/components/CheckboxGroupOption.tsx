@@ -29,7 +29,7 @@ export function CheckboxGroupOption(props: CheckboxGroupOptionProps) {
     const labelText = props?.label || JSON.stringify(props?.value);
     const id = useMemo(uuid, []);
 
-    const label = labelText && (
+    const label = labelText ? (
         <Typography
             component="span"
             variant="body1"
@@ -37,9 +37,9 @@ export function CheckboxGroupOption(props: CheckboxGroupOptionProps) {
         >
             {labelText}
         </Typography>
-    );
+    ) : null;
 
-    const helper = props.helperText && (
+    const helper = props.helperText ? (
         <ListItemIcon sx={{minWidth: 'auto', mr: 1}}>
             <Tooltip title={props.helperText} placement="left">
                 <InfoIcon
@@ -49,7 +49,7 @@ export function CheckboxGroupOption(props: CheckboxGroupOptionProps) {
                 />
             </Tooltip>
         </ListItemIcon>
-    );
+    ) : null;
 
     return (
         <ListItem component="label" htmlFor={id} disablePadding>

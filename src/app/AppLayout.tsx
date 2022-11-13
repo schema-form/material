@@ -42,7 +42,7 @@ export default function AppLayout() {
         })
     }, [appRoute.pathname]);
 
-    const form = schema && (
+    const form = schema ? (
         <SchemaForm
             key={formKey}
             schema={schema}
@@ -57,7 +57,7 @@ export default function AppLayout() {
                 })
             }}
         />
-    );
+    ) : null;
 
     const sourceForm = (
         <Container maxWidth="xl" sx={{py: 3}}>

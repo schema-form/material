@@ -59,11 +59,11 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         )
     }
 
-    const optionsList = hasOptions && (
+    const optionsList = hasOptions ? (
         <List>
             {options.map(renderOption)}
         </List>
-    );
+    ) : null;
 
     return (
         <FormCard

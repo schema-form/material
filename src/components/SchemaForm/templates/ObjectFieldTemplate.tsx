@@ -31,25 +31,25 @@ export function ObjectFieldTemplate(props: ObjectFieldTemplateProps<any, SchemaF
     const items = properties?.map(ObjectFieldPropertyTemplate);
     const hasItems = Boolean(items?.length);
 
-    const propertyList = hasItems && (
+    const propertyList = hasItems ? (
         <PropertyList className="object-field__properties">
             {items}
         </PropertyList>
-    );
+    ) : null;
 
-    const addButton = hasAddButton && (
+    const addButton = hasAddButton ? (
         <AddButton
             onClick={onAddClick(schema)}
         >
             Add property
         </AddButton>
-    );
+    ) : null;
 
-    const footer = hasAddButton && (
+    const footer = hasAddButton ? (
         <footer className="object-field__footer">
             {addButton}
         </footer>
-    );
+    ) : null;
 
     return (
         <ConfigProvider value={{

@@ -17,7 +17,7 @@ export function FormHeader(props: FormHeaderProps) {
     const hasLabel = Boolean(props.label);
     const hasHelperText = Boolean(props.helperText);
 
-    const label = hasLabel && (
+    const label = hasLabel ? (
         <Typography
             component="legend"
             variant="h6"
@@ -25,9 +25,9 @@ export function FormHeader(props: FormHeaderProps) {
         >
             {props?.label}
         </Typography>
-    );
+    ) : null;
 
-    const helperText = hasHelperText && (
+    const helperText = hasHelperText ? (
         <Typography
             component="p"
             variant="body2"
@@ -35,7 +35,7 @@ export function FormHeader(props: FormHeaderProps) {
         >
             {props?.helperText}
         </Typography>
-    )
+    ) : null
 
     return (
         <ListItem
@@ -47,6 +47,7 @@ export function FormHeader(props: FormHeaderProps) {
             secondaryAction={props?.secondaryAction}
         >
             <ListItemText
+                sx={{my: 0}}
                 primary={label}
                 secondary={helperText}
             />

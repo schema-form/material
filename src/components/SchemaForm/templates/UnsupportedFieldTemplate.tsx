@@ -8,7 +8,7 @@ export function UnsupportedFieldTemplate(props: UnsupportedFieldProps) {
     const { $id } = idSchema || {};
     const jsonSchema = JSON.stringify(schema, null, 2);
 
-    const message = reason && (
+    const message = reason ? (
         <Typography
             variant="body2"
             component="p"
@@ -16,13 +16,13 @@ export function UnsupportedFieldTemplate(props: UnsupportedFieldProps) {
         >
             {reason}
         </Typography>
-    );
+    ) : null;
 
-    const code = jsonSchema && (
+    const code = jsonSchema ? (
         <pre>
             <code>{jsonSchema}</code>
         </pre>
-    );
+    ) : null;
 
     return (
         <Alert severity="error">

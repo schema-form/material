@@ -33,16 +33,16 @@ export default function SliderWidget(props: WidgetProps<any, SchemaFormContext>)
     const formControlProps = mapFormControlProps(props);
     const formHelperText = mapFormHelperTextProps(props);
 
-    const formLabel = label && (
+    const formLabel = label ? (
         <Typography
             children={label}
             gutterBottom
         />
-    )
+    ) : null;
 
-    const helper = formHelperText?.children && (
+    const helper = formHelperText?.children ? (
         <FormHelperText {...formHelperText} />
-    )
+    ) : null;
 
     return (
         <FormControl {...formControlProps} data-testid="SliderWidget">

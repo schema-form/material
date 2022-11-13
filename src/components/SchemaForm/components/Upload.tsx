@@ -26,7 +26,7 @@ export function Upload(props: UploadProps) {
     const id = props.id || uuid();
     const hasHelperText = Boolean(props.helperText);
 
-    const helper = hasHelperText && (
+    const helper = hasHelperText ? (
         <Typography
             component="p"
             variant="body2"
@@ -34,7 +34,7 @@ export function Upload(props: UploadProps) {
         >
             {props.helperText}
         </Typography>
-    )
+    ) : null;
 
     return (
         <ListItemButton

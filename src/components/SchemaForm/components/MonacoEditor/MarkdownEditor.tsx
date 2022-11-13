@@ -229,7 +229,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         </StyledTabs>
     )
 
-    const actions = edited && (
+    const actions = edited ? (
         <Actions>
             <InsertsActions
               onItemSelect={(insert) => {
@@ -256,7 +256,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
               copyContent={value}
             />
         </Actions>
-    )
+    ) : null;
 
     const toolbar = (
       <StyledToolbar variant="dense" disableGutters={true}>
@@ -266,7 +266,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
     )
 
 
-    const editor = edited && (
+    const editor = edited ? (
         <Content>
             <Editor
                 {...editorProps}
@@ -282,17 +282,18 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
                 }}
             />
         </Content>
-    )
+    ) : null;
 
-    const preview = !edited && (
+    const preview = !edited ? (
         <Content sx={{p: 2}} style={{ height: editorProps?.height }}>
             <Markdown>
                 {value || ''}
             </Markdown>
         </Content>
-    )
+    ) : null;
 
-    const footer = (error || helperText) && (
+    const hasFooter = error || helperText;
+    const footer = hasFooter ? (
         <Footer>
             <StyledFormHelperText
                 error={error}
@@ -300,7 +301,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
                 children={helperText}
             />
         </Footer>
-    )
+    ) : null;
 
     return (
         <StyledCard

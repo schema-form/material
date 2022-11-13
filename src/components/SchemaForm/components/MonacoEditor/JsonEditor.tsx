@@ -167,11 +167,11 @@ function PropertyList({ json, onNavigate }: PropertyListProps) {
             ? () => onNavigate(key)
             : () => null;
 
-        const nextButton = isObject && (
+        const nextButton = isObject ? (
             <IconButton size="small" onClick={handleNext}>
                 <ChevronRightOutlined fontSize="small" />
             </IconButton>
-        )
+        ) : null;
 
         return (
             <ListItem
@@ -255,7 +255,7 @@ export function JsonEditor(props: JSONEditorProps) {
         setEnabledEditor(!isEnabledEditor);
     }
 
-    const breadcrumbs = hasPathSegments && (
+    const breadcrumbs = hasPathSegments ? (
         <Box sx={{mt: 'auto'}}>
             <Divider />
             <JSONViewBreadcrumbs
@@ -263,14 +263,14 @@ export function JsonEditor(props: JSONEditorProps) {
                 onSelect={navigateTo}
             />
         </Box>
-    )
+    ) : null;
 
-    const propertyList = !isEnabledEditor && (
+    const propertyList = !isEnabledEditor ? (
         <PropertyList
             json={json?.parsedPath}
             onNavigate={(key) => navigateTo([...pathSegments, key])}
         />
-    )
+    ) : null;
 
     const copyButton = (
         <CopyButton
@@ -279,30 +279,30 @@ export function JsonEditor(props: JSONEditorProps) {
         />
     );
 
-    const editorThemeToggle = isEnabledEditor && (
+    const editorThemeToggle = isEnabledEditor ? (
         <MonacoEditorThemeToggle
             size='small'
         />
-    );
+    ) : null;
 
     const editorIcon = isEnabledEditor
         ? <ExploreOutlined fontSize='small' />
         : <ExploreOffOutlined fontSize='small'/>;
-    const editorToggle = isObject && (
+    const editorToggle = isObject ? (
         <Tooltip title={isEnabledEditor ? 'Switch to navigator' : 'Switch to code'}>
             <IconButton size='small' onClick={toggleEditor}>
                 {editorIcon}
             </IconButton>
         </Tooltip>
-    )
+    ) : null;
 
-    const formLabel = label && (
+    const formLabel = label ? (
         <FormLabel
             children={label}
             disabled={disabled}
             error={error}
         />
-    )
+    ) : null;
 
     const header = (
         <Toolbar variant="dense" sx={{ px: 2 }}>
@@ -315,7 +315,7 @@ export function JsonEditor(props: JSONEditorProps) {
         </Toolbar>
     )
 
-    const footer = helperText && (
+    const footer = helperText ? (
         <Footer>
             <StyledFormHelperText
                 error={error}
@@ -323,9 +323,9 @@ export function JsonEditor(props: JSONEditorProps) {
                 children={helperText}
             />
         </Footer>
-    )
+    ) : null;
 
-    const editor = isEnabledEditor && (
+    const editor = isEnabledEditor ? (
         <Editor
             {...editorProps}
             value={value}
@@ -366,7 +366,7 @@ export function JsonEditor(props: JSONEditorProps) {
                 }
             }}
         />
-    );
+    ) : null;
 
     const content = (
         <Content sx={{

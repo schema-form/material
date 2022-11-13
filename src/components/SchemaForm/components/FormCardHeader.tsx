@@ -21,7 +21,7 @@ export function FormCardHeader(props: FormCardHeaderProps) {
     const hasLabel = Boolean(props.label);
     const hasHelperText = Boolean(props.helperText);
 
-    const label = hasLabel && (
+    const label = hasLabel ? (
         <Typography
             component="legend"
             variant="body1"
@@ -29,9 +29,9 @@ export function FormCardHeader(props: FormCardHeaderProps) {
         >
             {props?.label}
         </Typography>
-    );
+    ) : null;
 
-    const helperText = hasHelperText && (
+    const helperText = hasHelperText ? (
         <Typography
             component="p"
             variant="body2"
@@ -39,7 +39,7 @@ export function FormCardHeader(props: FormCardHeaderProps) {
         >
             {props?.helperText}
         </Typography>
-    )
+    ) : null;
 
     return (
         <ListItem

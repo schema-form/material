@@ -39,8 +39,9 @@ export function FormReorder(props: FormReorderProps) {
         color
     } = props;
     const iconButtonSize = ['small', 'medium'].includes(size as string) ? size : 'medium';
+    const hasReorder = onMoveDown || onMoveUp;
 
-    const reorder = (onMoveDown || onMoveUp) && (
+    const reorder = hasReorder ? (
         <Reorder
             orientation="vertical"
             onMoveDown={onMoveDown}
@@ -52,9 +53,9 @@ export function FormReorder(props: FormReorderProps) {
             }}
             sx={{mr: 1}}
         />
-    )
+    ) : null;
 
-    const removeButton = onRemove && (
+    const removeButton = onRemove ? (
         <Tooltip title='Delete'>
             <IconButton
                 edge="end"
@@ -65,7 +66,7 @@ export function FormReorder(props: FormReorderProps) {
                 <DeleteIcon />
             </IconButton>
         </Tooltip>
-    )
+    ) : null;
 
     const content = (
         <Content>

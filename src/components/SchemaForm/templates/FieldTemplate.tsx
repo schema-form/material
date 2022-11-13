@@ -24,9 +24,9 @@ export function FieldTemplateHeader(props: FieldTemplateProps<any, SchemaFormCon
         : false;
     const hasLabel = Boolean(label);
     const hasDescription = Boolean(rawDescription);
-    const heedDisplayHeader = displayHeader && (hasLabel || hasDescription);
+    const needDisplayHeader = displayHeader && (hasLabel || hasDescription);
 
-    return heedDisplayHeader && (
+    return needDisplayHeader ? (
         <FormHeader
             hidden={hidden}
             label={label}
@@ -34,20 +34,21 @@ export function FieldTemplateHeader(props: FieldTemplateProps<any, SchemaFormCon
             error={hasError}
             disabled={disabled}
         />
-    );
+    ) : null;
 }
 
 export function FieldErrorList(props: FieldTemplateProps<any, SchemaFormContext>) {
     const { rawErrors } = props;
     const hasErrors = Boolean(rawErrors?.length);
     const { displayErrorList } = useConfig();
+    const hasErrorList = displayErrorList && hasErrors;
 
-    return (displayErrorList && hasErrors) && (
+    return hasErrorList ? (
         <ErrorList
             className="field-error-list"
             errors={rawErrors as string[]}
         />
-    )
+    ) : null;
 }
 
 export function FieldTemplate(props: FieldTemplateProps<any, SchemaFormContext>) {

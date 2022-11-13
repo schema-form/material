@@ -81,35 +81,56 @@ export const StyledCard = styled(Card)<RootProps>(({ theme, error, bordered, foc
     })
 })
 
-export function FormCard({
-    className,
-    sx,
-    variant = 'outlined',
-    error: hasError,
-    focused = false,
-    disabled,
-    bordered = true,
-    icon,
-    title,
-    subheader,
-    children,
-    secondaryAction,
-    actions
-}: FormCardProps) {
+export function FormCard(props: FormCardProps) {
+    const {
+        className,
+        sx,
+        variant = 'outlined',
+        error: hasError,
+        focused = false,
+        disabled,
+        bordered = true,
+        icon,
+        children,
+        secondaryAction,
+        actions
+    } = props;
     const [expanded, setExpanded] = React.useState(true);
     const toggleExpand = () => setExpanded(!expanded);
 
-    const errorIcon = hasError && (
+    const errorIcon = hasError ? (
         <ErrorOutlined color="error" />
-    );
+    ) : null;
 
     const expandIcon = expanded ? <KeyboardArrowRight /> : <KeyboardArrowDown />;
-    const header = (title || subheader || secondaryAction) && (
+
+    const title = props?.title ? (
+        <Typography
+            component="span"
+            variant="body1"
+            color={hasError ? 'error' : 'textPrimary'}
+        >
+            {props.title}
+        </Typography>
+    ) : null;
+
+    const subheader = props.subheader ? (
+        <Typography
+            component="p"
+            variant="caption"
+            color={hasError ? 'error' : 'textSecondary'}
+        >
+            {props.subheader}
+        </Typography>
+    ) : null;
+
+    const hasHeader = title || subheader || secondaryAction;
+
+    const header = hasHeader ? (
         <ListItem
             component="header"
             disablePadding
             secondaryAction={secondaryAction}
-            disabled={disabled}
         >
             <ListItemButton
                 dense={false}
@@ -120,34 +141,18 @@ export function FormCard({
                     {icon || errorIcon || expandIcon}
                 </ListItemIcon>
                 <ListItemText
-                    primary={(
-                        <Typography
-                            component="span"
-                            variant="body1"
-                            color={hasError ? 'error' : 'textPrimary'}
-                        >
-                            {title}
-                        </Typography>
-                    )}
-                    secondary={(
-                        <Typography
-                            component="p"
-                            variant="caption"
-                            color={hasError ? 'error' : 'textSecondary'}
-                        >
-                            {subheader}
-                        </Typography>
-                    )}
+                    primary={title}
+                    secondary={subheader}
                 />
             </ListItemButton>
         </ListItem>
-    )
+    ) : null;
 
-    const footer = actions && (
+    const footer = actions ? (
         <CardActions>
             {actions}
         </CardActions>
-    )
+    ) : null;
 
     const collapse = (
         <Collapse in={expanded} timeout="auto" unmountOnExit>

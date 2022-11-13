@@ -19,7 +19,7 @@ export function CheckboxListItem({ label, helperText, error: hasError, ...props 
     const hasLabel = Boolean(label);
     const hasHelperText = Boolean(helperText);
 
-    const primaryText = hasLabel && (
+    const primaryText = hasLabel ? (
         <Typography
             component="span"
             variant="body1"
@@ -27,9 +27,9 @@ export function CheckboxListItem({ label, helperText, error: hasError, ...props 
         >
             {label}
         </Typography>
-    );
+    ) : null;
 
-    const secondaryText = hasHelperText && (
+    const secondaryText = hasHelperText ? (
         <Typography
             component="p"
             variant="caption"
@@ -37,7 +37,7 @@ export function CheckboxListItem({ label, helperText, error: hasError, ...props 
         >
             {helperText}
         </Typography>
-    );
+    ) : null;
 
     return (
         <ListItem

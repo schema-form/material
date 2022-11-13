@@ -37,7 +37,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
         ? props.onReorderClick(index, index + 1)
         : undefined;
 
-    const removeButton = onRemove && (
+    const removeButton = onRemove ? (
         <Tooltip title='Delete' placement="left">
             <IconButton
                 sx={{ml: 1}}
@@ -49,9 +49,10 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
                 <DeleteIcon />
             </IconButton>
         </Tooltip>
-    );
+    ) : null;
 
-    const reorder = (onMoveDown || onMoveUp) && (
+    const hasReorder = onMoveDown || onMoveUp;
+    const reorder = hasReorder ? (
         <Reorder
             onMoveDown={onMoveDown}
             onMoveUp={onMoveUp}
@@ -60,7 +61,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
                 color: hasError ? 'error' : undefined
             }}
         />
-    );
+    ) : null;
 
     const headerActions = (removeButton || reorder) ? (
         <HeaderActions>

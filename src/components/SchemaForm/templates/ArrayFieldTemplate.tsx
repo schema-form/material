@@ -37,11 +37,11 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
         <ArrayFieldItemTemplate {...props} />
     );
 
-    const body = hasItems && (
+    const body = hasItems ? (
         <ItemsList className="array-items">
             {items.map(renderItem)}
         </ItemsList>
-    );
+    ) : null;
 
     return (
         <ConfigProvider value={{
