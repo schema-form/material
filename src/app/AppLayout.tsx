@@ -87,7 +87,7 @@ export default function AppLayout() {
             color="inherit"
             component={Link}
             target="_blank"
-            href="https://github.com/slavabelaev"
+            href="https://github.com/slavabelaev/mui-form"
             sx={{p: isBreakpointUpSM ? .5 : undefined}}
         >
             <GitHub sx={{fontSize: 28}} />
@@ -100,7 +100,7 @@ export default function AppLayout() {
                 <MUI fontSize="medium" />
             </Link>
             <Typography variant="body1" textTransform="uppercase" fontWeight="bold">
-                Schema Form
+                Form
             </Typography>
         </Stack>
     )
