@@ -23,29 +23,19 @@ function getOptionSchemas(schema: JSONSchema7): JSONSchema7[] {
     return [];
 }
 
-function getNotAllowedValues(schema: JSONSchema7): string[] {
-    const { items, not } = schema;
-    const { not: itemsSchemaNot } = items as JSONSchema7 || {};
-    const { enum: itemsSchemaEnum } = itemsSchemaNot as JSONSchema7 || {};
-    const { enum: schemaEnum } = not as JSONSchema7 || {};
-    if (itemsSchemaEnum instanceof Array) return itemsSchemaEnum as [];
-    if (schemaEnum instanceof Array) return schemaEnum as [];
-    return [];
-}
-
-export function mapEnumOptions({ options, schema }: WidgetProps<any, SchemaFormContext>): EnumOption[] {
+export function mapSelectOptions({ options, schema }: WidgetProps<any, SchemaFormContext>): EnumOption[] {
     const { enumOptions = [] } = options || {};
     const optionSchemas = getOptionSchemas(schema);
-    const notAllowedValues = getNotAllowedValues(schema);
 
     const toEnumOption = ({ value, label }: EnumOption, index: number) => {
       const schema = optionSchemas?.[index];
-      const { readOnly, description } = schema || {};
+      const { readOnly, title, description } = schema || {};
+      const jsonValue = JSON.stringify(value);
       return ({
-        value,
-        label,
+        value: jsonValue,
+        label: title || (typeof value === 'string' ? value : jsonValue),
         description,
-        disabled: notAllowedValues?.includes?.(value) || Boolean(readOnly),
+        disabled: readOnly,
         schema
       })
     }

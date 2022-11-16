@@ -1,6 +1,6 @@
 import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
-import {EnumOption} from "../utils/maps/mapEnumOptions";
+import {EnumOption} from "../utils/maps/mapSelectOptions";
 import {SchemaFormContext} from "../SchemaForm";
 import {CheckboxGroup, CheckboxGroupProps} from "../components/CheckboxGroup";
 import {mapControlProps} from "../utils/maps/mapControlProps";

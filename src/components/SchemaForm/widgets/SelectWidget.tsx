@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import {v4 as uuid} from 'uuid';
+import isEqual from 'lodash/isEqual';
 import {WidgetProps} from '@rjsf/utils';
 import {
     FormControl,
@@ -12,43 +13,46 @@ import {
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check"
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {EnumOption, mapEnumOptions} from "../utils/maps/mapEnumOptions";
+import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
 import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
 import {mapInputLabelProps} from "../utils/maps/mapInputLabelProps";
 import {SchemaFormContext} from "../SchemaForm";
 
-export function mapSelectOptions(props: WidgetProps<any, SchemaFormContext>) {
-    const { value: valueList, multiple, formContext } = props;
+export function mapSelectProps(props: WidgetProps<any, SchemaFormContext>): SelectProps {
+    const { label, ...commonProps } = mapControlProps(props);
+    const { multiple, formContext } = props;
     const { FormControlProps } = formContext || {};
     const { size } = FormControlProps || {};
     const dense = size === 'small';
-    const enumOptions = mapEnumOptions(props);
+    const selectOptions = mapSelectOptions(props);
+    const selectJSONValue = commonProps.value instanceof Array
+        ? commonProps.value.map((itemValue: any) => JSON.stringify(itemValue))
+        : JSON.stringify(commonProps.value);
 
     const renderOption = ({ value, label, description, disabled }: EnumOption) => {
-        const key = JSON.stringify(value);
+        const checked = selectJSONValue instanceof Array
+            ? selectJSONValue?.includes(value)
+            : isEqual(selectJSONValue, value);
 
-        const renderCheckIcon = () => {
-            if (!multiple) return null;
-            const checked = valueList?.includes?.(value);
+        const checkedIcon = checked && (
+            <CheckIcon />
+        );
 
-            return (
-                <ListItemIcon style={{
-                    minWidth: 24,
-                    marginRight: 16
-                }}>
-                    {checked && <CheckIcon />}
-                </ListItemIcon>
-            );
-        }
+        const listItemIcon = multiple && (
+            <ListItemIcon>
+                {checkedIcon}
+            </ListItemIcon>
+        );
 
         return (
-            <MenuItem key={key}
-                  dense={dense}
-                  value={value}
-                  disabled={disabled}
+            <MenuItem
+                key={value}
+                dense={dense}
+                value={value}
+                disabled={disabled}
             >
-                {renderCheckIcon()}
+                {listItemIcon}
                 <ListItemText
                     primary={label}
                     secondary={description}
@@ -57,31 +61,30 @@ export function mapSelectOptions(props: WidgetProps<any, SchemaFormContext>) {
         )
     }
 
-    return enumOptions?.map(renderOption);
-}
-
-export function mapSelectProps(props: WidgetProps<any, SchemaFormContext>): SelectProps {
-    const { options } = props;
-    const { enumOptions } = options || {};
-    const { label, ...commonProps } = mapControlProps(props);
-    const notEmpty = Boolean;
-
-    const getOptionLabel = (value: any) => {
-        const hasEqualValue = (option: EnumOption) => option.value === value;
-        return (enumOptions instanceof Array)
-            ? enumOptions.find(hasEqualValue)?.label
-            : value;
+    const getOptionLabelByValue = (itemValue: any) => {
+        const option = selectOptions.find(option => itemValue === option.value);
+        return option?.label ?? itemValue;
     }
-
-    const renderValue = (value: any) => (value instanceof Array)
-        ? value.filter(notEmpty).map(getOptionLabel).join(', ')
-        : getOptionLabel(value);
 
     return {
         ...commonProps,
         label: label ? label : undefined,
-        children: mapSelectOptions(props),
-        renderValue
+        children: selectOptions?.map(renderOption),
+        value: selectJSONValue,
+        onChange: (event, child) => {
+            if (event.target.value instanceof Array) {
+                const newValue = event.target.value.map((value) => JSON.parse(value));
+                props.onChange?.(newValue);
+            } else {
+                const newValue = JSON.parse(event.target.value as string);
+                props.onChange?.(newValue);
+            }
+        },
+        renderValue: (value: any) => {
+            return value instanceof Array
+                ? value.map(getOptionLabelByValue).join(', ')
+                : getOptionLabelByValue(value);
+        }
     }
 }
 

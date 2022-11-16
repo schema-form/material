@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, {AutocompleteProps} from '@mui/material/Autocomplete';
 import {WidgetProps} from "@rjsf/utils";
 import {Chip, ListItemText, MenuItem} from "@mui/material";
-import {EnumOption, mapEnumOptions} from "../utils/maps/mapEnumOptions";
+import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import {mapControlProps} from "../utils/maps/mapControlProps";
 import {mapTextFieldProps} from "./TextFieldWidget";
 import isEmpty from "lodash/isEmpty";
@@ -17,7 +17,7 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     const { size } = FormControlProps || {};
     const dense = size === 'small';
     const commonProps = mapControlProps(props);
-    const enumOptions = mapEnumOptions(props);
+    const enumOptions = mapSelectOptions(props);
     const findOption = (value: any) => enumOptions?.find(option => option?.value === value);
     const { value: _, onChange: __, type, ...textFieldProps } = mapTextFieldProps(props);
     const hasValue = !isEmpty(value);

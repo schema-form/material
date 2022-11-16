@@ -3,7 +3,7 @@ import {WidgetProps} from '@rjsf/utils';
 import Slider, {SliderProps} from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {mapEnumOptions} from "../utils/maps/mapEnumOptions";
+import {mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import {FormControl, FormHelperText} from "@mui/material";
 import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
 import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
@@ -12,7 +12,7 @@ import {SchemaFormContext} from "../SchemaForm";
 export function mapSliderProps(props: WidgetProps<any, SchemaFormContext>): SliderProps {
     const { value, onChange } = props;
     const { value: _, onChange: __, ...commonProps } = mapControlProps(props);
-    const marks = mapEnumOptions(props);
+    const marks = mapSelectOptions(props);
 
     const handleChange: SliderProps['onChangeCommitted'] = (event, newValue) => {
         onChange(newValue);

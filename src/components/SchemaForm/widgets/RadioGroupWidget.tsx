@@ -6,7 +6,7 @@ import {
     RadioGroupProps
 } from "@mui/material";
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {EnumOption, mapEnumOptions} from "../utils/maps/mapEnumOptions";
+import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import {toJSON} from "../utils/json";
 import List from "@mui/material/List";
 import {SchemaFormContext} from "../SchemaForm";
@@ -18,7 +18,7 @@ export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
     const { FormControlProps } = formContext || {};
     const { size } = FormControlProps || {};
     const dense = size === 'small';
-    const enumOptions = mapEnumOptions(props);
+    const enumOptions = mapSelectOptions(props);
 
     const renderOption = ({ value, label, description, disabled }: EnumOption) => {
         const key = JSON.stringify(value);
