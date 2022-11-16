@@ -1,9 +1,7 @@
 import {ArrayFieldTemplateItemType} from "@rjsf/utils";
-import Typography from "@mui/material/Typography";
-import {isEmpty} from "lodash";
 import {isGroup} from "../utils/jsonSchema";
 import FormCard from "../components/FormCard";
-import FormReorder from "../components/FormReorder";
+import FormControlReorder from "../components/FormControlReorder";
 import {ConfigProvider, useConfig} from "../providers/ConfigProvider";
 import OrderIcon from "../components/OrderIcon";
 import {Box, CardContent, Divider, styled, Tooltip} from "@mui/material";
@@ -78,29 +76,26 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
     )
 
     return (
-        <>
-            <Divider />
-            <FormCard
-                key={key}
-                className={className}
-                error={hasError}
-                bordered={false}
-                icon={orderIcon}
-                title={schema?.title}
-                subheader={error || schema?.description}
-                secondaryAction={headerActions}
-            >
-                <ConfigProvider value={{
-                    ...config,
-                    displayHeader: false,
-                    displayErrorList: false
-                }}>
-                    <CardContent>
-                        {children}
-                    </CardContent>
-                </ConfigProvider>
-            </FormCard>
-        </>
+        <FormCard
+            key={key}
+            className={className}
+            error={hasError}
+            bordered={false}
+            icon={orderIcon}
+            label={schema?.title}
+            helperText={error || schema?.description}
+            secondaryAction={headerActions}
+        >
+            <ConfigProvider value={{
+                ...config,
+                displayHeader: false,
+                displayErrorList: false
+            }}>
+                <CardContent>
+                    {children}
+                </CardContent>
+            </ConfigProvider>
+        </FormCard>
     );
 }
 
@@ -120,20 +115,18 @@ function ArrayFieldControlItemTemplate(props: ArrayFieldTemplateItemType) {
         : undefined;
 
     return (
-        <Box sx={{m: 2}}>
-            <FormReorder
-                key={key}
-                className={className}
-                onRemove={onRemove}
-                onMoveUp={onMoveUp}
-                onMoveDown={onMoveDown}
-                size="small"
-                variant="outlined"
-                color={hasError ? 'error' : undefined}
-            >
-                {children}
-            </FormReorder>
-        </Box>
+        <FormControlReorder
+            key={key}
+            className={className}
+            onRemove={onRemove}
+            onMoveUp={onMoveUp}
+            onMoveDown={onMoveDown}
+            size="small"
+            variant="outlined"
+            color={hasError ? 'error' : undefined}
+            control={children}
+            sx={{m: 2}}
+        />
     )
 }
 

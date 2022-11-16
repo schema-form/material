@@ -69,8 +69,8 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         <FormCard
             focused={true}
             error={hasError}
-            title={label}
-            subheader={helperText || selectedText}
+            label={label}
+            helperText={helperText || selectedText}
         >
             {optionsList}
         </FormCard>

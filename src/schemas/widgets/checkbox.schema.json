@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "boolean",
+  "title": "Согласие с условиями",
+  "description": "Отлично, теперь можно зарегистрироваться",
+  "const": true,
+  "default": false
+}

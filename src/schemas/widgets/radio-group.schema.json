@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Тип доставки",
+  "description": "Как вам удобнее?",
+  "type": "string",
+  "anyOf": [
+    {
+      "title": "Самовывоз",
+      "const": "PICKUP"
+    },
+    {
+      "title": "Курьером",
+      "const": "COURIER"
+    },
+    {
+      "title": "В отделение",
+      "const": "DEPARTMENT"
+    }
+  ]
+}

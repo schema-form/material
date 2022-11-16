@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Время встречи",
+  "description": "Когда Вам было бы удобно встретиться?",
+  "type": "string",
+  "format": "date-time"
+}

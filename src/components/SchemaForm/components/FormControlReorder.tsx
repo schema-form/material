@@ -1,11 +1,11 @@
-import React, {PropsWithChildren} from 'react';
+import React, {ReactNode} from 'react';
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import {ButtonProps} from "@mui/material/Button";
-import {styled, Tooltip} from "@mui/material";
+import {BoxProps, Stack, styled, Tooltip} from "@mui/material";
 import Reorder, {ReorderControlProps} from "./Reoder";
 
-export type FormReorderProps = PropsWithChildren<{
+export type FormControlReorderProps = {
     className?: string;
     onRemove?: () => void;
     onMoveUp?: ReorderControlProps['onMoveUp'];
@@ -13,30 +13,25 @@ export type FormReorderProps = PropsWithChildren<{
     size?: ButtonProps['size'];
     variant?: ButtonProps['variant'];
     color?: ButtonProps['color'];
-}>
-
-const Root = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'flex-start',
-    listStyle: 'none',
-    padding: 0,
-    margin: 0
-}))
+    sx?: BoxProps['sx'];
+    control?: ReactNode;
+}
 
 const Content = styled('div')(({ theme }) => ({
     width: '100%'
 }))
 
-export function FormReorder(props: FormReorderProps) {
+export function FormControlReorder(props: FormControlReorderProps) {
     const {
         className,
         onMoveDown,
         onMoveUp,
         onRemove,
-        children,
+        control,
         size,
         variant,
-        color
+        color,
+        sx
     } = props;
     const iconButtonSize = ['small', 'medium'].includes(size as string) ? size : 'medium';
     const hasReorder = onMoveDown || onMoveUp;
@@ -70,17 +65,22 @@ export function FormReorder(props: FormReorderProps) {
 
     const content = (
         <Content>
-            {children}
+            {control}
         </Content>
     )
 
     return (
-        <Root className={className}>
+        <Stack
+            direction="row"
+            alignItems="start"
+            className={className}
+            sx={sx}
+        >
             {reorder}
             {content}
             {removeButton}
-        </Root>
+        </Stack>
     )
 }
 
-export default FormReorder;
+export default FormControlReorder;

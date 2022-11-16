@@ -11,8 +11,6 @@ import {
     KeyboardArrowRight,
     KeyboardArrowDown,
     ErrorOutlined,
-    ArrowRightOutlined,
-    ArrowDownwardOutlined
 } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -26,8 +24,8 @@ export type FormCardProps = PropsWithChildren<{
     disabled?: boolean;
     focused?: boolean;
     icon?: ReactNode;
-    title?: CardHeaderProps['title'];
-    subheader?: CardHeaderProps['subheader'];
+    label?: CardHeaderProps['title'];
+    helperText?: CardHeaderProps['subheader'];
     secondaryAction?: ListItemProps['secondaryAction'];
     actions?: ReactNode;
 }>
@@ -96,35 +94,35 @@ export function FormCard(props: FormCardProps) {
         actions
     } = props;
     const [expanded, setExpanded] = React.useState(true);
+    const iconColor = hasError ? 'error' : undefined;
     const toggleExpand = () => setExpanded(!expanded);
 
-    const errorIcon = hasError ? (
-        <ErrorOutlined color="error" />
-    ) : null;
+    const expandIcon = expanded
+        ? <KeyboardArrowDown color={iconColor} />
+        : <KeyboardArrowRight color={iconColor} />;
 
-    const expandIcon = expanded ? <KeyboardArrowDown /> : <KeyboardArrowRight />;
-
-    const title = props?.title ? (
+    const title = props?.label ? (
         <Typography
             component="span"
-            variant="body1"
+            variant="body2"
             color={hasError ? 'error' : 'textPrimary'}
         >
-            {props.title}
+            {props.label}
         </Typography>
     ) : null;
 
-    const subheader = props.subheader ? (
+    const subheader = props.helperText ? (
         <Typography
             component="p"
             variant="caption"
             color={hasError ? 'error' : 'textSecondary'}
         >
-            {props.subheader}
+            {props.helperText}
         </Typography>
     ) : null;
 
     const hasHeader = title || subheader || secondaryAction;
+    const hasTitleAndSubheader = Boolean(title && subheader);
 
     const header = hasHeader ? (
         <ListItem
@@ -138,11 +136,12 @@ export function FormCard(props: FormCardProps) {
                 onClick={toggleExpand}
             >
                 <ListItemIcon>
-                    {icon || errorIcon || expandIcon}
+                    {icon || expandIcon}
                 </ListItemIcon>
                 <ListItemText
                     primary={title}
                     secondary={subheader}
+                    sx={{my: hasTitleAndSubheader ? 0 : undefined}}
                 />
             </ListItemButton>
         </ListItem>

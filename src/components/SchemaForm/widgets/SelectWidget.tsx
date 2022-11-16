@@ -92,11 +92,19 @@ export default function SelectWidget(props: WidgetProps<any, SchemaFormContext>)
     const formHelperTextProps = mapFormHelperTextProps(props);
     const labelId = useMemo(uuid, []);
 
+    const inputLabel = inputLabelProps?.children
+        ? <InputLabel id={labelId} {...inputLabelProps} />
+        : null;
+
+    const helperText = formHelperTextProps?.children
+        ? <FormHelperText {...formHelperTextProps} />
+        : null;
+
     return (
         <FormControl hiddenLabel={true} {...formControlProps} data-testid="SelectWidget">
-            <InputLabel id={labelId} {...inputLabelProps} />
+            {inputLabel}
             <Select labelId={labelId} {...selectProps} />
-            <FormHelperText {...formHelperTextProps} />
+            {helperText}
         </FormControl>
     );
 }

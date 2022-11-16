@@ -2,41 +2,26 @@ import React, {useMemo} from "react";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import {TextFieldProps} from "@mui/material";
-import MaskedInput from "react-text-mask";
 
 export type ColorFieldProps = TextFieldProps;
 
 const generateId = () => Math.random().toString(16).substring(2);
 
-function MaskedInputColor(props: any) {
-    const { inputRef, ...otherProps } = props;
-
-    return (
-        <MaskedInput
-            {...otherProps}
-            ref={(ref: any) => {
-                inputRef(ref ? ref.inputElement : null);
-            }}
-            mask={['#', /[0-9A-Fa-f]/, /[0-9A-Fa-f]/, /[0-9A-Fa-f]/, /[0-9A-Fa-f]/, /[0-9A-Fa-f]/, /[0-9A-Fa-f]/]}
-            placeholderChar={'\u2000'}
-            showMask
-        />
-    );
-}
-
 export function ColorField(props: ColorFieldProps) {
     const { value, onChange } = props || {};
     const pickerId = useMemo(generateId, []);
+    const color = String(value);
 
     const pickerButton = (
         <IconButton
             style={{ position: 'relative' }}
+            edge="end"
             component="label"
             htmlFor={pickerId}
         >
             <div
                 style={{
-                    backgroundColor: String(value) || 'rgba(0,0,0,.05)',
+                    backgroundColor: color || 'rgba(0,0,0,.05)',
                     width: 24,
                     height: 24,
                     borderRadius: '50%'
@@ -58,7 +43,7 @@ export function ColorField(props: ColorFieldProps) {
                 }}
                 id={pickerId}
                 type="color"
-                value={String(value)}
+                value={color}
                 onChange={onChange}
             />
         </IconButton>
@@ -69,8 +54,7 @@ export function ColorField(props: ColorFieldProps) {
             {...props}
             InputProps={{
                 ...props?.InputProps,
-                endAdornment: pickerButton,
-                inputComponent: MaskedInputColor
+                endAdornment: pickerButton
             }}
         />
     )

@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "День рождения",
+  "description": "Когда Вы родились?",
+  "type": "string",
+  "format": "date"
+}

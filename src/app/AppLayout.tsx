@@ -12,7 +12,6 @@ import MUI from "../icons/MUI";
 import Typography from "@mui/material/Typography";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
-import JSONSchema from "../icons/JSONSchema";
 
 export default function AppLayout() {
     const appRoute = useAppRoute();
@@ -29,7 +28,6 @@ export default function AppLayout() {
     const theme = useTheme();
     const isBreakpointUpSM = useMediaQuery(theme.breakpoints.up('sm'));
 
-    console.log('!appRoute', appRoute);
     if (!hasRouteSchema) {
         navigate(DEFAULT_APP_ROUTE_PATH);
     }

@@ -20,7 +20,10 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
     const itemsCount = items.length;
     const hasItems = Boolean(itemsCount);
     const hasError = Boolean(error);
-    const itemLabel = (schema?.items as JSONSchema7)?.title || 'item';
+    const itemLabel =
+        (schema?.items as JSONSchema7)?.title ||
+        (schema?.additionalItems as JSONSchema7)?.title ||
+        'New';
 
     const addButton = (
         <Button
@@ -29,7 +32,7 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
             onClick={onAddClick}
             color={hasError ? 'error' : 'primary'}
         >
-            {itemLabel || 'New'}
+            {itemLabel}
         </Button>
     );
 
@@ -50,8 +53,8 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
         }}>
             <FormCard
                 className={className}
-                title={title}
-                subheader={error || description}
+                label={title}
+                helperText={error || description}
                 error={hasError}
                 disabled={disabled}
                 actions={addButton}

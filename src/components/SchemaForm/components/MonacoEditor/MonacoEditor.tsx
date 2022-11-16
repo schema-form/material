@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Editor, {EditorProps} from "@monaco-editor/react";
 import {
+    FormControl, FormControlLabel, InputLabel,
     Stack,
     TextFieldProps
 } from "@mui/material";
@@ -92,8 +93,8 @@ export function MonacoEditor(props: MonacoEditorProps) {
             focused={true}
             error={hasError}
             disabled={disabled}
-            title={label}
-            subheader={errorMessage || helperText}
+            label={label}
+            helperText={errorMessage || helperText}
             secondaryAction={actions}
         >
             {editor}

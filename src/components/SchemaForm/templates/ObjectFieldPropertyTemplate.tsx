@@ -1,5 +1,5 @@
 import {ObjectFieldTemplatePropertyType} from "@rjsf/utils";
-import FormReorder from "../components/FormReorder";
+import FormControlReorder from "../components/FormControlReorder";
 import React from "react";
 import {styled} from "@mui/material";
 
@@ -23,9 +23,9 @@ export function ObjectFieldPropertyTemplate(property: ObjectFieldTemplatePropert
             key={name}
             className="object-property"
         >
-            <FormReorder
+            <FormControlReorder
                 onRemove={onRemove}
-                children={content}
+                control={content}
                 size="medium"
                 variant="outlined"
             />

@@ -6,12 +6,15 @@ import {mapControlProps} from "../utils/maps/mapControlProps";
 
 export function mapUploadButtonProps(props: WidgetProps<any, SchemaFormContext>): UploadProps {
     const { size, variant, onChange, ...commonProps } = mapControlProps(props);
+    const isStringType = props.schema.type === 'string';
     return {
         ...commonProps,
         accept: props.schema.contentMediaType,
-        onChange: (event) => {
-            const file = event.target?.files?.item(0);
-            onChange(event);
+        onChange: (event, values) => {
+            const newValue = isStringType
+                ? values?.filesAsDataURLs?.[0]
+                : values?.filesAsDataURLs;
+            props.onChange?.(newValue);
         }
     }
 }
