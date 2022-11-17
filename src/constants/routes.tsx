@@ -489,7 +489,16 @@ export const widgetsRoutes: AppRouteProps = {
         },
         '/upload': {
             title: 'Upload',
-            fetchSchema: () => import('../schemas/widgets/upload.schema.json')
+            children: {
+                '/single': {
+                    title: 'Single',
+                    fetchSchema: () => import('../schemas/widgets/upload/upload.schema.json'),
+                },
+                '/multiple': {
+                    title: 'Multiple',
+                    fetchSchema: () => import('../schemas/widgets/upload/upload[multiple].schema.json'),
+                }
+            }
         }
     }
 }

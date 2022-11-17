@@ -10,10 +10,10 @@ export function mapUploadButtonProps(props: WidgetProps<any, SchemaFormContext>)
     return {
         ...commonProps,
         accept: props.schema.contentMediaType,
-        onChange: (event, values) => {
+        onChange: (value) => {
             const newValue = isStringType
-                ? values?.filesAsDataURLs?.[0]
-                : values?.filesAsDataURLs;
+                ? value?.[0]
+                : value;
             props.onChange?.(newValue);
         }
     }

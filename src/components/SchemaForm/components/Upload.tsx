@@ -1,29 +1,36 @@
 import {
-    ListItemButton,
-    ListItemIcon,
+    Button, CardContent,
+    ListItemIcon, ListItemSecondaryAction,
     ListItemText,
-    TextFieldProps, useTheme
+    TextFieldProps
 } from "@mui/material";
-import {FileUpload} from "@mui/icons-material";
-import React, {ChangeEvent} from "react";
+import {
+    AddOutlined,
+    DeleteOutlineOutlined,
+    FileUpload,
+    InsertDriveFileOutlined,
+} from "@mui/icons-material";
+import React, {ChangeEventHandler} from "react";
 import {v4 as uuid} from "uuid";
 import Typography from "@mui/material/Typography";
+import IconButton, {IconButtonProps} from "@mui/material/IconButton";
+import FormCard from "./FormCard";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 type HTMLInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-type UploadValue = {
-    files?: FileList;
-    filesAsDataURLs?: string[];
-}
+type DataURLFiles = string[];
 
-export type UploadProps = Omit<HTMLInputProps, 'onChange'> & {
+export type UploadProps = Omit<HTMLInputProps, 'onChange' | 'value'> & {
     required?: TextFieldProps['required'];
     disabled?: TextFieldProps['disabled'];
     hidden?: TextFieldProps['hidden'];
     error?: TextFieldProps['error']
     label?: TextFieldProps['label'];
     helperText?: TextFieldProps['helperText'];
-    onChange?: (event: ChangeEvent<HTMLInputElement>, value: UploadValue) => void;
+    value?: string[];
+    onChange?: (value?: DataURLFiles) => void;
 };
 
 const toDataURL = (file: File): Promise<string> => new Promise((resolve, reject) => {
@@ -48,10 +55,52 @@ const fromDataURL = (dataURLString: string): File => {
     });
 }
 
+type UploadItemProps = {
+    file: File;
+    onRemove?: IconButtonProps['onClick'];
+}
+
+function UploadItem({ file, onRemove }: UploadItemProps) {
+
+    return (
+        <ListItem dense={true}>
+            <ListItemIcon>
+                <InsertDriveFileOutlined />
+            </ListItemIcon>
+            <ListItemText
+                primary={file?.name}
+            />
+            <ListItemSecondaryAction>
+                <IconButton color="error" onClick={onRemove}>
+                    <DeleteOutlineOutlined />
+                </IconButton>
+            </ListItemSecondaryAction>
+        </ListItem>
+    )
+}
+
 export function Upload(props: UploadProps) {
-    const { error, value: originValue, ...inputProps } = props;
-    const theme = useTheme();
+    const { error, value, ...inputProps } = props;
     const id = props.id || uuid();
+    const filesAsDataURLs = value?.filter(Boolean);
+    const hasFiles = Boolean(filesAsDataURLs?.length);
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
+        if (props.onChange) {
+            const fileList = event.target?.files || [];
+            const fileListAsDataURLs = [];
+
+            for (let index = 0; index < fileList.length; index++) {
+                const file = event.target?.files?.item(index);
+
+                if (file) {
+                    fileListAsDataURLs[index] = await toDataURL(file);
+                }
+            }
+
+            props.onChange(fileListAsDataURLs);
+        }
+    }
 
     const label = props.label ? (
         <Typography
@@ -66,62 +115,70 @@ export function Upload(props: UploadProps) {
     const helperText = props.helperText ? (
         <Typography
             component="p"
-            variant="body2"
+            variant="caption"
             color={error ? 'error' : 'textSecondary'}
         >
             {props.helperText}
         </Typography>
     ) : null;
 
-    return (
-        <ListItemButton
+    const fileInput = (
+        <input
+            {...inputProps}
+            id={id}
+            hidden={true}
+            type="file"
+            value={undefined}
+            onChange={handleChange}
+        />
+    );
+
+    const uploadIconButton = (
+        <IconButton
             component="label"
             htmlFor={id}
             disabled={props.disabled}
-            hidden={props.hidden}
-            style={{
-                borderRadius: theme.shape.borderRadius,
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                borderColor: props.disabled
-                    ? theme.palette.grey["300"]
-                    : theme.palette.grey["400"]
-            }}
+            color={error ? 'error' : undefined}
         >
-            <ListItemIcon>
-                <FileUpload />
-            </ListItemIcon>
-            <ListItemText
-                primary={label}
-                secondary={helperText}
-            />
-            <input
-                {...inputProps}
-                id={id}
-                hidden={true}
-                type="file"
-                value={undefined}
-                onChange={async (event) => {
-                    if (props.onChange) {
-                        const fileList = event.target?.files || [];
-                        const fileListAsDataURLs = [];
+            <FileUpload />
+        </IconButton>
+    )
 
-                        for (let index = 0; index < fileList.length; index++) {
-                            const file = event.target?.files?.item(index);
-
-                            if (file) {
-                                fileListAsDataURLs[index] = await toDataURL(file);
-                            }
-                        }
-
-                        props.onChange(event, {
-                            files: event.target?.files || undefined,
-                            filesAsDataURLs: fileListAsDataURLs
-                        });
-                    }
+    const renderFileItem = (fileDataURL: string, index: number) => {
+        const file = fromDataURL(fileDataURL);
+        return (
+            <UploadItem
+                key={index}
+                file={file}
+                onRemove={() => {
+                    const notEqual = (itemFileDataURL: string) => itemFileDataURL !== fileDataURL;
+                    const newValue = filesAsDataURLs?.filter(notEqual);
+                    props.onChange?.(newValue);
                 }}
             />
-        </ListItemButton>
+        )
+    }
+
+    const fileList = hasFiles ? (
+        <List>
+            {filesAsDataURLs?.map(renderFileItem)}
+        </List>
+    ) : null;
+
+    return (
+        <>
+            <FormCard
+                label={label}
+                helperText={helperText}
+                error={error}
+                disabled={props.disabled}
+                secondaryAction={uploadIconButton}
+                isControl={true}
+            >
+                {fileList}
+            </FormCard>
+            {fileInput}
+        </>
     )
 }
 

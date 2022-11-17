@@ -2,15 +2,14 @@ import React, {PropsWithChildren, ReactNode} from 'react';
 import {
     CardActions,
     CardHeaderProps, CardProps,
-    Collapse,
+    Collapse, CollapseProps,
     ListItem,
-    ListItemButton, ListItemIcon, ListItemProps,
+    ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
     ListItemText, styled,
 } from "@mui/material";
 import {
     KeyboardArrowRight,
     KeyboardArrowDown,
-    ErrorOutlined,
 } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -22,22 +21,25 @@ export type FormCardProps = PropsWithChildren<{
     sx?: CardProps['sx'];
     error?: boolean;
     disabled?: boolean;
-    focused?: boolean;
+    isControl?: boolean;
     icon?: ReactNode;
     label?: CardHeaderProps['title'];
     helperText?: CardHeaderProps['subheader'];
     secondaryAction?: ListItemProps['secondaryAction'];
     actions?: ReactNode;
+    CollapseProps?: CollapseProps;
+    HeaderProps?: ListItemButtonProps;
+    defaultExpanded?: boolean;
 }>
 
-export type RootProps = CardProps & {
+export type OutlinedCardProps = CardProps & {
     error?: FormCardProps['error'];
     bordered?: FormCardProps['bordered'];
-    focused?: FormCardProps['focused'];
+    isControl?: FormCardProps['isControl'];
 }
 
-export const StyledCard = styled(Card)<RootProps>(({ theme, error, bordered, focused }) => {
-    const focusedStyles = focused ? {
+export const OutlinedCard = styled(Card)<OutlinedCardProps>(({ theme, error, bordered, isControl }) => {
+    const focusedStyles = isControl ? {
         borderColor: error
             ? theme.palette.error.main
             : theme.palette.action.disabled,
@@ -85,15 +87,18 @@ export function FormCard(props: FormCardProps) {
         sx,
         variant = 'outlined',
         error: hasError,
-        focused = false,
+        isControl = false,
         disabled,
         bordered = true,
         icon,
         children,
         secondaryAction,
-        actions
+        actions,
+        CollapseProps,
+        HeaderProps,
+        defaultExpanded = true
     } = props;
-    const [expanded, setExpanded] = React.useState(true);
+    const [expanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const toggleExpand = () => setExpanded(!expanded);
 
@@ -134,6 +139,7 @@ export function FormCard(props: FormCardProps) {
                 dense={false}
                 disabled={disabled}
                 onClick={toggleExpand}
+                {...HeaderProps}
             >
                 <ListItemIcon>
                     {icon || expandIcon}
@@ -154,16 +160,16 @@ export function FormCard(props: FormCardProps) {
     ) : null;
 
     const collapse = (
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit {...CollapseProps}>
             {children}
             {footer}
         </Collapse>
     )
 
     return (
-        <StyledCard
+        <OutlinedCard
             bordered={bordered}
-            focused={focused}
+            isControl={isControl}
             error={hasError}
             variant={variant}
             className={className}
@@ -171,7 +177,7 @@ export function FormCard(props: FormCardProps) {
         >
             {header}
             {collapse}
-        </StyledCard>
+        </OutlinedCard>
     )
 }
 

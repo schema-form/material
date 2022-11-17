@@ -90,7 +90,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
 
     return (
         <FormCard
-            focused={true}
+            isControl={true}
             error={hasError}
             disabled={disabled}
             label={label}
