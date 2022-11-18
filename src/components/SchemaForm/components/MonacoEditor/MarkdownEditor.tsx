@@ -1,15 +1,11 @@
 import React, {FunctionComponent, useState} from "react";
 import Editor, {EditorProps} from "@monaco-editor/react";
-import Toolbar, {ToolbarProps} from "@mui/material/Toolbar";
 import {
-  Button,
-  Divider,
-  FormHelperText, Stack, styled, TabsProps,
-  TextFieldProps, Tooltip
+    Box,
+    CardActions, Container,
+    Stack,
+    TextFieldProps, Tooltip
 } from "@mui/material";
-import Card from "@mui/material/Card";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import {
   AssignmentTurnedInOutlined,
   CodeOutlined,
@@ -20,12 +16,16 @@ import {
   FormatQuoteOutlined,
   InsertLinkOutlined,
   InsertPhotoOutlined,
-  TitleOutlined
+  TitleOutlined,
+  VisibilityOutlined,
+  VisibilityOffOutlined
 } from "@mui/icons-material";
 import {MonacoEditorThemeToggle} from "./MonacoEditorThemeToggle";
 import CopyButton from "../CopyButton";
 import {Markdown} from "../Markdown";
 import {useMonacoEditorTheme} from "./MonacoEditorThemeProvider";
+import IconButton from "@mui/material/IconButton";
+import FormCard from "../FormCard";
 
 export type MarkdownEditorProps = EditorProps & {
     error?: TextFieldProps['error'];
@@ -34,240 +34,146 @@ export type MarkdownEditorProps = EditorProps & {
     helperText?: TextFieldProps['helperText'];
 }
 
-type StyledProps = {
-    hasError: boolean;
-}
-
-const StyledCard = styled(Card)<StyledProps>(({ theme, hasError }) => ({
-  transition: 'none',
-  padding: 1,
-  borderColor: hasError
-    ? theme.palette.error.main
-    : theme.palette.grey["400"],
-  '&:hover': {
-    borderColor: hasError
-      ? theme.palette.error.main
-      : theme.palette.grey["900"]
-  },
-  '&:focus-within': {
-    borderColor: hasError
-      ? theme.palette.error.main
-      : theme.palette.grey["900"],
-    borderWidth: 2,
-    padding: 0
-  }
-}));
-
-const Footer = styled('footer')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(1, 2)
-}))
-
-const Content = styled('div')(({ theme }) => ({
-    overflow: 'auto',
-    borderColor: theme.palette.divider,
-    borderWidth: '1px 0 1px 0',
-    borderStyle: 'solid',
-    '&:first-child': {
-        borderTopWidth: 0
-    },
-    '&:last-child': {
-        borderBottomWidth: 0
-    }
-}))
-
-const StyledToolbar = styled(Toolbar)<ToolbarProps>(({ theme }) => ({
-    paddingRight: theme.spacing(1),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    overflow: 'auto'
-}))
-
-const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
-    overflow: 'initial'
-}))
-
-const StyledFormHelperText = styled(FormHelperText)(({ theme }) => ({
-    marginTop: 0,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    display: '-webkit-box',
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: 'vertical'
-}))
-
-const Actions = styled('aside')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 'auto',
-    boxShadow: 'rgba(0,0,0) -5px 0 -16px inset'
-}))
-
-const Action = styled(Button)(({ theme }) => ({
-  minWidth: 'auto'
-}))
-
-export enum MarkdownEditorTab {
-    EDITOR,
-    PREVIEW
-}
-
 type InsertAction = {
     title: string;
     Icon: FunctionComponent<any>;
-    insert: string;
+    insertCode: string;
 }
 
 const insertActions: InsertAction[] = [
     {
         title: 'Title',
         Icon: TitleOutlined,
-        insert: '## Heading 2'
+        insertCode: '## Heading 2\n'
     },
     {
         title: 'Bold',
         Icon: FormatBoldOutlined,
-        insert: '**Bold**'
+        insertCode: '**Bold**'
     },
     {
         title: 'Italic',
         Icon: FormatItalicOutlined,
-        insert: '*Italic*'
+        insertCode: '*Italic*'
     },
     {
         title: 'Quote',
         Icon: FormatQuoteOutlined,
-        insert: '> Blockquote'
+        insertCode: '> Blockquote\n'
     },
     {
         title: 'Code',
         Icon: CodeOutlined,
-        insert: '`Inline code` with backticks'
+        insertCode: '`Inline code` with backticks\n'
     },
     {
         title: 'Link',
         Icon: InsertLinkOutlined,
-        insert: '[Link](http://a.com)'
+        insertCode: '[Link](http://a.com)'
     },
     {
         title: 'Image',
         Icon: InsertPhotoOutlined,
-        insert: '![Image](http://url/a.png)'
+        insertCode: '![Image](http://url/a.png)\n'
     },
     {
         title: 'Bulleted list',
         Icon: FormatListBulletedOutlined,
-        insert:
+        insertCode:
             '* List\n' +
             '* List\n' +
-            '* List'
+            '* List\n'
     },
     {
         title: 'Numbered list',
         Icon: FormatListNumberedOutlined,
-        insert:
+        insertCode:
             '1. One\n' +
             '2. Two\n' +
-            '3. Three'
+            '3. Three\n'
     },
     {
         title: 'Task list',
         Icon: AssignmentTurnedInOutlined,
-        insert:
+        insertCode:
             '- [ ] One\n' +
             '- [ ] Two\n' +
-            '- [x] Three (completed)'
+            '- [x] Three (completed)\n'
     }
 ]
-
-type InsertsMenuProps = {
-    onItemSelect?: (insert: string) => void;
-}
-
-function InsertsActions({ onItemSelect }: InsertsMenuProps) {
-    return (
-      <Stack direction="row">
-        {insertActions.map(({ Icon, insert, title }, index) => (
-          <Tooltip key={title} title={title}>
-            <Action
-              variant="text"
-              size="small"
-              onClick={() => onItemSelect?.(insert)}
-            >
-              <Icon fontSize="small" />
-            </Action>
-          </Tooltip>
-        ))}
-      </Stack>
-    );
-}
-
 
 export function MarkdownEditor(props: MarkdownEditorProps) {
     const { value, error, disabled, className, helperText, label, ...editorProps } = props;
     const hasError = Boolean(error);
-    const [activeTab, setActiveTab] = useState(MarkdownEditorTab.EDITOR);
+    const [showPreview, setShowPreview] = useState(false);
     const [monacoEditor, setMonacoEditor] = useState<any>(null);
-    const edited = activeTab === MarkdownEditorTab.EDITOR;
     const { theme } = useMonacoEditorTheme();
+    const togglePreview = () => setShowPreview(!showPreview);
 
-    const tabs = (
-        <StyledTabs
-            variant='fullWidth'
-            disabled={disabled}
-            value={activeTab}
-            onChange={(event, newValue) => setActiveTab(newValue)}
-        >
-            <Tab
-                value={MarkdownEditorTab.EDITOR}
-                label='Write'
-            />
-            <Tab
-                value={MarkdownEditorTab.PREVIEW}
-                label='Preview'
-            />
-        </StyledTabs>
+    const createInsertHandle = (insertCode: InsertAction['insertCode']) => () => {
+        if (monacoEditor) {
+            monacoEditor.executeEdits("my-source", [{
+                identifier: { major: 1, minor: 1 },
+                range: monacoEditor.getSelection(),
+                text: insertCode,
+                forceMoveMarkers: true
+            }]);
+        }
+    }
+
+    const renderInsertAction = (item: InsertAction) => (
+        <Tooltip key={item?.title} title={item.title} placement="top">
+            <IconButton
+                size="small"
+                onClick={createInsertHandle(item.insertCode)}
+            >
+                <item.Icon fontSize="small" />
+            </IconButton>
+        </Tooltip>
     )
 
-    const actions = edited ? (
-        <Actions>
-            <InsertsActions
-              onItemSelect={(insert) => {
-                if (monacoEditor) {
-                  monacoEditor.executeEdits("my-source", [{
-                    identifier: { major: 1, minor: 1 },
-                    range: monacoEditor.getSelection(),
-                    text: insert,
-                    forceMoveMarkers: true
-                  }]);
-                }
-              }}
-            />
-            <Divider
-                sx={{mx: 1}}
-                orientation="vertical"
-                flexItem
-            />
-            <MonacoEditorThemeToggle
-              size="small"
-            />
-            <CopyButton
-              size="small"
-              copyContent={value}
-            />
-        </Actions>
-    ) : null;
+    const insertActionsFooter = (
+        <CardActions>
+            {insertActions.map(renderInsertAction)}
+        </CardActions>
+    );
 
-    const toolbar = (
-      <StyledToolbar variant="dense" disableGutters={true}>
-        {tabs}
-        {actions}
-      </StyledToolbar>
+    const PreviewIcon = showPreview ? VisibilityOffOutlined : VisibilityOutlined;
+    const previewAction = (
+        <Tooltip title={showPreview ? 'Hide preview' : 'Show preview'}>
+            <IconButton
+                size='small'
+                onClick={togglePreview}
+            >
+                <PreviewIcon fontSize="small" />
+            </IconButton>
+        </Tooltip>
     )
 
+    const editorThemeToggle = (
+        <MonacoEditorThemeToggle
+            size='small'
+        />
+    );
 
-    const editor = edited ? (
-        <Content>
+    const copyIconButton = (
+        <CopyButton
+            size='small'
+            edge='end'
+            copyContent={value}
+        />
+    );
+
+    const toolbarActions = (
+        <Stack direction="row" alignItems="center" spacing={.5}>
+            {previewAction}
+            {editorThemeToggle}
+            {copyIconButton}
+        </Stack>
+    );
+
+    const editor = (
+        <Box sx={{flex: 1, minWidth: '50%'}}>
             <Editor
                 {...editorProps}
                 value={value}
@@ -281,39 +187,40 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
                     readOnly: disabled,
                 }}
             />
-        </Content>
-    ) : null;
+        </Box>
+    );
 
-    const preview = !edited ? (
-        <Content sx={{p: 2}} style={{ height: editorProps?.height }}>
+    const preview = showPreview ? (
+        <Container sx={{
+            borderLeftWidth: 1,
+            borderLeftStyle: 'solid',
+            overflow: 'auto',
+            flex: 1,
+            minWidth: '50%',
+            height: props.height || 240,
+            borderLeftColor: theme => theme.palette.divider
+        }}>
             <Markdown>
                 {value || ''}
             </Markdown>
-        </Content>
-    ) : null;
-
-    const hasFooter = error || helperText;
-    const footer = hasFooter ? (
-        <Footer>
-            <StyledFormHelperText
-                error={error}
-                disabled={disabled}
-                children={helperText}
-            />
-        </Footer>
+        </Container>
     ) : null;
 
     return (
-        <StyledCard
-            hasError={hasError}
-            className={className}
-            variant="outlined"
+        <FormCard
+            isControl={true}
+            error={hasError}
+            disabled={disabled}
+            label={label}
+            helperText={helperText}
+            secondaryAction={toolbarActions}
         >
-            {toolbar}
-            {editor}
-            {preview}
-            {footer}
-        </StyledCard>
+            <Stack direction="row">
+                {editor}
+                {preview}
+            </Stack>
+            {insertActionsFooter}
+        </FormCard>
     )
 }
 

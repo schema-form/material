@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Editor, {EditorProps} from "@monaco-editor/react";
 import {
-    FormControl, FormControlLabel, InputLabel,
     Stack,
     TextFieldProps
 } from "@mui/material";
@@ -25,9 +24,9 @@ export function MonacoEditor(props: MonacoEditorProps) {
     const { theme } = useMonacoEditorTheme();
     const hasValidationError = Boolean(error);
     const [errorMarkers, setErrorMarkers] = useState<any>([]);
-    const hasErrorMarkers = Boolean(errorMarkers?.length);
-    const hasError = hasValidationError || hasErrorMarkers;
-    const errorMessage = error || errorMarkers?.[0]?.message;
+    const hasMarkersError = Boolean(errorMarkers?.length);
+    const hasError = hasValidationError || hasMarkersError;
+    const errorMessage = errorMarkers?.[0]?.message;
     const key = useMemo(() => Math.random().toString(16), [schema]);
 
     const copyIconButton = (

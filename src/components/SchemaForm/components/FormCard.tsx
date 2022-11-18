@@ -2,7 +2,7 @@ import React, {PropsWithChildren, ReactNode} from 'react';
 import {
     CardActions,
     CardHeaderProps, CardProps,
-    Collapse, CollapseProps,
+    Collapse, CollapseProps, FormControl, FormHelperText,
     ListItem,
     ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
     ListItemText, styled,
@@ -75,7 +75,7 @@ export const OutlinedCard = styled(Card)<OutlinedCardProps>(({ theme, error, bor
 
     return ({
         transition: 'none',
-        overflow: 'initial',
+        overflow: 'hidden',
         padding: 1,
         ...borderedStyles
     })
@@ -116,18 +116,13 @@ export function FormCard(props: FormCardProps) {
         </Typography>
     ) : null;
 
-    const subheader = props.helperText ? (
-        <Typography
-            component="p"
-            variant="caption"
-            color={hasError ? 'error' : 'textSecondary'}
-        >
+    const formHelperText = props.helperText ? (
+        <FormHelperText>
             {props.helperText}
-        </Typography>
+        </FormHelperText>
     ) : null;
 
-    const hasHeader = title || subheader || secondaryAction;
-    const hasTitleAndSubheader = Boolean(title && subheader);
+    const hasHeader = title || secondaryAction;
 
     const header = hasHeader ? (
         <ListItem
@@ -146,8 +141,6 @@ export function FormCard(props: FormCardProps) {
                 </ListItemIcon>
                 <ListItemText
                     primary={title}
-                    secondary={subheader}
-                    sx={{my: hasTitleAndSubheader ? 0 : undefined}}
                 />
             </ListItemButton>
         </ListItem>
@@ -167,17 +160,23 @@ export function FormCard(props: FormCardProps) {
     )
 
     return (
-        <OutlinedCard
-            bordered={bordered}
-            isControl={isControl}
+        <FormControl
             error={hasError}
-            variant={variant}
-            className={className}
-            sx={sx}
+            disabled={props.disabled}
         >
-            {header}
-            {collapse}
-        </OutlinedCard>
+            <OutlinedCard
+                bordered={bordered}
+                isControl={isControl}
+                error={hasError}
+                variant={variant}
+                className={className}
+                sx={sx}
+            >
+                {header}
+                {collapse}
+            </OutlinedCard>
+            {formHelperText}
+        </FormControl>
     )
 }
 

@@ -3,5 +3,6 @@
   "type": "string",
   "title": "JSON",
   "description": "application/json",
-  "contentMediaType": "application/json"
+  "contentMediaType": "application/json",
+  "minLength": 5
 }
