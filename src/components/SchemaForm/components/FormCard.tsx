@@ -98,18 +98,18 @@ export function FormCard(props: FormCardProps) {
         HeaderProps,
         defaultExpanded = true
     } = props;
-    const [expanded, setExpanded] = React.useState(defaultExpanded);
+    const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
-    const toggleExpand = () => setExpanded(!expanded);
+    const toggleExpand = () => setExpanded(!isExpanded);
 
-    const expandIcon = expanded
+    const expandIcon = isExpanded
         ? <KeyboardArrowDown color={iconColor} />
         : <KeyboardArrowRight color={iconColor} />;
 
     const title = props?.label ? (
         <Typography
             component="span"
-            variant="body2"
+            variant="body1"
             color={hasError ? 'error' : 'textPrimary'}
         >
             {props.label}
@@ -128,7 +128,7 @@ export function FormCard(props: FormCardProps) {
         <ListItem
             component="header"
             disablePadding
-            secondaryAction={secondaryAction}
+            secondaryAction={isExpanded ? secondaryAction : null}
         >
             <ListItemButton
                 dense={false}
@@ -153,7 +153,7 @@ export function FormCard(props: FormCardProps) {
     ) : null;
 
     const collapse = (
-        <Collapse in={expanded} timeout="auto" unmountOnExit {...CollapseProps}>
+        <Collapse in={isExpanded} timeout="auto" unmountOnExit {...CollapseProps}>
             {children}
             {footer}
         </Collapse>

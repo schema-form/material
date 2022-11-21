@@ -14,6 +14,7 @@ import RemoveButtonTemplate from "./buttons/RemoveButtonTemplate";
 import MoveUpButtonTemplate from "./buttons/MoveUpButtonTemplate";
 import MoveDownButtonTemplate from "./buttons/MoveDownButtonTemplate";
 import ObjectFieldTemplate from "./ObjectFieldTemplate";
+import WrapIfAdditionalTemplate from "./WrapIfAdditionalTemplate";
 
 export const TEMPLATES = {
     BaseInputTemplate,
@@ -29,6 +30,7 @@ export const TEMPLATES = {
     DescriptionFieldTemplate,
     UnsupportedFieldTemplate,
     ObjectFieldTemplate,
+    WrapIfAdditionalTemplate,
     ButtonTemplates: {
         AddButton: AddButtonTemplate,
         SubmitButton: SubmitButtonTemplate,

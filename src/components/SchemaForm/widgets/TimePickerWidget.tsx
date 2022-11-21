@@ -8,7 +8,13 @@ export function mapTimePickerProps(props: WidgetProps<any, SchemaFormContext>): 
     const textFieldProps = mapTextFieldProps(props);
     return {
         ...textFieldProps,
-        type: 'time'
+        type: 'time',
+        onChange: (event) => {
+            const originValue = event.target.value;
+            const isValidTime = originValue.match(/[0-9]{2}:[0-9]{2}/);
+            const newValue = isValidTime ? `${originValue}:00` : originValue;
+            props.onChange?.(newValue);
+        }
     }
 }
 

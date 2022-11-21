@@ -5,6 +5,7 @@ import {FormControlProps, ButtonProps, styled} from "@mui/material";
 import WIDGETS from "./widgets";
 import TEMPLATES from "./templates";
 import MonacoEditorThemeProvider from "./components/MonacoEditor/MonacoEditorThemeProvider";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 export type SchemaFormContext = {
     FormControlProps?: {
@@ -41,29 +42,31 @@ const StyledForm = styled('form')(({ theme }) => ({
 
 export function SchemaForm(props: SchemaFormProps) {
     return (
-        <MonacoEditorThemeProvider>
-            <Form
-                tagName={StyledForm}
-                showErrorList={ false }
-                liveValidate={true}
-                validator={ validator }
-                {...props}
-                formContext={{
-                    ...FORM_CONTEXT,
-                    ...props.formContext
-                }}
-                templates={{
-                    ...TEMPLATES,
-                    ...props.templates,
-                }}
-                widgets={{
-                    ...WIDGETS,
-                    ...props.widgets
-                }}
-            >
-                <></>
-            </Form>
-        </MonacoEditorThemeProvider>
+        <ErrorBoundary>
+            <MonacoEditorThemeProvider>
+                <Form
+                    tagName={StyledForm}
+                    showErrorList={ false }
+                    liveValidate={true}
+                    validator={ validator }
+                    {...props}
+                    formContext={{
+                        ...FORM_CONTEXT,
+                        ...props.formContext
+                    }}
+                    templates={{
+                        ...TEMPLATES,
+                        ...props.templates,
+                    }}
+                    widgets={{
+                        ...WIDGETS,
+                        ...props.widgets
+                    }}
+                >
+                    <></>
+                </Form>
+            </MonacoEditorThemeProvider>
+        </ErrorBoundary>
     );
 }
 

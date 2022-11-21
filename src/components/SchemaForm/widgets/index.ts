@@ -14,7 +14,6 @@ import MarkdownEditorWidget from "./MarkdownEditorWidget";
 import SchemaEditorWidget from "./SchemaEditorWidget";
 import TimePickerWidget from "./TimePickerWidget";
 import SwitchWidget from "./SwitchWidget";
-import ButtonGroupWidget from "./ButtonGroupWidget";
 import AutocompleteWidget from "./AutocompleteWidget";
 import SliderWidget from "./SliderWidget";
 
@@ -53,7 +52,6 @@ export const MUI_WIDGETS = {
     'select': SelectWidget,
     'file-upload': UploadWidget,
     'switch': SwitchWidget,
-    'button-group': ButtonGroupWidget,
     'autocomplete': AutocompleteWidget,
     'slider': SliderWidget
 };

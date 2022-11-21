@@ -6,6 +6,7 @@ import {FieldTemplateProps} from "@rjsf/utils";
 import {SchemaFormContext} from "../SchemaForm";
 import {useConfig} from "../providers/ConfigProvider";
 import {FormHeader} from "../components/FormHeader";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const Root = styled('div')(({ theme }) => ({
     display: 'grid',
@@ -64,11 +65,13 @@ export function FieldTemplate(props: FieldTemplateProps<any, SchemaFormContext>)
         : null;
 
     return (
-        <Root className={classNames}>
-            {header}
-            {errorList}
-            {children}
-        </Root>
+        <ErrorBoundary>
+            <Root className={classNames}>
+                {header}
+                {errorList}
+                {children}
+            </Root>
+        </ErrorBoundary>
     )
 }
 

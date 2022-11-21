@@ -102,26 +102,6 @@ export function Upload(props: UploadProps) {
         }
     }
 
-    const label = props.label ? (
-        <Typography
-            component="span"
-            variant="body2"
-            color={error ? 'error' : 'textPrimary'}
-        >
-            {props.label}
-        </Typography>
-    ) : null;
-
-    const helperText = props.helperText ? (
-        <Typography
-            component="p"
-            variant="caption"
-            color={error ? 'error' : 'textSecondary'}
-        >
-            {props.helperText}
-        </Typography>
-    ) : null;
-
     const fileInput = (
         <input
             {...inputProps}
@@ -168,8 +148,8 @@ export function Upload(props: UploadProps) {
     return (
         <>
             <FormCard
-                label={label}
-                helperText={helperText}
+                label={props.label}
+                helperText={props.helperText}
                 error={error}
                 disabled={props.disabled}
                 secondaryAction={uploadIconButton}

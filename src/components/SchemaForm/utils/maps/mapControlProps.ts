@@ -29,11 +29,6 @@ export function mapControlProps(props: WidgetProps<any, SchemaFormContext>) {
         error: hasError,
         onBlur: () => onBlur(id, value),
         onFocus: () => onFocus(id, value),
-        onChange: (event: any) => {
-            const { value } = event?.target || {};
-            const isEmptyString = value === '';
-            const newValue = isEmptyString ? undefined : value;
-            onChange(newValue);
-        }
+        onChange: (event: any) => onChange(event?.target?.value)
     };
 }

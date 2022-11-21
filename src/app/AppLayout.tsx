@@ -25,6 +25,7 @@ export default function AppLayout() {
     });
     const [formData, setFormData] = useState<unknown>();
     const [schema, setSchema] = useState<SchemaFormProps['schema']>();
+    const [uiSchema, setUiSchema] = useState<SchemaFormProps['uiSchema']>();
     const theme = useTheme();
     const isBreakpointUpSM = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -33,27 +34,32 @@ export default function AppLayout() {
     }
 
     useEffect(() => {
-        appRoute?.fetchSchema?.().then((data) => {
-            try {
-                const schema = data?.default;
-                const formData = schema?.default;
+        const fetchSchemas = async () => {
+            const schemaResponse = await appRoute?.fetchSchema?.();
+            const uiSchemaResponse = await appRoute?.fetchUiSchema?.();
+            const schema = schemaResponse.default;
+            const uiSchema = uiSchemaResponse.default;
+            const formData = schema.default;
 
-                setSchema(schema);
-                setFormData(formData);
-                setEditorData({
-                    schema: JSON.stringify(schema, null, 2),
-                    formData: JSON.stringify(formData, null, 2)
-                })
-            } catch (e) {
-                console.error(e);
-            }
-        })
+            setSchema(schema);
+            setUiSchema(uiSchema);
+            setFormData(formData);
+            setEditorData({
+                schema: JSON.stringify(schema, null, 2),
+                uiSchema: JSON.stringify(uiSchema, null, 2),
+                formData: JSON.stringify(formData, null, 2)
+            });
+        }
+
+        fetchSchemas()
+            .catch(console.error);
     }, [appRoute?.pathname]);
 
     const form = schema ? (
         <SchemaForm
             key={formKey}
             schema={schema}
+            uiSchema={uiSchema}
             formData={formData}
             onChange={({ formData }) => {
                 setFormData(formData);
@@ -76,9 +82,21 @@ export default function AppLayout() {
                     setEditorData(formData);
                     startTransition(() => {
                         try {
-                            const newFormData = JSON.parse(formData?.formData);
-                            const newSchema = JSON.parse(formData?.schema);
+                            const hasSchema = Boolean(formData?.schema);
+                            const hasUiSchema = Boolean(formData?.uiSchema);
+                            const hasFormData = Boolean(formData?.formData);
+                            const newSchema = hasSchema
+                                ? JSON.parse(formData?.schema)
+                                : undefined;
+                            const newUiSchema = hasUiSchema
+                                ? JSON.parse(formData?.uiSchema)
+                                : undefined;
+                            const newFormData = hasFormData
+                                ? JSON.parse(formData?.formData)
+                                : undefined;
+
                             setSchema(newSchema);
+                            setUiSchema(newUiSchema);
                             setFormData(newFormData);
                         } catch (e) {
                             console.error(e);
