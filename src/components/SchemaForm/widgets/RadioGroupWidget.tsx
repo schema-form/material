@@ -8,7 +8,6 @@ import {
     RadioGroupProps
 } from "@mui/material";
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import List from "@mui/material/List";
 import {SchemaFormContext} from "../SchemaForm";
 import {mapFormHeaderProps} from "../utils/maps/mapFormHeaderProps";
@@ -18,6 +17,8 @@ import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
 import isEqual from "lodash/isEqual";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
+import {mapOptions} from "../utils/maps/mapOptions";
+import {Option} from "../types/Option";
 
 export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
     const { value: inputValue, rawErrors, formContext} = props;
@@ -25,17 +26,18 @@ export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
     const { FormControlProps } = formContext || {};
     const { size } = FormControlProps || {};
     const dense = size === 'small';
-    const enumOptions = mapSelectOptions(props);
+    const options = mapOptions(props);
     const errorMessage = rawErrors?.[0];
     const hasError = Boolean(errorMessage);
 
-    const renderOption = ({ value, label, description, disabled }: EnumOption) => {
+    const renderOption = (option: Option) => {
+        const { label, helperText, disabled } = option;
         const id = uuid();
-        const checked = isEqual(jsonValue, value);
+        const checked = isEqual(jsonValue, option?.value);
         const hasLabel = Boolean(label);
-        const hasDescription = Boolean(description);
+        const hasHelperText = Boolean(helperText);
 
-        const labelText = hasLabel && (
+        const primaryText = hasLabel && (
             <Typography
                 component="span"
                 variant="body1"
@@ -45,19 +47,19 @@ export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
             </Typography>
         );
 
-        const descriptionText = hasDescription && (
+        const secondaryText = hasHelperText && (
             <Typography
                 component="p"
                 variant="caption"
                 color={hasError ? 'error' : 'textSecondary'}
             >
-                {description}
+                {helperText}
             </Typography>
         );
 
         return (
             <ListItem
-                key={value}
+                key={option?.value}
                 component="label"
                 htmlFor={id}
                 dense={dense}
@@ -71,15 +73,15 @@ export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
                         id={id}
                         edge="start"
                         size={size}
-                        value={value}
+                        value={option?.value}
                         disabled={disabled}
                         checked={checked}
                         color={hasError ? 'error' : undefined}
                     />
                 </ListItemIcon>
                 <ListItemText
-                    primary={labelText}
-                    secondary={descriptionText}
+                    primary={primaryText}
+                    secondary={secondaryText}
                 />
             </ListItem>
         )
@@ -87,7 +89,7 @@ export function RadioListGroup(props: WidgetProps<any, SchemaFormContext>) {
 
     return (
         <List disablePadding={true}>
-            {enumOptions?.map?.(renderOption)}
+            {options?.map?.(renderOption)}
         </List>
     );
 }
@@ -100,6 +102,7 @@ export function mapRadioGroupProps(props: WidgetProps<any, SchemaFormContext>): 
             const jsonValue = event.target?.value;
             const hasJsonValue = Boolean(jsonValue);
             const newValue = hasJsonValue ? JSON.parse(jsonValue) : jsonValue;
+            console.log('!jsonValue', jsonValue, newValue);
             props.onChange?.(newValue);
         }
     }

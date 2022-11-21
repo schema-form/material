@@ -53,7 +53,10 @@ export const MUI_WIDGETS = {
     'file-upload': UploadWidget,
     'switch': SwitchWidget,
     'autocomplete': AutocompleteWidget,
-    'slider': SliderWidget
+    'slider': SliderWidget,
+    'password-field': PasswordFieldWidget,
+    'color-field': ColorFieldWidget,
+    'upload': UploadWidget,
 };
 
 export const WIDGETS = {

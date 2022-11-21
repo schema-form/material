@@ -1,15 +1,14 @@
 import React from "react";
 import List from "@mui/material/List";
 import {
-    Checkbox, CheckboxProps,
-    Divider,
     TextFieldProps
 } from "@mui/material";
 import {CheckboxGroupOption, CheckboxGroupOptionProps} from "./CheckboxGroupOption";
 import FormCard from "./FormCard";
+import {Option} from "../types/Option";
 
 export type CheckboxGroupProps = {
-    options: CheckboxGroupOptionProps[];
+    options: Option[];
     value?: unknown[];
     onChange?: (event: {
         target?: {
@@ -24,13 +23,9 @@ export type CheckboxGroupProps = {
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
     const { options, value, label, helperText, error: hasError } = props;
-    const selectedCount = Number(value?.length);
-    const selectedText = selectedCount
-        ? `${selectedCount} items selected`
-        : 'not selected';
     const hasOptions = Boolean(options.length);
 
-    const createHandleOptionChange = (option: CheckboxGroupOptionProps): CheckboxGroupOptionProps['onChange'] => (event, checked) => {
+    const createHandleOptionChange = (option: Option): CheckboxGroupOptionProps['onChange'] => (event, checked) => {
         const oldValue = value || [];
         const newValue = checked
             ? [...oldValue, option?.value]
@@ -39,20 +34,18 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         props.onChange?.(changeEvent, newValue);
     }
 
-    const renderOption = (option: CheckboxGroupOptionProps) => {
-        const key = JSON.stringify(option?.value);
+    const renderOption = (option: Option) => {
         const checked = value?.includes(option?.value) || false;
         const disabled = props.disabled || option.disabled;
 
         return (
             <CheckboxGroupOption
-                key={key}
+                key={option?.value}
                 value={option?.value}
                 disabled={disabled}
                 checked={checked}
                 label={option?.label}
                 helperText={option.helperText}
-                hidden={option.hidden}
                 onChange={createHandleOptionChange(option)}
                 error={hasError}
             />
@@ -70,7 +63,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
             isControl={true}
             error={hasError}
             label={label}
-            helperText={helperText || selectedText}
+            helperText={helperText}
         >
             {optionsList}
         </FormCard>

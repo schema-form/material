@@ -5,8 +5,9 @@ import {mapControlProps} from "./mapControlProps";
 
 export function mapCheckboxProps(props: WidgetProps<any, SchemaFormContext>): CheckboxProps {
     const { value, onChange } = props;
+    const controlProps = mapControlProps(props);
     return {
-        ...mapControlProps(props),
+        ...controlProps,
         indeterminate: value === undefined || value === null,
         checked: Boolean(value),
         onChange: ({ target }) => onChange(target?.checked),

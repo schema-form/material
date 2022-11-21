@@ -37,9 +37,9 @@ export default function AppLayout() {
         const fetchSchemas = async () => {
             const schemaResponse = await appRoute?.fetchSchema?.();
             const uiSchemaResponse = await appRoute?.fetchUiSchema?.();
-            const schema = schemaResponse.default;
-            const uiSchema = uiSchemaResponse.default;
-            const formData = schema.default;
+            const schema = schemaResponse?.default;
+            const uiSchema = uiSchemaResponse?.default;
+            const formData = schema?.default;
 
             setSchema(schema);
             setUiSchema(uiSchema);
