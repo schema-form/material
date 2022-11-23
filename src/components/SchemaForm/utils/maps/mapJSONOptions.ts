@@ -23,7 +23,7 @@ const mapSchemaToOption = (schema?: JSONSchema7): Option => {
     }
 }
 
-export function mapOptions(props: WidgetProps<any, SchemaFormContext>): Option[] {
+export function mapJSONOptions(props: WidgetProps<any, SchemaFormContext>): Option[] {
     const { schema } = props;
     const schemaItems = schema?.items as JSONSchema7;
     const optionsAsEnumList = schemaItems?.enum || schema?.enum;

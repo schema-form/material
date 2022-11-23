@@ -3,7 +3,7 @@ import {WidgetProps} from '@rjsf/utils';
 import {SchemaFormContext} from "../SchemaForm";
 import {CheckboxGroup, CheckboxGroupProps} from "../components/CheckboxGroup";
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {mapOptions} from "../utils/maps/mapOptions";
+import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
 
 const fromJSON = (value: any) => (typeof value === 'string')
     ? JSON.parse(value)
@@ -13,7 +13,7 @@ const toJSON = (value: any) => JSON.stringify(value);
 
 export function mapCheckboxGroupProps(props: WidgetProps<any, SchemaFormContext>): CheckboxGroupProps {
     const commonProps = mapControlProps(props);
-    const checkboxOptions = mapOptions(props);
+    const checkboxOptions = mapJSONOptions(props);
 
     return {
         label: commonProps.label,
