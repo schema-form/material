@@ -1,35 +1,35 @@
 import {
     Checkbox,
     CheckboxProps, ListItem,
-    ListItemButton,
+    ListItemButton, ListItemButtonProps,
     ListItemIcon,
     ListItemText,
-    ListItemTextProps,
-    Tooltip,
+    ListItemTextProps, Switch, SwitchProps,
     TooltipProps
 } from "@mui/material";
 import React, {useMemo} from "react";
 import {v4 as uuid} from "uuid";
 import Typography from "@mui/material/Typography";
-import InfoIcon from "@mui/icons-material/InfoOutlined";
 
-export type CheckboxGroupOptionProps = {
-    value: CheckboxProps['value'];
+export type SwitchListItemProps = {
+    isGroupOption?: boolean;
+    value?: SwitchProps['value'];
     label?: ListItemTextProps['primary'];
-    helperText?: TooltipProps['title'];
-    disabled?: CheckboxProps['disabled'];
-    hidden?: CheckboxProps['hidden'];
-    checked?: CheckboxProps['checked'];
+    helperText?: ListItemTextProps['title'];
+    disabled?: SwitchProps['disabled'];
+    hidden?: SwitchProps['hidden'];
+    checked?: SwitchProps['checked'];
     error?: boolean;
-    onChange?: CheckboxProps['onChange'];
+    onChange?: SwitchProps['onChange'];
+    sx?: ListItemButtonProps['sx'];
 }
 
-export function CheckboxGroupOption(props: CheckboxGroupOptionProps) {
-    const {error: hasError} = props;
+export function SwitchListItem(props: SwitchListItemProps) {
+    const {error: hasError, helperText, isGroupOption} = props;
     const labelText = props?.label || JSON.stringify(props?.value);
     const id = useMemo(uuid, []);
 
-    const label = labelText ? (
+    const primaryText = labelText ? (
         <Typography
             component="span"
             variant="body1"
@@ -39,42 +39,48 @@ export function CheckboxGroupOption(props: CheckboxGroupOptionProps) {
         </Typography>
     ) : null;
 
-    const helper = props.helperText ? (
-        <ListItemIcon sx={{minWidth: 'auto', mr: 1}}>
-            <Tooltip title={props.helperText} placement="left">
-                <InfoIcon
-                    fontSize="small"
-                    color={hasError ? 'error' : 'action'}
-                    opacity={.7}
-                />
-            </Tooltip>
-        </ListItemIcon>
+    const secondaryText = helperText ? (
+        <Typography
+            component="p"
+            variant="caption"
+            color={hasError ? 'error' : 'textSecondary'}
+        >
+            {helperText}
+        </Typography>
     ) : null;
 
     return (
-        <ListItem component="label" htmlFor={id} disablePadding>
+        <ListItem disablePadding>
             <ListItemButton
+                component="label"
+                htmlFor={id}
                 disabled={props?.disabled}
+                selected={props.checked}
                 hidden={props?.hidden}
-                sx={{py: 0}}
+                sx={{
+                    borderRadius: isGroupOption ? 0 : 1,
+                    ...props?.sx
+                }}
             >
                 <ListItemIcon>
-                    <Checkbox
+                    <Switch
                         id={id}
                         disableRipple
                         edge="start"
+                        disabled={props.disabled}
                         checked={props.checked}
                         value={props.value}
                         onChange={props.onChange}
-                        sx={{mr: 1}}
                         color={hasError ? 'error' : undefined}
                     />
                 </ListItemIcon>
                 <ListItemText
-                    primary={label}
+                    primary={primaryText}
+                    secondary={secondaryText}
                 />
-                {helper}
             </ListItemButton>
         </ListItem>
     )
 }
+
+export default SwitchListItem;

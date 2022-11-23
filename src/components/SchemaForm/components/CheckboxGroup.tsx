@@ -3,7 +3,7 @@ import List from "@mui/material/List";
 import {
     TextFieldProps
 } from "@mui/material";
-import {CheckboxGroupOption, CheckboxGroupOptionProps} from "./CheckboxGroupOption";
+import {CheckboxListItem, CheckboxListItemProps} from "./CheckboxListItem";
 import FormCard from "./FormCard";
 import {Option} from "../types/Option";
 
@@ -22,10 +22,10 @@ export type CheckboxGroupProps = {
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
-    const { options, value, label, helperText, error: hasError } = props;
+    const { options, value, label, helperText, error: hasError, disabled } = props;
     const hasOptions = Boolean(options.length);
 
-    const createHandleOptionChange = (option: Option): CheckboxGroupOptionProps['onChange'] => (event, checked) => {
+    const createHandleOptionChange = (option: Option): CheckboxListItemProps['onChange'] => (event, checked) => {
         const oldValue = value || [];
         const newValue = checked
             ? [...oldValue, option?.value]
@@ -39,7 +39,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         const disabled = props.disabled || option.disabled;
 
         return (
-            <CheckboxGroupOption
+            <CheckboxListItem
                 key={option?.value}
                 value={option?.value}
                 disabled={disabled}
@@ -48,6 +48,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
                 helperText={option.helperText}
                 onChange={createHandleOptionChange(option)}
                 error={hasError}
+                isGroupOption={true}
             />
         )
     }
@@ -61,6 +62,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     return (
         <FormCard
             isControl={true}
+            disabled={disabled}
             error={hasError}
             label={label}
             helperText={helperText}

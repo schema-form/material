@@ -1,25 +1,35 @@
 import {
     Checkbox,
     CheckboxProps, ListItem,
+    ListItemButton, ListItemButtonProps,
+    ListItemIcon,
     ListItemText,
-    TextFieldProps
+    ListItemTextProps,
 } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import React, {useMemo} from "react";
 import {v4 as uuid} from "uuid";
+import Typography from "@mui/material/Typography";
 
-export type CheckboxListItemProps = CheckboxProps & {
-    label?: TextFieldProps['label'];
-    helperText?: TextFieldProps['helperText'];
-    error?: TextFieldProps['error'];
+export type CheckboxListItemProps = {
+    isGroupOption?: boolean;
+    value?: CheckboxProps['value'];
+    label?: ListItemTextProps['primary'];
+    helperText?: ListItemTextProps['title'];
+    disabled?: CheckboxProps['disabled'];
+    hidden?: CheckboxProps['hidden'];
+    checked?: CheckboxProps['checked'];
+    error?: boolean;
+    onChange?: CheckboxProps['onChange'];
+    sx?: ListItemButtonProps['sx'];
 }
 
-export function CheckboxListItem({ label, helperText, error: hasError, ...props }: CheckboxListItemProps) {
+export function CheckboxListItem(props: CheckboxListItemProps) {
     const id = useMemo(uuid, []);
-    const hasLabel = Boolean(label);
-    const hasHelperText = Boolean(helperText);
+    const {error: hasError, helperText, isGroupOption} = props;
+    const label = props?.label || JSON.stringify(props?.value);
+    const optionPaddingY = helperText ? undefined : 0;
 
-    const primaryText = hasLabel ? (
+    const primaryText = label ? (
         <Typography
             component="span"
             variant="body1"
@@ -29,7 +39,7 @@ export function CheckboxListItem({ label, helperText, error: hasError, ...props 
         </Typography>
     ) : null;
 
-    const secondaryText = hasHelperText ? (
+    const secondaryText = helperText ? (
         <Typography
             component="p"
             variant="caption"
@@ -40,27 +50,38 @@ export function CheckboxListItem({ label, helperText, error: hasError, ...props 
     ) : null;
 
     return (
-        <ListItem
-            component="label"
-            htmlFor={id}
-            disabled={props.disabled}
-            hidden={props.hidden}
-            disableGutters={true}
-            disablePadding={true}
-            sx={{cursor: 'pointer'}}
-        >
-            <Checkbox
-                {...props}
-                id={id}
-                sx={{mr: 1}}
-                edge="start"
-                color={hasError ? 'error' : undefined}
-            />
-            <ListItemText
-                sx={{my: 0}}
-                primary={primaryText}
-                secondary={secondaryText}
-            />
+        <ListItem disablePadding>
+            <ListItemButton
+                component="label"
+                htmlFor={id}
+                disabled={props?.disabled}
+                selected={props.checked}
+                hidden={props?.hidden}
+                sx={{
+                    py: isGroupOption ? optionPaddingY : undefined,
+                    borderRadius: isGroupOption ? 0 : 1,
+                    ...props.sx
+                }}
+            >
+                <ListItemIcon>
+                    <Checkbox
+                        id={id}
+                        disableRipple
+                        edge="start"
+                        disabled={props.disabled}
+                        checked={props.checked}
+                        value={props.value}
+                        onChange={props.onChange}
+                        color={hasError ? 'error' : undefined}
+                    />
+                </ListItemIcon>
+                <ListItemText
+                    primary={primaryText}
+                    secondary={secondaryText}
+                />
+            </ListItemButton>
         </ListItem>
     )
 }
+
+export default CheckboxListItem;

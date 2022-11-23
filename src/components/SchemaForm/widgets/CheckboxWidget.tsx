@@ -10,7 +10,7 @@ export function mapCheckboxListItemProps(props: WidgetProps<any, SchemaFormConte
     const checkboxProps = mapCheckboxProps(props);
     return {
         ...commonProps,
-        ...checkboxProps,
+        ...checkboxProps
     }
 }
 

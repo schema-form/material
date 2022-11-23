@@ -1,5 +1,5 @@
 export type Option = {
-    value?: string;
+    value: string;
     label?: string;
     helperText?: string;
     disabled?: boolean;
