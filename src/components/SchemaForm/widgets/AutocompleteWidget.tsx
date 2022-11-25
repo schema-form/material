@@ -83,16 +83,12 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     }
 
     const handleChange: Props['onChange'] = (event, options) => {
-        const getValue = (option: Option) => option?.value ?? option;
+        const getValue = (option: Option) => JSON.parse(option?.value ?? option);
         const value = (options instanceof Array)
             ? (options as Option[]).map(getValue)
-            : (options as Option)?.value
+            : JSON.parse((options as Option)?.value)
 
         onChange?.(value);
-    }
-
-    const handleInputChange: Props['onInputChange'] = (event, value) => {
-      onChange?.(value);
     }
 
     return {
@@ -106,8 +102,7 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
         renderOption,
         renderInput,
         renderTags,
-        onChange: handleChange,
-        onInputChange: handleInputChange
+        onChange: handleChange
     }
 }
 

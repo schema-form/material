@@ -8,13 +8,13 @@ const schema: SchemaFormProps['schema'] = {
             type: 'string',
             contentMediaType: 'application/json'
         },
-        uiSchema: {
-            title: 'Ui Schema',
+        formData: {
+            title: 'Form data',
             type: 'string',
             contentMediaType: 'application/json'
         },
-        formData: {
-            title: 'Form data',
+        uiSchema: {
+            title: 'Ui Schema',
             type: 'string',
             contentMediaType: 'application/json'
         }

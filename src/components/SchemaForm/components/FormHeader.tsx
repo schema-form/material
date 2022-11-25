@@ -31,12 +31,12 @@ export function FormHeader(props: FormHeaderProps) {
     const helperText = hasHelperText ? (
         <Typography
             component="p"
-            variant="caption"
+            variant="body2"
             color={props.error ? 'error' : 'textSecondary'}
         >
             {props?.helperText}
         </Typography>
-    ) : null
+    ) : null;
 
     return (
         <ListItem
@@ -45,19 +45,14 @@ export function FormHeader(props: FormHeaderProps) {
             hidden={props.hidden}
             disableGutters
             disablePadding
+            disabled={props?.disabled}
             secondaryAction={props?.secondaryAction}
         >
-            <ListItemButton
-                disabled={props.disabled}
-                disableGutters
-                sx={{p: 0}}
-            >
-                <ListItemText
-                    sx={{my: 0}}
-                    primary={label}
-                    secondary={helperText}
-                />
-            </ListItemButton>
+            <ListItemText
+                sx={{my: 0}}
+                primary={label}
+                secondary={helperText}
+            />
         </ListItem>
     )
 }
