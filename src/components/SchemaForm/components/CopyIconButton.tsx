@@ -36,8 +36,8 @@ export function CopyIconButton({
 
     return (
         <Tooltip
-            title={pressed ? 'Copied' : 'Copy'}
             {...TooltipProps}
+            title={pressed ? 'Copied' : (TooltipProps?.title || 'Copy')}
         >
             <IconButton
                 size='small'

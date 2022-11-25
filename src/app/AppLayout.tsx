@@ -4,7 +4,7 @@ import {Container, Link, Stack, Tooltip, useMediaQuery, useTheme} from "@mui/mat
 import {SchemaForm, SchemaFormProps} from "../components/SchemaForm";
 import AppNavigation from "./AppNavigation";
 import {useAppRoute} from "./AppRoutesProvider";
-import EditorForm, {EditorFormData} from "./EditorForm";
+import {EditorFormData} from "./EditorForm";
 import Layout from "../components/Layout/Layout";
 import IconButton from "@mui/material/IconButton";
 import {GitHub} from "@mui/icons-material";
@@ -12,6 +12,7 @@ import MUI from "../icons/MUI";
 import Typography from "@mui/material/Typography";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
+import PropsEditor from "./PropsEditor";
 
 export default function AppLayout() {
     const appRoute = useAppRoute();
@@ -74,38 +75,36 @@ export default function AppLayout() {
         />
     ) : null;
 
-    const sourceForm = (
-        <Container maxWidth="xl" sx={{py: 3}}>
-            <EditorForm
-                key={formKey}
-                formData={editorData}
-                onChange={({ formData }) => {
-                    setEditorData(formData);
-                    startTransition(() => {
-                        try {
-                            const hasSchema = Boolean(formData?.schema);
-                            const hasUiSchema = Boolean(formData?.uiSchema);
-                            const hasFormData = Boolean(formData?.formData);
-                            const newSchema = hasSchema
-                                ? JSON.parse(formData?.schema)
-                                : undefined;
-                            const newUiSchema = hasUiSchema
-                                ? JSON.parse(formData?.uiSchema)
-                                : undefined;
-                            const newFormData = hasFormData
-                                ? JSON.parse(formData?.formData)
-                                : undefined;
+    const propsEditor = (
+        <PropsEditor
+            key={formKey}
+            formData={editorData}
+            onChange={({ formData }) => {
+                setEditorData(formData);
+                startTransition(() => {
+                    try {
+                        const hasSchema = Boolean(formData?.schema);
+                        const hasUiSchema = Boolean(formData?.uiSchema);
+                        const hasFormData = Boolean(formData?.formData);
+                        const newSchema = hasSchema
+                            ? JSON.parse(formData?.schema)
+                            : undefined;
+                        const newUiSchema = hasUiSchema
+                            ? JSON.parse(formData?.uiSchema)
+                            : undefined;
+                        const newFormData = hasFormData
+                            ? JSON.parse(formData?.formData)
+                            : undefined;
 
-                            setSchema(newSchema);
-                            setUiSchema(newUiSchema);
-                            setFormData(newFormData);
-                        } catch (e) {
-                            console.error(e);
-                        }
-                    });
-                }}
-            />
-        </Container>
+                        setSchema(newSchema);
+                        setUiSchema(newUiSchema);
+                        setFormData(newFormData);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                });
+            }}
+        />
     );
 
     const GitHubLink = (
@@ -135,7 +134,7 @@ export default function AppLayout() {
         >
             <MUI fontSize="medium" />
             <Typography variant="body1" textTransform="uppercase" fontWeight="bold">
-                JSON Schema Form
+                Schema Form
             </Typography>
         </Stack>
     );
@@ -143,7 +142,7 @@ export default function AppLayout() {
     return (
         <Layout
             drawer={<AppNavigation />}
-            rightDrawer={sourceForm}
+            rightDrawer={propsEditor}
             AppBarProps={{
                 logo: appLogo,
                 actions: GitHubLink

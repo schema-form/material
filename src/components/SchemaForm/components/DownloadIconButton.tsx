@@ -39,7 +39,7 @@ export function DownloadIconButton({
                 disabled={!hasContent}
                 onClick={handleDownload}
             >
-                <DownloadIcon />
+                <DownloadIcon fontSize={IconButtonProps.size || 'small'} />
             </IconButton>
         </Tooltip>
     )
