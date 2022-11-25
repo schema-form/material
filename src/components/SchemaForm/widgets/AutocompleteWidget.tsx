@@ -14,6 +14,11 @@ type Props = AutocompleteProps<Option, any, any, any>;
 
 const findOption = (value: any, values: Option[]) => values?.find(option => option?.value === value);
 
+const parseJSONValue = (item: any) => {
+    try { return JSON.parse(item) }
+    catch(e) { return item }
+}
+
 export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>): AutocompleteProps<any, any, any, any> {
     const { value, multiple, onChange, formContext } = props;
     const { FormControlProps } = formContext || {};
@@ -22,13 +27,24 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     const commonProps = mapControlProps(props);
     const jsonOptions = mapJSONOptions(props);
     const { value: _, onChange: __, type, ...textFieldProps } = mapTextFieldProps(props);
+    const jsonValue = value instanceof Array
+        ? value.map(item => JSON.stringify(item))
+        : JSON.stringify(value);
     const hasValue = !isEmpty(value);
 
     const renderOption: Props['renderOption'] = (props, option) => {
-        const { label, helperText, disabled } = option;
+        const { label, helperText, disabled, value } = option;
+        const selected = jsonValue instanceof Array
+            ? jsonValue.includes(value)
+            : (jsonValue === value);
 
         return (
-            <MenuItem dense={dense} disabled={disabled} {...props}>
+            <MenuItem
+                dense={dense}
+                disabled={disabled}
+                selected={selected}
+                {...props}
+            >
                 <ListItemText
                     primary={label}
                     secondary={helperText}
@@ -66,11 +82,12 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
       )
     }
 
-    const renderTags: Props['renderTags'] = (tagValues, getTagProps) => {
+    const renderTags: Props['renderTags'] = (tagValues, getTagProps, ownerState) => {
         const selectedOptions = tagValues.map(value => findOption(value, jsonOptions));
         return selectedOptions?.map((option, index) => {
-            const { label, value, disabled } = option || {};
+            const { value, disabled } = option || {};
             const tagProps = getTagProps({ index });
+            const label = option?.label || option?.value;
             return (
                 <Chip
                     {...tagProps}
@@ -82,13 +99,48 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
         })
     }
 
-    const handleChange: Props['onChange'] = (event, options) => {
-        const getValue = (option: Option) => JSON.parse(option?.value ?? option);
-        const value = (options instanceof Array)
-            ? (options as Option[]).map(getValue)
-            : JSON.parse((options as Option)?.value)
+    const handleChange: Props['onChange'] = (event, options, reason, details) => {
+        let newJSONValue;
 
-        onChange?.(value);
+        const removeValue = (value: any) => jsonValue instanceof Array
+            ? jsonValue.filter(itemValue => itemValue !== value)
+            : undefined;
+
+        switch (reason) {
+            case 'selectOption': {
+                const selectedOption = details?.option;
+                const selectedOptionValue = selectedOption?.value as string;
+
+                if (multiple) {
+                    const needRemove = jsonValue instanceof Array
+                        ? jsonValue?.includes(selectedOptionValue)
+                        : (jsonValue === selectedOptionValue);
+
+                    if (needRemove) {
+                        newJSONValue = removeValue(selectedOptionValue);
+                        break;
+                    }
+
+                    newJSONValue = jsonValue instanceof Array
+                        ? [...jsonValue, selectedOptionValue]
+                        : [selectedOptionValue];
+                } else {
+                    newJSONValue = selectedOptionValue;
+                }
+                break;
+            }
+            case 'removeOption': {
+                const selectedOptionValue = details?.option as any;
+                newJSONValue = removeValue(selectedOptionValue);
+                break;
+            }
+        }
+
+        const newValue = newJSONValue instanceof Array
+            ? newJSONValue.map(parseJSONValue)
+            : parseJSONValue(newJSONValue);
+
+        onChange?.(newValue);
     }
 
     return {
@@ -96,7 +148,7 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
         multiple,
         options: jsonOptions,
         noOptionsText: 'No options',
-        value: multiple ? value : findOption(value, jsonOptions)?.value,
+        value: jsonValue,
         getOptionLabel: option => option?.label,
         getOptionDisabled: option => option?.disabled,
         renderOption,

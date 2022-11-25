@@ -422,8 +422,28 @@ export const widgetsRoutes: AppRouteProps = {
     children: {
         '/autocomplete': {
             title: 'Autocomplete',
-            fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+            children: {
+                '/enum': {
+                    title: 'Enumerable',
+                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[enum].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                },
+                '/anyOf': {
+                    title: 'Any of',
+                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[anyOf].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                },
+                '/multiple-enum': {
+                    title: 'Multiple Enum',
+                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-enum].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                },
+                '/multiple-any-of': {
+                    title: 'Multiple Any Of',
+                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-anyOf].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                }
+            }
         },
         '/checkbox': {
             title: 'Checkbox',

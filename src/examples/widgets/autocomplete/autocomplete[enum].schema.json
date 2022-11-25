@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "type": "string",
-  "title": "Тег",
-  "description": "Выберите из списка",
+  "title": "Заголовок",
+  "description": "Текст подсказки",
   "enum": [
     "Option 1",
     "Option 2",
