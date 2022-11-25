@@ -12,11 +12,14 @@
       },
       {
         "title": "Опция 2",
+        "description": "Дополнительная информация",
         "const": 2
       },
       {
         "title": "Опция 3",
-        "const": 3
+        "description": "Только для чтения",
+        "const": 3,
+        "readOnly": true
       }
     ]
   }

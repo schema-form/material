@@ -1,10 +1,8 @@
 import List from "@mui/material/List";
 import {AppRouteProps, appRoutes} from "../constants/routes";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
 import * as React from "react";
 import {Link, useLocation} from "react-router-dom";
 import {Box, Collapse, MenuItem} from "@mui/material";
@@ -27,6 +25,7 @@ function NavigationItem(props: NavigationItemProps) {
     const [isExpanded, setExpanded] = useState(hasPathMatch);
     const toggleExpand = () => setExpanded(!isExpanded);
     const { closeDrawer } = useDrawerState();
+    const paddingLeft = level * 2;
 
     const renderChild = ([itemPath, itemProps]: [string, AppRouteProps]) => {
         const parentPath = props.path;
@@ -43,24 +42,34 @@ function NavigationItem(props: NavigationItemProps) {
         );
     }
 
+    const primaryText = hasChildren ? (
+        <Typography variant="body1">
+            {props?.title}
+        </Typography>
+    ) : (
+        <Typography
+            component="span"
+            variant="body1"
+            color={isSelected ? 'textPrimary' : 'textSecondary'}
+        >
+            {props?.title}
+        </Typography>
+    );
+
     if (hasChildren) {
         return (
             <React.Fragment>
                 <MenuItem
                     onClick={toggleExpand}
-                    sx={{ pl: level * 2}}
+                    sx={{pl: paddingLeft}}
                 >
-                    <ListItemIcon>
+                    <ListItemText primary={primaryText} />
+                    <ListItemIcon style={{minWidth: 'auto'}}>
                         <KeyboardArrowRightIcon
                             fontSize="small"
                             sx={{transform: isExpanded ? 'rotate(90deg)' : undefined}}
                         />
                     </ListItemIcon>
-                    <ListItemText primary={(
-                        <Typography variant="body1">
-                            {props?.title}
-                        </Typography>
-                    )} />
                 </MenuItem>
                 <Collapse in={isExpanded}>
                     {Object.entries(props.children || {}).map(renderChild)}
@@ -74,18 +83,10 @@ function NavigationItem(props: NavigationItemProps) {
             component={Link}
             to={props.path}
             selected={isSelected}
-            sx={{pl: level * 2.875}}
+            sx={{pl: paddingLeft}}
             onClick={closeDrawer}
         >
-            <ListItemText primary={(
-                <Typography
-                    component="span"
-                    variant="body1"
-                    color={isSelected ? 'textPrimary' : 'textSecondary'}
-                >
-                    {props?.title}
-                </Typography>
-            )} />
+            <ListItemText primary={primaryText} />
         </MenuItem>
     )
 }

@@ -423,26 +423,31 @@ export const widgetsRoutes: AppRouteProps = {
         '/autocomplete': {
             title: 'Autocomplete',
             children: {
-                '/enum': {
-                    title: 'Enumerable',
+                '/label-eq-value': {
+                    title: 'Label = Value',
                     fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[enum].schema.json'),
                     fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
                 },
-                '/anyOf': {
-                    title: 'Any of',
+                '/label-neq-value': {
+                    title: 'Label + Value',
                     fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[anyOf].schema.json'),
                     fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
                 },
-                '/multiple-enum': {
-                    title: 'Multiple Enum',
-                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-enum].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                '/multiple': {
+                    title: 'Multiple',
+                    children: {
+                        '/label-eq-value': {
+                            title: 'Label = Value',
+                            fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-enum].schema.json'),
+                            fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                        },
+                        '/label-neq-value': {
+                            title: 'Label + Value',
+                            fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-anyOf].schema.json'),
+                            fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                        }
+                    }
                 },
-                '/multiple-any-of': {
-                    title: 'Multiple Any Of',
-                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-anyOf].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
-                }
             }
         },
         '/checkbox': {

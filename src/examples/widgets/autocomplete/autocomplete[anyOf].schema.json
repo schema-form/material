@@ -15,6 +15,7 @@
     },
     {
       "title": "Опция 3",
+      "description": "Только для чтения",
       "const": 3,
       "readOnly": true
     }
