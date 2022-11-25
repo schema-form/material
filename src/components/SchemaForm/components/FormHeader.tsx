@@ -1,4 +1,4 @@
-import {ListItemText, ListItemTextProps} from "@mui/material";
+import {ListItemButton, ListItemText, ListItemTextProps} from "@mui/material";
 import React, {ReactNode} from "react";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
@@ -42,17 +42,22 @@ export function FormHeader(props: FormHeaderProps) {
         <ListItem
             component="header"
             className={props.className}
-            disabled={props.disabled}
             hidden={props.hidden}
             disableGutters
             disablePadding
             secondaryAction={props?.secondaryAction}
         >
-            <ListItemText
-                sx={{my: 0}}
-                primary={label}
-                secondary={helperText}
-            />
+            <ListItemButton
+                disabled={props.disabled}
+                disableGutters
+                sx={{p: 0}}
+            >
+                <ListItemText
+                    sx={{my: 0}}
+                    primary={label}
+                    secondary={helperText}
+                />
+            </ListItemButton>
         </ListItem>
     )
 }

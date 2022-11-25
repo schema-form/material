@@ -17,7 +17,7 @@ export default function AppLayout() {
     const appRoute = useAppRoute();
     const navigate = useNavigate();
     const hasRouteSchema = Boolean(appRoute?.fetchSchema);
-    const formKey = appRoute?.pathname;
+    const [formKey, setFormKey] = useState<string>('-');
     const [editorData, setEditorData] = useState<EditorFormData>({
         schema: '',
         uiSchema: '',
@@ -44,6 +44,7 @@ export default function AppLayout() {
             setSchema(schema);
             setUiSchema(uiSchema);
             setFormData(formData);
+            setFormKey(appRoute?.pathname as string);
             setEditorData({
                 schema: JSON.stringify(schema, null, 2),
                 uiSchema: JSON.stringify(uiSchema, null, 2),

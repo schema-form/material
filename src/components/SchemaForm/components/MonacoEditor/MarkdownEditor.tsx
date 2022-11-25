@@ -44,7 +44,7 @@ const insertActions: InsertAction[] = [
     {
         title: 'Title',
         Icon: TitleOutlined,
-        insertCode: '## Heading 2\n'
+        insertCode: '\n## Heading 2'
     },
     {
         title: 'Bold',
@@ -59,12 +59,12 @@ const insertActions: InsertAction[] = [
     {
         title: 'Quote',
         Icon: FormatQuoteOutlined,
-        insertCode: '> Blockquote\n'
+        insertCode: '\n> Blockquote'
     },
     {
         title: 'Code',
         Icon: CodeOutlined,
-        insertCode: '`Inline code` with backticks\n'
+        insertCode: '\n```Code```'
     },
     {
         title: 'Link',
@@ -74,12 +74,13 @@ const insertActions: InsertAction[] = [
     {
         title: 'Image',
         Icon: InsertPhotoOutlined,
-        insertCode: '![Image](http://url/a.png)\n'
+        insertCode: '\n![Image](http://url/a.png)'
     },
     {
         title: 'Bulleted list',
         Icon: FormatListBulletedOutlined,
         insertCode:
+            '\n' +
             '* List\n' +
             '* List\n' +
             '* List\n'
@@ -88,6 +89,7 @@ const insertActions: InsertAction[] = [
         title: 'Numbered list',
         Icon: FormatListNumberedOutlined,
         insertCode:
+            '\n' +
             '1. One\n' +
             '2. Two\n' +
             '3. Three\n'
@@ -96,6 +98,7 @@ const insertActions: InsertAction[] = [
         title: 'Task list',
         Icon: AssignmentTurnedInOutlined,
         insertCode:
+            '\n' +
             '- [ ] One\n' +
             '- [ ] Two\n' +
             '- [x] Three (completed)\n'
@@ -132,23 +135,26 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         </Tooltip>
     )
 
-    const insertActionsFooter = (
-        <CardActions>
-            {insertActions.map(renderInsertAction)}
-        </CardActions>
-    );
-
     const PreviewIcon = showPreview ? VisibilityOffOutlined : VisibilityOutlined;
+    const previewTooltipText = showPreview ? 'Hide preview' : 'Show preview';
     const previewAction = (
-        <Tooltip title={showPreview ? 'Hide preview' : 'Show preview'}>
+        <Tooltip title={previewTooltipText}>
             <IconButton
                 size='small'
                 onClick={togglePreview}
+                sx={{ml: 'auto!important'}}
             >
                 <PreviewIcon fontSize="small" />
             </IconButton>
         </Tooltip>
     )
+
+    const footerActions = (
+        <CardActions>
+            {insertActions.map(renderInsertAction)}
+            {previewAction}
+        </CardActions>
+    );
 
     const editorThemeToggle = (
         <MonacoEditorThemeToggle
@@ -166,7 +172,6 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
 
     const toolbarActions = (
         <Stack direction="row" alignItems="center" spacing={.5}>
-            {previewAction}
             {editorThemeToggle}
             {copyIconButton}
         </Stack>
@@ -219,7 +224,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
                 {editor}
                 {preview}
             </Stack>
-            {insertActionsFooter}
+            {footerActions}
         </FormCard>
     )
 }

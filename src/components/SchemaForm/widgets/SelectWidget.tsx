@@ -13,11 +13,13 @@ import {
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check"
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
+import {EnumOption} from "../utils/maps/mapSelectOptions";
 import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
 import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
 import {mapInputLabelProps} from "../utils/maps/mapInputLabelProps";
 import {SchemaFormContext} from "../SchemaForm";
+import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {Option} from "../types/Option";
 
 export function mapSelectProps(props: WidgetProps<any, SchemaFormContext>): SelectProps {
     const { label, ...commonProps } = mapControlProps(props);
@@ -25,15 +27,15 @@ export function mapSelectProps(props: WidgetProps<any, SchemaFormContext>): Sele
     const { FormControlProps } = formContext || {};
     const { size } = FormControlProps || {};
     const dense = size === 'small';
-    const selectOptions = mapSelectOptions(props);
-    const selectJSONValue = commonProps.value instanceof Array
+    const jsonOptions = mapJSONOptions(props);
+    const jsonValue = commonProps.value instanceof Array
         ? commonProps.value.map((itemValue: any) => JSON.stringify(itemValue))
         : JSON.stringify(commonProps.value);
 
-    const renderOption = ({ value, label, description, disabled }: EnumOption) => {
-        const checked = selectJSONValue instanceof Array
-            ? selectJSONValue?.includes(value)
-            : isEqual(selectJSONValue, value);
+    const renderOption = ({ value, label, helperText, disabled }: Option) => {
+        const checked = jsonValue instanceof Array
+            ? jsonValue?.includes(value)
+            : isEqual(jsonValue, value);
 
         const checkedIcon = checked && (
             <CheckIcon />
@@ -55,22 +57,22 @@ export function mapSelectProps(props: WidgetProps<any, SchemaFormContext>): Sele
                 {listItemIcon}
                 <ListItemText
                     primary={label}
-                    secondary={description}
+                    secondary={helperText}
                 />
             </MenuItem>
         )
     }
 
     const getOptionLabelByValue = (itemValue: any) => {
-        const option = selectOptions.find(option => itemValue === option.value);
+        const option = jsonOptions.find(option => itemValue === option.value);
         return option?.label ?? itemValue;
     }
 
     return {
         ...commonProps,
         label: label ? label : undefined,
-        children: selectOptions?.map(renderOption),
-        value: selectJSONValue,
+        children: jsonOptions?.map(renderOption),
+        value: jsonValue,
         onChange: (event, child) => {
             if (event.target.value instanceof Array) {
                 const newValue = event.target.value.map((value) => JSON.parse(value));

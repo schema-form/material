@@ -3,13 +3,16 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, {AutocompleteProps} from '@mui/material/Autocomplete';
 import {WidgetProps} from "@rjsf/utils";
 import {Chip, ListItemText, MenuItem} from "@mui/material";
-import {EnumOption, mapSelectOptions} from "../utils/maps/mapSelectOptions";
 import {mapControlProps} from "../utils/maps/mapControlProps";
 import {mapTextFieldProps} from "./TextFieldWidget";
 import isEmpty from "lodash/isEmpty";
 import {SchemaFormContext} from "../SchemaForm";
+import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {Option} from "../types/Option";
 
-type Props = AutocompleteProps<EnumOption, any, any, any>;
+type Props = AutocompleteProps<Option, any, any, any>;
+
+const findOption = (value: any, values: Option[]) => values?.find(option => option?.value === value);
 
 export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>): AutocompleteProps<any, any, any, any> {
     const { value, multiple, onChange, formContext } = props;
@@ -17,19 +20,18 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     const { size } = FormControlProps || {};
     const dense = size === 'small';
     const commonProps = mapControlProps(props);
-    const enumOptions = mapSelectOptions(props);
-    const findOption = (value: any) => enumOptions?.find(option => option?.value === value);
+    const jsonOptions = mapJSONOptions(props);
     const { value: _, onChange: __, type, ...textFieldProps } = mapTextFieldProps(props);
     const hasValue = !isEmpty(value);
 
     const renderOption: Props['renderOption'] = (props, option) => {
-        const { label, description, disabled } = option;
+        const { label, helperText, disabled } = option;
 
         return (
             <MenuItem dense={dense} disabled={disabled} {...props}>
                 <ListItemText
                     primary={label}
-                    secondary={description}
+                    secondary={helperText}
                 />
             </MenuItem>
         )
@@ -65,7 +67,7 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     }
 
     const renderTags: Props['renderTags'] = (tagValues, getTagProps) => {
-        const selectedOptions = tagValues.map(findOption);
+        const selectedOptions = tagValues.map(value => findOption(value, jsonOptions));
         return selectedOptions?.map((option, index) => {
             const { label, value, disabled } = option || {};
             const tagProps = getTagProps({ index });
@@ -81,10 +83,10 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     }
 
     const handleChange: Props['onChange'] = (event, options) => {
-        const getValue = (option: EnumOption) => option?.value ?? option;
+        const getValue = (option: Option) => option?.value ?? option;
         const value = (options instanceof Array)
-            ? (options as EnumOption[]).map(getValue)
-            : (options as EnumOption)?.value
+            ? (options as Option[]).map(getValue)
+            : (options as Option)?.value
 
         onChange?.(value);
     }
@@ -96,9 +98,9 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
     return {
         ...commonProps,
         multiple,
-        options: enumOptions,
+        options: jsonOptions,
         noOptionsText: 'No options',
-        value: multiple ? value : findOption(value)?.value,
+        value: multiple ? value : findOption(value, jsonOptions)?.value,
         getOptionLabel: option => option?.label,
         getOptionDisabled: option => option?.disabled,
         renderOption,
