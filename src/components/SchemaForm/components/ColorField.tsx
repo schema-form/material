@@ -1,52 +1,52 @@
-import React, {useMemo} from "react";
+import React, {startTransition, useMemo} from "react";
+import {v4 as uuid} from 'uuid';
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import {TextFieldProps} from "@mui/material";
+import PaletteIcon from '@mui/icons-material/Palette';
 
 export type ColorFieldProps = TextFieldProps;
 
-const generateId = () => Math.random().toString(16).substring(2);
-
 export function ColorField(props: ColorFieldProps) {
-    const { value, onChange } = props || {};
-    const pickerId = useMemo(generateId, []);
-    const color = String(value);
+    const pickerId = useMemo(uuid, []);
+    const color = String(props?.value);
+    const iconColor = color || 'rgba(0,0,0,.05)';
+
+    const handleChange: ColorFieldProps['onChange'] = (event) => {
+        startTransition(() => {
+            props?.onChange?.(event);
+        })
+    }
 
     const pickerButton = (
-        <IconButton
-            style={{ position: 'relative' }}
-            edge="end"
-            component="label"
-            htmlFor={pickerId}
-        >
-            <div
-                style={{
-                    backgroundColor: color || 'rgba(0,0,0,.05)',
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%'
-                }}
-            />
+        <React.Fragment>
+            <IconButton
+                edge="end"
+                component="label"
+                htmlFor={pickerId}
+            >
+                <PaletteIcon
+                    sx={{color: iconColor}}
+                />
+            </IconButton>
             <input
                 style={{
                     position: "absolute",
                     top: 0,
                     bottom: 0,
-                    left: 0,
                     right: 0,
-                    width: 24,
-                    height: 24,
-                    margin: 'auto',
-                    borderRadius: '50%',
                     opacity: 0,
-                    zIndex: -1
+                    width: 235,
+                    height: '100%',
+                    zIndex: -1,
+                    background: 'red'
                 }}
                 id={pickerId}
                 type="color"
                 value={color}
-                onChange={onChange}
+                onChange={handleChange}
             />
-        </IconButton>
+        </React.Fragment>
     )
 
     return (
