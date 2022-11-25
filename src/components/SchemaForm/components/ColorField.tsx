@@ -9,8 +9,9 @@ export type ColorFieldProps = TextFieldProps;
 
 export function ColorField(props: ColorFieldProps) {
     const pickerId = useMemo(uuid, []);
-    const color = String(props?.value);
-    const iconColor = color || 'rgba(0,0,0,.05)';
+    const value = String(props?.value);
+    const iconColor = value || 'rgba(0,0,0,.05)';
+    const hasValue = Boolean(props?.value);
 
     const handleChange: ColorFieldProps['onChange'] = (event) => {
         startTransition(() => {
@@ -43,7 +44,7 @@ export function ColorField(props: ColorFieldProps) {
                 }}
                 id={pickerId}
                 type="color"
-                value={color}
+                value={value}
                 onChange={handleChange}
             />
         </React.Fragment>
@@ -54,7 +55,10 @@ export function ColorField(props: ColorFieldProps) {
             {...props}
             InputProps={{
                 ...props?.InputProps,
-                endAdornment: pickerButton
+                endAdornment: pickerButton,
+            }}
+            InputLabelProps={{
+                shrink: hasValue
             }}
         />
     )

@@ -9,6 +9,7 @@ import isEmpty from "lodash/isEmpty";
 import {SchemaFormContext} from "../SchemaForm";
 import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
 import {Option} from "../types/Option";
+import Typography from "@mui/material/Typography";
 
 type Props = AutocompleteProps<Option, any, any, any>;
 
@@ -38,16 +39,26 @@ export function mapAutocompleteProps(props: WidgetProps<any, SchemaFormContext>)
             ? jsonValue.includes(value)
             : (jsonValue === value);
 
+        const helper = (
+            <Typography
+                component="p"
+                variant="caption"
+                color="textSecondary"
+            >
+                {helperText}
+            </Typography>
+        );
+
         return (
             <MenuItem
-                dense={dense}
+                dense={false}
                 disabled={disabled}
                 selected={selected}
                 {...props}
             >
                 <ListItemText
                     primary={label}
-                    secondary={helperText}
+                    secondary={helper}
                 />
             </MenuItem>
         )

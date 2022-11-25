@@ -94,7 +94,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
             disabled={disabled}
             label={label}
             helperText={errorMessage || helperText}
-            secondaryAction={actions}
+            expandedActions={actions}
         >
             {editor}
         </FormCard>

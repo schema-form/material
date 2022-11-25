@@ -218,7 +218,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
             disabled={disabled}
             label={label}
             helperText={helperText}
-            secondaryAction={toolbarActions}
+            expandedActions={toolbarActions}
         >
             <Stack direction="row">
                 {editor}

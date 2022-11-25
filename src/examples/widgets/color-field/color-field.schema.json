@@ -1,5 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Цвет карты",
+  "description": "Выберите цвет вашей будущей карты",
   "type": "string",
   "format": "color"
 }

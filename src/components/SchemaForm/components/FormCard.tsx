@@ -25,6 +25,7 @@ export type FormCardProps = PropsWithChildren<{
     icon?: ReactNode;
     label?: CardHeaderProps['title'];
     helperText?: CardHeaderProps['subheader'];
+    expandedActions?: ListItemProps['secondaryAction'];
     secondaryAction?: ListItemProps['secondaryAction'];
     actions?: ReactNode;
     CollapseProps?: CollapseProps;
@@ -92,6 +93,7 @@ export function FormCard(props: FormCardProps) {
         bordered = true,
         icon,
         children,
+        expandedActions,
         secondaryAction,
         actions,
         CollapseProps,
@@ -101,6 +103,8 @@ export function FormCard(props: FormCardProps) {
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const toggleExpand = () => setExpanded(!isExpanded);
+    const hasChildren = Boolean(children);
+    const hasActions = Boolean(secondaryAction) || Boolean(expandedActions);
 
     const expandIcon = isExpanded
         ? <KeyboardArrowDown color={iconColor} />
@@ -122,13 +126,26 @@ export function FormCard(props: FormCardProps) {
         </FormHelperText>
     ) : null;
 
-    const hasHeader = title || secondaryAction;
+    const secondaryActions = hasActions && (
+        <React.Fragment>
+            {isExpanded ? expandedActions : null}
+            {secondaryAction}
+        </React.Fragment>
+    );
+
+    const hasHeader = title || secondaryActions;
+
+    const expandListItemIcon = hasChildren && (
+        <ListItemIcon>
+            {icon || expandIcon}
+        </ListItemIcon>
+    )
 
     const header = hasHeader ? (
         <ListItem
             component="header"
             disablePadding
-            secondaryAction={isExpanded ? secondaryAction : null}
+            secondaryAction={secondaryActions}
         >
             <ListItemButton
                 dense={false}
@@ -136,9 +153,7 @@ export function FormCard(props: FormCardProps) {
                 onClick={toggleExpand}
                 {...HeaderProps}
             >
-                <ListItemIcon>
-                    {icon || expandIcon}
-                </ListItemIcon>
+                {expandListItemIcon}
                 <ListItemText
                     primary={title}
                 />

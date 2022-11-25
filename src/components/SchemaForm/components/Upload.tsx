@@ -1,18 +1,16 @@
 import {
-    Button, CardContent,
+    Button,
     ListItemIcon, ListItemSecondaryAction,
     ListItemText,
     TextFieldProps
 } from "@mui/material";
 import {
-    AddOutlined,
     DeleteOutlineOutlined,
     FileUpload,
     InsertDriveFileOutlined,
 } from "@mui/icons-material";
 import React, {ChangeEventHandler} from "react";
 import {v4 as uuid} from "uuid";
-import Typography from "@mui/material/Typography";
 import IconButton, {IconButtonProps} from "@mui/material/IconButton";
 import FormCard from "./FormCard";
 import List from "@mui/material/List";
@@ -114,14 +112,16 @@ export function Upload(props: UploadProps) {
     );
 
     const uploadIconButton = (
-        <IconButton
+        <Button
             component="label"
             htmlFor={id}
+            size="small"
             disabled={props.disabled}
             color={error ? 'error' : undefined}
+            startIcon={<FileUpload />}
         >
-            <FileUpload />
-        </IconButton>
+            Выберите файл
+        </Button>
     )
 
     const renderFileItem = (fileDataURL: string, index: number) => {
@@ -148,12 +148,13 @@ export function Upload(props: UploadProps) {
     return (
         <>
             <FormCard
-                label={props.label}
+                label={'Файл не выбран'}
                 helperText={props.helperText}
                 error={error}
                 disabled={props.disabled}
                 secondaryAction={uploadIconButton}
                 isControl={true}
+                sx={{borderStyle: 'dashed'}}
             >
                 {fileList}
             </FormCard>

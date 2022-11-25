@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
 import * as React from "react";
 import {Link, useLocation} from "react-router-dom";
-import {Box, Collapse} from "@mui/material";
+import {Box, Collapse, MenuItem} from "@mui/material";
 import isEmpty from "lodash/isEmpty";
 import {useState} from "react";
 import {useDrawerState} from "../components/Layout/DrawerProvider";
@@ -46,24 +46,22 @@ function NavigationItem(props: NavigationItemProps) {
     if (hasChildren) {
         return (
             <React.Fragment>
-                <ListItem disablePadding>
-                    <ListItemButton
-                        onClick={toggleExpand}
-                        sx={{ pl: level * 2, pr: 4, py: .5}}
-                    >
-                        <ListItemIcon sx={{minWidth: 'auto', mr: .75}}>
-                            <KeyboardArrowRightIcon
-                                fontSize="small"
-                                sx={{transform: isExpanded ? 'rotate(90deg)' : undefined}}
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary={(
-                            <Typography variant="body1">
-                                {props?.title}
-                            </Typography>
-                        )} />
-                    </ListItemButton>
-                </ListItem>
+                <MenuItem
+                    onClick={toggleExpand}
+                    sx={{ pl: level * 2}}
+                >
+                    <ListItemIcon>
+                        <KeyboardArrowRightIcon
+                            fontSize="small"
+                            sx={{transform: isExpanded ? 'rotate(90deg)' : undefined}}
+                        />
+                    </ListItemIcon>
+                    <ListItemText primary={(
+                        <Typography variant="body1">
+                            {props?.title}
+                        </Typography>
+                    )} />
+                </MenuItem>
                 <Collapse in={isExpanded}>
                     {Object.entries(props.children || {}).map(renderChild)}
                 </Collapse>
@@ -72,25 +70,23 @@ function NavigationItem(props: NavigationItemProps) {
     }
 
     return (
-        <ListItem disablePadding>
-            <ListItemButton
-                component={Link}
-                to={props.path}
-                selected={isSelected}
-                sx={{ pl: level * 2.5, py: .5}}
-                onClick={closeDrawer}
-            >
-                <ListItemText primary={(
-                    <Typography
-                        component="span"
-                        variant="body1"
-                        color={isSelected ? 'textPrimary' : 'textSecondary'}
-                    >
-                        {props?.title}
-                    </Typography>
-                )} />
-            </ListItemButton>
-        </ListItem>
+        <MenuItem
+            component={Link}
+            to={props.path}
+            selected={isSelected}
+            sx={{pl: level * 2.875}}
+            onClick={closeDrawer}
+        >
+            <ListItemText primary={(
+                <Typography
+                    component="span"
+                    variant="body1"
+                    color={isSelected ? 'textPrimary' : 'textSecondary'}
+                >
+                    {props?.title}
+                </Typography>
+            )} />
+        </MenuItem>
     )
 }
 
