@@ -3,15 +3,31 @@ export type AppRoutes = {
 }
 
 export type AppRouteProps = {
-    path?: string;
+    pathname?: string;
     title?: string;
     description?: string;
     fetchSchema?: () => Promise<any>;
+    docsURL?: string;
+    fetchProps?: () => Promise<any>;
     fetchUiSchema?: () => Promise<any>;
     children?: AppRoutes;
 }
 
 export const DEFAULT_APP_ROUTE_PATH = '/keywords/$ref/properties';
+
+export const gettingStartedRoutes: AppRouteProps = {
+    title: 'Getting started',
+    children: {
+        '/overview': {
+            title: 'Overview',
+            docsURL: require('../examples/gettingStarted/overview.md')
+        },
+        '/installation': {
+            title: 'Installation',
+            docsURL: require('../examples/gettingStarted/installation.md')
+        }
+    }
+}
 
 export const keywordsRoutes: AppRouteProps = {
     title: 'Keywords',
@@ -426,11 +442,13 @@ export const widgetsRoutes: AppRouteProps = {
                     title: 'Label = Value',
                     fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[enum].schema.json'),
                     fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                    docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
                 },
                 '/label-neq-value': {
                     title: 'Label + Value',
                     fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[anyOf].schema.json'),
                     fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                    docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
                 },
                 '/multiple': {
                     title: 'Multiple',
@@ -439,11 +457,13 @@ export const widgetsRoutes: AppRouteProps = {
                             title: 'Label = Value',
                             fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-enum].schema.json'),
                             fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                            docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
                         },
                         '/label-neq-value': {
                             title: 'Label + Value',
                             fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-anyOf].schema.json'),
                             fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
+                            docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
                         }
                     }
                 },
@@ -543,6 +563,7 @@ export const widgetsRoutes: AppRouteProps = {
 }
 
 export const appRoutes: AppRoutes = ({
+    '/getting-started': gettingStartedRoutes,
     '/keywords': keywordsRoutes,
     '/widgets': widgetsRoutes,
 })

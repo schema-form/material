@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {startTransition, useEffect, useState} from "react";
-import {Container, Link, Stack, Tooltip, useMediaQuery, useTheme} from "@mui/material";
+import {ReactNode, startTransition, useEffect, useState} from "react";
+import {Container, Divider, Link, Stack, Tab, Tabs, TabsProps, Tooltip, useMediaQuery, useTheme} from "@mui/material";
 import {SchemaForm, SchemaFormProps} from "../components/SchemaForm";
 import AppNavigation from "./AppNavigation";
 import {useAppRoute} from "./AppRoutesProvider";
@@ -11,13 +11,41 @@ import {GitHub} from "@mui/icons-material";
 import MUI from "../icons/MUI";
 import Typography from "@mui/material/Typography";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
-import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
 import PropsEditor from "./PropsEditor";
+import {Markdown} from "../components/SchemaForm/components/Markdown";
+import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
+
+enum AppLayoutTab {
+    DEMO = 'DEMO',
+    DOCS = 'DOCS',
+    PROPS = 'PROPS'
+}
+
+type MarkdownLoaderProps = { url: string };
+
+function MarkdownLoader({ url }: MarkdownLoaderProps) {
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+        fetch(url)
+            .then(response => response.text())
+            .then(setContent);
+    }, []);
+
+    return (
+        <Markdown>
+            {content}
+        </Markdown>
+    );
+}
 
 export default function AppLayout() {
     const appRoute = useAppRoute();
     const navigate = useNavigate();
-    const hasRouteSchema = Boolean(appRoute?.fetchSchema);
+    const hasDemoTab = Boolean(appRoute?.fetchSchema);
+    const hasDocsTab = Boolean(appRoute?.docsURL);
+    const hasPropsTab = Boolean(appRoute?.fetchProps);
+    const hasRouteContent = hasDemoTab || hasDocsTab || hasPropsTab;
     const [formKey, setFormKey] = useState<string>('-');
     const [editorData, setEditorData] = useState<EditorFormData>({
         schema: '',
@@ -29,53 +57,50 @@ export default function AppLayout() {
     const [uiSchema, setUiSchema] = useState<SchemaFormProps['uiSchema']>();
     const theme = useTheme();
     const isBreakpointUpSM = useMediaQuery(theme.breakpoints.up('sm'));
+    const [activeTab, setActiveTab] = useState<AppLayoutTab | undefined>(AppLayoutTab.DEMO);
+    const handleChange: TabsProps['onChange'] = (event, newActiveTab) => setActiveTab(newActiveTab);
 
-    if (!hasRouteSchema) {
+    if (!hasRouteContent) {
         navigate(DEFAULT_APP_ROUTE_PATH);
     }
 
     useEffect(() => {
-        const fetchSchemas = async () => {
-            const schemaResponse = await appRoute?.fetchSchema?.();
-            const uiSchemaResponse = await appRoute?.fetchUiSchema?.();
-            const schema = schemaResponse?.default;
-            const uiSchema = uiSchemaResponse?.default;
-            const formData = schema?.default;
+        const newActiveTab =
+            hasDemoTab ? AppLayoutTab.DEMO :
+                hasDocsTab ? AppLayoutTab.DOCS :
+                    hasPropsTab ? AppLayoutTab.PROPS : undefined;
 
-            setSchema(schema);
-            setUiSchema(uiSchema);
-            setFormData(formData);
-            setFormKey(appRoute?.pathname as string);
-            setEditorData({
-                schema: JSON.stringify(schema, null, 2),
-                uiSchema: JSON.stringify(uiSchema, null, 2),
-                formData: JSON.stringify(formData, null, 2)
-            });
+        if (newActiveTab !== activeTab) {
+            setActiveTab(newActiveTab);
         }
-
-        fetchSchemas()
-            .catch(console.error);
     }, [appRoute?.pathname]);
 
-    const form = schema ? (
-        <SchemaForm
-            key={formKey}
-            schema={schema}
-            uiSchema={uiSchema}
-            formData={formData}
-            onChange={({ formData }) => {
-                setFormData(formData);
-                startTransition(() => {
-                    setEditorData({
-                        ...editorData,
-                        formData: JSON.stringify(formData, null , 2)
-                    });
-                })
-            }}
-        />
-    ) : null;
+    useEffect(() => {
+        if (hasDemoTab) {
+            const fetchSchemas = async () => {
+                const schemaResponse = await appRoute?.fetchSchema?.();
+                const uiSchemaResponse = await appRoute?.fetchUiSchema?.();
+                const schema = schemaResponse?.default;
+                const uiSchema = uiSchemaResponse?.default;
+                const formData = schema?.default;
 
-    const propsEditor = (
+                setSchema(schema);
+                setUiSchema(uiSchema);
+                setFormData(formData);
+                setFormKey(appRoute?.pathname as string);
+                setEditorData({
+                    schema: JSON.stringify(schema, null, 2),
+                    uiSchema: JSON.stringify(uiSchema, null, 2),
+                    formData: JSON.stringify(formData, null, 2)
+                });
+            }
+
+            fetchSchemas()
+                .catch(console.error);
+        }
+    }, [appRoute?.pathname]);
+
+    const propsEditor = hasDemoTab && (
         <PropsEditor
             key={formKey}
             formData={editorData}
@@ -139,6 +164,91 @@ export default function AppLayout() {
         </Stack>
     );
 
+    const renderDemoTabContent = () => {
+        const form = schema ? (
+            <SchemaForm
+                key={formKey}
+                schema={schema}
+                uiSchema={uiSchema}
+                formData={formData}
+                onChange={({ formData }) => {
+                    setFormData(formData);
+                    startTransition(() => {
+                        setEditorData({
+                            ...editorData,
+                            formData: JSON.stringify(formData, null , 2)
+                        });
+                    })
+                }}
+            />
+        ) : null;
+
+        return (
+            <Container maxWidth="xl" sx={{py: 2}}>
+                {form}
+            </Container>
+        );
+    }
+
+    const renderDocsTabContent = () => {
+        const markdown = appRoute?.docsURL ? (
+            <MarkdownLoader
+                key={appRoute?.docsURL}
+                url={appRoute?.docsURL}
+            />
+        ) : null;
+
+        return (
+            <Container maxWidth="xl" sx={{py: 2}}>
+                {markdown}
+            </Container>
+        );
+    }
+
+    const renderPropsTabContent = () => (
+        <Container maxWidth="xl" sx={{py: 2}}>
+            Props
+        </Container>
+    )
+
+    const renderTabContent = (activeTab?: AppLayoutTab) => {
+        switch (activeTab) {
+            case AppLayoutTab.DEMO: return renderDemoTabContent();
+            case AppLayoutTab.DOCS: return renderDocsTabContent();
+            case AppLayoutTab.PROPS: return renderPropsTabContent();
+            default: return null;
+        }
+    }
+
+    const demoTab = hasDemoTab && (
+        <Tab
+            label="Demo"
+            value={AppLayoutTab.DEMO}
+        />
+    );
+
+    const docsTab = hasDocsTab && (
+        <Tab
+            label="Docs"
+            value={AppLayoutTab.DOCS}
+        />
+    );
+
+    const propsTab = hasPropsTab && (
+        <Tab
+            label="Props"
+            value={AppLayoutTab.PROPS}
+        />
+    );
+
+    const tabs = (
+        <Tabs value={activeTab} onChange={handleChange}>
+            {demoTab}
+            {docsTab}
+            {propsTab}
+        </Tabs>
+    );
+
     return (
         <Layout
             drawer={<AppNavigation />}
@@ -148,9 +258,9 @@ export default function AppLayout() {
                 actions: GitHubLink
             }}
         >
-            <Container maxWidth="xl" sx={{py: 3}}>
-                {form}
-            </Container>
+            {tabs}
+            <Divider />
+            {renderTabContent(activeTab)}
         </Layout>
     )
 }

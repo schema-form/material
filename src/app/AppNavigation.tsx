@@ -7,7 +7,7 @@ import * as React from "react";
 import {Link, useLocation} from "react-router-dom";
 import {Box, Collapse, Divider, InputBaseProps, MenuItem} from "@mui/material";
 import isEmpty from "lodash/isEmpty";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {useDrawerState} from "../components/Layout/DrawerProvider";
 import Typography from "@mui/material/Typography";
 import Highlighter from "react-highlight-words";
@@ -15,7 +15,7 @@ import {AppNavigationSearch} from "./AppNavigationSearch";
 import {findSuggestions} from "../utils/findSuggestions";
 
 type NavigationItemProps = AppRouteProps & {
-    path: string;
+    pathname: string;
     level?: number;
     highlightText?: string;
 }
@@ -24,22 +24,22 @@ function NavigationItem(props: NavigationItemProps) {
     const { level = 1 } = props;
     const hasChildren = !isEmpty(props.children);
     const { pathname } = useLocation();
-    const isSelected = pathname === props.path;
-    const hasPathMatch = pathname.startsWith(props.path);
+    const selected = pathname === props.pathname;
+    const hasPathMatch = pathname.startsWith(props.pathname);
     const [isExpanded, setExpanded] = useState(hasPathMatch);
     const toggleExpand = () => setExpanded(!isExpanded);
     const { closeDrawer } = useDrawerState();
     const paddingLeft = level * 2;
 
     const renderChild = ([itemPath, itemProps]: [string, AppRouteProps]) => {
-        const parentPath = props.path;
+        const parentPath = props.pathname;
         const path = parentPath + itemPath;
         const itemLevel = level + 1;
 
         return (
             <NavigationItem
                 key={path}
-                path={path}
+                pathname={path}
                 level={itemLevel}
                 highlightText={props?.highlightText}
                 {...itemProps}
@@ -53,7 +53,7 @@ function NavigationItem(props: NavigationItemProps) {
             textToHighlight={props?.title}
             searchWords={[props?.highlightText]}
             variant="body1"
-            color={(isSelected || hasChildren) ? 'textPrimary' : 'textSecondary'}
+            color={(selected || hasChildren) ? 'textPrimary' : 'textSecondary'}
         />
     );
 
@@ -82,8 +82,8 @@ function NavigationItem(props: NavigationItemProps) {
     return (
         <MenuItem
             component={Link}
-            to={props.path}
-            selected={isSelected}
+            to={props.pathname}
+            selected={selected}
             sx={{pl: paddingLeft}}
             onClick={closeDrawer}
         >
@@ -96,15 +96,16 @@ export function AppNavigation() {
     const [searchText, setSearchText] = useState('');
     const handleSearchChange: InputBaseProps['onChange'] = (event) => setSearchText(event?.target.value);
     const isSearching = Boolean(searchText);
+    const suggestions = useMemo(() => isSearching ? findSuggestions({ children: appRoutes }, searchText) : [], [searchText]);
     const appRouteEntries = isSearching
-        ? findSuggestions({ children: appRoutes }, searchText)
+        ? suggestions
         : Object.entries(appRoutes);
 
     const renderItem = ([itemPath, itemProps]: [string, AppRouteProps]) => (
         <NavigationItem
             key={itemPath}
             data-path={itemPath}
-            path={itemPath}
+            pathname={itemPath}
             highlightText={searchText}
             {...itemProps}
         />

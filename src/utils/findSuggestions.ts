@@ -2,7 +2,7 @@ import {AppRouteProps} from "../constants/routes";
 
 type Suggestions = Array<[string, AppRouteProps]>;
 
-export function findSuggestions(appRoutes: AppRouteProps, searchText: string, parentPathname?: string): Suggestions {
+export function findSuggestions(appRoutes: AppRouteProps, searchText: string, parentPathname: string = ''): Suggestions {
     return Object.entries(appRoutes.children || {}).reduce((routeEntries, routeEntry) => {
         const [pathname, appRoute] = routeEntry as [string, AppRouteProps];
         const childrenSuggestions = findSuggestions(appRoute, searchText, pathname);
@@ -14,7 +14,8 @@ export function findSuggestions(appRoutes: AppRouteProps, searchText: string, pa
         ];
 
         if (hasSuggestion) {
-            suggestions.push([parentPathname + pathname, appRoute]);
+            const suggestionPathname = parentPathname + pathname;
+            suggestions.push([suggestionPathname, appRoute]);
         }
 
         return suggestions;
