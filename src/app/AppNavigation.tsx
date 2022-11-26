@@ -5,15 +5,19 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ListItemText from "@mui/material/ListItemText";
 import * as React from "react";
 import {Link, useLocation} from "react-router-dom";
-import {Box, Collapse, MenuItem} from "@mui/material";
+import {Box, Collapse, Divider, InputBaseProps, MenuItem} from "@mui/material";
 import isEmpty from "lodash/isEmpty";
 import {useState} from "react";
 import {useDrawerState} from "../components/Layout/DrawerProvider";
 import Typography from "@mui/material/Typography";
+import Highlighter from "react-highlight-words";
+import {AppNavigationSearch} from "./AppNavigationSearch";
+import {findSuggestions} from "../utils/findSuggestions";
 
 type NavigationItemProps = AppRouteProps & {
     path: string;
     level?: number;
+    highlightText?: string;
 }
 
 function NavigationItem(props: NavigationItemProps) {
@@ -37,23 +41,20 @@ function NavigationItem(props: NavigationItemProps) {
                 key={path}
                 path={path}
                 level={itemLevel}
+                highlightText={props?.highlightText}
                 {...itemProps}
             />
         );
     }
 
-    const primaryText = hasChildren ? (
-        <Typography variant="body1">
-            {props?.title}
-        </Typography>
-    ) : (
+    const primaryText = (
         <Typography
-            component="span"
+            component={Highlighter}
+            textToHighlight={props?.title}
+            searchWords={[props?.highlightText]}
             variant="body1"
-            color={isSelected ? 'textPrimary' : 'textSecondary'}
-        >
-            {props?.title}
-        </Typography>
+            color={(isSelected || hasChildren) ? 'textPrimary' : 'textSecondary'}
+        />
     );
 
     if (hasChildren) {
@@ -92,22 +93,36 @@ function NavigationItem(props: NavigationItemProps) {
 }
 
 export function AppNavigation() {
+    const [searchText, setSearchText] = useState('');
+    const handleSearchChange: InputBaseProps['onChange'] = (event) => setSearchText(event?.target.value);
+    const isSearching = Boolean(searchText);
+    const appRouteEntries = isSearching
+        ? findSuggestions({ children: appRoutes }, searchText)
+        : Object.entries(appRoutes);
+
     const renderItem = ([itemPath, itemProps]: [string, AppRouteProps]) => (
         <NavigationItem
             key={itemPath}
+            data-path={itemPath}
             path={itemPath}
+            highlightText={searchText}
             {...itemProps}
         />
     )
 
     const itemsList = (
         <List>
-            {Object.entries(appRoutes).map(renderItem)}
+            {appRouteEntries.map(renderItem)}
         </List>
     );
 
     return (
         <Box>
+            <AppNavigationSearch
+                value={searchText}
+                onChange={handleSearchChange}
+            />
+            <Divider />
             {itemsList}
         </Box>
     )

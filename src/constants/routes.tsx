@@ -1,12 +1,11 @@
-import {ListItemTextProps} from "@mui/material";
-
 export type AppRoutes = {
     [key: string]: AppRouteProps
 }
 
 export type AppRouteProps = {
-    title: ListItemTextProps['primary'];
-    description?: ListItemTextProps['secondary'];
+    path?: string;
+    title?: string;
+    description?: string;
     fetchSchema?: () => Promise<any>;
     fetchUiSchema?: () => Promise<any>;
     children?: AppRoutes;
