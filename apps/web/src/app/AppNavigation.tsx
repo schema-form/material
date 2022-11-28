@@ -100,7 +100,7 @@ export function AppNavigation() {
     const [searchText, setSearchText] = useState('');
     const handleSearchChange: InputBaseProps['onChange'] = (event) => setSearchText(event?.target.value);
     const isSearching = Boolean(searchText);
-    const suggestions = useMemo(() => isSearching ? findSuggestions({ children: appRoutes }, searchText) : [], [searchText]);
+    const suggestions = useMemo(() => isSearching ? findSuggestions({ children: appRoutes }, searchText) : [], [isSearching, searchText]);
     const appRouteEntries = isSearching
         ? suggestions
         : Object.entries(appRoutes);

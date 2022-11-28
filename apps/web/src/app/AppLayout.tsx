@@ -37,7 +37,7 @@ function MarkdownLoader({ url }: MarkdownLoaderProps) {
         fetch(url)
             .then(response => response.text())
             .then(setContent);
-    }, []);
+    });
 
     return (
         <Markdown>
@@ -80,7 +80,7 @@ export default function AppLayout() {
         if (newActiveTab !== activeTab) {
             setActiveTab(newActiveTab);
         }
-    }, [appRoute?.pathname]);
+    }, [activeTab, appRoute?.pathname, hasDemoTab, hasDocsTab, hasPropsTab]);
 
     useEffect(() => {
         if (hasDemoTab) {
@@ -105,7 +105,7 @@ export default function AppLayout() {
             fetchSchemas()
                 .catch(console.error);
         }
-    }, [appRoute?.pathname]);
+    }, [appRoute, appRoute?.pathname, hasDemoTab]);
 
     const propsEditor = hasDemoTab && (
         <PropsEditor
