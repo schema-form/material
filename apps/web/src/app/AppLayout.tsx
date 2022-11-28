@@ -37,7 +37,7 @@ function MarkdownLoader({ url }: MarkdownLoaderProps) {
         fetch(url)
             .then(response => response.text())
             .then(setContent);
-    });
+    }, [url]);
 
     return (
         <Markdown>
@@ -105,7 +105,8 @@ export default function AppLayout() {
             fetchSchemas()
                 .catch(console.error);
         }
-    }, [appRoute, appRoute?.pathname, hasDemoTab]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [appRoute?.pathname]);
 
     const propsEditor = hasDemoTab && (
         <PropsEditor
