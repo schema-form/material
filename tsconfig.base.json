@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@project/mui-schema-form": ["libs/mui-schema-form/src/index.ts"]
+      "@project/mui-schema-form": ["libs/mui-schema-form/src/index.ts"],
+      "@project/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

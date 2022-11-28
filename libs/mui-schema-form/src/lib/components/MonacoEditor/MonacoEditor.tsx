@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import {MonacoEditorThemeToggle} from "./MonacoEditorThemeToggle";
 import {JSONSchema4, JSONSchema6, JSONSchema7} from "json-schema";
-import CopyButton from "../CopyButton";
+import CopyIconButton from "../CopyIconButton";
 import {useMonacoEditorTheme} from "./MonacoEditorThemeProvider";
 import FormCard from "../FormCard";
 
@@ -30,7 +30,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
     const key = useMemo(() => Math.random().toString(16), [schema]);
 
     const copyIconButton = (
-        <CopyButton
+        <CopyIconButton
             size='small'
             edge='end'
             copyContent={value}

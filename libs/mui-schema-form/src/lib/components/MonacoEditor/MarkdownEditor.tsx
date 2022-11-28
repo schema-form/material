@@ -21,7 +21,7 @@ import {
   VisibilityOffOutlined
 } from "@mui/icons-material";
 import {MonacoEditorThemeToggle} from "./MonacoEditorThemeToggle";
-import CopyButton from "../CopyButton";
+import CopyIconButton from "../CopyIconButton";
 import {Markdown} from "../Markdown";
 import {useMonacoEditorTheme} from "./MonacoEditorThemeProvider";
 import IconButton from "@mui/material/IconButton";
@@ -163,7 +163,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
     );
 
     const copyIconButton = (
-        <CopyButton
+        <CopyIconButton
             size='small'
             edge='end'
             copyContent={value}

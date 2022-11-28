@@ -6,14 +6,13 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import {exampleSourceCode} from "../constants/exampleSourceCode";
 import {EditorForm, EditorFormProps} from "./EditorForm";
-import {Markdown} from "../components/SchemaForm/components/Markdown";
+import {Markdown, DownloadIconButton} from "@project/mui-schema-form";
 import Toolbar from "@mui/material/Toolbar";
 import CodeOffOutlined from "@mui/icons-material/CodeOffOutlined";
 import CodeOutlined from "@mui/icons-material/CodeOutlined";
 import RestartAltOutlined from "@mui/icons-material/RestartAltOutlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import DownloadIconButton from "../components/SchemaForm/components/DownloadIconButton";
 
 export type PropsEditorProps = EditorFormProps;
 

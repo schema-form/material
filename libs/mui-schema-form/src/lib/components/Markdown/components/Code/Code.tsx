@@ -1,7 +1,7 @@
 import React from "react";
 import SyntaxHighlighter, {SyntaxHighlighterProps} from 'react-syntax-highlighter';
 import {dark} from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import CopyButton from "../../../CopyButton";
+import {CopyIconButton} from "../../../CopyIconButton";
 import {useCodeTheme} from "./CodeThemeProvider";
 import {CodeThemeToggle} from "./CodeThemeToggle";
 import {styled} from "@mui/material";
@@ -36,7 +36,7 @@ const Actions = styled('div')(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
 }))
 
-const StyledCopyIconButton = styled(CopyButton)<StyledProps>(({ theme, isDarkTheme }) => ({
+const StyledCopyIconButton = styled(CopyIconButton)<StyledProps>(({ theme, isDarkTheme }) => ({
     color: isDarkTheme
         ? theme.palette.common.white
         : theme.palette.common.black

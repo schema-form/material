@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import Tabs, {TabsProps} from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Tooltip from "@mui/material/Tooltip";
-import {SchemaForm, SchemaFormProps} from "../components/SchemaForm";
+import {SchemaForm, SchemaFormProps} from "@project/mui-schema-form";
 import AppNavigation from "./AppNavigation";
 import {useAppRoute} from "./AppRoutesProvider";
 import {EditorFormData} from "./EditorForm";
@@ -19,7 +19,7 @@ import MUI from "../icons/MUI";
 import Typography from "@mui/material/Typography";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import PropsEditor from "./PropsEditor";
-import {Markdown} from "../components/SchemaForm/components/Markdown";
+import {Markdown} from "@project/mui-schema-form";
 import {DEFAULT_APP_ROUTE_PATH} from "../constants/routes";
 
 enum AppLayoutTab {
