@@ -8,23 +8,23 @@ type ErrorBoundaryState = {
     error?: Error;
 }
 
-export type ErrorBoundaryProps = PropsWithChildren<{}>;
+export type ErrorBoundaryProps = PropsWithChildren;
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-    stata = {
+    override state: ErrorBoundaryState = {
         hasError: false
     }
 
-    componentDidCatch(error: Error) {
+    override componentDidCatch(error: Error) {
         this.setState({
             hasError: true,
             error
         });
     }
 
-    render() {
+    override render() {
         if (this.state?.hasError) {
-            const errorMessage = this.state.error?.message;
+            const errorMessage = this.state?.error?.message;
             const hasErrorMessage = Boolean(errorMessage);
 
             return (

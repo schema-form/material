@@ -1,5 +1,5 @@
 import React from "react";
-import {SchemaForm, SchemaFormProps} from "@project/mui-schema-form";
+import {SchemaForm, SchemaFormProps} from "@schema-form/material";
 
 const schema: SchemaFormProps['schema'] = {
     properties: {

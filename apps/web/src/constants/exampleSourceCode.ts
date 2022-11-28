@@ -1,6 +1,6 @@
 export const exampleSourceCode = `
 import * as React from "react";
-import SchemaForm, {SchemaFormProps} from "@mui-schema-form";
+import SchemaForm, {SchemaFormProps} from "@schema-form/material";
 import schema from './example-form.schema.json';
 import uiSchema from './example-form.ui-schema.json';
 
@@ -14,7 +14,7 @@ export type ExampleFormProps = Omit<SchemaFormProps, 'schema' | 'uiSchema'>;
 
 export function ExampleForm(props: EditorFormProps) {
     const [formData, setFormData] = useState();
-    
+
     return (
         <SchemaForm
             {...props}

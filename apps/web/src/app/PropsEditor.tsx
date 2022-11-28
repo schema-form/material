@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import {exampleSourceCode} from "../constants/exampleSourceCode";
 import {EditorForm, EditorFormProps} from "./EditorForm";
-import {Markdown, DownloadIconButton} from "@project/mui-schema-form";
+import {Markdown, DownloadIconButton} from "@schema-form/material";
 import Toolbar from "@mui/material/Toolbar";
 import CodeOffOutlined from "@mui/icons-material/CodeOffOutlined";
 import CodeOutlined from "@mui/icons-material/CodeOutlined";
