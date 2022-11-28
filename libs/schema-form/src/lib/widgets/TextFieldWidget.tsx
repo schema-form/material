@@ -15,8 +15,10 @@ function mapTextFieldInputMode({ schema }: WidgetProps<any, any, SchemaFormConte
                 case 'email':
                 case 'tel':
                 case 'search': return format;
+                default: return;
             }
         }
+        default: return;
     }
 }
 
@@ -32,8 +34,10 @@ function mapTextFieldInputType({ schema }: WidgetProps<any, any, SchemaFormConte
                 case 'password': return format;
                 case 'date-time': return 'datetime-local';
                 case 'data-url': return 'file';
+                default: return;
             }
         }
+        default: return;
     }
 }
 
