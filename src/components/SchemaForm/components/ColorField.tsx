@@ -3,7 +3,7 @@ import {v4 as uuid} from 'uuid';
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import {TextFieldProps} from "@mui/material";
-import PaletteIcon from '@mui/icons-material/Palette';
+import {Circle} from "@mui/icons-material";
 
 export type ColorFieldProps = TextFieldProps;
 
@@ -26,9 +26,7 @@ export function ColorField(props: ColorFieldProps) {
                 component="label"
                 htmlFor={pickerId}
             >
-                <PaletteIcon
-                    sx={{color: iconColor}}
-                />
+                <Circle sx={{color: value}} />
             </IconButton>
             <input
                 style={{
@@ -39,8 +37,7 @@ export function ColorField(props: ColorFieldProps) {
                     opacity: 0,
                     width: 235,
                     height: '100%',
-                    zIndex: -1,
-                    background: 'red'
+                    zIndex: -1
                 }}
                 id={pickerId}
                 type="color"

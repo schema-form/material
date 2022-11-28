@@ -3,7 +3,7 @@ import {WidgetProps} from '@rjsf/utils';
 import {mapControlProps} from "../utils/maps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
 import {mapCheckboxProps} from "../utils/maps/mapCheckboxProps";
-import {SwitchListItem, SwitchListItemProps} from "../components/SwitchListItem";
+import SwitchListItem, {SwitchListItemProps} from "../components/SwitchListItem";
 
 export function mapSwitchListItemProps(props: WidgetProps<any, SchemaFormContext>): SwitchListItemProps {
     const commonProps = mapControlProps(props);

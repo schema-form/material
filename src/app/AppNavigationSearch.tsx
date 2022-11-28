@@ -1,9 +1,10 @@
 import * as React from "react";
-import {InputBaseProps, styled} from "@mui/material";
-import {ClearOutlined, SearchOutlined} from "@mui/icons-material";
+import {styled} from "@mui/material";
+import ClearOutlined from "@mui/icons-material/ClearOutlined";
+import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
-import InputBase from "@mui/material/InputBase";
+import InputBase, {InputBaseProps} from "@mui/material/InputBase";
 
 const SearchInput = styled(InputBase)(({ theme }) => ({
     position: 'absolute',

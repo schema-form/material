@@ -1,10 +1,16 @@
 import React, {useState} from "react";
-import {Box, Collapse, Divider, Stack, Tooltip} from "@mui/material";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 import {exampleSourceCode} from "../constants/exampleSourceCode";
 import {EditorForm, EditorFormProps} from "./EditorForm";
 import {Markdown} from "../components/SchemaForm/components/Markdown";
 import Toolbar from "@mui/material/Toolbar";
-import {CodeOffOutlined, CodeOutlined, DownloadOutlined, RestartAltOutlined} from "@mui/icons-material";
+import CodeOffOutlined from "@mui/icons-material/CodeOffOutlined";
+import CodeOutlined from "@mui/icons-material/CodeOutlined";
+import RestartAltOutlined from "@mui/icons-material/RestartAltOutlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import DownloadIconButton from "../components/SchemaForm/components/DownloadIconButton";

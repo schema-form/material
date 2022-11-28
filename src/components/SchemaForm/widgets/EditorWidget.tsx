@@ -1,5 +1,5 @@
 import React from "react";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {WidgetProps} from "@rjsf/utils";
 import MonacoEditor, {MonacoEditorProps} from "../components/MonacoEditor";
 import {mapControlProps} from "../utils/maps/mapControlProps";

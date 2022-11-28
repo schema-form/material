@@ -1,6 +1,8 @@
 import React from "react";
 import {WidgetProps} from "@rjsf/utils";
-import {FormControlLabelProps, FormHelperText, styled} from "@mui/material";
+import {styled} from "@mui/material";
+import FormHelperText from "@mui/material/FormHelperText";
+import {FormControlLabelProps} from "@mui/material/FormControlLabel";
 import {SchemaFormContext} from "../../SchemaForm";
 import Typography from "@mui/material/Typography";
 import {mapFormHelperTextProps} from "./mapFormHelperTextProps";

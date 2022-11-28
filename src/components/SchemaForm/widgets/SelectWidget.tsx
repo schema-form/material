@@ -2,18 +2,15 @@ import React, {useMemo} from 'react';
 import {v4 as uuid} from 'uuid';
 import isEqual from 'lodash/isEqual';
 import {WidgetProps} from '@rjsf/utils';
-import {
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    ListItemIcon, ListItemText,
-    MenuItem,
-    Select,
-    SelectProps
-} from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import InputLabel from "@mui/material/InputLabel";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem from "@mui/material/MenuItem";
+import Select, {SelectProps} from "@mui/material/Select";
 import CheckIcon from "@mui/icons-material/Check"
 import {mapControlProps} from "../utils/maps/mapControlProps";
-import {EnumOption} from "../utils/maps/mapSelectOptions";
 import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
 import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
 import {mapInputLabelProps} from "../utils/maps/mapInputLabelProps";

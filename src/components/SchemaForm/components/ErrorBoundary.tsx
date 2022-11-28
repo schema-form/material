@@ -1,5 +1,6 @@
 import {Component, PropsWithChildren} from "react";
-import {Alert, AlertTitle} from "@mui/material";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 type ErrorBoundaryState = {
     hasError?: boolean;

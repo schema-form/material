@@ -1,9 +1,11 @@
-import {ListItem, ListItemText, ListItemTextProps, Radio, RadioProps} from "@mui/material";
 import React, {useMemo} from "react";
-import {v4 as uuid} from "uuid";
+import ListItem from "@mui/material/ListItem";
+import ListItemText, {ListItemTextProps} from "@mui/material/ListItemText";
+import Radio, {RadioProps} from "@mui/material/Radio";
 import Typography from "@mui/material/Typography";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import {v4 as uuid} from "uuid";
 
 export type RadioListItemProps = RadioProps & {
     id?: RadioProps['id'];

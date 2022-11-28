@@ -1,7 +1,11 @@
-import * as React from "react";
-import {BottomNavigation, BottomNavigationAction, Drawer, Hidden, styled} from "@mui/material";
-import {PropsWithChildren, ReactNode, useState} from "react";
-import {HomeOutlined, SettingsOutlined} from "@mui/icons-material";
+import React, {PropsWithChildren, ReactNode, useState} from "react";
+import {styled} from "@mui/material";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Drawer from "@mui/material/Drawer";
+import Hidden from "@mui/material/Hidden";
+import HomeOutlined from "@mui/icons-material/HomeOutlined";
+import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import {DrawerProvider, useDrawerState} from "./DrawerProvider";
 import LayoutAppBar, {LayoutAppBarProps} from "./LayoutAppBar";
 

@@ -1,12 +1,13 @@
+import React, {ReactNode} from "react";
 import {useDrawerState} from "./DrawerProvider";
-import {Hidden, Stack} from "@mui/material";
+import Hidden from "@mui/material/Hidden";
+import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
-import {MenuOpenOutlined, MenuOutlined} from "@mui/icons-material";
+import MenuOpenOutlined from "@mui/icons-material/MenuOpenOutlined";
+import MenuOutlined from "@mui/icons-material/MenuOutlined";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import {ReactNode} from "react";
 
 export type LayoutAppBarProps = {
     logo?: ReactNode;

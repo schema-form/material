@@ -1,5 +1,5 @@
 import {WidgetProps} from "@rjsf/utils";
-import {FormLabelProps} from "@mui/material";
+import {FormLabelProps} from "@mui/material/FormLabel";
 import {mapControlProps} from "./mapControlProps";
 import {SchemaFormContext} from "../../SchemaForm";
 

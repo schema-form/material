@@ -1,5 +1,5 @@
 import {SchemaForm, SchemaFormProps} from "../components/SchemaForm";
-import * as React from "react";
+import React from "react";
 
 const schema: SchemaFormProps['schema'] = {
     properties: {

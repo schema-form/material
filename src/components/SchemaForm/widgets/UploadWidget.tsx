@@ -1,7 +1,7 @@
 import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import {SchemaFormContext} from "../SchemaForm";
-import {Upload, UploadProps} from "../components/Upload";
+import Upload, {UploadProps} from "../components/Upload";
 import {mapControlProps} from "../utils/maps/mapControlProps";
 
 export function mapUploadButtonProps(props: WidgetProps<any, SchemaFormContext>): UploadProps {

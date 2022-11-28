@@ -1,5 +1,5 @@
 import {WidgetProps} from "@rjsf/utils";
-import {FormHelperTextProps} from "@mui/material";
+import {FormHelperTextProps} from "@mui/material/FormHelperText";
 import {SchemaFormContext} from "../../SchemaForm";
 
 export function mapFormHelperTextProps(props: WidgetProps<any, SchemaFormContext>): FormHelperTextProps {

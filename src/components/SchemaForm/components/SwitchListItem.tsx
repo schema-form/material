@@ -1,12 +1,8 @@
-import {
-    Checkbox,
-    CheckboxProps, ListItem,
-    ListItemButton, ListItemButtonProps,
-    ListItemIcon,
-    ListItemText,
-    ListItemTextProps, Switch, SwitchProps,
-    TooltipProps
-} from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton, { ListItemButtonProps } from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText, { ListItemTextProps } from "@mui/material/ListItemText";
+import Switch, { SwitchProps } from "@mui/material/Switch";
 import React, {useMemo} from "react";
 import {v4 as uuid} from "uuid";
 import Typography from "@mui/material/Typography";
