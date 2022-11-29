@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[582],{90582:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"IPv6","type":"string","format":"ipv6","examples":["2001:0db8:11a3:09d7:1f34:8a2e:07a0:765d"]}')}}]);

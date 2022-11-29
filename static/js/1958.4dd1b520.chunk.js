@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[1958],{41958:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema","$id":"https://example.com/json-schema/inn","title":"\u0418\u041d\u041d","type":"string","pattern":"^([0-9]{10}|[0-9]{12})$","minLength":10,"maxLength":12,"examples":["7728168971","781612345678"]}')}}]);

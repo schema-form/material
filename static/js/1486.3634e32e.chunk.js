@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[1486],{1486:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema","title":"JPEG","type":"string","format":"data-url","contentMediaType":"image/jpeg"}')}}]);
