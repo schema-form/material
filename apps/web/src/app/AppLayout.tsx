@@ -147,7 +147,7 @@ export default function AppLayout() {
                 color="inherit"
                 component={Link}
                 target="_blank"
-                href="https://github.com/slavabelaev/mui-form"
+                href="https://github.com/schema-form/material"
                 sx={{p: isBreakpointUpSM ? .5 : undefined}}
             >
                 <GitHub sx={{fontSize: 28}} />
