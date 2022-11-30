@@ -1,4 +1,3 @@
-import React from "react";
 import List from "@mui/material/List";
 import {TextFieldProps} from "@mui/material/TextField";
 import {CheckboxListItem, CheckboxListItemProps} from "./CheckboxListItem";

@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import {ReactNode} from 'react';
 import {Alert, Stack} from "@mui/material";
 
 export type ErrorListProps = {

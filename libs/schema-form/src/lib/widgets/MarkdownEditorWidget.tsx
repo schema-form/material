@@ -1,4 +1,3 @@
-import React from "react";
 import {WidgetProps} from "@rjsf/utils";
 import {MarkdownEditor} from "../components/MonacoEditor";
 import {mapEditorProps} from "./EditorWidget";

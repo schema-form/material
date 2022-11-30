@@ -1,4 +1,3 @@
-import React from 'react';
 import {WidgetProps} from "@rjsf/utils";
 import EditorWidget, {mapEditorLanguage} from "./EditorWidget";
 import TextFieldWidget from "./TextFieldWidget";

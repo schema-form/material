@@ -1,4 +1,3 @@
-import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import {SchemaFormContext} from "../SchemaForm";
 import {CheckboxGroup, CheckboxGroupProps} from "../components/CheckboxGroup";

@@ -1,4 +1,3 @@
-import React from "react";
 import SyntaxHighlighter, {SyntaxHighlighterProps} from 'react-syntax-highlighter';
 import {dark} from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import {CopyIconButton} from "../../../CopyIconButton";

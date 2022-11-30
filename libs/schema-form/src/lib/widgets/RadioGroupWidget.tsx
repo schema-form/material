@@ -1,4 +1,3 @@
-import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import {mapControlProps} from "../utils/maps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";

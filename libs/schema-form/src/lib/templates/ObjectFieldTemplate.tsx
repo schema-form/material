@@ -1,4 +1,3 @@
-import React from 'react';
 import {ObjectFieldTemplateProps} from "@rjsf/utils";
 import {styled} from "@mui/material";
 import ObjectFieldPropertyTemplate from "./ObjectFieldPropertyTemplate";

@@ -1,4 +1,3 @@
-import React from "react";
 import {DescriptionFieldProps} from "@rjsf/utils";
 import Typography from "@mui/material/Typography";
 

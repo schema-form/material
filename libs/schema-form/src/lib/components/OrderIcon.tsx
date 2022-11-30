@@ -1,4 +1,3 @@
-import React from "react";
 import {Avatar, AvatarProps, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
 

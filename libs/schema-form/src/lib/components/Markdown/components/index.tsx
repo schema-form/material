@@ -1,4 +1,3 @@
-import React from "react";
 import { Options } from "react-markdown";
 import {
   Divider, DividerProps,

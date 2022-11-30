@@ -1,4 +1,3 @@
-import React from 'react';
 import {isObject} from "../utils/jsonSchema";
 import ErrorList from "../components/ErrorList";
 import {styled} from "@mui/material";

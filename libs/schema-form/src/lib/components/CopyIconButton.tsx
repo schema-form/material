@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import copyToClipboard from "copy-to-clipboard";
 import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
 import CheckIcon from "@mui/icons-material/Check";

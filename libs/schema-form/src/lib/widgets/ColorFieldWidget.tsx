@@ -1,4 +1,3 @@
-import React from "react";
 import {WidgetProps} from "@rjsf/utils";
 import {mapTextFieldProps} from "./TextFieldWidget";
 import ColorField, {ColorFieldProps} from "../components/ColorField";

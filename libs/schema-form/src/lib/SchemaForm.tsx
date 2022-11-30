@@ -1,4 +1,3 @@
-import React from "react";
 import validator from "@rjsf/validator-ajv8";
 import Form, { FormProps } from "@rjsf/core";
 import {FormControlProps, ButtonProps, styled} from "@mui/material";

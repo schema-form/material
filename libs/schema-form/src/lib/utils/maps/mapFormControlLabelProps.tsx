@@ -1,4 +1,3 @@
-import React from "react";
 import {WidgetProps} from "@rjsf/utils";
 import {styled} from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";

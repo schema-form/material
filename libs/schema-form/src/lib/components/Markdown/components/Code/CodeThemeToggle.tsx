@@ -1,4 +1,3 @@
-import React from "react";
 import {LightbulbOutlined, LightbulbTwoTone} from "@mui/icons-material";
 import {styled, Tooltip} from "@mui/material";
 import {useCodeTheme} from "./CodeThemeProvider";

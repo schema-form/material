@@ -1,4 +1,3 @@
-import React from "react";
 import {Option} from "../types/Option";
 import {v4 as uuid} from "uuid";
 import isEqual from "lodash/isEqual";

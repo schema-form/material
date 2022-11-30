@@ -1,4 +1,4 @@
-import React, {startTransition, useMemo} from "react";
+import {startTransition, useMemo} from "react";
 import {v4 as uuid} from 'uuid';
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
@@ -10,7 +10,6 @@ export type ColorFieldProps = TextFieldProps;
 export function ColorField(props: ColorFieldProps) {
     const pickerId = useMemo(uuid, []);
     const value = String(props?.value);
-    const iconColor = value || 'rgba(0,0,0,.05)';
     const hasValue = Boolean(props?.value);
 
     const handleChange: ColorFieldProps['onChange'] = (event) => {
@@ -20,7 +19,7 @@ export function ColorField(props: ColorFieldProps) {
     }
 
     const pickerButton = (
-        <React.Fragment>
+        <>
             <IconButton
                 edge="end"
                 component="label"
@@ -44,7 +43,7 @@ export function ColorField(props: ColorFieldProps) {
                 value={value}
                 onChange={handleChange}
             />
-        </React.Fragment>
+        </>
     )
 
     return (

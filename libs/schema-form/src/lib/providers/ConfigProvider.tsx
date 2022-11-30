@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {createContext, useContext} from 'react';
 
 export type Config = {
     displayHeader?: boolean;
@@ -6,7 +6,7 @@ export type Config = {
     isStepper?: boolean;
 }
 
-const ConfigContext = React.createContext<Config>({
+const ConfigContext = createContext<Config>({
     displayHeader: true,
     displayErrorList: true,
     isStepper: false

@@ -1,4 +1,3 @@
-import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import {TextField, TextFieldProps} from "@mui/material";
 import {mapTextFieldProps} from "./TextFieldWidget";

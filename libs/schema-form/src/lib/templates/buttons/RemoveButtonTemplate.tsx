@@ -1,4 +1,3 @@
-import React from "react";
 import {IconButtonProps} from "@rjsf/utils";
 import {IconButton} from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";

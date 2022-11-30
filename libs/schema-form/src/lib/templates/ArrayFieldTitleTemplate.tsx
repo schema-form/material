@@ -1,4 +1,3 @@
-import React from "react";
 import {ArrayFieldTitleProps} from "@rjsf/utils";
 import Typography from "@mui/material/Typography";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import {ArrayFieldTemplateItemType} from "@rjsf/utils";
 import {isGroup} from "../utils/jsonSchema";
 import FormCard from "../components/FormCard";

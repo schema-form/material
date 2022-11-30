@@ -1,4 +1,4 @@
-import React, {createContext, PropsWithChildren, useContext, useEffect, useState} from "react";
+import {createContext, PropsWithChildren, useContext, useEffect, useState} from "react";
 import {useTheme} from "@mui/material/styles";
 import {EditorProps} from "@monaco-editor/react";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactMarkdown, { Options } from "react-markdown";
 import gfm from 'remark-gfm';
 import slug from 'remark-slug';
