@@ -61,7 +61,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
             isControl={true}
             disabled={disabled}
             error={hasError}
-            label={label}
+            title={label}
             helperText={helperText}
         >
             {optionsList}

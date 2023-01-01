@@ -5,11 +5,10 @@ import {
     Collapse, CollapseProps, FormControl, FormHelperText,
     ListItem,
     ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
-    ListItemText, styled,
+    ListItemText, styled, keyframes
 } from "@mui/material";
 import {
-    KeyboardArrowRight,
-    KeyboardArrowDown,
+    KeyboardArrowRight
 } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -23,7 +22,8 @@ export type FormCardProps = PropsWithChildren<{
     disabled?: boolean;
     isControl?: boolean;
     icon?: ReactNode;
-    label?: CardHeaderProps['title'];
+    title?: CardHeaderProps['title'];
+    subheader?: CardHeaderProps['subheader'];
     helperText?: CardHeaderProps['subheader'];
     expandedActions?: ListItemProps['secondaryAction'];
     secondaryAction?: ListItemProps['secondaryAction'];
@@ -31,6 +31,7 @@ export type FormCardProps = PropsWithChildren<{
     CollapseProps?: CollapseProps;
     HeaderProps?: ListItemButtonProps;
     defaultExpanded?: boolean;
+    onExpandedChange?: (isExpanded: boolean) => void;
 }>
 
 export type OutlinedCardProps = CardProps & {
@@ -82,6 +83,36 @@ export const OutlinedCard = styled(Card)<OutlinedCardProps>(({ theme, error, bor
     })
 })
 
+const rotateAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+`;
+
+const rotateReverseAnimation = keyframes`
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+const ExpandIcon = styled(KeyboardArrowRight)<{
+  isExpanded?: boolean;
+}>(({ theme, isExpanded }) => isExpanded ? ({
+  animationName: rotateAnimation,
+  animationDuration: `${theme.transitions.duration.short}ms`,
+  animationFillMode: 'forwards',
+}) : ({
+  animationName: rotateReverseAnimation,
+  animationDuration: `${theme.transitions.duration.short}ms`,
+  animationFillMode: 'forwards',
+}));
+
 export function FormCard(props: FormCardProps) {
     const {
         className,
@@ -98,32 +129,58 @@ export function FormCard(props: FormCardProps) {
         actions,
         CollapseProps,
         HeaderProps,
-        defaultExpanded = true
+        defaultExpanded = true,
+        onExpandedChange,
     } = props;
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
-    const toggleExpand = () => setExpanded(!isExpanded);
     const hasChildren = Boolean(children);
     const hasActions = Boolean(secondaryAction) || Boolean(expandedActions);
+    const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
+    const hasSubheader = Boolean(subheaderText);
 
-    const expandIcon = isExpanded
-        ? <KeyboardArrowDown color={iconColor} />
-        : <KeyboardArrowRight color={iconColor} />;
+    const toggleExpand = () => {
+        const newExpanded = !isExpanded;
 
-    const title = props?.label ? (
+        setExpanded(newExpanded);
+        onExpandedChange?.(newExpanded);
+    };
+
+    const expandIcon = (
+      <ExpandIcon
+        color={iconColor}
+        isExpanded={isExpanded}
+      />
+    );
+
+    const title = props?.title ? (
         <Typography
             component="span"
             variant="body1"
             color={hasError ? 'error' : 'textPrimary'}
         >
-            {props.label}
+            {props.title}
         </Typography>
     ) : null;
 
+    const subheader = subheaderText ? (
+      <Collapse in={!isExpanded}>
+        <Typography
+          component="p"
+          variant="body2"
+          color={hasError ? 'error' : 'textSecondary'}
+        >
+          {subheaderText}
+        </Typography>
+      </Collapse>
+    ) : null;
+
     const formHelperText = props.helperText ? (
+      <Collapse in={isExpanded}>
         <FormHelperText>
             {props.helperText}
         </FormHelperText>
+      </Collapse>
     ) : null;
 
     const secondaryActions = hasActions && (
@@ -133,7 +190,7 @@ export function FormCard(props: FormCardProps) {
         </React.Fragment>
     );
 
-    const hasHeader = title || secondaryActions;
+    const hasHeader = title || subheader || secondaryActions;
 
     const expandListItemIcon = hasChildren && (
         <ListItemIcon>
@@ -151,11 +208,13 @@ export function FormCard(props: FormCardProps) {
                 dense={false}
                 disabled={disabled}
                 onClick={toggleExpand}
+                sx={{py: subheader ? .5 : .75}}
                 {...HeaderProps}
             >
                 {expandListItemIcon}
                 <ListItemText
                     primary={title}
+                    secondary={subheader}
                 />
             </ListItemButton>
         </ListItem>

@@ -148,7 +148,7 @@ export function Upload(props: UploadProps) {
     return (
         <>
             <FormCard
-                label={'Файл не выбран'}
+                title={'Файл не выбран'}
                 helperText={props.helperText}
                 error={error}
                 disabled={props.disabled}

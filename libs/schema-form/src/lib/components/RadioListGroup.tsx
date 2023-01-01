@@ -8,6 +8,7 @@ import {
 import List from "@mui/material/List";
 import FormCard from "./FormCard";
 import RadioListItem from "./RadioListItem";
+import { useState } from "react";
 
 export type RadioListGroupProps = RadioGroupProps & {
     options?: Option[];
@@ -26,6 +27,7 @@ export function RadioListGroup(props: RadioListGroupProps) {
         helperText,
         disabled,
     } = props;
+    const [selectedOption, setSelectedOption] = useState<Option>();
 
     const renderOption = (option: Option) => {
         const id = uuid();
@@ -43,7 +45,10 @@ export function RadioListGroup(props: RadioListGroupProps) {
                 helperText={option?.helperText}
                 onChange={(event, checked) => {
                     if (checked) {
+                        setSelectedOption(option);
                         props.onChange?.(event, option.value);
+                    } else {
+                        setSelectedOption(undefined);
                     }
                 }}
             />
@@ -55,7 +60,8 @@ export function RadioListGroup(props: RadioListGroupProps) {
             isControl={true}
             disabled={disabled}
             error={hasError}
-            label={label}
+            title={label}
+            subheader={selectedOption?.label}
             helperText={helperText}
         >
             <List>

@@ -216,7 +216,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
             isControl={true}
             error={hasError}
             disabled={disabled}
-            label={label}
+            title={label}
             helperText={helperText}
             expandedActions={toolbarActions}
         >

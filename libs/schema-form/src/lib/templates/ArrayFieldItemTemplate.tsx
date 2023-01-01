@@ -81,7 +81,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
             error={hasError}
             bordered={false}
             icon={orderIcon}
-            label={schema?.title}
+            title={schema?.title}
             helperText={error || schema?.description}
             expandedActions={headerActions}
         >

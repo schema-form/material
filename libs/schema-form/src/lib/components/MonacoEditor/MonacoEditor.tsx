@@ -92,7 +92,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
             isControl={true}
             error={hasError}
             disabled={disabled}
-            label={label}
+            title={label}
             helperText={errorMessage || helperText}
             expandedActions={actions}
         >
