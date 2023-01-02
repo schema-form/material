@@ -106,6 +106,7 @@ export function FormCard(props: FormCardProps) {
     const hasActions = Boolean(secondaryAction) || Boolean(expandedActions);
     const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
     const hasSubheader = Boolean(subheaderText);
+    const displaySubheader = hasSubheader && !isExpanded;
 
     const toggleExpand = () => {
         const newExpanded = !isExpanded;
@@ -131,7 +132,7 @@ export function FormCard(props: FormCardProps) {
         </Typography>
     ) : null;
 
-    const subheader = subheaderText ? (
+    const subheader = hasSubheader ? (
       <Collapse in={!isExpanded}>
         <Typography
           component="p"
@@ -162,7 +163,7 @@ export function FormCard(props: FormCardProps) {
         </React.Fragment>
     );
 
-    const hasHeader = title || subheader || secondaryActions;
+    const hasHeader = title || displaySubheader || secondaryActions;
 
     const expandListItemIcon = hasChildren && (
         <ListItemIcon>

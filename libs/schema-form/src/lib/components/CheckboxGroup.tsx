@@ -3,6 +3,7 @@ import {TextFieldProps} from "@mui/material/TextField";
 import {CheckboxListItem, CheckboxListItemProps} from "./CheckboxListItem";
 import FormCard from "./FormCard";
 import {Option} from "../types/Option";
+import {useMemo} from "react";
 
 export type CheckboxGroupProps = {
     options: Option[];
@@ -21,6 +22,10 @@ export type CheckboxGroupProps = {
 export function CheckboxGroup(props: CheckboxGroupProps) {
     const { options, value, label, helperText, error: hasError, disabled } = props;
     const hasOptions = Boolean(options.length);
+    const selectedOptions = useMemo(() => value?.map(value => {
+      return options.find(option => option.value === value);
+    }), [options, value]);
+    const subheader = selectedOptions?.map(option => option?.label).join(', ');
 
     const createHandleOptionChange = (option: Option): CheckboxListItemProps['onChange'] => (event, checked) => {
         const oldValue = value || [];
@@ -62,6 +67,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
             disabled={disabled}
             error={hasError}
             title={label}
+            subheader={subheader}
             helperText={helperText}
         >
             {optionsList}
