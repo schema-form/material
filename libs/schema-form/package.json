@@ -25,6 +25,7 @@
     "@rjsf/core": "^5.0.0-beta.13",
     "@rjsf/utils": "^5.0.0-beta.13",
     "@rjsf/validator-ajv8": "^5.0.0-beta.13",
+    "ajv-i18n": "^4.2.0",
     "react": ">=17"
   }
 }

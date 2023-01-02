@@ -43,13 +43,6 @@ export function MonacoEditor(props: MonacoEditorProps) {
         />
     );
 
-    const actions = (
-        <Stack direction="row" spacing={.5}>
-            {editorThemeToggle}
-            {copyIconButton}
-        </Stack>
-    )
-
     const editor = (
         <Editor
             {...editorProps}
@@ -94,7 +87,8 @@ export function MonacoEditor(props: MonacoEditorProps) {
             disabled={disabled}
             title={label}
             helperText={errorMessage || helperText}
-            expandedActions={actions}
+            expandedActions={editorThemeToggle}
+            secondaryActions={copyIconButton}
         >
             {editor}
         </FormCard>

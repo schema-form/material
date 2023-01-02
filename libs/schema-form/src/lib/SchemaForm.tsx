@@ -1,4 +1,4 @@
-import validator from "@rjsf/validator-ajv8";
+import { customizeValidator } from "@rjsf/validator-ajv8";
 import Form, { FormProps } from "@rjsf/core";
 import {FormControlProps, ButtonProps, styled} from "@mui/material";
 import WIDGETS from "./widgets";
@@ -6,6 +6,7 @@ import TEMPLATES from "./templates";
 import MonacoEditorThemeProvider from "./components/MonacoEditor/MonacoEditorThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { StrictRJSFSchema } from "@rjsf/utils";
+import localize from 'ajv-i18n/localize/en';
 
 export type SchemaFormContext = {
     FormControlProps?: {
@@ -39,6 +40,8 @@ const StyledForm = styled('form')(({ theme }) => ({
     display: 'grid',
     gap: theme.spacing(2)
 }))
+
+const validator = customizeValidator(undefined, localize);
 
 export function SchemaForm(props: SchemaFormProps) {
     return (

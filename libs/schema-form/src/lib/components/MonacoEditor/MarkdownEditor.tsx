@@ -170,13 +170,6 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         />
     );
 
-    const toolbarActions = (
-        <Stack direction="row" alignItems="center" spacing={.5}>
-            {editorThemeToggle}
-            {copyIconButton}
-        </Stack>
-    );
-
     const editor = (
         <Box sx={{flex: 1, minWidth: '50%'}}>
             <Editor
@@ -218,7 +211,8 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
             disabled={disabled}
             title={label}
             helperText={helperText}
-            expandedActions={toolbarActions}
+            expandedActions={editorThemeToggle}
+            secondaryActions={copyIconButton}
         >
             <Stack direction="row">
                 {editor}

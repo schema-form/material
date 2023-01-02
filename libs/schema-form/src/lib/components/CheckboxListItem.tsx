@@ -6,6 +6,8 @@ import ListItemButton, {ListItemButtonProps} from "@mui/material/ListItemButton"
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText, {ListItemTextProps} from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import FormCard from "./FormCard";
+import FormHelperText from "@mui/material/FormHelperText";
 
 export type CheckboxListItemProps = {
     isGroupOption?: boolean;
@@ -46,39 +48,44 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
         </Typography>
     ) : null;
 
-    return (
-        <ListItem disablePadding>
-            <ListItemButton
-                component="label"
-                htmlFor={id}
-                disabled={props?.disabled}
-                selected={props.checked}
-                hidden={props?.hidden}
-                sx={{
-                    py: isGroupOption ? optionPaddingY : undefined,
-                    borderRadius: isGroupOption ? 0 : 1,
-                    ...props.sx
-                }}
-            >
-                <ListItemIcon>
-                    <Checkbox
-                        id={id}
-                        disableRipple
-                        edge="start"
-                        disabled={props.disabled}
-                        checked={props.checked}
-                        value={props.value}
-                        onChange={props.onChange}
-                        color={hasError ? 'error' : undefined}
-                    />
-                </ListItemIcon>
-                <ListItemText
-                    primary={primaryText}
-                    secondary={secondaryText}
-                />
-            </ListItemButton>
-        </ListItem>
-    )
+    const listItem = (
+      <ListItem disablePadding>
+        <ListItemButton
+          component="label"
+          htmlFor={id}
+          disabled={props?.disabled}
+          selected={props.checked}
+          hidden={props?.hidden}
+          sx={{
+            py: isGroupOption ? optionPaddingY : .5,
+            ...props.sx
+          }}
+        >
+          <ListItemIcon>
+            <Checkbox
+              id={id}
+              disableRipple
+              edge="start"
+              disabled={props.disabled}
+              checked={props.checked}
+              value={props.value}
+              onChange={props.onChange}
+              color={hasError ? 'error' : undefined}
+            />
+          </ListItemIcon>
+          <ListItemText
+            primary={primaryText}
+            secondary={secondaryText}
+          />
+        </ListItemButton>
+      </ListItem>
+    );
+
+    return isGroupOption ? listItem : (
+      <FormCard isControl={true} error={hasError}>
+        {listItem}
+      </FormCard>
+    );
 }
 
 export default CheckboxListItem;

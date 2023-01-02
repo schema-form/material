@@ -5,7 +5,7 @@ import {
   Collapse, CollapseProps, Fade, FormControl, FormHelperText,
   ListItem,
   ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
-  ListItemText, styled
+  ListItemText, Stack, styled
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -24,7 +24,7 @@ export type FormCardProps = PropsWithChildren<{
     subheader?: CardHeaderProps['subheader'];
     helperText?: CardHeaderProps['subheader'];
     expandedActions?: ListItemProps['secondaryAction'];
-    secondaryAction?: ListItemProps['secondaryAction'];
+    secondaryActions?: ListItemProps['secondaryAction'];
     actions?: ReactNode;
     CollapseProps?: CollapseProps;
     HeaderProps?: ListItemButtonProps;
@@ -93,7 +93,7 @@ export function FormCard(props: FormCardProps) {
         icon,
         children,
         expandedActions,
-        secondaryAction,
+        secondaryActions,
         actions,
         CollapseProps,
         HeaderProps,
@@ -103,7 +103,7 @@ export function FormCard(props: FormCardProps) {
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const hasChildren = Boolean(children);
-    const hasActions = Boolean(secondaryAction) || Boolean(expandedActions);
+    const hasActions = Boolean(secondaryActions) || Boolean(expandedActions);
     const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
     const hasSubheader = Boolean(subheaderText);
     const displaySubheader = hasSubheader && !isExpanded;
@@ -136,7 +136,7 @@ export function FormCard(props: FormCardProps) {
       <Collapse in={!isExpanded}>
         <Typography
           component="p"
-          variant="body2"
+          variant="caption"
           color={hasError ? 'error' : 'textSecondary'}
         >
           {subheaderText}
@@ -152,18 +152,18 @@ export function FormCard(props: FormCardProps) {
       </Collapse>
     ) : null;
 
-    const secondaryActions = hasActions && (
-        <React.Fragment>
+    const headerActions = hasActions && (
+        <Stack direction="row" spacing={.5}>
             <Fade in={isExpanded}>
               <div>
                 {expandedActions}
               </div>
             </Fade>
-            {secondaryAction}
-        </React.Fragment>
+            {secondaryActions}
+        </Stack>
     );
 
-    const hasHeader = title || displaySubheader || secondaryActions;
+    const hasHeader = title || displaySubheader || headerActions;
 
     const expandListItemIcon = hasChildren && (
         <ListItemIcon>
@@ -175,7 +175,7 @@ export function FormCard(props: FormCardProps) {
         <ListItem
             component="header"
             disablePadding
-            secondaryAction={secondaryActions}
+            secondaryAction={headerActions}
         >
             <ListItemButton
                 dense={false}

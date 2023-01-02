@@ -61,6 +61,7 @@ export function RadioListItem({
                 dense={true}
                 disabled={disabled}
                 selected={checked}
+                sx={{py: 0}}
             >
                 <ListItemIcon>
                     <Radio

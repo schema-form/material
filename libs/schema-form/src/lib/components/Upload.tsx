@@ -59,7 +59,6 @@ type UploadItemProps = {
 }
 
 function UploadItem({ file, onRemove }: UploadItemProps) {
-
     return (
         <ListItem dense={true}>
             <ListItemIcon>
@@ -80,7 +79,7 @@ function UploadItem({ file, onRemove }: UploadItemProps) {
 export function Upload(props: UploadProps) {
     const { error, value, ...inputProps } = props;
     const id = props.id || uuid();
-    const filesAsDataURLs = value?.filter(Boolean);
+    const filesAsDataURLs = value?.filter?.(Boolean);
     const hasFiles = Boolean(filesAsDataURLs?.length);
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
@@ -152,7 +151,8 @@ export function Upload(props: UploadProps) {
                 helperText={props.helperText}
                 error={error}
                 disabled={props.disabled}
-                secondaryAction={uploadIconButton}
+                secondaryActions={uploadIconButton}
+                defaultExpanded={false}
                 isControl={true}
                 sx={{borderStyle: 'dashed'}}
             >

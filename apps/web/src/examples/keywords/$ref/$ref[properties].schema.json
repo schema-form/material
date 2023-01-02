@@ -7,7 +7,8 @@
 			"type": "string",
 			"minLength": 3,
 			"maxLength": 24,
-			"pattern": "[А-Я]{1}[а-я]*"
+			"pattern": "[А-Я]{1}[а-я]*",
+      "errorMessage": "Some error message"
 		},
 		"firstName": {
 			"title": "Имя",
