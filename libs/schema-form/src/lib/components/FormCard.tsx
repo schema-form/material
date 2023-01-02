@@ -1,17 +1,15 @@
 import React, {PropsWithChildren, ReactNode} from 'react';
 import {
-    CardActions,
-    CardHeaderProps, CardProps,
-    Collapse, CollapseProps, FormControl, FormHelperText,
-    ListItem,
-    ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
-    ListItemText, styled, keyframes
+  CardActions,
+  CardHeaderProps, CardProps,
+  Collapse, CollapseProps, Fade, FormControl, FormHelperText,
+  ListItem,
+  ListItemButton, ListItemButtonProps, ListItemIcon, ListItemProps,
+  ListItemText, styled
 } from "@mui/material";
-import {
-    KeyboardArrowRight
-} from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
+import ExpandIcon from "./ExpandIcon";
 
 export type FormCardProps = PropsWithChildren<{
     variant?: CardProps['variant'];
@@ -81,37 +79,7 @@ export const OutlinedCard = styled(Card)<OutlinedCardProps>(({ theme, error, bor
         padding: 1,
         ...borderedStyles
     })
-})
-
-const rotateAnimation = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(90deg);
-  }
-`;
-
-const rotateReverseAnimation = keyframes`
-  0% {
-    transform: rotate(90deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-`;
-
-const ExpandIcon = styled(KeyboardArrowRight)<{
-  isExpanded?: boolean;
-}>(({ theme, isExpanded }) => isExpanded ? ({
-  animationName: rotateAnimation,
-  animationDuration: `${theme.transitions.duration.short}ms`,
-  animationFillMode: 'forwards',
-}) : ({
-  animationName: rotateReverseAnimation,
-  animationDuration: `${theme.transitions.duration.short}ms`,
-  animationFillMode: 'forwards',
-}));
+});
 
 export function FormCard(props: FormCardProps) {
     const {
@@ -185,7 +153,11 @@ export function FormCard(props: FormCardProps) {
 
     const secondaryActions = hasActions && (
         <React.Fragment>
-            {isExpanded ? expandedActions : null}
+            <Fade in={isExpanded}>
+              <div>
+                {expandedActions}
+              </div>
+            </Fade>
             {secondaryAction}
         </React.Fragment>
     );
@@ -208,7 +180,7 @@ export function FormCard(props: FormCardProps) {
                 dense={false}
                 disabled={disabled}
                 onClick={toggleExpand}
-                sx={{py: subheader ? .5 : .75}}
+                sx={{py: hasSubheader ? .5 : .75}}
                 {...HeaderProps}
             >
                 {expandListItemIcon}
