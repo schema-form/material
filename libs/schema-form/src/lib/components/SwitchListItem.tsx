@@ -6,6 +6,7 @@ import ListItemText, { ListItemTextProps } from "@mui/material/ListItemText";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import {v4 as uuid} from "uuid";
 import Typography from "@mui/material/Typography";
+import FormCard from "./FormCard";
 
 export type SwitchListItemProps = {
     isGroupOption?: boolean;
@@ -24,6 +25,8 @@ export function SwitchListItem(props: SwitchListItemProps) {
     const {error: hasError, helperText, isGroupOption} = props;
     const labelText = props?.label || JSON.stringify(props?.value);
     const id = useMemo(uuid, []);
+    const optionPaddingY = helperText ? undefined : 0;
+    const paddingY = isGroupOption ? optionPaddingY : .5;
 
     const primaryText = labelText ? (
         <Typography
@@ -45,38 +48,44 @@ export function SwitchListItem(props: SwitchListItemProps) {
         </Typography>
     ) : null;
 
-    return (
-        <ListItem disablePadding>
-            <ListItemButton
-                component="label"
-                htmlFor={id}
-                disabled={props?.disabled}
-                selected={props.checked}
-                hidden={props?.hidden}
-                sx={{
-                    borderRadius: isGroupOption ? 0 : 1,
-                    ...props?.sx
-                }}
-            >
-                <ListItemIcon>
-                    <Switch
-                        id={id}
-                        disableRipple
-                        edge="start"
-                        disabled={props.disabled}
-                        checked={props.checked}
-                        value={props.value}
-                        onChange={props.onChange}
-                        color={hasError ? 'error' : undefined}
-                    />
-                </ListItemIcon>
-                <ListItemText
-                    primary={primaryText}
-                    secondary={secondaryText}
-                />
-            </ListItemButton>
-        </ListItem>
+    const listItem = (
+      <ListItem disablePadding>
+        <ListItemButton
+          component="label"
+          htmlFor={id}
+          disabled={props?.disabled}
+          selected={props.checked}
+          hidden={props?.hidden}
+          sx={{
+            py: paddingY,
+            ...props.sx
+          }}
+        >
+          <ListItemIcon>
+            <Switch
+              id={id}
+              disableRipple
+              edge="start"
+              disabled={props.disabled}
+              checked={props.checked}
+              value={props.value}
+              onChange={props.onChange}
+              color={hasError ? 'error' : undefined}
+            />
+          </ListItemIcon>
+          <ListItemText
+            primary={primaryText}
+            secondary={secondaryText}
+          />
+        </ListItemButton>
+      </ListItem>
     )
+
+    return isGroupOption ? listItem : (
+      <FormCard isControl={true} error={hasError}>
+        {listItem}
+      </FormCard>
+    );
 }
 
 export default SwitchListItem;

@@ -1,5 +1,6 @@
 import React, {PropsWithChildren, ReactNode} from 'react';
 import {
+  Box,
   CardActions,
   CardHeaderProps, CardProps,
   Collapse, CollapseProps, Fade, FormControl, FormHelperText,
@@ -154,10 +155,10 @@ export function FormCard(props: FormCardProps) {
 
     const headerActions = hasActions && (
         <Stack direction="row" spacing={.5}>
-            <Fade in={isExpanded}>
-              <div>
+            <Fade in={isExpanded} appear={false}>
+              <Box>
                 {expandedActions}
-              </div>
+              </Box>
             </Fade>
             {secondaryActions}
         </Stack>
