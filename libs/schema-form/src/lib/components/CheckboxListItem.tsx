@@ -7,7 +7,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText, {ListItemTextProps} from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import FormCard from "./FormCard";
-import FormHelperText from "@mui/material/FormHelperText";
 
 export type CheckboxListItemProps = {
     isGroupOption?: boolean;
@@ -17,6 +16,7 @@ export type CheckboxListItemProps = {
     disabled?: CheckboxProps['disabled'];
     hidden?: CheckboxProps['hidden'];
     checked?: CheckboxProps['checked'];
+    indeterminate?: CheckboxProps['indeterminate'];
     error?: boolean;
     onChange?: CheckboxProps['onChange'];
     sx?: ListItemButtonProps['sx'];
@@ -68,6 +68,7 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
               edge="start"
               disabled={props.disabled}
               checked={props.checked}
+              indeterminate={props.indeterminate}
               value={props.value}
               onChange={props.onChange}
               color={hasError ? 'error' : undefined}

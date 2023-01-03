@@ -155,12 +155,14 @@ export function FormCard(props: FormCardProps) {
 
     const headerActions = hasActions && (
         <Stack direction="row" spacing={.5}>
-            <Fade in={isExpanded} appear={false}>
+            <Fade in={isExpanded} appear={false} unmountOnExit={true}>
               <Box>
                 {expandedActions}
               </Box>
             </Fade>
-            {secondaryActions}
+             <Box>
+               {secondaryActions}
+             </Box>
         </Stack>
     );
 
