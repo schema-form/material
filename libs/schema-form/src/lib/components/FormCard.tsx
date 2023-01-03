@@ -25,6 +25,7 @@ export type FormCardProps = PropsWithChildren<{
     subheader?: CardHeaderProps['subheader'];
     helperText?: CardHeaderProps['subheader'];
     expandedActions?: ListItemProps['secondaryAction'];
+    notExpandedActions?: ListItemProps['secondaryAction'];
     secondaryActions?: ListItemProps['secondaryAction'];
     actions?: ReactNode;
     CollapseProps?: CollapseProps;
@@ -91,9 +92,9 @@ export function FormCard(props: FormCardProps) {
         isControl = false,
         disabled,
         bordered = true,
-        icon,
         children,
         expandedActions,
+        notExpandedActions,
         secondaryActions,
         actions,
         CollapseProps,
@@ -104,7 +105,7 @@ export function FormCard(props: FormCardProps) {
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const hasChildren = Boolean(children);
-    const hasActions = Boolean(secondaryActions) || Boolean(expandedActions);
+    const hasActions = Boolean(secondaryActions) || Boolean(notExpandedActions) || Boolean(expandedActions);
     const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
     const hasSubheader = Boolean(subheaderText);
     const displaySubheader = hasSubheader && !isExpanded;
@@ -160,6 +161,11 @@ export function FormCard(props: FormCardProps) {
                 {expandedActions}
               </Box>
             </Fade>
+            <Fade in={!isExpanded} appear={false} unmountOnExit={true}>
+              <Box>
+                {notExpandedActions}
+              </Box>
+            </Fade>
              <Box>
                {secondaryActions}
              </Box>
@@ -168,9 +174,10 @@ export function FormCard(props: FormCardProps) {
 
     const hasHeader = title || displaySubheader || headerActions;
 
-    const expandListItemIcon = hasChildren && (
+    const icon = hasChildren ? expandIcon : props.icon;
+    const expandListItemIcon = icon && (
         <ListItemIcon>
-            {icon || expandIcon}
+            {icon}
         </ListItemIcon>
     )
 
