@@ -93,9 +93,6 @@ export function FormCard(props: FormCardProps) {
         disabled,
         bordered = true,
         children,
-        expandedActions,
-        notExpandedActions,
-        secondaryActions,
         actions,
         CollapseProps,
         HeaderProps,
@@ -105,7 +102,10 @@ export function FormCard(props: FormCardProps) {
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const hasChildren = Boolean(children);
-    const hasActions = Boolean(secondaryActions) || Boolean(notExpandedActions) || Boolean(expandedActions);
+    const hasSecondaryActions = Boolean(props.secondaryActions);
+    const hasExpandedActions = Boolean(props.expandedActions);
+    const hasNotExpandedActions = Boolean(props.notExpandedActions)
+    const hasActions = hasSecondaryActions || hasNotExpandedActions || hasExpandedActions;
     const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
     const hasSubheader = Boolean(subheaderText);
     const displaySubheader = hasSubheader && !isExpanded;
@@ -154,21 +154,33 @@ export function FormCard(props: FormCardProps) {
       </Collapse>
     ) : null;
 
+    const expandedActions = hasExpandedActions && (
+      <Fade in={isExpanded} appear={false} unmountOnExit={true}>
+        <Box>
+          {props?.expandedActions}
+        </Box>
+      </Fade>
+    );
+
+    const notExpandedActions = hasNotExpandedActions && (
+      <Fade in={!isExpanded} appear={false} unmountOnExit={true}>
+        <Box>
+          {props?.notExpandedActions}
+        </Box>
+      </Fade>
+    );
+
+    const secondaryActions = (
+      <Box>
+        {props?.secondaryActions}
+      </Box>
+    );
+
     const headerActions = hasActions && (
         <Stack direction="row" spacing={.5}>
-            <Fade in={isExpanded} appear={false} unmountOnExit={true}>
-              <Box>
-                {expandedActions}
-              </Box>
-            </Fade>
-            <Fade in={!isExpanded} appear={false} unmountOnExit={true}>
-              <Box>
-                {notExpandedActions}
-              </Box>
-            </Fade>
-             <Box>
-               {secondaryActions}
-             </Box>
+            {expandedActions}
+            {notExpandedActions}
+            {secondaryActions}
         </Stack>
     );
 

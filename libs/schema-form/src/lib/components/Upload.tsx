@@ -231,154 +231,154 @@ const createSelectedFilesMessage = (filesCount?: number) => {
 }
 
 function MultipleUpload(props: UploadProps) {
-    const { error, ...inputProps } = props;
-    const id = props.id || uuid();
-    const value = props.value as string[] | undefined;
-    const filesAsDataURLs = value?.filter?.(Boolean);
-    const selectedFilesCount = filesAsDataURLs?.length;
-    const hasFiles = Boolean(selectedFilesCount);
-    const selectedMessage = createSelectedFilesMessage(selectedFilesCount);
+  const {error, ...inputProps} = props;
+  const id = props.id || uuid();
+  const value = props.value as string[] | undefined;
+  const filesAsDataURLs = value?.filter?.(Boolean);
+  const selectedFilesCount = filesAsDataURLs?.length;
+  const hasFiles = Boolean(selectedFilesCount);
+  const selectedMessage = createSelectedFilesMessage(selectedFilesCount);
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
-        if (props.onChange) {
-            const fileList = event.target?.files || [];
-            const fileListAsDataURLs = value instanceof Array ? value : [];
+  const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
+    if (props.onChange) {
+      const fileList = event.target?.files || [];
+      const fileListAsDataURLs = value instanceof Array ? value : [];
 
-            for (let index = 0; index < fileList.length; index++) {
-                const file = event.target?.files?.item(index);
+      for (let index = 0; index < fileList.length; index++) {
+        const file = event.target?.files?.item(index);
 
-                if (file) {
-                    const fileAsDataURL = await toDataURL(file);
-                    fileListAsDataURLs.push(fileAsDataURL);
-                }
-            }
-
-            props.onChange(fileListAsDataURLs);
+        if (file) {
+          const fileAsDataURL = await toDataURL(file);
+          fileListAsDataURLs.push(fileAsDataURL);
         }
+      }
+
+      props.onChange(fileListAsDataURLs);
     }
+  }
 
   const handleClear = () => props.onChange?.([]);
 
-    const fileInput = (
-        <input
-            {...inputProps}
-            id={id}
-            hidden={true}
-            type="file"
-            value={undefined}
-            onChange={handleChange}
-        />
-    );
+  const fileInput = (
+    <input
+      {...inputProps}
+      id={id}
+      hidden={true}
+      type="file"
+      value={undefined}
+      onChange={handleChange}
+    />
+  );
 
-    const selectButton = (
-      <Tooltip title={DEFAULT_MULTIPLE_LABEL} placement="left">
-        <IconButton
-          component="label"
-          htmlFor={id}
-          disabled={props.disabled}
-          color={error ? 'error' : undefined}
-          size="small"
-        >
-          <FileUpload />
-        </IconButton>
-      </Tooltip>
-    );
-
-    const clearButton = hasFiles && (
-      <Tooltip title={CLEAR_TEXT} placement="left">
-        <IconButton
-          disabled={props.disabled}
-          color={error ? 'error' : undefined}
-          onClick={handleClear}
-          size="small"
-        >
-          <ClearOutlined />
-        </IconButton>
-      </Tooltip>
-    );
-
-    const secondaryActions = (
-      <Stack direction="row" alignItems="center" spacing={.5}>
-        {clearButton}
-        {selectButton}
-      </Stack>
-    )
-
-    const renderFileItem = (fileDataURL: string, index: number) => {
-        const file = fromDataURL(fileDataURL);
-        return (
-            <UploadItem
-                key={index}
-                file={file}
-                onRemove={() => {
-                    const notEqual = (itemFileDataURL: string) => itemFileDataURL !== fileDataURL;
-                    const newValue = filesAsDataURLs?.filter(notEqual);
-                    props.onChange?.(newValue);
-                }}
-            />
-        )
-    }
-
-    const fileList = hasFiles ? (
-        <List>
-            {filesAsDataURLs?.map(renderFileItem)}
-        </List>
-    ) : null;
-
-    const footerAddButton = (
-      <Button
+  const selectIconButton = (
+    <Tooltip title={DEFAULT_MULTIPLE_LABEL}>
+      <IconButton
         component="label"
         htmlFor={id}
         disabled={props.disabled}
         color={error ? 'error' : undefined}
-        startIcon={<AddOutlined />}
+        size="small"
       >
-        {DEFAULT_MULTIPLE_LABEL}
-      </Button>
-    );
+        <FileUpload/>
+      </IconButton>
+    </Tooltip>
+  );
 
-    const footerClearButton = hasFiles && (
-      <Button
+  const clearIconButton = hasFiles && (
+    <Tooltip title={CLEAR_TEXT}>
+      <IconButton
         disabled={props.disabled}
-        color="error"
-        startIcon={<ClearOutlined />}
+        color={error ? 'error' : undefined}
         onClick={handleClear}
+        size="small"
       >
-        {MULTIPLE_CLEAR_LABEL}
-      </Button>
-    );
+        <ClearOutlined/>
+      </IconButton>
+    </Tooltip>
+  );
 
-    const footerActions = (
-      <CardActions>
-        {footerAddButton}
-        {footerClearButton}
-      </CardActions>
-    );
+  const headerActions = (
+    <Stack direction="row" alignItems="center" spacing={.5}>
+      {clearIconButton}
+      {selectIconButton}
+    </Stack>
+  )
 
-    const formCard = (
-      <FormCard
-        title={props.label}
-        subheader={selectedMessage}
-        helperText={props.helperText}
-        icon={<AttachmentOutlined />}
-        error={error}
-        disabled={props.disabled}
-        notExpandedActions={secondaryActions}
-        defaultExpanded={false}
-        isControl={true}
-        sx={{borderStyle: 'dashed'}}
-      >
-        {fileList}
-        {footerActions}
-      </FormCard>
-    )
-
+  const renderFileItem = (fileDataURL: string, index: number) => {
+    const file = fromDataURL(fileDataURL);
     return (
-        <>
-            {formCard}
-            {fileInput}
-        </>
+      <UploadItem
+        key={index}
+        file={file}
+        onRemove={() => {
+          const notEqual = (itemFileDataURL: string) => itemFileDataURL !== fileDataURL;
+          const newValue = filesAsDataURLs?.filter(notEqual);
+          props.onChange?.(newValue);
+        }}
+      />
     )
+  }
+
+  const fileList = hasFiles ? (
+    <List>
+      {filesAsDataURLs?.map(renderFileItem)}
+    </List>
+  ) : null;
+
+  const addButton = (
+    <Button
+      component="label"
+      htmlFor={id}
+      disabled={props.disabled}
+      color={error ? 'error' : undefined}
+      startIcon={<AddOutlined/>}
+    >
+      {DEFAULT_MULTIPLE_LABEL}
+    </Button>
+  );
+
+  const clearButton = hasFiles && (
+    <Button
+      disabled={props.disabled}
+      color="error"
+      startIcon={<ClearOutlined/>}
+      onClick={handleClear}
+    >
+      {MULTIPLE_CLEAR_LABEL}
+    </Button>
+  );
+
+  const cardActions = (
+    <CardActions sx={{justifyContent: 'space-between'}}>
+      {addButton}
+      {clearButton}
+    </CardActions>
+  );
+
+  const formCard = (
+    <FormCard
+      title={props.label}
+      subheader={selectedMessage}
+      helperText={props.helperText}
+      icon={<AttachmentOutlined/>}
+      error={error}
+      disabled={props.disabled}
+      notExpandedActions={headerActions}
+      defaultExpanded={false}
+      isControl={true}
+      sx={{borderStyle: 'dashed'}}
+    >
+      {fileList}
+      {cardActions}
+    </FormCard>
+  )
+
+  return (
+    <>
+      {formCard}
+      {fileInput}
+    </>
+  );
 }
 
 export function Upload(props: UploadProps) {
