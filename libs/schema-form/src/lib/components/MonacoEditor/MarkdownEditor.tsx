@@ -17,8 +17,7 @@ import {
   InsertLinkOutlined,
   InsertPhotoOutlined,
   TitleOutlined,
-  VisibilityOutlined,
-  VisibilityOffOutlined
+  MenuOpenOutlined
 } from "@mui/icons-material";
 import {MonacoEditorThemeToggle} from "./MonacoEditorThemeToggle";
 import CopyIconButton from "../CopyIconButton";
@@ -135,16 +134,19 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         </Tooltip>
     )
 
-    const PreviewIcon = showPreview ? VisibilityOffOutlined : VisibilityOutlined;
     const previewTooltipText = showPreview ? 'Hide preview' : 'Show preview';
-    const previewAction = (
+    const previewToggle = (
         <Tooltip title={previewTooltipText}>
             <IconButton
                 size='small'
                 onClick={togglePreview}
                 sx={{ml: 'auto!important'}}
+                color={showPreview ? 'primary' : undefined}
             >
-                <PreviewIcon fontSize="small" />
+                <MenuOpenOutlined
+                  fontSize="small"
+                  sx={{transform: showPreview ? 'rotate(180deg)' : undefined}}
+                />
             </IconButton>
         </Tooltip>
     )
@@ -152,7 +154,6 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
     const footerActions = (
         <CardActions>
             {insertActions.map(renderInsertAction)}
-            {previewAction}
         </CardActions>
     );
 
@@ -204,6 +205,13 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         </Container>
     ) : null;
 
+    const expandedActions = (
+      <Stack direction="row" spacing={.5}>
+        {previewToggle}
+        {editorThemeToggle}
+      </Stack>
+    );
+
     return (
         <FormCard
             isControl={true}
@@ -211,7 +219,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
             disabled={disabled}
             title={label}
             helperText={helperText}
-            expandedActions={editorThemeToggle}
+            expandedActions={expandedActions}
             secondaryActions={copyIconButton}
         >
             <Stack direction="row">

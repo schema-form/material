@@ -104,6 +104,7 @@ const MULTIPLE_CLEAR_LABEL = 'Удалить все';
 const DEFAULT_LABEL = 'Выберите файл';
 const DEFAULT_MULTIPLE_LABEL = 'Добавить файлы';
 const DEFAULT_HELPER_TEXT = 'Файл не выбран';
+const DEFAULT_MULTIPLE_HELPER_TEXT = 'Файлы не выбраны';
 
 function SingleUpload(props: UploadProps) {
   const { error, ...inputProps } = props;
@@ -241,14 +242,10 @@ function SingleUpload(props: UploadProps) {
   )
 }
 
-const createSelectedFilesMessage = (filesCount?: number) => {
-  if (filesCount) {
-    const chooseWord = declension('Выбран', 'Выбрано', 'Выбрано', filesCount);
-    const filesWord = declension('файл', 'файлов', 'файла', filesCount);
-    return `${chooseWord} ${filesCount} ${filesWord}`;
-  }
-
-  return 'Файлы не выбраны';
+const createSelectedFilesMessage = (filesCount: number) => {
+  const chooseWord = declension('Выбран', 'Выбрано', 'Выбрано', filesCount);
+  const filesWord = declension('файл', 'файлов', 'файла', filesCount);
+  return `${chooseWord} ${filesCount} ${filesWord}`;
 }
 
 function MultipleUpload(props: UploadProps) {
@@ -259,7 +256,9 @@ function MultipleUpload(props: UploadProps) {
   const filesAsDataURLs = value?.filter?.(Boolean);
   const selectedFilesCount = filesAsDataURLs?.length;
   const hasFiles = Boolean(selectedFilesCount);
-  const selectedMessage = createSelectedFilesMessage(selectedFilesCount);
+  const selectedMessage = selectedFilesCount
+    ? createSelectedFilesMessage(selectedFilesCount)
+    : props.helperText || DEFAULT_MULTIPLE_HELPER_TEXT;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
     if (!props.onChange) return;
