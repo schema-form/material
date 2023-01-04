@@ -529,6 +529,11 @@ export const widgetsRoutes: AppRouteProps = {
             fetchSchema: () => import('../examples/widgets/slider/slider.schema.json'),
             fetchUiSchema: () => import('../examples/widgets/slider/slider.ui-schema.json'),
         },
+        '/slider-field': {
+          title: 'SliderField',
+          fetchSchema: () => import('../examples/widgets/slider-field/slider-field.schema.json'),
+          fetchUiSchema: () => import('../examples/widgets/slider-field/slider-field.ui-schema.json'),
+        },
         '/switch': {
             title: 'Switch',
             fetchSchema: () => import('../examples/widgets/switch/switch.schema.json'),

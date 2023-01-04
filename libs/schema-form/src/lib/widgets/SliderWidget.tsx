@@ -4,7 +4,7 @@ import Slider, {SliderProps} from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import {mapControlProps} from "../utils/maps/mapControlProps";
 import {mapSelectOptions} from "../utils/maps/mapSelectOptions";
-import {FormControl, FormHelperText} from "@mui/material";
+import {FormControl, FormHelperText, TextField} from "@mui/material";
 import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
 import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
 import {SchemaFormContext} from "../SchemaForm";
@@ -47,7 +47,7 @@ export default function SliderWidget(props: WidgetProps<any, any, SchemaFormCont
     return (
         <FormControl {...formControlProps} data-testid="SliderWidget">
             {formLabel}
-            <Slider {...sliderProps} />
+            <Slider {...sliderProps} size="small" />
             {helper}
         </FormControl>
     )

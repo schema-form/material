@@ -16,6 +16,7 @@ import TimePickerWidget from "./TimePickerWidget";
 import SwitchWidget from "./SwitchWidget";
 import AutocompleteWidget from "./AutocompleteWidget";
 import SliderWidget from "./SliderWidget";
+import SliderFieldWidget from "./SliderFieldWidget";
 
 export const DEFAULT_WIDGETS = {
     AltDateTimeWidget: DateTimePickerWidget,
@@ -30,7 +31,7 @@ export const DEFAULT_WIDGETS = {
     // HiddenWidget,
     PasswordWidget: PasswordFieldWidget,
     RadioWidget: RadioGroupWidget,
-    RangeWidget: TextFieldWidget,
+    RangeWidget: SliderFieldWidget,
     SelectWidget,
     TextWidget: TextWidget,
     TextareaWidget: TextFieldWidget,
@@ -54,6 +55,7 @@ export const MUI_WIDGETS = {
     'switch': SwitchWidget,
     'autocomplete': AutocompleteWidget,
     'slider': SliderWidget,
+    'slider-field': SliderFieldWidget,
     'password-field': PasswordFieldWidget,
     'color-field': ColorFieldWidget,
     'upload': UploadWidget,
