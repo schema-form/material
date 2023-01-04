@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler} from "react";
+import React, {ChangeEventHandler, useState} from "react";
 import {
   Button, CardActions, ListItemButton,
   ListItemIcon, ListItemSecondaryAction,
@@ -19,6 +19,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import {declension} from "../utils/declension";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type HTMLInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
@@ -58,18 +59,29 @@ const fromDataURL = (dataURLString: string): File => {
 }
 
 type UploadItemProps = {
-    file: File;
+    fileDataURL: string;
+    isPending?: boolean;
     onRemove?: IconButtonProps['onClick'];
 }
 
-function UploadItem({ file, onRemove }: UploadItemProps) {
+const getFileName = (fileAsDataURL: string) => fileAsDataURL?.match(/name=(.+?);/)?.[1] || 'Файл без имени';
+
+function UploadItem({ fileDataURL, isPending, onRemove }: UploadItemProps) {
+    const fileName = getFileName(fileDataURL);
+
+    const icon = isPending ? (
+      <CircularProgress size={20} />
+    ) : (
+      <InsertDriveFileOutlined fontSize="small" />
+    );
+
     return (
         <ListItem dense={true}>
             <ListItemIcon>
-                <InsertDriveFileOutlined fontSize="small" />
+                {icon}
             </ListItemIcon>
             <ListItemText
-                primary={file?.name}
+                primary={fileName}
                 primaryTypographyProps={{
                   style: {
                     whiteSpace: 'nowrap',
@@ -98,23 +110,26 @@ function SingleUpload(props: UploadProps) {
   const value = props.value as string | undefined;
   const id = props.id || uuid();
   const fileName = value
-    ? value?.match(/name=(.+?);/)?.[1] || 'Файл без имени'
+    ? getFileName(value)
     : undefined;
   const isSelected = Boolean(value);
   const label = props.label || DEFAULT_LABEL;
   const helperText = isSelected
     ? fileName
     : (props?.helperText || DEFAULT_HELPER_TEXT);
+  const [isPending, setPending] = useState(false);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
-    if (props.onChange) {
-      const file = event.target?.files?.item(0);
-      const fileAsDataURL = file
-        ? await toDataURL(file)
-        : undefined;
+    if (!props.onChange) return;
 
-      props.onChange(fileAsDataURL ? [fileAsDataURL] : []);
-    }
+    setPending(true);
+    const file = event.target?.files?.item(0);
+    const fileAsDataURL = file
+      ? await toDataURL(file)
+      : undefined;
+
+    props.onChange?.(fileAsDataURL ? [fileAsDataURL] : []);
+    setPending(false);
   }
 
   const handleClear = () => props.onChange?.([]);
@@ -185,6 +200,12 @@ function SingleUpload(props: UploadProps) {
     </Typography>
   ) : null;
 
+  const icon = isPending ? (
+    <CircularProgress size={24} />
+  ) : (
+    <AttachmentOutlined color={error ? 'error' : undefined} />
+  );
+
   const listItem = (
     <ListItem
       disablePadding
@@ -197,7 +218,7 @@ function SingleUpload(props: UploadProps) {
         sx={{py: helperText ? .5 : .75}}
       >
         <ListItemIcon>
-          <AttachmentOutlined color={error ? 'error' : undefined} />
+          {icon}
         </ListItemIcon>
         <ListItemText
           primary={primaryText}
@@ -231,6 +252,7 @@ const createSelectedFilesMessage = (filesCount?: number) => {
 }
 
 function MultipleUpload(props: UploadProps) {
+  const [isPending, setPending] = useState(false);
   const {error, ...inputProps} = props;
   const id = props.id || uuid();
   const value = props.value as string[] | undefined;
@@ -240,21 +262,23 @@ function MultipleUpload(props: UploadProps) {
   const selectedMessage = createSelectedFilesMessage(selectedFilesCount);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
-    if (props.onChange) {
-      const fileList = event.target?.files || [];
-      const fileListAsDataURLs = value instanceof Array ? value : [];
+    if (!props.onChange) return;
+    setPending(true);
 
-      for (let index = 0; index < fileList.length; index++) {
-        const file = event.target?.files?.item(index);
+    const fileList = event.target?.files || [];
+    const fileListAsDataURLs = value instanceof Array ? value : [];
 
-        if (file) {
-          const fileAsDataURL = await toDataURL(file);
-          fileListAsDataURLs.push(fileAsDataURL);
-        }
-      }
+    for (let index = 0; index < fileList.length; index++) {
+      const file = event.target?.files?.item(index);
 
-      props.onChange(fileListAsDataURLs);
+      if (!file) continue;
+
+      const fileAsDataURL = await toDataURL(file);
+      fileListAsDataURLs.push(fileAsDataURL);
     }
+
+    props.onChange?.(fileListAsDataURLs);
+    setPending(false);
   }
 
   const handleClear = () => props.onChange?.([]);
@@ -305,11 +329,11 @@ function MultipleUpload(props: UploadProps) {
   )
 
   const renderFileItem = (fileDataURL: string, index: number) => {
-    const file = fromDataURL(fileDataURL);
     return (
       <UploadItem
         key={index}
-        file={file}
+        fileDataURL={fileDataURL}
+        isPending={false}
         onRemove={() => {
           const notEqual = (itemFileDataURL: string) => itemFileDataURL !== fileDataURL;
           const newValue = filesAsDataURLs?.filter(notEqual);
@@ -355,12 +379,16 @@ function MultipleUpload(props: UploadProps) {
     </CardActions>
   );
 
+  const icon = isPending
+    ? <CircularProgress size={24} />
+    : <AttachmentOutlined color={error ? 'error' : undefined}/>;
+
   const formCard = (
     <FormCard
       title={props.label}
       subheader={selectedMessage}
       helperText={props.helperText}
-      icon={<AttachmentOutlined/>}
+      icon={icon}
       error={error}
       disabled={props.disabled}
       notExpandedActions={headerActions}

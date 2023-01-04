@@ -186,7 +186,7 @@ export function FormCard(props: FormCardProps) {
 
     const hasHeader = title || displaySubheader || headerActions;
 
-    const icon = hasChildren ? expandIcon : props.icon;
+    const icon = props.icon || (hasChildren ? expandIcon : null);
     const expandListItemIcon = icon && (
         <ListItemIcon>
             {icon}
