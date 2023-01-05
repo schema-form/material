@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/material/static/js/main.e6d8982c.js",
-    "static/js/1813.4f25d6b3.chunk.js": "/material/static/js/1813.4f25d6b3.chunk.js",
+    "main.js": "/material/static/js/main.895cfaa1.js",
+    "static/js/1813.37c22fe1.chunk.js": "/material/static/js/1813.37c22fe1.chunk.js",
     "static/js/7380.5a352a75.chunk.js": "/material/static/js/7380.5a352a75.chunk.js",
     "static/js/6586.35da52f3.chunk.js": "/material/static/js/6586.35da52f3.chunk.js",
     "static/js/1316.3b319149.chunk.js": "/material/static/js/1316.3b319149.chunk.js",
@@ -89,7 +89,7 @@
     "static/js/9626.80b1b10c.chunk.js": "/material/static/js/9626.80b1b10c.chunk.js",
     "static/js/7450.0a52bc3e.chunk.js": "/material/static/js/7450.0a52bc3e.chunk.js",
     "static/js/2030.a1ac884b.chunk.js": "/material/static/js/2030.a1ac884b.chunk.js",
-    "static/js/5206.0ea48b34.chunk.js": "/material/static/js/5206.0ea48b34.chunk.js",
+    "static/js/5206.f8b6f7c7.chunk.js": "/material/static/js/5206.f8b6f7c7.chunk.js",
     "static/js/2268.afb7b3d1.chunk.js": "/material/static/js/2268.afb7b3d1.chunk.js",
     "static/js/815.5bd70117.chunk.js": "/material/static/js/815.5bd70117.chunk.js",
     "static/js/9289.f57ad1f6.chunk.js": "/material/static/js/9289.f57ad1f6.chunk.js",
@@ -113,6 +113,8 @@
     "static/js/7251.27ab0e79.chunk.js": "/material/static/js/7251.27ab0e79.chunk.js",
     "static/js/1421.d98995a1.chunk.js": "/material/static/js/1421.d98995a1.chunk.js",
     "static/js/2128.f17064e3.chunk.js": "/material/static/js/2128.f17064e3.chunk.js",
+    "static/js/4065.95834ac6.chunk.js": "/material/static/js/4065.95834ac6.chunk.js",
+    "static/js/136.6065504a.chunk.js": "/material/static/js/136.6065504a.chunk.js",
     "static/js/5225.6f6598d6.chunk.js": "/material/static/js/5225.6f6598d6.chunk.js",
     "static/js/8897.ea0e417b.chunk.js": "/material/static/js/8897.ea0e417b.chunk.js",
     "static/js/2898.ff8db9ac.chunk.js": "/material/static/js/2898.ff8db9ac.chunk.js",
@@ -128,10 +130,10 @@
     "static/media/autocomplete.md": "/material/static/media/autocomplete.d72b745f37c674e49c86.md",
     "static/media/installation.md": "/material/static/media/installation.355b6fd008c47fad0af4.md",
     "static/media/overview.md": "/material/static/media/overview.f50d8cb5ac353bee8e30.md",
-    "main.e6d8982c.js.map": "/material/static/js/main.e6d8982c.js.map",
+    "main.895cfaa1.js.map": "/material/static/js/main.895cfaa1.js.map",
     "6837.2ac8cc3a.chunk.js.map": "/material/static/js/6837.2ac8cc3a.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.e6d8982c.js"
+    "static/js/main.895cfaa1.js"
   ]
 }
