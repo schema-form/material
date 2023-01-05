@@ -104,7 +104,7 @@ export function FormCard(props: FormCardProps) {
     const hasChildren = Boolean(children);
     const hasSecondaryActions = Boolean(props.secondaryActions);
     const hasExpandedActions = Boolean(props.expandedActions);
-    const hasNotExpandedActions = Boolean(props.notExpandedActions)
+    const hasNotExpandedActions = Boolean(props.notExpandedActions);
     const hasActions = hasSecondaryActions || hasNotExpandedActions || hasExpandedActions;
     const subheaderText = hasError ? props?.helperText : (props.subheader || props.helperText)
     const hasSubheader = Boolean(subheaderText);
@@ -170,7 +170,7 @@ export function FormCard(props: FormCardProps) {
       </Fade>
     );
 
-    const secondaryActions = (
+    const secondaryActions = hasSecondaryActions && (
       <Box>
         {props?.secondaryActions}
       </Box>
