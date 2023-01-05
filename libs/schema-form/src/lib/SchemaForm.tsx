@@ -6,7 +6,7 @@ import TEMPLATES from "./templates";
 import MonacoEditorThemeProvider from "./components/MonacoEditor/MonacoEditorThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { StrictRJSFSchema } from "@rjsf/utils";
-import localize from 'ajv-i18n/localize/en';
+// import localize from 'ajv-i18n/localize/en';
 import mapSchemaErrors from "./utils/mapSchemaErrors";
 
 export type SchemaFormContext = {
@@ -42,7 +42,7 @@ const StyledForm = styled('form')(({ theme }) => ({
     gap: theme.spacing(2)
 }))
 
-const validator = customizeValidator(undefined, localize);
+const validator = customizeValidator();
 
 export function SchemaForm(props: SchemaFormProps) {
     return (
