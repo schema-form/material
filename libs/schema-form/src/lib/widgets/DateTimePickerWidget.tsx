@@ -1,7 +1,7 @@
 import {WidgetProps} from '@rjsf/utils';
 import {TextField, TextFieldProps} from "@mui/material";
 import {mapTextFieldProps} from "./TextFieldWidget";
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
 
 export function mapDateTimePickerProps(props: WidgetProps<any, any, SchemaFormContext>): TextFieldProps {

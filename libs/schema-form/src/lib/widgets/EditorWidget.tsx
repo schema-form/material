@@ -2,7 +2,7 @@ import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import {WidgetProps} from "@rjsf/utils";
 import MonacoEditor, {MonacoEditorProps} from "../components/MonacoEditor";
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
 
 export function mapEditorLanguage({ schema }: WidgetProps<any, any, SchemaFormContext>): MonacoEditorProps['language'] {

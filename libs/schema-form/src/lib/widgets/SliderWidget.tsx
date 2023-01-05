@@ -2,11 +2,11 @@ import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import Slider, {SliderProps} from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import {mapControlProps} from "../utils/maps/mapControlProps";
-import {mapSelectOptions} from "../utils/maps/mapSelectOptions";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
+import {mapSelectOptions} from "../utils/mapSelectOptions";
 import {FormControl, FormHelperText, TextField} from "@mui/material";
-import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
-import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
+import {mapFormControlProps} from "../utils/propsMaps/mapFormControlProps";
+import {mapFormHelperTextProps} from "../utils/propsMaps/mapFormHelperTextProps";
 import {SchemaFormContext} from "../SchemaForm";
 
 export function mapSliderProps(props: WidgetProps<any, any, SchemaFormContext>): SliderProps {

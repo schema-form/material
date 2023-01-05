@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import {
   AddOutlined, AttachmentOutlined,
-  ClearOutlined, CloseOutlined,
+  ClearOutlined, CloseOutlined, DeleteOutlineOutlined,
   FileUpload,
   InsertDriveFileOutlined,
 } from "@mui/icons-material";
@@ -91,7 +91,7 @@ function UploadItem({ fileDataURL, isPending, onRemove }: UploadItemProps) {
             />
             <ListItemSecondaryAction>
                 <IconButton size="small" onClick={onRemove}>
-                    <CloseOutlined fontSize="small" />
+                    <DeleteOutlineOutlined color="error" fontSize="small" />
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>
@@ -99,8 +99,7 @@ function UploadItem({ fileDataURL, isPending, onRemove }: UploadItemProps) {
 }
 
 const CLEAR_TEXT = 'Отменить выбор';
-const MULTIPLE_CLEAR_TEXT = 'Отменить все';
-const MULTIPLE_ADD_MORE_TEXT = 'Добавить файлы';
+const MULTIPLE_CLEAR_TEXT = 'Отменить выбор';
 const DEFAULT_LABEL = 'Выберите файл';
 const DEFAULT_MULTIPLE_LABEL = 'Выберите файлы';
 const DEFAULT_HELPER_TEXT = 'Файл не выбран';
@@ -295,7 +294,7 @@ function MultipleUpload(props: UploadProps) {
   );
 
   const selectIconButton = (
-    <Tooltip title={DEFAULT_MULTIPLE_LABEL}>
+    <Tooltip title={DEFAULT_MULTIPLE_LABEL} placement="left">
       <IconButton
         component="label"
         htmlFor={id}
@@ -310,7 +309,7 @@ function MultipleUpload(props: UploadProps) {
   );
 
   const clearIconButton = hasFiles && (
-    <Tooltip title={MULTIPLE_CLEAR_TEXT}>
+    <Tooltip title={MULTIPLE_CLEAR_TEXT} placement="left">
       <IconButton
         disabled={props.disabled}
         color={error ? 'error' : undefined}

@@ -1,7 +1,7 @@
-import {Option} from "../../types/Option";
+import {Option} from "../types/Option";
 import {JSONSchema7} from "json-schema";
 import {WidgetProps} from "@rjsf/utils";
-import {SchemaFormContext} from "../../SchemaForm";
+import {SchemaFormContext} from "../SchemaForm";
 
 const mapEnumToOption = (value: any): Option => {
     const jsonValue = JSON.stringify(value);

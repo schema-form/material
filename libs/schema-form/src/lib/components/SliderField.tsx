@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useMemo, useState} from "react";
 import {TextFieldProps, SliderProps, TextField, Slider, styled} from "@mui/material";
 
 export type SliderFieldProps = Omit<TextFieldProps, 'onChange', 'value'> & {
@@ -27,6 +27,7 @@ const StyledSlider = styled(Slider)<SliderProps & {
 
 export function SliderField({ SliderProps, onChange, value: originValue, ...TextFieldProps }: SliderFieldProps) {
   const [value, setValue] = useState<number>(originValue);
+  const marksWithoutLabels = useMemo(() => SliderProps?.marks?.map(item => ({ value: item.value })), [SliderProps?.marks]);
 
   return (
     <Root>
@@ -37,6 +38,8 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
         value={value || null}
         onChange={(event) => setValue(event.target?.value)}
         onChangeCommitted={onChange}
+        valueLabelDisplay="auto"
+        marks={marksWithoutLabels}
       />
       <TextField
         {...TextFieldProps}

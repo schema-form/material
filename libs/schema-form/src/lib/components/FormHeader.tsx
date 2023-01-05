@@ -21,6 +21,7 @@ export function FormHeader(props: FormHeaderProps) {
         <Typography
             component="legend"
             variant="body1"
+            fontWeight="bolder"
             color={props.error ? 'error' : 'textPrimary'}
             sx={{p: 0}}
         >

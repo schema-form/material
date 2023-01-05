@@ -1,8 +1,8 @@
 import {WidgetProps} from '@rjsf/utils';
 import {SchemaFormContext} from "../SchemaForm";
 import {CheckboxGroup, CheckboxGroupProps} from "../components/CheckboxGroup";
-import {mapControlProps} from "../utils/maps/mapControlProps";
-import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
+import {mapJSONOptions} from "../utils/mapJSONOptions";
 
 const fromJSON = (value: any) => (typeof value === 'string')
     ? JSON.parse(value)

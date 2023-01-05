@@ -1,7 +1,7 @@
 import {WidgetProps} from '@rjsf/utils';
 import {SchemaFormContext} from "../SchemaForm";
 import Upload, {UploadProps} from "../components/Upload";
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 
 export function mapUploadButtonProps(props: WidgetProps<any, any, SchemaFormContext>): UploadProps {
     const { size, variant, onChange, ...commonProps } = mapControlProps(props);

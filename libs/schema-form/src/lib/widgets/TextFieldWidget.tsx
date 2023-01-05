@@ -1,7 +1,7 @@
 import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
 import {TextField, TextFieldProps} from "@mui/material";
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
 
 function mapTextFieldInputMode({ schema }: WidgetProps<any, any, SchemaFormContext>): TextFieldProps['inputMode'] {

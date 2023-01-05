@@ -1,8 +1,42 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "boolean",
-  "title": "Согласие с условиями",
-  "description": "Отлично, теперь можно зарегистрироваться",
-  "const": true,
-  "default": false
+  "properties": {
+    "states": {
+      "title": "States",
+      "properties": {
+        "checked": {
+          "type": "boolean",
+          "title": "Checked",
+          "default": true
+        },
+        "unchecked": {
+          "type": "boolean",
+          "title": "Unchecked",
+          "default": false
+        },
+        "intermediate": {
+          "type": "boolean",
+          "title": "Intermediate"
+        },
+        "disabled": {
+          "type": "boolean",
+          "title": "Disabled",
+          "default": true,
+          "readOnly": true
+        }
+      }
+    },
+    "examples": {
+      "title": "Examples",
+      "properties": {
+        "agreeWithTerms": {
+          "type": "boolean",
+          "title": "I agree with Terms",
+          "description": "Great, now you can create an account.",
+          "default": false,
+          "const": true
+        }
+      }
+    }
+  }
 }

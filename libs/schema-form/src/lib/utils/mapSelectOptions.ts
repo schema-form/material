@@ -1,6 +1,6 @@
 import {WidgetProps} from "@rjsf/utils";
 import {JSONSchema7} from "json-schema";
-import {SchemaFormContext} from "../../SchemaForm";
+import {SchemaFormContext} from "../SchemaForm";
 
 export type EnumOption = {
     label: string;

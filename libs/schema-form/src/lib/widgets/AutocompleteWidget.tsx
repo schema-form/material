@@ -3,11 +3,11 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, {AutocompleteProps} from '@mui/material/Autocomplete';
 import {WidgetProps} from "@rjsf/utils";
 import {Chip, ListItemText, MenuItem} from "@mui/material";
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {mapTextFieldProps} from "./TextFieldWidget";
 import isEmpty from "lodash/isEmpty";
 import {SchemaFormContext} from "../SchemaForm";
-import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {mapJSONOptions} from "../utils/mapJSONOptions";
 import {Option} from "../types/Option";
 import Typography from "@mui/material/Typography";
 

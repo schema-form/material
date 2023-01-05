@@ -1,8 +1,8 @@
 import {WidgetProps} from '@rjsf/utils';
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
 import RadioListGroup, {RadioListGroupProps} from "../components/RadioListGroup";
-import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {mapJSONOptions} from "../utils/mapJSONOptions";
 
 export function mapRadioListGroupProps(props: WidgetProps<any, any, SchemaFormContext>): RadioListGroupProps {
     const commonProps = mapControlProps(props);

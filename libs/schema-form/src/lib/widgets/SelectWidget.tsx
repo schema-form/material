@@ -10,12 +10,12 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Select, {SelectProps} from "@mui/material/Select";
 import CheckIcon from "@mui/icons-material/Check"
-import {mapControlProps} from "../utils/maps/mapControlProps";
-import {mapFormHelperTextProps} from "../utils/maps/mapFormHelperTextProps";
-import {mapFormControlProps} from "../utils/maps/mapFormControlProps";
-import {mapInputLabelProps} from "../utils/maps/mapInputLabelProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
+import {mapFormHelperTextProps} from "../utils/propsMaps/mapFormHelperTextProps";
+import {mapFormControlProps} from "../utils/propsMaps/mapFormControlProps";
+import {mapInputLabelProps} from "../utils/propsMaps/mapInputLabelProps";
 import {SchemaFormContext} from "../SchemaForm";
-import {mapJSONOptions} from "../utils/maps/mapJSONOptions";
+import {mapJSONOptions} from "../utils/mapJSONOptions";
 import {Option} from "../types/Option";
 
 export function mapSelectProps(props: WidgetProps<any, any, SchemaFormContext>): SelectProps {

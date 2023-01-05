@@ -1,7 +1,7 @@
 import {WidgetProps} from '@rjsf/utils';
-import {mapControlProps} from "../utils/maps/mapControlProps";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
-import {mapCheckboxProps} from "../utils/maps/mapCheckboxProps";
+import {mapCheckboxProps} from "../utils/propsMaps/mapCheckboxProps";
 import SwitchListItem, {SwitchListItemProps} from "../components/SwitchListItem";
 
 export function mapSwitchListItemProps(props: WidgetProps<any, any, SchemaFormContext>): SwitchListItemProps {
