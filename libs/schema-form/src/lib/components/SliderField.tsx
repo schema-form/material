@@ -11,23 +11,30 @@ const Root = styled('div')(({ theme }) => ({
   position: 'relative'
 }));
 
+const StyledSlider = styled(Slider)<SliderProps & {
+  textFieldSize: TextFieldProps['size'],
+}>(({ theme, textFieldSize }) => ({
+  position: 'absolute',
+  top: textFieldSize === 'small'
+    ? theme.spacing(3.25)
+    : theme.spacing(5.25),
+  width: `calc(100% - ${theme.spacing(2)})`,
+  height: 1,
+  left: theme.spacing(1),
+  zIndex: 1,
+  margin: '0 auto'
+}));
+
 export function SliderField({ SliderProps, onChange, value: originValue, ...TextFieldProps }: SliderFieldProps) {
   const [value, setValue] = useState<number>(originValue);
 
   return (
     <Root>
-      <Slider
+      <StyledSlider
         {...SliderProps}
+        textFieldSize={TextFieldProps.size}
         size="small"
-        sx={{
-          position: 'absolute',
-          top: TextFieldProps.size === 'small' ? 25 : 42,
-          left: 0,
-          right: 0,
-          zIndex: 1,
-          margin: '0 auto'
-        }}
-        value={value}
+        value={value || null}
         onChange={(event) => setValue(event.target?.value)}
         onChangeCommitted={onChange}
       />
@@ -40,19 +47,13 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
         InputProps={{
           ...TextFieldProps?.InputProps,
           type: 'number',
-          inputMode: 'numeric',
-          sx: {
-            ...TextFieldProps?.InputProps?.sx,
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-            borderBottomWidth: 0,
-          }
+          inputMode: 'numeric'
         }}
-        value={value}
+        value={value || ''}
         onChange={(event) => {
           const { value } = event.target || {};
-          setValue(value);
           onChange?.(event, value);
+          setValue(value);
         }}
       />
     </Root>
