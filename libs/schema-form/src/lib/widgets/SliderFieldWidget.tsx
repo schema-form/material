@@ -6,12 +6,13 @@ import {mapTextFieldProps} from "./TextFieldWidget";
 import {mapSliderProps} from "./SliderWidget";
 
 export function mapSliderFieldProps(props: WidgetProps<any, any, SchemaFormContext>): SliderFieldProps {
-    const textFieldProps = mapTextFieldProps(props);
+    const { value, ...textFieldProps } = mapTextFieldProps(props);
     const sliderProps = mapSliderProps(props);
 
     return {
         ...textFieldProps,
         SliderProps: sliderProps,
+        value: Number(value),
         onChange: (event, value) => props.onChange(value)
     }
 }

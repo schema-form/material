@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useMemo, useState} from "react";
 import {TextFieldProps, SliderProps, TextField, Slider, styled} from "@mui/material";
 
-export type SliderFieldProps = Omit<TextFieldProps, 'onChange', 'value'> & {
+export type SliderFieldProps = Omit<TextFieldProps, 'onChange' | 'value'> & {
   SliderProps?: Omit<SliderProps, 'onChange' | 'onChangeCommitted' | 'value'>;
-  value?: SliderProps['value'];
+  value?: number;
   onChange?: (event: Event | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, value?: number) => void;
 }
 
@@ -26,8 +26,11 @@ const StyledSlider = styled(Slider)<SliderProps & {
 }));
 
 export function SliderField({ SliderProps, onChange, value: originValue, ...TextFieldProps }: SliderFieldProps) {
-  const [value, setValue] = useState<number>(originValue);
-  const marksWithoutLabels = useMemo(() => SliderProps?.marks?.map(item => ({ value: item.value })), [SliderProps?.marks]);
+  const [value, setValue] = useState<number | undefined>(originValue);
+  const marksWithoutLabels = useMemo(() => {
+    const marks = SliderProps?.marks instanceof Array ? SliderProps?.marks : [];
+    return marks?.map(item => ({ value: item.value }))
+  }, [SliderProps?.marks]);
 
   return (
     <Root>
@@ -35,9 +38,11 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
         {...SliderProps}
         textFieldSize={TextFieldProps.size}
         size="small"
-        value={value || null}
-        onChange={(event) => setValue(event.target?.value)}
-        onChangeCommitted={onChange}
+        value={value || SliderProps?.min}
+        onChange={(event, value) => setValue(value as number)}
+        onChangeCommitted={(event, value) => {
+          onChange?.(event as Event, value as number);
+        }}
         valueLabelDisplay="auto"
         marks={marksWithoutLabels}
       />
@@ -55,8 +60,9 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
         value={value || ''}
         onChange={(event) => {
           const { value } = event.target || {};
-          onChange?.(event, value);
-          setValue(value);
+          const newValue = Number(value);
+          onChange?.(event, newValue);
+          setValue(newValue);
         }}
       />
     </Root>

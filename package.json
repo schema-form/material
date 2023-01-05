@@ -8,8 +8,6 @@
     "test": "nx test",
     "predeploy:web": "npm run build",
     "deploy:web": "gh-pages -d build",
-    "prepublish:example-form": "nx build example-form",
-    "publish:example-form": "cd dist/libs/example-form && npm publish",
     "prepublish:schema-form": "nx build schema-form",
     "publish:schema-form": "cd dist/libs/schema-form && npm publish"
   },
