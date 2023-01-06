@@ -1,0 +1,17 @@
+{
+  "checked": {
+    "ui:widget": "checkbox"
+  },
+  "unchecked": {
+    "ui:widget": "checkbox"
+  },
+  "intermediate": {
+    "ui:widget": "checkbox"
+  },
+  "disabled": {
+    "ui:widget": "checkbox"
+  },
+  "invalid": {
+    "ui:widget": "checkbox"
+  }
+}

@@ -471,13 +471,35 @@ export const widgetsRoutes: AppRouteProps = {
         },
         '/checkbox': {
             title: 'Checkbox',
-            fetchSchema: () => import('../examples/widgets/checkbox/checkbox.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/checkbox/checkbox.ui-schema.json'),
+            fetchSchema: () => import('../examples/widgets/checkbox/checkbox[states].schema.json'),
+            fetchUiSchema: () => import('../examples/widgets/checkbox/checkbox[states].ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/checkbox/checkbox[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/checkbox/checkbox[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/checkbox/checkbox[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/checkbox/checkbox[examples].ui-schema.json'),
+              }
+            }
         },
         '/checkbox-group': {
             title: 'CheckboxGroup',
-            fetchSchema: () => import('../examples/widgets/checkbox-group/checkbox-group.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/checkbox-group/checkbox-group.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/checkbox-group/checkbox-group[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/checkbox-group/checkbox-group[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/checkbox-group/checkbox-group[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/checkbox-group/checkbox-group[examples].ui-schema.json'),
+              }
+            }
         },
         '/color-field': {
             title: 'ColorField',

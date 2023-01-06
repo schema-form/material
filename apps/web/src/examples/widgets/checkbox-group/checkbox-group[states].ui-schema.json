@@ -1,0 +1,11 @@
+{
+  "normal": {
+    "ui:widget": "checkbox-group"
+  },
+  "disabled": {
+    "ui:widget": "checkbox-group"
+  },
+  "invalid": {
+    "ui:widget": "checkbox-group"
+  }
+}

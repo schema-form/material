@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Examples",
+  "properties": {
+    "remember": {
+      "type": "boolean",
+      "title": "Remember me"
+    },
+    "subscribe": {
+      "type": "boolean",
+      "title": "Subscribe to newsletter",
+      "description": "Stay informed with our periodic newsletters, featuring exclusive content and promotions",
+      "default": true
+    },
+    "agreeTerms": {
+      "type": "boolean",
+      "title": "Agree to terms and conditions",
+      "description": "great, now you can create an account",
+      "x-errorMessage": "required to create an account",
+      "default": false,
+      "const": true
+    }
+  }
+}
