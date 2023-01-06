@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[4065],{94065:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema","title":"Slider Field","description":"allow slide or input number values","type":"integer","minimum":0,"maximum":100}')}}]);

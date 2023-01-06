@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[1899],{21899:function(e){e.exports=JSON.parse('{"ui:widget":"color-field"}')}}]);

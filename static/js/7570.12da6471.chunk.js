@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[7570],{47570:function(e){e.exports=JSON.parse('{"ui:widget":"schema-editor"}')}}]);
