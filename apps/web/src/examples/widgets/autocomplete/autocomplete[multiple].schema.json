@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "array",
+  "title": "Заголовок",
+  "description": "Текст подсказки",
+  "items": {
+    "type": "string",
+    "anyOf": [
+      {
+        "title": "Опция 1",
+        "const": 1
+      },
+      {
+        "title": "Опция 2",
+        "description": "Дополнительная информация",
+        "const": 2
+      },
+      {
+        "title": "Опция 3",
+        "description": "Только для чтения",
+        "const": 3,
+        "readOnly": true
+      }
+    ]
+  }
+}

@@ -2,16 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "title": "Examples",
   "properties": {
-    "repeatDays": {
+    "workingDays": {
       "type": "array",
-      "title": "Repeat days",
-      "description": "Choose the days on which the event will repeat",
+      "title": "Working days",
+      "description": "select your available days for work",
       "items": {
         "type": "integer",
         "anyOf": [
           {
             "title": "Sunday",
-            "const": 0
+            "const": 0,
+            "readOnly": true
           },
           {
             "title": "Monday",
@@ -40,7 +41,12 @@
           }
         ]
       },
-      "uniqueItems": true
+      "uniqueItems": true,
+      "minItems": 3,
+      "default": [1,2],
+      "x-errorMessage": {
+        "minItems": "must select 3 days or more"
+      }
     }
   }
 }

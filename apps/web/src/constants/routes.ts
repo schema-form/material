@@ -438,41 +438,25 @@ export const widgetsRoutes: AppRouteProps = {
         '/autocomplete': {
             title: 'Autocomplete',
             children: {
-                '/label-eq-value': {
-                    title: 'Label = Value',
-                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[enum].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
-                    docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
-                },
-                '/label-neq-value': {
-                    title: 'Label + Value',
-                    fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[anyOf].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
-                    docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
-                },
-                '/multiple': {
-                    title: 'Multiple',
-                    children: {
-                        '/label-eq-value': {
-                            title: 'Label = Value',
-                            fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-enum].schema.json'),
-                            fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
-                            docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
-                        },
-                        '/label-neq-value': {
-                            title: 'Label + Value',
-                            fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple-anyOf].schema.json'),
-                            fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete.ui-schema.json'),
-                            docsURL: require('../examples/widgets/autocomplete/autocomplete.md'),
-                        }
-                    }
-                },
+              '/single': {
+                title: 'Single states',
+                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[single].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[single].ui-schema.json'),
+              },
+              '/multiple': {
+                title: 'Multiple States',
+                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[examples].ui-schema.json'),
+              }
             }
         },
         '/checkbox': {
             title: 'Checkbox',
-            fetchSchema: () => import('../examples/widgets/checkbox/checkbox[states].schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/checkbox/checkbox[states].ui-schema.json'),
             children: {
               '/states': {
                 title: 'States',
@@ -503,88 +487,233 @@ export const widgetsRoutes: AppRouteProps = {
         },
         '/color-field': {
             title: 'ColorField',
-            fetchSchema: () => import('../examples/widgets/color-field/color-field.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/color-field/color-field.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/color-field/color-field[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/color-field/color-field[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/color-field/color-field[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/color-field/color-field[examples].ui-schema.json'),
+              }
+            }
         },
         '/date-picker': {
             title: 'DatePicker',
-            fetchSchema: () => import('../examples/widgets/date-picker/date-picker.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/date-picker/date-picker.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/date-picker/date-picker[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/date-picker/date-picker[examples].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/date-picker/date-picker[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/date-picker/date-picker[examples].ui-schema.json'),
+              }
+            }
         },
         '/date-time-picker': {
             title: 'DateTimePicker',
-            fetchSchema: () => import('../examples/widgets/date-time-picker/date-time-picker.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/date-time-picker/date-time-picker.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/date-time-picker/date-time-picker[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/date-time-picker/date-time-picker[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/date-time-picker/date-time-picker[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/date-time-picker/date-time-picker[examples].ui-schema.json'),
+              }
+            }
         },
         '/editor': {
             title: 'Editor',
-            fetchSchema: () => import('../examples/widgets/editor/editor.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/editor/editor.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/editor/editor[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/editor/editor[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/editor/editor[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/editor/editor[examples].ui-schema.json'),
+              }
+            }
         },
         '/markdown-editor': {
             title: 'MarkdownEditor',
-            fetchSchema: () => import('../examples/widgets/markdown-editor/markdown-editor.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/markdown-editor/markdown-editor.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/markdown-editor/markdown-editor[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/markdown-editor/markdown-editor[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/markdown-editor/markdown-editor[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/markdown-editor/markdown-editor[examples].ui-schema.json'),
+              }
+            }
         },
         '/password-field': {
             title: 'PasswordField',
-            fetchSchema: () => import('../examples/widgets/password-field/password-field.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/password-field/password-field.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/password-field/password-field[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/password-field/password-field[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/password-field/password-field[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/password-field/password-field[examples].ui-schema.json'),
+              }
+            }
         },
         '/radio-group': {
             title: 'RadioGroup',
-            fetchSchema: () => import('../examples/widgets/radio-group/radio-group.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/radio-group/radio-group.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/radio-group/radio-group[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/radio-group/radio-group[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/radio-group/radio-group[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/radio-group/radio-group[examples].ui-schema.json'),
+              }
+            }
         },
         '/schema-editor': {
             title: 'SchemaEditor',
-            fetchSchema: () => import('../examples/widgets/schema-editor/schema-editor.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/schema-editor/schema-editor.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/schema-editor/schema-editor[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/schema-editor/schema-editor[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/schema-editor/schema-editor[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/schema-editor/schema-editor[examples].ui-schema.json'),
+              }
+            }
         },
         '/select': {
             title: 'Select',
-            fetchSchema: () => import('../examples/widgets/select/select.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/select/select.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/select/select[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/select/select[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/select/select[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/select/select[examples].ui-schema.json'),
+              }
+            }
         },
         '/slider': {
             title: 'Slider',
-            fetchSchema: () => import('../examples/widgets/slider/slider.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/slider/slider.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/slider/slider[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/slider/slider[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/slider/slider[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/slider/slider[examples].ui-schema.json'),
+              }
+            }
         },
         '/slider-field': {
-          title: 'SliderField',
-          fetchSchema: () => import('../examples/widgets/slider-field/slider-field.schema.json'),
-          fetchUiSchema: () => import('../examples/widgets/slider-field/slider-field.ui-schema.json'),
+            title: 'SliderField',
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/slider-field/slider-field[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/slider-field/slider-field[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/slider-field/slider-field[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/slider-field/slider-field[examples].ui-schema.json'),
+              }
+            }
         },
         '/switch': {
             title: 'Switch',
-            fetchSchema: () => import('../examples/widgets/switch/switch.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/switch/switch.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/switch/switch[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/switch/switch[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/switch/switch[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/switch/switch[examples].ui-schema.json'),
+              }
+            }
         },
         '/text-field': {
             title: 'TextField',
-            fetchSchema: () => import('../examples/widgets/text-field/text-field.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/text-field/text-field.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/text-field/text-field[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/text-field/text-field[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/text-field/text-field[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/text-field/text-field[examples].ui-schema.json'),
+              }
+            }
         },
         '/time-picker': {
             title: 'TimePicker',
-            fetchSchema: () => import('../examples/widgets/time-picker/time-picker.schema.json'),
-            fetchUiSchema: () => import('../examples/widgets/time-picker/time-picker.ui-schema.json'),
+            children: {
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/time-picker/time-picker[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/time-picker/time-picker[states].ui-schema.json'),
+              },
+              '/examples': {
+                title: 'Examples',
+                fetchSchema: () => import('../examples/widgets/time-picker/time-picker[examples].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/time-picker/time-picker[examples].ui-schema.json'),
+              }
+            }
         },
         '/upload': {
             title: 'Upload',
             children: {
                 '/single': {
                     title: 'Single',
-                    fetchSchema: () => import('../examples/widgets/upload/single/upload[single].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/upload/single/upload[single].ui-schema.json'),
+                    fetchSchema: () => import('../examples/widgets/upload/upload[single].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/upload/upload[single].ui-schema.json'),
                 },
                 '/multiple': {
                     title: 'Multiple',
-                    fetchSchema: () => import('../examples/widgets/upload/multiple/upload[multiple].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/upload/multiple/upload[multiple].ui-schema.json'),
+                    fetchSchema: () => import('../examples/widgets/upload/upload[multiple].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/upload/upload[multiple].ui-schema.json'),
+                },
+                '/examples': {
+                  title: 'Examples',
+                  fetchSchema: () => import('../examples/widgets/upload/upload[examples].schema.json'),
+                  fetchUiSchema: () => import('../examples/widgets/upload/upload[examples].ui-schema.json'),
                 }
-            }
+            },
         }
     }
 }

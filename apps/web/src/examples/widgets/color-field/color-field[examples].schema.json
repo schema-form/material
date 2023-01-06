@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Examples",
+  "properties": {
+    "themeColor": {
+      "title": "Theme color",
+      "description": "use picker or hex code",
+      "type": "string",
+      "format": "color",
+      "default": "#ff0000"
+    },
+    "backgroundColor": {
+      "title": "Background color",
+      "description": "use picker or hex code",
+      "type": "string",
+      "format": "color",
+      "default": "rgb(0,255,0)"
+    },
+    "textColor": {
+      "title": "Text color",
+      "description": "use picker or hex code",
+      "type": "string",
+      "format": "color",
+      "default": "blue"
+    }
+  }
+}
