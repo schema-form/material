@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[9571],{29571:function(e){e.exports=JSON.parse('{"remember":{"ui:widget":"checkbox"},"subscribe":{"ui:widget":"checkbox"},"agreeTerms":{"ui:widget":"checkbox"}}')}}]);

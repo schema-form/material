@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[815],{70815:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema","type":"array","title":"Checkbox Group","items":{"enum":["Option 1","Option 2","Option 3"]}}')}}]);
