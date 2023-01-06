@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useState} from "react";
+import React, {ChangeEventHandler, useMemo, useState} from "react";
 import {
   Button, CardActions, ListItemButton,
   ListItemIcon, ListItemSecondaryAction,
@@ -113,10 +113,10 @@ function SingleUpload(props: UploadProps) {
     ? getFileName(value)
     : undefined;
   const isSelected = Boolean(value);
-  const label = props.label || DEFAULT_LABEL;
+  const label = props.label ?? DEFAULT_LABEL;
   const helperText = isSelected
     ? fileName
-    : (props?.helperText || DEFAULT_HELPER_TEXT);
+    : (props?.helperText ?? DEFAULT_HELPER_TEXT);
   const [isPending, setPending] = useState(false);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
@@ -250,15 +250,15 @@ const createSelectedFilesMessage = (filesCount: number) => {
 
 function MultipleUpload(props: UploadProps) {
   const [isPending, setPending] = useState(false);
+  const id = useMemo(() => props.id || uuid(), [props.id]);
   const {error, ...inputProps} = props;
-  const id = props.id || uuid();
   const value = props.value as string[] | undefined;
   const filesAsDataURLs = value?.filter?.(Boolean);
   const selectedFilesCount = filesAsDataURLs?.length;
   const hasFiles = Boolean(selectedFilesCount);
   const selectedMessage = selectedFilesCount
     ? createSelectedFilesMessage(selectedFilesCount)
-    : props.helperText || DEFAULT_MULTIPLE_HELPER_TEXT;
+    : (props.helperText ?? DEFAULT_MULTIPLE_HELPER_TEXT);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
     if (!props.onChange) return;

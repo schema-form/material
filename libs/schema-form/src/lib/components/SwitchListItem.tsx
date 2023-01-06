@@ -23,7 +23,10 @@ export type SwitchListItemProps = {
 
 export function SwitchListItem(props: SwitchListItemProps) {
     const {error: hasError, helperText, isGroupOption} = props;
-    const labelText = props?.label || JSON.stringify(props?.value);
+    const createValueLabel = () => typeof props?.value === 'string'
+      ? props.value
+      : JSON.stringify(props?.value);
+    const labelText = props?.label ?? createValueLabel();
     const id = useMemo(uuid, []);
     const optionPaddingY = helperText ? undefined : 0;
     const paddingY = isGroupOption ? optionPaddingY : .5;

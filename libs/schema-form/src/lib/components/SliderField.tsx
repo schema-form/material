@@ -38,7 +38,7 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
         {...SliderProps}
         textFieldSize={TextFieldProps.size}
         size="small"
-        value={value || SliderProps?.min}
+        value={value ?? SliderProps?.min}
         onChange={(event, value) => setValue(value as number)}
         onChangeCommitted={(event, value) => {
           onChange?.(event as Event, value as number);
@@ -57,7 +57,7 @@ export function SliderField({ SliderProps, onChange, value: originValue, ...Text
           type: 'number',
           inputMode: 'numeric'
         }}
-        value={value || ''}
+        value={value ?? ''}
         onChange={(event) => {
           const { value } = event.target || {};
           const newValue = Number(value);

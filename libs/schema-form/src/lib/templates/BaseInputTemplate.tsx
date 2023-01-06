@@ -26,7 +26,7 @@ export function BaseInputTemplate(props: WidgetProps<any, any, SchemaFormContext
             onFocus={(event) => props.onFocus(event.target?.id, event.target?.value)}
             onBlur={(event) => props.onBlur(event.target?.id, event.target?.value)}
             error={hasError}
-            helperText={error || props.schema?.description}
+            helperText={error ?? props.schema?.description}
             fullWidth={true}
         />
     )

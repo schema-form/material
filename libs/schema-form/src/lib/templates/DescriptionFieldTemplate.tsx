@@ -2,7 +2,7 @@ import {DescriptionFieldProps} from "@rjsf/utils";
 import Typography from "@mui/material/Typography";
 
 export function DescriptionFieldTemplate(props: DescriptionFieldProps) {
-    const description = props.description || props.schema.description;
+    const description = props.description ?? props.schema?.description;
     const hasDescription = Boolean(description);
 
     return hasDescription ? (

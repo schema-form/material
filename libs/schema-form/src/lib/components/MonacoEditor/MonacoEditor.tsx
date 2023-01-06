@@ -86,7 +86,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
             error={hasError}
             disabled={disabled}
             title={label}
-            helperText={errorMessage || helperText}
+            helperText={errorMessage ?? helperText}
             expandedActions={editorThemeToggle}
             secondaryActions={copyIconButton}
         >

@@ -13,11 +13,11 @@ const mapEnumToOption = (value: any): Option => {
 }
 
 const mapSchemaToOption = (schema?: JSONSchema7): Option => {
-    const value = schema?.const || schema?.enum?.[0];
+    const value = schema?.const ?? schema?.enum?.[0];
     const jsonValue = JSON.stringify(value);
     return {
         value: jsonValue,
-        label: schema?.title,
+        label: schema?.title ?? (typeof value === 'string' ? value : jsonValue),
         helperText: schema?.description,
         disabled: Boolean(schema?.readOnly),
     }

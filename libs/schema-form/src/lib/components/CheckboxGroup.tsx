@@ -28,7 +28,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     const subheader = selectedOptions?.map(option => option?.label).join(', ');
 
     const createHandleOptionChange = (option: Option): CheckboxListItemProps['onChange'] => (event, checked) => {
-        const oldValue = value || [];
+        const oldValue = value instanceof Array ? value : [];
         const newValue = checked
             ? [...oldValue, option?.value]
             : oldValue?.filter(item => item !== option?.value);

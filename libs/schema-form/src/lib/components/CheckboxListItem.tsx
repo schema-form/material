@@ -25,7 +25,10 @@ export type CheckboxListItemProps = {
 export function CheckboxListItem(props: CheckboxListItemProps) {
     const id = useMemo(uuid, []);
     const {error: hasError, helperText, isGroupOption} = props;
-    const label = props?.label || JSON.stringify(props?.value);
+    const createValueLabel = () => typeof props?.value === 'string'
+      ? props?.value
+      : JSON.stringify(props?.value);
+    const label = props?.label ?? createValueLabel();
     const optionPaddingY = helperText ? undefined : 0;
 
     const primaryText = label ? (

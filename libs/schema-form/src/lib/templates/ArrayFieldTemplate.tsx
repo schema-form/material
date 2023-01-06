@@ -55,7 +55,7 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
             <FormCard
                 className={className}
                 title={title}
-                helperText={error || description}
+                helperText={error ?? description}
                 error={hasError}
                 disabled={disabled}
                 actions={addButton}

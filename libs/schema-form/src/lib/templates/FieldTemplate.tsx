@@ -30,7 +30,7 @@ export function FieldTemplateHeader(props: FieldTemplateProps<any, any, SchemaFo
         <FormHeader
             hidden={hidden}
             label={label}
-            helperText={error || rawDescription}
+            helperText={error ?? rawDescription}
             error={hasError}
             disabled={disabled}
         />

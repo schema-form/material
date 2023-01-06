@@ -3,16 +3,33 @@ import {WidgetProps} from '@rjsf/utils';
 import Slider, {SliderProps} from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import {mapControlProps} from "../utils/propsMaps/mapControlProps";
-import {mapSelectOptions} from "../utils/mapSelectOptions";
-import {FormControl, FormHelperText, TextField} from "@mui/material";
+import {FormControl, FormHelperText} from "@mui/material";
 import {mapFormControlProps} from "../utils/propsMaps/mapFormControlProps";
 import {mapFormHelperTextProps} from "../utils/propsMaps/mapFormHelperTextProps";
 import {SchemaFormContext} from "../SchemaForm";
+import {EnumOption} from "../types/EnumOption";
+
+function mapSliderMarks({ options }: WidgetProps<any, any, SchemaFormContext>): SliderProps['marks'] {
+  const { enumOptions = [] } = options || {};
+
+  const toMark = ({ value, label }: EnumOption) => {
+    return ({
+      value: Number(value),
+      label: label,
+    })
+  }
+
+  if (enumOptions?.length > 0) {
+    return enumOptions.map(toMark);
+  }
+
+  return [];
+}
 
 export function mapSliderProps(props: WidgetProps<any, any, SchemaFormContext>): SliderProps {
     const { value, onChange } = props;
     const { value: _, onChange: __, ...commonProps } = mapControlProps(props);
-    const marks = mapSelectOptions(props);
+    const marks = mapSliderMarks(props);
 
     const handleChange: SliderProps['onChangeCommitted'] = (event, newValue) => {
         onChange(newValue);
