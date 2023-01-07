@@ -44,40 +44,42 @@ export function MonacoEditor(props: MonacoEditorProps) {
     );
 
     const editor = (
+      <div style={{opacity: props.disabled ? .38 : 1}}>
         <Editor
-            {...editorProps}
-            key={key}
-            value={value}
-            theme={theme}
-            options={{
-                minimap: {
-                    enabled: false,
-                    ...options?.minimap
-                },
-                ...options,
-                readOnly: disabled,
-            }}
-            path={path}
-            onValidate={(markers) => {
-                props?.onValidate?.(markers);
-                setErrorMarkers(markers);
-            }}
-            beforeMount={(monaco) => {
-                if (schema) {
-                    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                        validate: true,
-                        schemaValidation: 'error',
-                        schemas: [
-                            {
-                                uri: `http://myserver/${path}`,
-                                fileMatch: path ? [path] : [],
-                                schema
-                            }
-                        ]
-                    });
-                }
-            }}
+          {...editorProps}
+          key={key}
+          value={value}
+          theme={theme}
+          options={{
+            minimap: {
+              enabled: false,
+              ...options?.minimap
+            },
+            ...options,
+            readOnly: disabled,
+          }}
+          path={path}
+          onValidate={(markers) => {
+            props?.onValidate?.(markers);
+            setErrorMarkers(markers);
+          }}
+          beforeMount={(monaco) => {
+            if (schema) {
+              monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                validate: true,
+                schemaValidation: 'error',
+                schemas: [
+                  {
+                    uri: `http://myserver/${path}`,
+                    fileMatch: path ? [path] : [],
+                    schema
+                  }
+                ]
+              });
+            }
+          }}
         />
+      </div>
     )
 
     return (

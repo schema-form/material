@@ -1,10 +1,72 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Цвет шрифта",
-  "description": "Какой цвет Вам больше нравится?",
-  "enum": [
-    "red",
-    "green",
-    "blue"
-  ]
+  "title": "Examples",
+  "properties": {
+    "country": {
+      "title": "Country",
+      "description": "Select the country where you are located",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "United States",
+          "const": "US"
+        },
+        {
+          "title": "Canada",
+          "const": "CA"
+        },
+        {
+          "title": "Mexico",
+          "description": "Not available",
+          "const": "MX",
+          "readOnly": true
+        }
+      ],
+      "default": "US"
+    },
+    "color": {
+      "title": "Color",
+      "description": "Select the color of the item",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Red",
+          "const": "#FF0000"
+        },
+        {
+          "title": "Green",
+          "const": "#00FF00"
+        },
+        {
+          "title": "Blue",
+          "description": "Not available",
+          "const": "#0000FF",
+          "readOnly": true
+        }
+      ],
+      "default": "#00FF00"
+    },
+    "size": {
+      "title": "Size",
+      "description": "Select the size of the item",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Small",
+          "const": "S"
+        },
+        {
+          "title": "Medium",
+          "const": "M"
+        },
+        {
+          "title": "Large",
+          "description": "Not available",
+          "const": "L",
+          "readOnly": true
+        }
+      ],
+      "default": "XL"
+    }
+  }
 }

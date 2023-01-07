@@ -28,7 +28,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             const hasErrorMessage = Boolean(errorMessage);
 
             return (
-                <Alert variant="filled" color="error">
+                <Alert
+                  variant="filled"
+                  color="error"
+                >
                     <AlertTitle sx={{m: hasErrorMessage ? undefined : 0}}>
                         Oops! Something went wrong
                     </AlertTitle>

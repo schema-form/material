@@ -14,7 +14,7 @@
       "description": "use picker or hex code",
       "type": "string",
       "format": "color",
-      "default": "rgb(0,255,0)"
+      "default": "rgb(0,128,0)"
     },
     "textColor": {
       "title": "Text color",

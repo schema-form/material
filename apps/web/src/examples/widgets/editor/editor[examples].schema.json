@@ -1,8 +1,29 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "string",
-  "title": "JSON",
-  "description": "application/json",
-  "contentMediaType": "application/json",
-  "minLength": 5
+  "title": "Examples",
+  "properties": {
+    "normal": {
+      "type": "string",
+      "title": "Text",
+      "description": "Demo of text support",
+      "contentMediaType": "text/plain",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nInteger vestibulum tellus eu mauris pretium, non faucibus lacus tincidunt.\nVivamus id dui auctor, placerat est in, imperdiet massa.\nAliquam erat volutpat.\n\nFusce id malesuada urna. Sed et lacus nec massa consectetur lobortis.\nNam euismod nisi id lorem semper tempus.\n"
+    },
+    "disabled": {
+      "type": "string",
+      "title": "YAML",
+      "description": "Demo of YAML support",
+      "contentMediaType": "text/x-yaml",
+      "readOnly": true,
+      "default": "# This is a YAML comment\n\n# This is a simple key-value pair\nkey: value\n\n# Keys can also be strings\n\"another key\": \"another value\"\n\n# You can use whitespace to make the file more readable\nkey_with_lots_of_information: this is the value\n\n# YAML supports multiple data types, including:\n# - strings (single- and double-quoted)\n# - integers\n# - floats\n# - booleans (true, false)\n# - null/nil values (null, Null, NULL)\nstring: \"This is a string\"\ninteger: 42\nfloat: 3.14159\nbool: true\nnull_value: null\n\n# YAML also supports lists\nlist:\n  - item 1\n  - item 2\n  - item 3\n\n# And nested lists\nnested_list:\n  - item 1\n  - item 2\n    - subitem 1\n    - subitem 2\n  - item 3\n\n# Lists can contain multiple data types\nlist_with_multiple_types:\n  - item 1\n  - item 2\n  - 3.14159\n  - true\n\n# You can also use lists to represent key-value pairs (known as \"dictionaries\" or \"hashes\" in other languages)\ndictionary:\n  key 1: value 1\n  key 2: value 2\n\n# Dictionaries can contain nested dictionaries and lists\ncomplex_data_structure:\n  key 1:\n    nested key: nested value\n  key 2:\n    - item 1\n    - item 2\n      - subitem 1\n      - subitem 2\n    - item 3\n"
+    },
+    "invalid": {
+      "type": "string",
+      "title": "JSON",
+      "description": "Demo of JSON support",
+      "contentMediaType": "application/json",
+      "maxLength": 100,
+      "default": "{\n  \"key\": \"value\",\n  \"another key\": \"another value\",\n  \"string\": \"This is a string\",\n  \"integer\": 42,\n  \"float\": 3.14159,\n  \"bool\": true,\n  \"null_value\": null,\n  \"list\": [\n    \"item 1\",\n    \"item 2\",\n    \"item 3\"\n  ],\n  \"nested_list\": [\n    \"item 1\",\n    \"item 2\",\n    [\n      \"subitem 1\",\n      \"subitem 2\"\n    ],\n    \"item 3\"\n  ],\n  \"array_with_multiple_types\": [\n    \"item 1\",\n    \"item 2\",\n    3.14159,\n    true\n  ],\n  \"object\": {\n    \"key 1\": \"value 1\",\n    \"key 2\": \"value 2\"\n  },\n  \"complex_data_structure\": {\n    \"key 1\": {\n      \"nested key\": \"nested value\"\n    },\n    \"key 2\": [\n      \"item 1\",\n      \"item 2\",\n      [\n        \"subitem 1\",\n        \"subitem 2\"\n      ],\n      \"item 3\"\n    ]\n  }\n}\n"
+    }
+  }
 }

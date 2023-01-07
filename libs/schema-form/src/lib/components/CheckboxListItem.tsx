@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton, {ListItemButtonProps} from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText, {ListItemTextProps} from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
+import Typography, {TypographyProps} from "@mui/material/Typography";
 import FormCard from "./FormCard";
 
 export type CheckboxListItemProps = {
@@ -22,6 +22,12 @@ export type CheckboxListItemProps = {
     sx?: ListItemButtonProps['sx'];
 }
 
+const typographyStyles: TypographyProps['style'] = {
+  // whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+};
+
 export function CheckboxListItem(props: CheckboxListItemProps) {
     const id = useMemo(uuid, []);
     const {error: hasError, helperText, isGroupOption} = props;
@@ -36,19 +42,21 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
             component="span"
             variant="body1"
             color={hasError ? 'error' : 'textPrimary'}
+            style={typographyStyles}
         >
             {label}
         </Typography>
     ) : null;
 
     const secondaryText = helperText ? (
-        <Typography
-            component="p"
-            variant="caption"
-            color={hasError ? 'error' : 'textSecondary'}
-        >
-            {helperText}
-        </Typography>
+      <Typography
+        component="p"
+        variant="caption"
+        color={hasError ? 'error' : 'textSecondary'}
+        style={typographyStyles}
+      >
+        {helperText}
+      </Typography>
     ) : null;
 
     const listItem = (

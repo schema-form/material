@@ -1,20 +1,56 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Тип доставки",
-  "description": "Как вам удобнее?",
-  "type": "string",
-  "anyOf": [
-    {
-      "title": "Самовывоз",
-      "const": "PICKUP"
+  "title": "Examples",
+  "properties": {
+    "paymentMethod": {
+      "title": "Payment Method",
+      "description": "Which payment method would you like to use?",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Credit card",
+          "const": "CREDIT_CARD"
+        },
+        {
+          "title": "Debit card",
+          "const": "DEBIT_CARD"
+        },
+        {
+          "title": "PayPal",
+          "const": "PAYPAL"
+        },
+        {
+          "title": "Apple Pay",
+          "const": "APPLE_PAY"
+        },
+        {
+          "title": "Google Pay",
+          "const": "GOOGLE_PAY"
+        }
+      ]
     },
-    {
-      "title": "Курьером",
-      "const": "COURIER"
-    },
-    {
-      "title": "В отделение",
-      "const": "DEPARTMENT"
+    "deliveryMethod": {
+      "title": "Delivery Type",
+      "description": "Which delivery option is most convenient for you?",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Courier",
+          "description": "Professional courier service delivers to your doorstep.",
+          "const": "COURIER"
+        },
+        {
+          "title": "In-store pickup",
+          "description": "Pick up at a nearby store location.",
+          "const": "PICKUP"
+        },
+        {
+          "title": "Mail",
+          "description": "Temporarily unavailable.",
+          "const": "MAIL",
+          "readOnly": true
+        }
+      ]
     }
-  ]
+  }
 }

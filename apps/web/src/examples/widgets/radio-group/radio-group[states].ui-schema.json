@@ -1,3 +1,11 @@
 {
-  "ui:widget": "radio-group"
+  "normal": {
+    "ui:widget": "radio-group"
+  },
+  "disabled": {
+    "ui:widget": "radio-group"
+  },
+  "invalid": {
+    "ui:widget": "radio-group"
+  }
 }

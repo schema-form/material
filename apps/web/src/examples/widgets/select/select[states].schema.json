@@ -1,10 +1,73 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Цвет шрифта",
-  "description": "Какой цвет Вам больше нравится?",
-  "enum": [
-    "red",
-    "green",
-    "blue"
-  ]
+  "title": "States",
+  "properties": {
+    "normal": {
+      "title": "Normal",
+      "description": "Helper text",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Option 1",
+          "const": "OPTION_1"
+        },
+        {
+          "title": "Option 2",
+          "const": "OPTION_2"
+        },
+        {
+          "title": "Option 3",
+          "description": "Helper text",
+          "const": "OPTION_3",
+          "readOnly": true
+        }
+      ],
+      "default": "OPTION_2"
+    },
+    "disabled": {
+      "title": "Disabled",
+      "description": "Helper text",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Option 1",
+          "const": "OPTION_1"
+        },
+        {
+          "title": "Option 2",
+          "const": "OPTION_2"
+        },
+        {
+          "title": "Option 3",
+          "description": "Helper text",
+          "const": "OPTION_3",
+          "readOnly": true
+        }
+      ],
+      "readOnly": true,
+      "default": "OPTION_2"
+    },
+    "invalid": {
+      "title": "Invalid",
+      "description": "Helper text",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Option 1",
+          "const": "OPTION_1"
+        },
+        {
+          "title": "Option 2",
+          "const": "OPTION_2"
+        },
+        {
+          "title": "Option 3",
+          "description": "Helper text",
+          "const": "OPTION_3",
+          "readOnly": true
+        }
+      ],
+      "default": "OPTION_4"
+    }
+  }
 }

@@ -127,6 +127,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
         <Tooltip key={item?.title} title={item.title} placement="top">
             <IconButton
                 size="small"
+                disabled={props?.disabled}
                 onClick={createInsertHandle(item.insertCode)}
             >
                 <item.Icon fontSize="small" />
@@ -172,7 +173,11 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
     );
 
     const editor = (
-        <Box sx={{flex: 1, minWidth: '50%'}}>
+        <Box sx={{
+          flex: 1,
+          minWidth: '50%',
+          opacity: props.disabled ? .38 : 1
+        }}>
             <Editor
                 {...editorProps}
                 value={value}

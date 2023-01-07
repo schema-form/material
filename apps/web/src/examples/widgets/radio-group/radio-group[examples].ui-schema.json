@@ -1,3 +1,8 @@
 {
-  "ui:widget": "radio-group"
+  "paymentMethod": {
+    "ui:widget": "radio-group"
+  },
+  "deliveryMethod": {
+    "ui:widget": "radio-group"
+  }
 }
