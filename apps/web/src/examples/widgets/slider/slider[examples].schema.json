@@ -1,6 +1,129 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "integer",
-  "minimum": 0,
-  "maximum": 100
+  "title": "Examples",
+  "properties": {
+    "brightness": {
+      "title": "Brightness",
+      "description": "Adjust the brightness of the display using the slider below",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "multipleOf": 10,
+      "anyOf": [
+        {
+          "title": "Low",
+          "const": 0
+        },
+        {
+          "title": "",
+          "const": 10
+        },
+        {
+          "title": "",
+          "const": 20
+        },
+        {
+          "title": "",
+          "const": 30
+        },
+        {
+          "title": "",
+          "const": 40
+        },
+        {
+          "title": "Medium",
+          "const": 50
+        },
+        {
+          "title": "",
+          "const": 60
+        },
+        {
+          "title": "",
+          "const": 70
+        },
+        {
+          "title": "",
+          "const": 80
+        },
+        {
+          "title": "",
+          "const": 90
+        },
+        {
+          "title": "High",
+          "const": 100
+        }
+      ],
+      "default": 20
+    },
+    "fontSize": {
+      "title": "Font size",
+      "description": "Adjust the font size using the slider below",
+      "type": "integer",
+      "minimum": 8,
+      "maximum": 24,
+      "multipleOf": 2,
+      "anyOf": [
+        {
+          "title": "Small",
+          "const": 8
+        },
+        {
+          "const": 10
+        },
+        {
+          "const": 12
+        },
+        {
+          "const": 14
+        },
+        {
+          "title": "Medium",
+          "const": 16
+        },
+        {
+          "const": 18
+        },
+        {
+          "const": 20
+        },
+        {
+          "const": 22
+        },
+        {
+          "title": "Large",
+          "const": 24
+        }
+      ],
+      "default": 14
+    },
+    "zoom": {
+      "title": "Zoom",
+      "description": "Adjust the zoom level using the slider below",
+      "type": "integer",
+      "minimum": 50,
+      "maximum": 200,
+      "multipleOf": 50,
+      "anyOf": [
+        {
+          "title": "50%",
+          "const": 50
+        },
+        {
+          "title": "100%",
+          "const": 100
+        },
+        {
+          "title": "150%",
+          "const": 150
+        },
+        {
+          "title": "200%",
+          "const": 200
+        }
+      ],
+      "default": 100
+    }
+  }
 }

@@ -1,3 +1,11 @@
 {
-  "ui:widget": "slider"
+  "brightness": {
+    "ui:widget": "slider"
+  },
+  "zoom": {
+    "ui:widget": "slider"
+  },
+  "fontSize": {
+    "ui:widget": "slider"
+  }
 }
