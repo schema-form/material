@@ -8,11 +8,16 @@ import {SchemaFormContext} from "../SchemaForm";
 export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContext>): TextFieldProps {
     const commonProps = mapControlProps(props);
     const textFieldProps = mapTextFieldProps(props);
+    const widgetProps = {
+      ...commonProps,
+      ...textFieldProps,
+    };
+
     return {
-        ...commonProps,
-        ...textFieldProps,
+        ...widgetProps,
         type: 'date',
         InputLabelProps: {
+            ...widgetProps.InputLabelProps,
             shrink: true,
         }
     }

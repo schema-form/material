@@ -1,3 +1,8 @@
 {
-  "ui:widget": "date-time-picker"
+  "startTime": {
+    "ui:widget": "date-time-picker"
+  },
+  "endTime": {
+    "ui:widget": "date-time-picker"
+  }
 }

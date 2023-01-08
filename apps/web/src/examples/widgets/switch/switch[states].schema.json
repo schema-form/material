@@ -1,14 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "boolean",
-  "default": false,
-  "if": {
-    "const": false
-  },
-  "then": {
-    "title": "Включить свет"
-  },
-  "else": {
-    "title": "Выключить свет"
+  "properties": {
+    "on": {
+      "type": "boolean",
+      "title": "On",
+      "description": "Helper text",
+      "default": true
+    },
+    "off": {
+      "type": "boolean",
+      "title": "Off",
+      "description": "Helper text",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "title": "Disabled",
+      "description": "Helper text",
+      "default": true,
+      "readOnly": true
+    },
+    "invalid": {
+      "type": "boolean",
+      "title": "Invalid",
+      "description": "Helper text",
+      "default": false,
+      "const": true
+    }
   }
 }

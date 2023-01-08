@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "States",
+  "properties": {
+    "singleChoice": {
+      "type": "string",
+      "title": "Single choice",
+      "description": "Helper text",
+      "enum": [
+        "Option 1",
+        "Option 2",
+        "Option 3"
+      ]
+    },
+    "withPlaceholder": {
+      "type": "string",
+      "title": "Placeholder",
+      "description": "Helper text",
+      "examples": ["Option 1"],
+      "enum": [
+        "Option 1",
+        "Option 2",
+        "Option 3"
+      ]
+    },
+    "multipleChoice": {
+      "title": "Multiple choice",
+      "description": "Helper text",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Option 1",
+            "const": 1
+          },
+          {
+            "title": "Option 2",
+            "const": 2
+          },
+          {
+            "title": "Option 3",
+            "description": "Helper text",
+            "const": 3,
+            "readOnly": true
+          }
+        ]
+      },
+      "default": [1, 2]
+    },
+    "disabled": {
+      "type": "array",
+      "title": "Disabled",
+      "description": "Helper text",
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Option 1",
+            "const": 1
+          },
+          {
+            "title": "Option 2",
+            "const": 2
+          },
+          {
+            "title": "Option 3",
+            "description": "Helper text",
+            "const": 3,
+            "readOnly": true
+          }
+        ]
+      },
+      "default": [1, 2],
+      "readOnly": true
+    },
+    "invalid": {
+      "type": "array",
+      "title": "Invalid",
+      "description": "Helper text",
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Option 1",
+            "const": 1
+          },
+          {
+            "title": "Option 2",
+            "const": 2
+          },
+          {
+            "title": "Option 3",
+            "description": "Helper text",
+            "const": 3
+          }
+        ]
+      },
+      "maxItems": 2,
+      "default": [1, 2, 3]
+    }
+  }
+}

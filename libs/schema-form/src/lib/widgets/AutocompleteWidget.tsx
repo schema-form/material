@@ -104,7 +104,7 @@ export function mapAutocompleteProps(props: WidgetProps<any, any, SchemaFormCont
                     {...tagProps}
                     key={value}
                     label={label}
-                    disabled={disabled}
+                    disabled={textFieldProps?.disabled || disabled}
                 />
             )
         })

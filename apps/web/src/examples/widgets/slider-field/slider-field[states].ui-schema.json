@@ -1,3 +1,14 @@
 {
-  "ui:widget": "slider-field"
+  "normal": {
+    "ui:widget": "slider-field"
+  },
+  "enumMarks": {
+    "ui:widget": "slider-field"
+  },
+  "disabled": {
+    "ui:widget": "slider-field"
+  },
+  "invalid": {
+    "ui:widget": "slider-field"
+  }
 }

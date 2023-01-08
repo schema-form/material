@@ -1,13 +1,29 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Прикрепить документы",
-  "description": "допустимые форматы .pdf, .xml",
-  "type": "array",
-  "items": {
-    "type": "string",
-    "format": "data-url",
-    "contentEncoding": "base64",
-    "contentMediaType": "application/pdf, application/xml"
-  },
-  "minItems": 2
+  "title": "States",
+  "properties": {
+    "document": {
+      "title": "Attach scan",
+      "description": "Select a PDF file to attach to this submission.",
+      "type": "string",
+      "format": "data-url",
+      "contentEncoding": "base64",
+      "contentMediaType": "application/pdf"
+    },
+    "images": {
+      "title": "Attach images",
+      "description": "Only JPEG or PNG files are accepted for attachment.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "data-url",
+        "contentEncoding": "base64",
+        "contentMediaType": "image/png, image/jpeg"
+      },
+      "maxItems": 2,
+      "x-errorMessage": {
+        "maxItems": "must NOT have more than ${limit} images"
+      }
+    }
+  }
 }

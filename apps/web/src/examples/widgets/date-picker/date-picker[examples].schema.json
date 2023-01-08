@@ -1,7 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "День рождения",
-  "description": "Когда Вы родились?",
-  "type": "string",
-  "format": "date"
+  "title": "Examples",
+  "properties": {
+    "birthdate": {
+      "title": "Birthdate",
+      "description": "Your birthdate will be used to verify your identity and for age-restricted activities.",
+      "type": "string",
+      "format": "date"
+    },
+    "meetingDate": {
+      "title": "Meeting date",
+      "description": "Please select the desired meeting date",
+      "type": "string",
+      "format": "date",
+      "default": "2024-12-31"
+    }
+  }
 }

@@ -1,3 +1,11 @@
 {
-  "ui:widget": "switch"
+  "isNotificationsEnabled": {
+    "ui:widget": "switch"
+  },
+  "isDarkModeEnabled": {
+    "ui:widget": "switch"
+  },
+  "isWiFiEnabled": {
+    "ui:widget": "switch"
+  }
 }

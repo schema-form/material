@@ -1,0 +1,17 @@
+{
+  "singleChoice": {
+    "ui:widget": "autocomplete"
+  },
+  "withPlaceholder": {
+    "ui:widget": "autocomplete"
+  },
+  "multipleChoice": {
+    "ui:widget": "autocomplete"
+  },
+  "disabled": {
+    "ui:widget": "autocomplete"
+  },
+  "invalid": {
+    "ui:widget": "autocomplete"
+  }
+}

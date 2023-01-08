@@ -438,15 +438,10 @@ export const widgetsRoutes: AppRouteProps = {
         '/autocomplete': {
             title: 'Autocomplete',
             children: {
-              '/single': {
-                title: 'Single states',
-                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[single].schema.json'),
-                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[single].ui-schema.json'),
-              },
-              '/multiple': {
-                title: 'Multiple States',
-                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple].schema.json'),
-                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[multiple].ui-schema.json'),
+              '/states': {
+                title: 'States',
+                fetchSchema: () => import('../examples/widgets/autocomplete/autocomplete[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/autocomplete/autocomplete[states].ui-schema.json'),
               },
               '/examples': {
                 title: 'Examples',
@@ -505,8 +500,8 @@ export const widgetsRoutes: AppRouteProps = {
             children: {
               '/states': {
                 title: 'States',
-                fetchSchema: () => import('../examples/widgets/date-picker/date-picker[examples].schema.json'),
-                fetchUiSchema: () => import('../examples/widgets/date-picker/date-picker[examples].ui-schema.json'),
+                fetchSchema: () => import('../examples/widgets/date-picker/date-picker[states].schema.json'),
+                fetchUiSchema: () => import('../examples/widgets/date-picker/date-picker[states].ui-schema.json'),
               },
               '/examples': {
                 title: 'Examples',
@@ -698,15 +693,10 @@ export const widgetsRoutes: AppRouteProps = {
         '/upload': {
             title: 'Upload',
             children: {
-                '/single': {
-                    title: 'Single',
-                    fetchSchema: () => import('../examples/widgets/upload/upload[single].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/upload/upload[single].ui-schema.json'),
-                },
-                '/multiple': {
-                    title: 'Multiple',
-                    fetchSchema: () => import('../examples/widgets/upload/upload[multiple].schema.json'),
-                    fetchUiSchema: () => import('../examples/widgets/upload/upload[multiple].ui-schema.json'),
+                '/states': {
+                    title: 'States',
+                    fetchSchema: () => import('../examples/widgets/upload/upload[states].schema.json'),
+                    fetchUiSchema: () => import('../examples/widgets/upload/upload[states].ui-schema.json'),
                 },
                 '/examples': {
                   title: 'Examples',

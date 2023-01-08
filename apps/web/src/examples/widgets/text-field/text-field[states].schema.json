@@ -1,4 +1,38 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "string"
+  "title": "States",
+  "properties": {
+    "text": {
+      "title": "Text",
+      "description": "Helper text",
+      "type": "string",
+      "default": "ABC"
+    },
+    "numeric": {
+      "title": "Numeric",
+      "description": "Helper text",
+      "type": "number",
+      "default": 123
+    },
+    "withPlaceholder": {
+      "title": "Placeholder",
+      "description": "Focus to show",
+      "type": "string",
+      "examples": ["ABC"]
+    },
+    "disabled": {
+      "title": "Disabled",
+      "description": "Helper text",
+      "type": "string",
+      "readOnly": true,
+      "default": "ABC"
+    },
+    "invalid": {
+      "title": "Invalid",
+      "description": "Helper text",
+      "type": "string",
+      "minLength": 3,
+      "default": "AB"
+    }
+  }
 }

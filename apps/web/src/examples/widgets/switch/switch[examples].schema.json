@@ -1,14 +1,24 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "boolean",
-  "default": false,
-  "if": {
-    "const": false
-  },
-  "then": {
-    "title": "Включить свет"
-  },
-  "else": {
-    "title": "Выключить свет"
+  "title": "Examples",
+  "properties": {
+    "isNotificationsEnabled": {
+      "type": "boolean",
+      "title": "Notifications",
+      "description": "Turn on to receive, turn off to silence.",
+      "default": true
+    },
+    "isDarkModeEnabled": {
+      "type": "boolean",
+      "title": "Dark mode",
+      "description": "Turn on to enable, turn off to disable.",
+      "default": false
+    },
+    "isWiFiEnabled": {
+      "type": "boolean",
+      "title": "Wi-Fi",
+      "description": "Turn on to enable, turn off to disable.",
+      "default": true
+    }
   }
 }

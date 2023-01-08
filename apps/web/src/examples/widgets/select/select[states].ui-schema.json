@@ -1,3 +1,14 @@
 {
-  "ui:widget": "select"
+  "singleChoice": {
+    "ui:widget": "select"
+  },
+  "multipleChoice": {
+    "ui:widget": "select"
+  },
+  "disabled": {
+    "ui:widget": "select"
+  },
+  "invalid": {
+    "ui:widget": "select"
+  }
 }

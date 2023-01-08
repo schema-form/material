@@ -1,3 +1,17 @@
 {
-  "ui:widget": "text-field"
+  "text": {
+    "ui:widget": "text-field"
+  },
+  "numeric": {
+    "ui:widget": "text-field"
+  },
+  "withPlaceholder": {
+    "ui:widget": "text-field"
+  },
+  "disabled": {
+    "ui:widget": "text-field"
+  },
+  "invalid": {
+    "ui:widget": "text-field"
+  }
 }

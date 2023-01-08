@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "title": "States",
   "properties": {
-    "normal": {
-      "title": "Normal",
+    "singleChoice": {
+      "title": "Single choice",
       "description": "Helper text",
       "type": "string",
       "anyOf": [
@@ -23,6 +23,32 @@
         }
       ],
       "default": "OPTION_2"
+    },
+    "multipleChoice": {
+      "title": "Multiple choice",
+      "description": "Helper text",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Option 1",
+            "const": "OPTION_1"
+          },
+          {
+            "title": "Option 2",
+            "const": "OPTION_2"
+          },
+          {
+            "title": "Option 3",
+            "description": "Helper text",
+            "const": "OPTION_3",
+            "readOnly": true
+          }
+        ]
+      },
+      "default": ["OPTION_1", "OPTION_2"]
     },
     "disabled": {
       "title": "Disabled",

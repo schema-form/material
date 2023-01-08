@@ -1,3 +1,11 @@
 {
-  "ui:widget": "autocomplete"
+  "color": {
+    "ui:widget": "autocomplete"
+  },
+  "language": {
+    "ui:widget": "autocomplete"
+  },
+  "hobbies": {
+    "ui:widget": "autocomplete"
+  }
 }

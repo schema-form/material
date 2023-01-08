@@ -3,12 +3,23 @@ import {WidgetProps} from '@rjsf/utils';
 import {mapTextFieldProps} from "./TextFieldWidget";
 import {TextField, TextFieldProps} from "@mui/material";
 import {SchemaFormContext} from "../SchemaForm";
+import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 
 export function mapTimePickerProps(props: WidgetProps<any, any, SchemaFormContext>): TextFieldProps {
+    const commonProps = mapControlProps(props);
     const textFieldProps = mapTextFieldProps(props);
+    const widgetProps = {
+      ...commonProps,
+      ...textFieldProps,
+    };
+
     return {
-        ...textFieldProps,
+        ...widgetProps,
         type: 'time',
+        InputLabelProps: {
+          ...widgetProps.InputLabelProps,
+          shrink: true,
+        },
         onChange: (event) => {
             const originValue = event.target.value;
             const isValidTime = originValue.match(/[0-9]{2}:[0-9]{2}/);

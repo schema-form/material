@@ -25,26 +25,28 @@
       "default": "US"
     },
     "color": {
-      "title": "Color",
-      "description": "Select the color of the item",
-      "type": "string",
-      "anyOf": [
-        {
-          "title": "Red",
-          "const": "#FF0000"
-        },
-        {
-          "title": "Green",
-          "const": "#00FF00"
-        },
-        {
-          "title": "Blue",
-          "description": "Not available",
-          "const": "#0000FF",
-          "readOnly": true
-        }
-      ],
-      "default": "#00FF00"
+      "title": "Colors",
+      "description": "Select colors for filter products",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Red",
+            "const": "#FF0000"
+          },
+          {
+            "title": "Green",
+            "const": "#00FF00"
+          },
+          {
+            "title": "Blue",
+            "const": "#0000FF"
+          }
+        ]
+      },
+      "default": ["#FF0000", "#00FF00"]
     },
     "size": {
       "title": "Size",

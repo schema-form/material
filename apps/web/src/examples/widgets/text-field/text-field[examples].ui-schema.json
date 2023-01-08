@@ -1,3 +1,14 @@
 {
-  "ui:widget": "text-field"
+  "email": {
+    "ui:widget": "text-field"
+  },
+  "age": {
+    "ui:widget": "text-field"
+  },
+  "address": {
+    "ui:widget": "text-field"
+  },
+  "apiKey": {
+    "ui:widget": "text-field"
+  }
 }

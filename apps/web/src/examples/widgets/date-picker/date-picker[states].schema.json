@@ -1,7 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "День рождения",
-  "description": "Когда Вы родились?",
-  "type": "string",
-  "format": "date"
+  "title": "States",
+  "properties": {
+    "normal": {
+      "title": "Normal",
+      "description": "Helper text",
+      "type": "string",
+      "format": "date"
+    },
+    "disabled": {
+      "title": "Disabled",
+      "description": "Helper text",
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    },
+    "invalid": {
+      "title": "Invalid",
+      "description": "Helper text",
+      "type": "string",
+      "format": "date",
+      "default": ""
+    }
+  }
 }

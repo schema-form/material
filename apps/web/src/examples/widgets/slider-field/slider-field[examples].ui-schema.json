@@ -1,3 +1,8 @@
 {
-  "ui:widget": "slider-field"
+  "fontSize": {
+    "ui:widget": "slider-field"
+  },
+  "quantity": {
+    "ui:widget": "slider-field"
+  }
 }

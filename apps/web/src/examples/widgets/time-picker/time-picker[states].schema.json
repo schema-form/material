@@ -1,5 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "type": "string",
-  "format": "time"
+  "title": "States",
+  "properties": {
+    "normal": {
+      "title": "Normal",
+      "description": "Helper text",
+      "type": "string",
+      "format": "time"
+    },
+    "disabled": {
+      "title": "Disabled",
+      "description": "Helper text",
+      "type": "string",
+      "format": "time",
+      "readOnly": true
+    },
+    "invalid": {
+      "title": "Invalid",
+      "description": "Helper text",
+      "type": "string",
+      "format": "time",
+      "default": ""
+    }
+  }
 }

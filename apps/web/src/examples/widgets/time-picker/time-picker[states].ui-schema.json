@@ -1,3 +1,11 @@
 {
-  "ui:widget": "time-picker"
+  "normal": {
+    "ui:widget": "date-picker"
+  },
+  "disabled": {
+    "ui:widget": "date-picker"
+  },
+  "invalid": {
+    "ui:widget": "date-picker"
+  }
 }

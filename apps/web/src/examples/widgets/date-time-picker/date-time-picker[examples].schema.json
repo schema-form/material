@@ -1,7 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Время встречи",
-  "description": "Когда Вам было бы удобно встретиться?",
-  "type": "string",
-  "format": "date-time"
+  "title": "Examples",
+  "properties": {
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Time",
+      "description": "Please select the start time for your event. "
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "End Time",
+      "description": "Please select the end time for your event."
+    }
+  }
 }

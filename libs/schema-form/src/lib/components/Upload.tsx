@@ -32,6 +32,7 @@ export type UploadProps = Omit<HTMLInputProps, 'onChange' | 'value'> & {
     label?: TextFieldProps['label'];
     helperText?: TextFieldProps['helperText'];
     value?: string | string[];
+    maxItems?: number;
     onChange?: (value?: DataURLFiles) => void;
 };
 
@@ -254,8 +255,11 @@ function MultipleUpload(props: UploadProps) {
   const {error, ...inputProps} = props;
   const value = props.value as string[] | undefined;
   const filesAsDataURLs = value?.filter?.(Boolean);
-  const selectedFilesCount = filesAsDataURLs?.length;
+  const selectedFilesCount = Number(filesAsDataURLs?.length);
   const hasFiles = Boolean(selectedFilesCount);
+  const canAddMore = typeof props.maxItems === "number"
+    ? selectedFilesCount < props.maxItems
+    : true;
   const selectedMessage = selectedFilesCount
     ? createSelectedFilesMessage(selectedFilesCount)
     : (props.helperText ?? DEFAULT_MULTIPLE_HELPER_TEXT);
@@ -298,7 +302,7 @@ function MultipleUpload(props: UploadProps) {
       <IconButton
         component="label"
         htmlFor={id}
-        disabled={props.disabled}
+        disabled={props.disabled || !canAddMore}
         color={error ? 'error' : undefined}
         size="small"
         edge="end"
@@ -353,7 +357,7 @@ function MultipleUpload(props: UploadProps) {
     <Button
       component="label"
       htmlFor={id}
-      disabled={props.disabled}
+      disabled={props.disabled || !canAddMore}
       color={error ? 'error' : undefined}
       startIcon={<AddOutlined/>}
     >
