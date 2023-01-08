@@ -94,7 +94,6 @@ export default function SelectWidget(props: WidgetProps<any, any, SchemaFormCont
     const inputLabelProps = mapInputLabelProps(props);
     const formHelperTextProps = mapFormHelperTextProps(props);
     const labelId = useMemo(uuid, []);
-    const isAnyOfSelect = props.id?.endsWith('anyof_select');
 
     const inputLabel = inputLabelProps?.children
         ? <InputLabel id={labelId} {...inputLabelProps} />
@@ -109,9 +108,6 @@ export default function SelectWidget(props: WidgetProps<any, any, SchemaFormCont
           hiddenLabel={true}
           {...formControlProps}
           data-testid="SelectWidget"
-          sx={{
-            mb: isAnyOfSelect ? 2 : undefined
-          }}
         >
             {inputLabel}
             <Select labelId={labelId} {...selectProps} />

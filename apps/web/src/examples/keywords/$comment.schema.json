@@ -1,8 +1,11 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema",
-	"type": "string",
-	"title": "Кодовое слово",
-	"pattern": "^[А-Я0-9]{3,8}$",
-	"maxLength": 8,
-	"$comment": "Author: slav@belaev.com"
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Password",
+  "type": "string",
+  "format": "password",
+  "pattern": "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$",
+  "x-errorMessage": {
+    "pattern": "must contain at least 8 characters, including at least 1 uppercase letter, 1 special character, and 1 number"
+  },
+  "$comment": "Author: Joe Doe"
 }

@@ -5,7 +5,7 @@
     {
       "type": "object",
       "properties": {
-        "streetAddress": {
+        "street": {
           "title": "Street",
           "type": "string"
         },
@@ -18,11 +18,11 @@
           "type": "string"
         }
       },
-      "required": ["streetAddress", "city", "state"]
+      "required": ["street", "city", "state"]
     }
   ],
   "properties": {
-    "streetAddress": true,
+    "street": true,
     "city": true,
     "state": true,
     "type": {
@@ -31,7 +31,7 @@
   },
   "required": ["type"],
   "default": {
-    "streetAddress": "1600 Pennsylvania Avenue NW",
+    "street": "1600 Pennsylvania Avenue NW",
     "city": "Washington",
     "state": "DC",
     "type": "business"

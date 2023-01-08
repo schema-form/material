@@ -38,28 +38,19 @@ export const keywordsRoutes: AppRouteProps = {
         },
         '/additionalItems': {
             title: 'additionalItems',
-            fetchSchema: async () => import('../examples/keywords/additionalItems[schema].schema.json'),
+            fetchSchema: async () => import('../examples/keywords/additionalItems.schema.json'),
         },
         '/additionalProperties': {
             title: 'additionalProperties',
-            fetchSchema: async () => import('../examples/keywords/additionalProperties[schema].schema.json'),
+            fetchSchema: async () => import('../examples/keywords/additionalProperties.schema.json'),
         },
         '/allOf': {
             title: 'allOf',
-            fetchSchema: async () => import('../examples/keywords/allOf[properties].schema.json'),
+            fetchSchema: async () => import('../examples/keywords/allOf.schema.json'),
         },
         '/anyOf': {
             title: 'anyOf',
-            children: {
-                '/options': {
-                    title: 'options',
-                    fetchSchema: async () => import('../examples/keywords/anyOf/anyOf[const].schema.json'),
-                },
-                '/rules': {
-                    title: 'rules',
-                    fetchSchema: async () => import('../examples/keywords/anyOf/anyOf[keyword].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/anyOf.schema.json'),
         },
         '/contentEncoding': {
             title: 'contentEncoding',

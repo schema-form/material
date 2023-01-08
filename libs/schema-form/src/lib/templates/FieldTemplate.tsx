@@ -10,7 +10,10 @@ import ErrorBoundary from "../components/ErrorBoundary";
 const Root = styled('div')(({ theme }) => ({
     display: 'grid',
     width: '100%',
-    gridGap: theme.spacing(2)
+    gridGap: theme.spacing(2),
+    '.form-group + &.form-group': {
+      marginTop: 16
+    }
 }))
 
 export function FieldTemplateHeader(props: FieldTemplateProps<any, any, SchemaFormContext>) {

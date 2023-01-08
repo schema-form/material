@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Payment method",
+  "anyOf": [
+    {
+      "title": "Card",
+      "description": "Your credit or debit card",
+      "properties": {
+        "cardNumber": {
+          "title": "Card number",
+          "type": "string"
+        },
+        "cardName": {
+          "title": "Name on card",
+          "type": "string"
+        },
+        "expiration": {
+          "title": "Expiration",
+          "type": "string",
+          "examples": ["MM/YY"]
+        },
+        "securityCode": {
+          "title": "Security code",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "title": "Mobile phone",
+      "description": "From your mobile phone balance",
+      "properties": {
+        "phoneNumber": {
+          "title": "Phone number",
+          "type": "string",
+          "examples": ["+1 123-456-7890"]
+        }
+      }
+    }
+  ]
+}
