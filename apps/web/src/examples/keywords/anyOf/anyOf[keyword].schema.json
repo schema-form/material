@@ -1,14 +1,28 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Пароль",
-	"description": "Должен содержать не меньше 8 символов или начинаться с цифры",
-	"type": "string",
-	"anyOf": [
-		{
-			"minLength": 3
-		},
-		{
-			"pattern": "^[0-9]"
-		}
-	]
+  "anyOf": [
+    {
+      "title": "First method of identification",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "First name",
+          "default": "Chuck"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Last name"
+        }
+      }
+    },
+    {
+      "title": "Second method of identification",
+      "properties": {
+        "idCode": {
+          "type": "string",
+          "title": "ID code"
+        }
+      }
+    }
+  ]
 }

@@ -17,8 +17,9 @@ import SwitchWidget from "./SwitchWidget";
 import AutocompleteWidget from "./AutocompleteWidget";
 import SliderWidget from "./SliderWidget";
 import SliderFieldWidget from "./SliderFieldWidget";
+import {SchemaFormProps} from "../SchemaForm";
 
-export const DEFAULT_WIDGETS = {
+export const DEFAULT_WIDGETS: SchemaFormProps['widgets'] = {
     AltDateTimeWidget: DateTimePickerWidget,
     AltDateWidget: DatePickerWidget,
     CheckboxWidget,
@@ -39,7 +40,7 @@ export const DEFAULT_WIDGETS = {
     // UpDownWidget,
 }
 
-export const MUI_WIDGETS = {
+export const MUI_WIDGETS: SchemaFormProps['widgets'] = {
     'editor': EditorWidget,
     'markdown-editor': MarkdownEditorWidget,
     'schema-editor': SchemaEditorWidget,

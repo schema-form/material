@@ -16,7 +16,7 @@ import {mapFormControlProps} from "../utils/propsMaps/mapFormControlProps";
 import {mapInputLabelProps} from "../utils/propsMaps/mapInputLabelProps";
 import {SchemaFormContext} from "../SchemaForm";
 import {mapJSONOptions} from "../utils/mapJSONOptions";
-import {Option} from "../types/Option";
+import {JSONOption} from "../types/JSONOption";
 
 export function mapSelectProps(props: WidgetProps<any, any, SchemaFormContext>): SelectProps {
     const { label, ...commonProps } = mapControlProps(props);
@@ -29,7 +29,7 @@ export function mapSelectProps(props: WidgetProps<any, any, SchemaFormContext>):
         ? commonProps.value.map((itemValue: any) => JSON.stringify(itemValue))
         : JSON.stringify(commonProps.value);
 
-    const renderOption = ({ value, label, helperText, disabled }: Option) => {
+    const renderOption = ({ value, label, helperText, disabled }: JSONOption) => {
         const checked = jsonValue instanceof Array
             ? jsonValue?.includes(value)
             : isEqual(jsonValue, value);
@@ -61,7 +61,8 @@ export function mapSelectProps(props: WidgetProps<any, any, SchemaFormContext>):
     }
 
     const getOptionLabelByValue = (itemValue: any) => {
-        const option = jsonOptions.find(option => itemValue === option.value);
+        const checkValueOption = (option: JSONOption) => itemValue === option.value;
+        const option = jsonOptions.find(checkValueOption);
         return option?.label ?? itemValue;
     }
 
@@ -93,6 +94,7 @@ export default function SelectWidget(props: WidgetProps<any, any, SchemaFormCont
     const inputLabelProps = mapInputLabelProps(props);
     const formHelperTextProps = mapFormHelperTextProps(props);
     const labelId = useMemo(uuid, []);
+    const isAnyOfSelect = props.id?.endsWith('anyof_select');
 
     const inputLabel = inputLabelProps?.children
         ? <InputLabel id={labelId} {...inputLabelProps} />
@@ -103,7 +105,14 @@ export default function SelectWidget(props: WidgetProps<any, any, SchemaFormCont
         : null;
 
     return (
-        <FormControl hiddenLabel={true} {...formControlProps} data-testid="SelectWidget">
+        <FormControl
+          hiddenLabel={true}
+          {...formControlProps}
+          data-testid="SelectWidget"
+          sx={{
+            mb: isAnyOfSelect ? 2 : undefined
+          }}
+        >
             {inputLabel}
             <Select labelId={labelId} {...selectProps} />
             {helperText}

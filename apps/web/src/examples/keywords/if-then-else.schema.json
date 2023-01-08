@@ -9,7 +9,7 @@
 		},
 		"then": {
 			"pattern": "^\\+79[0-9]{8}",
-			"x-errorMessages": {
+			"x-errorMessage": {
 				"pattern": "должно соответствовать формату \"номер телефона\""
 			}
 		},

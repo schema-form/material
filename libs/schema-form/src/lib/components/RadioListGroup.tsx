@@ -1,4 +1,4 @@
-import {Option} from "../types/Option";
+import {JSONOption} from "../types/JSONOption";
 import {v4 as uuid} from "uuid";
 import isEqual from "lodash/isEqual";
 import {
@@ -11,7 +11,7 @@ import RadioListItem from "./RadioListItem";
 import { useState } from "react";
 
 export type RadioListGroupProps = RadioGroupProps & {
-    options?: Option[];
+    options?: JSONOption[];
     label?: TextFieldProps['label'];
     helperText?: TextFieldProps['helperText'];
     error?: TextFieldProps['error'];
@@ -27,9 +27,9 @@ export function RadioListGroup(props: RadioListGroupProps) {
         helperText,
         disabled,
     } = props;
-    const [selectedOption, setSelectedOption] = useState<Option>();
+    const [selectedOption, setSelectedOption] = useState<JSONOption>();
 
-    const renderOption = (option: Option) => {
+    const renderOption = (option: JSONOption) => {
         const id = uuid();
         const disabled = props.disabled || option.disabled;
         const checked = isEqual(value, option?.value);

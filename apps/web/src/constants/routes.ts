@@ -34,63 +34,19 @@ export const keywordsRoutes: AppRouteProps = {
     children: {
         '/$ref': {
             title: '$ref',
-            children: {
-                '/properties': {
-                    title: 'properties',
-                    fetchSchema: async () => import('../examples/keywords/$ref/$ref[properties].schema.json'),
-                },
-                '/definitions': {
-                    title: 'definitions',
-                    fetchSchema: async () => import('../examples/keywords/$ref/$ref[definitions].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/$ref.schema.json'),
         },
         '/additionalItems': {
             title: 'additionalItems',
-            children: {
-                '/true': {
-                    title: 'true',
-                    fetchSchema: async () => import('../examples/keywords/additionalItems/additionalItems[true].schema.json'),
-                },
-                '/false': {
-                    title: 'false',
-                    fetchSchema: async () => import('../examples/keywords/additionalItems/additionalItems[false].schema.json'),
-                },
-                '/schema': {
-                    title: 'schema',
-                    fetchSchema: async () => import('../examples/keywords/additionalItems/additionalItems[schema].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/additionalItems[schema].schema.json'),
         },
         '/additionalProperties': {
             title: 'additionalProperties',
-            children: {
-                '/true': {
-                    title: 'true',
-                    fetchSchema: async () => import('../examples/keywords/additionalProperties/additionalProperties[true].schema.json'),
-                },
-                '/false': {
-                    title: 'false',
-                    fetchSchema: async () => import('../examples/keywords/additionalProperties/additionalProperties[false].schema.json'),
-                },
-                '/schema': {
-                    title: 'schema',
-                    fetchSchema: async () => import('../examples/keywords/additionalProperties/additionalProperties[schema].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/additionalProperties[schema].schema.json'),
         },
         '/allOf': {
             title: 'allOf',
-            children: {
-                '/properties': {
-                    title: 'properties',
-                    fetchSchema: async () => import('../examples/keywords/allOf/allOf[properties].schema.json'),
-                },
-                '/rules': {
-                    title: 'rules',
-                    fetchSchema: async () => import('../examples/keywords/allOf/allOf[keywords].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/allOf[properties].schema.json'),
         },
         '/anyOf': {
             title: 'anyOf',
@@ -425,9 +381,9 @@ export const keywordsRoutes: AppRouteProps = {
             title: 'writeOnly',
             fetchSchema: async () => import('../examples/keywords/writeOnly.schema.json'),
         },
-        '/x-errorMessages': {
-            title: 'x-errorMessages',
-            fetchSchema: async () => import('../examples/keywords/x-errorMessages.schema.json'),
+        '/x-errorMessage': {
+            title: 'x-errorMessage',
+            fetchSchema: async () => import('../examples/keywords/x-errorMessage.schema.json'),
         }
     }
 }

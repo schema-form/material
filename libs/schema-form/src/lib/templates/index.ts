@@ -15,8 +15,9 @@ import MoveUpButtonTemplate from "./buttons/MoveUpButtonTemplate";
 import MoveDownButtonTemplate from "./buttons/MoveDownButtonTemplate";
 import ObjectFieldTemplate from "./ObjectFieldTemplate";
 import WrapIfAdditionalTemplate from "./WrapIfAdditionalTemplate";
+import {SchemaFormProps} from "../SchemaForm";
 
-export const TEMPLATES = {
+export const TEMPLATES: SchemaFormProps['templates'] = {
     BaseInputTemplate,
     ErrorListTemplate,
     ArrayFieldItemTemplate,

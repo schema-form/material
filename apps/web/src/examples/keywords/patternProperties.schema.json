@@ -19,7 +19,7 @@
 		"^.*?Name$": {
 			"minLength": 3,
 			"pattern": "^[А-яA-z ]+$",
-			"x-errorMessages": {
+			"x-errorMessage": {
 				"pattern": "должно содержать только буквы и пробел"
 			}
 		}

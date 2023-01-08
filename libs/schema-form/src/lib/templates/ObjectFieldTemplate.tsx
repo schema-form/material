@@ -40,7 +40,7 @@ export function ObjectFieldTemplate(props: ObjectFieldTemplateProps<any, any, Sc
         <AddButton
             onClick={onAddClick(schema)}
         >
-            Add property
+            New property
         </AddButton>
     ) : null;
 

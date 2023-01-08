@@ -8,12 +8,12 @@ import {mapTextFieldProps} from "./TextFieldWidget";
 import isEmpty from "lodash/isEmpty";
 import {SchemaFormContext} from "../SchemaForm";
 import {mapJSONOptions} from "../utils/mapJSONOptions";
-import {Option} from "../types/Option";
+import {JSONOption} from "../types/JSONOption";
 import Typography from "@mui/material/Typography";
 
-type Props = AutocompleteProps<Option, any, any, any>;
+type Props = AutocompleteProps<JSONOption, any, any, any>;
 
-const findOption = (value: any, values: Option[]) => values?.find(option => option?.value === value);
+const findOption = (value: any, values: JSONOption[]) => values?.find(option => option?.value === value);
 
 const parseJSONValue = (item: any) => {
     try { return JSON.parse(item) }

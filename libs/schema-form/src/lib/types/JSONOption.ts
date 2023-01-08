@@ -1,4 +1,4 @@
-export type Option = {
+export type JSONOption = {
     value: string;
     label: string;
     helperText?: string;

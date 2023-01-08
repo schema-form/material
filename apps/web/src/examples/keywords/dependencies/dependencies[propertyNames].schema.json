@@ -19,7 +19,7 @@
 	"dependencies": {
 		"firstName": ["lastName", "middleName"]
 	},
-	"x-errorMessages": {
+	"x-errorMessage": {
 		"dependencies": "обязательное"
 	}
 }

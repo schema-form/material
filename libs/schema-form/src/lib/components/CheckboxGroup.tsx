@@ -2,11 +2,11 @@ import List from "@mui/material/List";
 import {TextFieldProps} from "@mui/material/TextField";
 import {CheckboxListItem, CheckboxListItemProps} from "./CheckboxListItem";
 import FormCard from "./FormCard";
-import {Option} from "../types/Option";
+import {JSONOption} from "../types/JSONOption";
 import {useMemo} from "react";
 
 export type CheckboxGroupProps = {
-    options: Option[];
+    options: JSONOption[];
     value?: unknown[];
     onChange?: (event: {
         target?: {
@@ -27,7 +27,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     }), [options, value]);
     const subheader = selectedOptions?.map(option => option?.label).join(', ');
 
-    const createHandleOptionChange = (option: Option): CheckboxListItemProps['onChange'] => (event, checked) => {
+    const createHandleOptionChange = (option: JSONOption): CheckboxListItemProps['onChange'] => (event, checked) => {
         const oldValue = value instanceof Array ? value : [];
         const newValue = checked
             ? [...oldValue, option?.value]
@@ -36,7 +36,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         props.onChange?.(changeEvent, newValue);
     }
 
-    const renderOption = (option: Option) => {
+    const renderOption = (option: JSONOption) => {
         const checked = value?.includes(option?.value) || false;
         const disabled = props.disabled || option.disabled;
 

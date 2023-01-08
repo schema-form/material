@@ -10,7 +10,7 @@
 				"redefined": {
 					"title": "Переопределено",
 					"type": "string",
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"type": "должно быть строкой ${help}"
 					}
 				}
@@ -25,7 +25,7 @@
 				"redefined": {
 					"title": "Переопределено",
 					"enum": ["Опция 1", "Опция 2", "Опция 3"],
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"enum": "должна быть выбрана одна из опций ${help}"
 					}
 				}
@@ -42,7 +42,7 @@
 					"title": "Переопределено",
 					"type": "string",
 					"const": "oldP@$$word",
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"const": "должен быть введен старый пароль ${help}"
 					}
 				}
@@ -59,7 +59,7 @@
 					"title": "Переопределено",
 					"type": "number",
 					"multipleOf": 1.0,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"multipleOf": "должно быть целым числом ${help}"
 					}
 				}
@@ -76,7 +76,7 @@
 					"title": "Переопределено",
 					"type": "number",
 					"maximum": 99,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"maximum": "должно быть числом меньше или равным ${limit} ${help}"
 					}
 				}
@@ -93,7 +93,7 @@
 					"title": "Переопределено",
 					"type": "number",
 					"exclusiveMaximum": 99,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"exclusiveMaximum": "должно быть числом меньше, чем ${limit} ${help}"
 					}
 				}
@@ -110,7 +110,7 @@
 					"title": "Переопределено",
 					"type": "number",
 					"minimum": 99,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"minimum": "должно быть числом больше или равным ${limit} ${help}"
 					}
 				}
@@ -127,7 +127,7 @@
 					"title": "Переопределено",
 					"type": "number",
 					"exclusiveMinimum": 99,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"exclusiveMinimum": "должно быть числом больше, чем ${limit} ${help}"
 					}
 				}
@@ -144,7 +144,7 @@
 					"title": "Переопределено",
 					"type": "string",
 					"maxLength": 3,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"maxLength": "должно быть аббревиатурой не длиннее, чем ${limit} символа ${help}"
 					}
 				}
@@ -161,7 +161,7 @@
 					"title": "Переопределено",
 					"type": "string",
 					"minLength": 3,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"minLength": "должно быть именем не короче, чем ${limit} символа ${help}"
 					}
 				}
@@ -178,7 +178,7 @@
 					"title": "Переопределено",
 					"type": "string",
 					"pattern": "^[A-z0-9]+$",
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"pattern": "должно состоять из букв A-Z, a-z и цифр ${help}"
 					}
 				}
@@ -195,7 +195,7 @@
 					"title": "Переопределено",
 					"type": "string",
 					"format": "email",
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"format": "должно быть электронной почтой ${help}"
 					}
 				}
@@ -228,7 +228,7 @@
 						}
 					],
 					"additionalItems": false,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"additionalItems": "должно иметь не более, чем ${limit} опции ${help}"
 					}
 				}
@@ -251,7 +251,7 @@
 						"type": "string"
 					},
 					"maxItems": 2,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"maxItems": "должно иметь не более, чем ${limit} опции ${help}"
 					}
 				}
@@ -274,7 +274,7 @@
 						"type": "string"
 					},
 					"minItems": 2,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"minItems": "должно иметь не менее, чем ${limit} опции ${help}"
 					}
 				}
@@ -297,7 +297,7 @@
 						"type": "string"
 					},
 					"uniqueItems": true,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"uniqueItems": "не должно иметь повторений, опции ${i + 1} и ${j + 1} идентичны ${help}"
 					}
 				}
@@ -324,7 +324,7 @@
 					"contains": {
 						"pattern": "^[0-9]+$"
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"contains": "должно содержать значение состоящее исключительно из цифр ${help}"
 					}
 				}
@@ -347,7 +347,7 @@
 						"type": "string"
 					},
 					"maxProperties": 2,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"maxProperties": "должно иметь не более, чем  ${limit} поля ${help}"
 					}
 				}
@@ -370,7 +370,7 @@
 						"type": "string"
 					},
 					"minProperties": 2,
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"minProperties": "должно иметь не менее, чем ${limit} поля ${help}"
 					}
 				}
@@ -397,7 +397,7 @@
 						}
 					},
 					"required": ["first"],
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"required": "должно быть заполнено ${help}"
 					}
 				}
@@ -424,7 +424,7 @@
 							"type": "string"
 						}
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"additionalProperties": " ${help}"
 					}
 				}
@@ -463,7 +463,7 @@
 					"dependencies": {
 						"first": ["second"]
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"dependencies": "должно быть заполнено ${help}"
 					}
 				}
@@ -489,11 +489,11 @@
 					},
 					"propertyNames": {
 						"pattern": "^_[A-z]",
-						"x-errorMessages": {
+						"x-errorMessage": {
 							"pattern": "имена полей должны начинаться с \"_\" и состоять из символов A-Z и a-z, например \"_fieldName\""
 						}
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"propertyNames": "имя поля \"${propertyName}\" неверно ${help}"
 					}
 				}
@@ -524,7 +524,7 @@
 							"pattern": "[0-9]"
 						}
 					],
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"allOf": " ${help}"
 					}
 				}
@@ -555,7 +555,7 @@
 							"pattern": "[0-9]"
 						}
 					],
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"anyOf": "должно содержать букву a-z или цифру ${help}"
 					}
 				}
@@ -586,7 +586,7 @@
 							"pattern": "[0-9]"
 						}
 					],
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"oneOf": "должно содержать букву a-z или цифру ${help}"
 					}
 				}
@@ -607,7 +607,7 @@
 					"not": {
 						"pattern": "[0-9]"
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"not": "не должно содержать цифры ${help}"
 					}
 				}
@@ -641,7 +641,7 @@
 					"else": {
 						"format": "email"
 					},
-					"x-errorMessages": {
+					"x-errorMessage": {
 						"if": "${failingKeyword === 'then' ? 'должно быть номером телефона' : 'должно быть электронной почтой'} ${help}"
 					}
 				}

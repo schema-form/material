@@ -12,7 +12,7 @@
 			"title": "Мобильный телефон",
 			"type": "string",
 			"pattern": "^\\+79[0-9]{9}$",
-			"x-errorMessages": {
+			"x-errorMessage": {
 				"pattern": "должно быть номером мобильного телефона"
 			}
 		},
@@ -20,7 +20,7 @@
 			"title": "Telegram",
 			"type": "string",
 			"pattern": "^@.{10}$",
-			"x-errorMessages": {
+			"x-errorMessage": {
 				"pattern": "должно быть логином \"Telegram\""
 			}
 		}

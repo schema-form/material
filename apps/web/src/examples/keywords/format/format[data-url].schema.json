@@ -3,7 +3,7 @@
 	"title": "Выберите изображение",
 	"type": "string",
 	"format": "data-url",
-	"x-errorMessages": {
+	"x-errorMessage": {
 		"format": "должен быть выбран файл"
 	},
 	"examples": ["data:image/png;name=one-pixel-image.png;base64,iVBORw0KGgo"]
