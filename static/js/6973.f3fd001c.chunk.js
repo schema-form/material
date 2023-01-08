@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[6973],{86973:function(e){e.exports=JSON.parse('{"paymentMethod":{"ui:widget":"radio-group"},"deliveryMethod":{"ui:widget":"radio-group"}}')}}]);

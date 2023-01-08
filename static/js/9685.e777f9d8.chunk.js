@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[9685],{99685:function(e){e.exports=JSON.parse('{"text":{"ui:widget":"text-field"},"numeric":{"ui:widget":"text-field"},"withPlaceholder":{"ui:widget":"text-field"},"disabled":{"ui:widget":"text-field"},"invalid":{"ui:widget":"text-field"}}')}}]);

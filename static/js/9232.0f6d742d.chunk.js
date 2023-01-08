@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[9232],{99232:function(e){e.exports=JSON.parse('{"color":{"ui:widget":"autocomplete"},"language":{"ui:widget":"autocomplete"},"hobbies":{"ui:widget":"autocomplete"}}')}}]);

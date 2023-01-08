@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[8747],{68747:function(e){e.exports=JSON.parse('{"email":{"ui:widget":"text-field"},"age":{"ui:widget":"text-field"},"address":{"ui:widget":"text-field"},"apiKey":{"ui:widget":"text-field"}}')}}]);

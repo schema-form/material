@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[2083],{92083:function(e){e.exports=JSON.parse('{"fontSize":{"ui:widget":"slider-field"},"quantity":{"ui:widget":"slider-field"}}')}}]);

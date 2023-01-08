@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[401],{90401:function(i){i.exports=JSON.parse('{"on":{"ui:widget":"switch"},"off":{"ui:widget":"switch"},"disabled":{"ui:widget":"switch"},"invalid":{"ui:widget":"switch"}}')}}]);

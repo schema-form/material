@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[8548],{38548:function(i){i.exports=JSON.parse('{"isNotificationsEnabled":{"ui:widget":"switch"},"isDarkModeEnabled":{"ui:widget":"switch"},"isWiFiEnabled":{"ui:widget":"switch"}}')}}]);

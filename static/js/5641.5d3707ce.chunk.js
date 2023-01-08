@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[5641],{85641:function(e){e.exports=JSON.parse('{"singleChoice":{"ui:widget":"select"},"multipleChoice":{"ui:widget":"select"},"disabled":{"ui:widget":"select"},"invalid":{"ui:widget":"select"}}')}}]);

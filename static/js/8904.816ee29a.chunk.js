@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[8904],{18904:function(e){e.exports=JSON.parse('{"singleChoice":{"ui:widget":"autocomplete"},"withPlaceholder":{"ui:widget":"autocomplete"},"multipleChoice":{"ui:widget":"autocomplete"},"disabled":{"ui:widget":"autocomplete"},"invalid":{"ui:widget":"autocomplete"}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[6160],{96160:function(e){e.exports=JSON.parse('{"brightness":{"ui:widget":"slider"},"zoom":{"ui:widget":"slider"},"fontSize":{"ui:widget":"slider"}}')}}]);
