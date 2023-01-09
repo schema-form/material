@@ -1,5 +1,11 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"type": "number",
-	"minimum": 98.76
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "integer",
+  "title": "Age",
+  "minimum": 18,
+  "description": "Please enter your age",
+  "x-errorMessage": {
+    "minimum": "You must be at least ${limit} years old to participate"
+  },
+  "default": 17
 }

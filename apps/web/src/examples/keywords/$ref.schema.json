@@ -14,7 +14,7 @@
           "type": "string"
         },
         "state": {
-          "title": "State",
+          "title": "State/Province",
           "type": "string"
         }
       },

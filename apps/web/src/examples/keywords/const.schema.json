@@ -8,8 +8,9 @@
       "format": "password",
       "const": "12345",
       "x-errorMessage": {
-        "const": "enter your current password"
-      }
+        "const": "must be your current password"
+      },
+      "default": "1234"
     },
     "newPassword": {
       "title": "New password",

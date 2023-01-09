@@ -25,5 +25,6 @@
 	},
 	"x-errorMessage": {
 		"contains": "must be a citizen of at least \"United States\" or \"United Kingdom\""
-	}
+	},
+  "default": []
 }

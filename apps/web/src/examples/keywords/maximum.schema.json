@@ -1,6 +1,11 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Возраст",
-	"type": "number",
-	"maximum": 65
+  "type": "integer",
+  "title": "Age",
+  "maximum": 67,
+  "description": "Please enter your age",
+  "x-errorMessage": {
+    "maximum": "You must be ${limit} years old or younger to participate"
+  },
+  "default": 68
 }

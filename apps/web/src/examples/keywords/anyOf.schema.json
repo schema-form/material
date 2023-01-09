@@ -20,10 +20,11 @@
           "examples": ["MM/YY"]
         },
         "securityCode": {
-          "title": "Security code",
+          "title": "CVV/CVC",
           "type": "string"
         }
-      }
+      },
+      "required": ["cardNumber", "cardName", "expiration", "securityCode"]
     },
     {
       "title": "Mobile phone",
@@ -34,7 +35,8 @@
           "type": "string",
           "examples": ["+1 123-456-7890"]
         }
-      }
+      },
+      "required": ["phoneNumber"]
     }
   ]
 }

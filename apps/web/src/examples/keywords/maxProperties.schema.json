@@ -1,8 +1,37 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"type": "object",
-	"additionalProperties": {
-		"type": "string"
-	},
-	"maxProperties": 2
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Person",
+  "type": "object",
+  "maxProperties": 5,
+  "properties": {
+    "firstName": {
+      "title": "First Name",
+      "type": "string"
+    },
+    "lastName": {
+      "title": "Last Name",
+      "type": "string"
+    },
+    "age": {
+      "title": "Age",
+      "type": "integer"
+    },
+    "gender": {
+      "title": "Gender",
+      "type": "string",
+      "enum": ["male", "female"]
+    }
+  },
+  "additionalProperties": {
+    "title": "Additional Information",
+    "type": "string"
+  },
+  "default": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 70,
+    "gender": "male",
+    "additional": "Married",
+    "additional2": "Has children"
+  }
 }

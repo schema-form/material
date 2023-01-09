@@ -4,7 +4,7 @@
   "title": "Address",
   "properties": {
     "postalCode": {
-      "title": "Postal / Zip Code",
+      "title": "Zip/Postal code",
       "type": "number"
     },
     "streetName": {
@@ -16,6 +16,7 @@
       "enum": ["Street", "Avenue", "Boulevard"]
     }
   },
+  "required": ["postalCode", "streetName", "streetType"],
   "additionalProperties": {
     "title": "",
     "type": "string"

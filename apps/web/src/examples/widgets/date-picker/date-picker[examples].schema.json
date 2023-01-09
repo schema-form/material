@@ -3,7 +3,7 @@
   "title": "Examples",
   "properties": {
     "birthdate": {
-      "title": "Birthdate",
+      "title": "Date of birth",
       "description": "Your birthdate will be used to verify your identity and for age-restricted activities.",
       "type": "string",
       "format": "date"

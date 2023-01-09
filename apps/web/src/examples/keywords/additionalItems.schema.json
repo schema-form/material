@@ -4,11 +4,11 @@
   "title": "Address",
   "items": [
     {
-      "title": "Postal / Zip Code",
+      "title": "Zip/Postal code",
       "type": "number"
     },
     {
-      "title": "State",
+      "title": "State/Province",
       "type": "string"
     },
     {

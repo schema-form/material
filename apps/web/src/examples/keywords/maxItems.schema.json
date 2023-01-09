@@ -1,10 +1,14 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Гражданство",
+	"title": "Citizenship",
 	"type": "array",
 	"items": {
-		"title": "Страна",
+		"title": "Country",
 		"type": "string"
 	},
-	"maxItems": 2
+	"maxItems": 2,
+  "x-errorMessage": {
+    "maxItems": "must NOT have more than ${limit} citizenship"
+  },
+  "default": ["Unites States", "United Kingdom", "Russia"]
 }

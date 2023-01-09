@@ -1,6 +1,8 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "ФИО",
-	"type": "string",
-	"minLength": 3
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Username",
+  "type": "string",
+  "minLength": 3,
+  "maxLength": 12,
+  "default": ""
 }

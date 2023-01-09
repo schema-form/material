@@ -1,7 +1,11 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Ваш возраст",
-	"description": "Вы должны быть старше 17",
-	"type": "integer",
-	"exclusiveMinimum": 17
+  "type": "integer",
+  "title": "Born year",
+  "exclusiveMinimum": 1900,
+  "description": "Please enter the year you were born",
+  "x-errorMessage": {
+    "exclusiveMinimum": "You must be born after ${limit}"
+  },
+  "default": 1900
 }
