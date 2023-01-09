@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/material/static/js/main.9754d75c.js",
+    "main.js": "/material/static/js/main.cabf2dcd.js",
     "static/js/5927.474bf75b.chunk.js": "/material/static/js/5927.474bf75b.chunk.js",
     "static/js/4422.96b15535.chunk.js": "/material/static/js/4422.96b15535.chunk.js",
     "static/js/1499.9a7b574a.chunk.js": "/material/static/js/1499.9a7b574a.chunk.js",
@@ -64,19 +64,18 @@
     "static/js/4280.116c0180.chunk.js": "/material/static/js/4280.116c0180.chunk.js",
     "static/js/2065.3c78f978.chunk.js": "/material/static/js/2065.3c78f978.chunk.js",
     "static/js/9192.d1ff9c57.chunk.js": "/material/static/js/9192.d1ff9c57.chunk.js",
-    "static/js/3451.fb36b9c7.chunk.js": "/material/static/js/3451.fb36b9c7.chunk.js",
-    "static/js/2206.2e7cab6d.chunk.js": "/material/static/js/2206.2e7cab6d.chunk.js",
-    "static/js/4584.2a9abd3f.chunk.js": "/material/static/js/4584.2a9abd3f.chunk.js",
-    "static/js/59.df64454d.chunk.js": "/material/static/js/59.df64454d.chunk.js",
-    "static/js/7470.cc45f87d.chunk.js": "/material/static/js/7470.cc45f87d.chunk.js",
-    "static/js/8238.504b1081.chunk.js": "/material/static/js/8238.504b1081.chunk.js",
-    "static/js/2671.a676073f.chunk.js": "/material/static/js/2671.a676073f.chunk.js",
-    "static/js/9407.0dfb8d2f.chunk.js": "/material/static/js/9407.0dfb8d2f.chunk.js",
-    "static/js/6401.e09770f2.chunk.js": "/material/static/js/6401.e09770f2.chunk.js",
-    "static/js/8883.ad95b319.chunk.js": "/material/static/js/8883.ad95b319.chunk.js",
-    "static/js/8117.16643a69.chunk.js": "/material/static/js/8117.16643a69.chunk.js",
-    "static/js/6055.42dd30dd.chunk.js": "/material/static/js/6055.42dd30dd.chunk.js",
-    "static/js/2634.f3db575e.chunk.js": "/material/static/js/2634.f3db575e.chunk.js",
+    "static/js/3451.acea1192.chunk.js": "/material/static/js/3451.acea1192.chunk.js",
+    "static/js/2206.9c6a16bb.chunk.js": "/material/static/js/2206.9c6a16bb.chunk.js",
+    "static/js/4584.08d20282.chunk.js": "/material/static/js/4584.08d20282.chunk.js",
+    "static/js/59.a352959a.chunk.js": "/material/static/js/59.a352959a.chunk.js",
+    "static/js/7470.5199f417.chunk.js": "/material/static/js/7470.5199f417.chunk.js",
+    "static/js/8238.2e6bbcf1.chunk.js": "/material/static/js/8238.2e6bbcf1.chunk.js",
+    "static/js/2671.3a344fdd.chunk.js": "/material/static/js/2671.3a344fdd.chunk.js",
+    "static/js/9407.86a7537a.chunk.js": "/material/static/js/9407.86a7537a.chunk.js",
+    "static/js/6401.f6b203ad.chunk.js": "/material/static/js/6401.f6b203ad.chunk.js",
+    "static/js/8883.e7a4ab8e.chunk.js": "/material/static/js/8883.e7a4ab8e.chunk.js",
+    "static/js/8117.a580d05b.chunk.js": "/material/static/js/8117.a580d05b.chunk.js",
+    "static/js/6055.e31a94b4.chunk.js": "/material/static/js/6055.e31a94b4.chunk.js",
     "static/js/5308.ebdf9d7a.chunk.js": "/material/static/js/5308.ebdf9d7a.chunk.js",
     "static/js/8904.816ee29a.chunk.js": "/material/static/js/8904.816ee29a.chunk.js",
     "static/js/7688.3d1db673.chunk.js": "/material/static/js/7688.3d1db673.chunk.js",
@@ -153,10 +152,10 @@
     "index.html": "/material/index.html",
     "static/media/installation.md": "/material/static/media/installation.355b6fd008c47fad0af4.md",
     "static/media/overview.md": "/material/static/media/overview.f50d8cb5ac353bee8e30.md",
-    "main.9754d75c.js.map": "/material/static/js/main.9754d75c.js.map",
+    "main.cabf2dcd.js.map": "/material/static/js/main.cabf2dcd.js.map",
     "6837.2ac8cc3a.chunk.js.map": "/material/static/js/6837.2ac8cc3a.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.9754d75c.js"
+    "static/js/main.cabf2dcd.js"
   ]
 }

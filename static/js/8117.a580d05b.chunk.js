@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[8117],{58117:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"Shipping Countries","type":"array","items":{"title":"Country","type":"string"},"uniqueItems":true,"default":["United States","United States","United Kingdom","Russia"]}')}}]);

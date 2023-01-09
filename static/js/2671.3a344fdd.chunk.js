@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[2671],{72671:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","propertyNames":{"pattern":"^newKey(-[0-9]+)?$","minLength":3,"maxLength":12},"additionalProperties":true,"default":{"oldKey-1":1,"oldKey-2":2}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[3451],{53451:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"Price","type":"number","multipleOf":0.01,"examples":[99.99,999.9,9999],"default":99.999,"x-errorMessage":{"multipleOf":"must be in dollars and cents, example 99.99"}}')}}]);
