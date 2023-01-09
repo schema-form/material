@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[4280],{44280:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"Children","type":"array","items":{"title":"Name","type":"string"},"minItems":3,"x-errorMessage":{"minItems":"must NOT have fewer than 3 children"},"default":["Johnny Doe","Janie Doe"]}')}}]);

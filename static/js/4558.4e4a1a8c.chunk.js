@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[4558],{84558:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"Username","type":"string","minLength":3,"maxLength":12,"default":"John_Doe_1953"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[8304],{68304:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","additionalProperties":{"type":"string"},"maxProperties":2}')}}]);

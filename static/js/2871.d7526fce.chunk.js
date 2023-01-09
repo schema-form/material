@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[2871],{32871:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","type":"integer","title":"Born year","exclusiveMinimum":1900,"description":"Please enter the year you were born","x-errorMessage":{"exclusiveMinimum":"You must be born after ${limit}"},"default":1900}')}}]);

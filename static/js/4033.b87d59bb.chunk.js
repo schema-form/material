@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[4033],{84033:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","type":"string","title":"Country","enum":["United States","China","Russia","India"],"x-errorMessage":{"enum":"must be a country from the allowed list"},"default":"Canada"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[826],{826:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","type":"integer","title":"Age","maximum":67,"description":"Please enter your age","x-errorMessage":{"maximum":"You must be ${limit} years old or younger to participate"},"default":68}')}}]);
