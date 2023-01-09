@@ -1,15 +1,29 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Тип документа",
-	"type": "string",
-	"oneOf": [
-		{
-			"title": "Паспорт гражданина РФ",
-			"const": "006"
-		},
-		{
-			"title": "Паспорт гражданина СССР",
-			"const": "001"
-		}
-	]
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Contact",
+  "oneOf": [
+    {
+      "title": "Email",
+      "properties": {
+        "email": {
+          "title": "",
+          "type": "string",
+          "format": "email",
+          "examples": ["johndoe@email.com"]
+        }
+      },
+      "required": ["email"]
+    },
+    {
+      "title": "Phone number",
+      "properties": {
+        "phoneNumber": {
+          "title": "",
+          "type": "string",
+          "examples": ["+1 123-456-7890"]
+        }
+      },
+      "required": ["phoneNumber"]
+    }
+  ]
 }

@@ -1,14 +1,18 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "string",
-	"title": "Страна регистрации",
-	"not": {
-		"enum": [
-			"Германия",
-			"США"
-		]
-	},
-	"x-errorMessage": {
-		"not": "не разрешены: \"Германия\", \"США\""
+	"title": "Email",
+  "format": "email",
+  "not": {
+    "pattern": "(gmail|outlook).com$"
+  },
+  "examples": [
+    "johndoe@yandex.com",
+    "johndoe@yahoo.com",
+    "johndoe@icloud.com"
+  ],
+  "default": "johndoe@gmail.com",
+  "x-errorMessage": {
+		"not": "must NOT be \"Gmail\" or \"Outlook\""
 	}
 }

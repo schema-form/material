@@ -1,27 +1,36 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
+  "title": "Person",
 	"properties": {
+    "firstName": {
+      "title": "First Name",
+      "type": "string",
+      "examples": ["John"]
+    },
+    "middleName": {
+      "title": "Middle Name",
+      "type": "string",
+      "examples": ["Edward"]
+    },
 		"lastName": {
-			"title": "Фамилия",
-			"type": "string"
-		},
-		"firstName": {
-			"title": "Имя",
-			"type": "string"
-		},
-		"middleName": {
-			"title": "Отчество",
-			"type": "string"
+			"title": "Last Name",
+			"type": "string",
+      "examples": ["Doe"]
 		}
 	},
 	"patternProperties": {
-		"^.*?Name$": {
+		"^(.*?)Name$": {
 			"minLength": 3,
-			"pattern": "^[А-яA-z ]+$",
+			"pattern": "^[a-zA-Z ]+$",
 			"x-errorMessage": {
-				"pattern": "должно содержать только буквы и пробел"
+				"pattern": "must contain only letters and spaces"
 			}
 		}
-	}
+	},
+  "default": {
+    "firstName": "John$",
+    "middleName": "Edward$",
+    "lastName": "Doe$"
+  }
 }

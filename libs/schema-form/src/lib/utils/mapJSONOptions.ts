@@ -37,7 +37,7 @@ export function mapJSONOptions(props: WidgetProps<any, any, SchemaFormContext>):
     const { schema } = props;
     const schemaItems = schema?.items as JSONSchema7;
     const optionsAsEnumList = schemaItems?.enum || schema?.enum;
-    const isAnyOfSelect = props.id?.endsWith('anyof_select');
+    const isAnyOfSelect = props.id?.endsWith('_select');
 
     if (isAnyOfSelect) {
         return props?.options?.enumOptions?.map(mapEnumOptionToJSONOption) || [];

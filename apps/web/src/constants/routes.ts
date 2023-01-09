@@ -289,7 +289,7 @@ export const keywordsRoutes: AppRouteProps = {
             fetchSchema: async () => import('../examples/keywords/exclusiveMaximum.schema.json'),
         },
         '/if-then-else': {
-            title: 'if-then-else',
+            title: 'if / then / else',
             fetchSchema: async () => import('../examples/keywords/if-then-else.schema.json'),
         },
         '/maximum': {
@@ -371,10 +371,6 @@ export const keywordsRoutes: AppRouteProps = {
         '/writeOnly': {
             title: 'writeOnly',
             fetchSchema: async () => import('../examples/keywords/writeOnly.schema.json'),
-        },
-        '/x-errorMessage': {
-            title: 'x-errorMessage',
-            fetchSchema: async () => import('../examples/keywords/x-errorMessage.schema.json'),
         }
     }
 }

@@ -1,30 +1,31 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"properties": {
-		"input": {
-			"title": "Место рождения",
+		"country": {
+			"title": "Country",
 			"type": "string",
-			"default": "Россия",
+			"default": "Unites States",
 			"readOnly": true
 		},
-		"select": {
-			"title": "Место рождения",
+		"deliveryMethod": {
+			"title": "Delivery Method",
 			"type": "string",
 			"anyOf": [
-				{
-					"title": "Россия",
-					"const": "ru"
-				},
-				{
-					"title": "Германия",
-					"const": "de",
-					"readOnly": true
-				},
-				{
-					"title": "США",
-					"const": "us"
-				}
-			]
+        {
+          "title": "Standard",
+          "const": "STANDARD"
+        },
+        {
+          "title": "Express",
+          "description": "Not available",
+          "const": "EXPRESS",
+          "readOnly": true
+        },
+        {
+          "title": "Next-day",
+          "const": "NEXT_DAY"
+        }
+      ]
 		}
 	}
 }

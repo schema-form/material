@@ -19,6 +19,11 @@ export function mapControlProps(props: WidgetProps<any, any, SchemaFormContext>)
         max: schema.maximum || schema.exclusiveMaximum,
         min: schema.minimum || schema.exclusiveMinimum,
         step: schema.multipleOf,
+        inputProps: {
+          max: schema.maximum || schema.exclusiveMaximum,
+          min: schema.minimum || schema.exclusiveMinimum,
+          step: schema.multipleOf,
+        },
         className,
         tabIndex,
         value,
