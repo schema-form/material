@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[881],{30881:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"UUID","type":"string","format":"uuid","examples":["fcc18103-f6c4-4852-b332-89384556a9f4"]}')}}]);

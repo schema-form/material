@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[3872],{63872:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"E-mail","type":"string","format":"email","examples":["username@example.com"]}')}}]);

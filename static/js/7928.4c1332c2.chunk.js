@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[7928],{67928:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema","title":"PDF","type":"string","format":"data-url","contentMediaType":"application/pdf"}')}}]);

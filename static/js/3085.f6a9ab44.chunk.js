@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[3085],{43085:function(e){e.exports=JSON.parse('{"$schema":"http://json-schema.org/draft-07/schema#","title":"\u0413\u043e\u0434 \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f","type":"integer"}')}}]);
