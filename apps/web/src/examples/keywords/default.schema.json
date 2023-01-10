@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "default": "John Doe"
+    },
+    "gender": {
+      "title": "Gender",
+      "type": "string",
+      "enum": ["Male", "Female", "Other"],
+      "default": "Male"
+    },
+    "age": {
+      "title": "Age",
+      "type": "integer",
+      "default": 69
+    },
+    "isMarried": {
+      "title": "Married?",
+      "type": "boolean",
+      "default": true
+    },
+    "children": {
+      "title": "Children",
+      "type": "array",
+      "items": {
+        "title": "Name",
+        "type": "string"
+      },
+      "default": ["Janie Doe", "Johnny Doe"]
+    }
+  }
+}

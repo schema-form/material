@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Family",
+  "properties": {
+    "spouses": {
+      "title": "Spouses",
+      "type": "array",
+      "items": [
+        {
+          "title": "Husband",
+          "type": "string"
+        },
+        {
+          "title": "Wife",
+          "type": "string"
+        }
+      ]
+    },
+    "children": {
+      "title": "Children",
+      "type": "array",
+      "items": {
+        "title": "Name",
+        "type": "string"
+      }
+    }
+  },
+  "default": {
+    "spouses": ["John Doe", "Jane Doe"],
+    "children": ["Johnny Doe", "Janie Doe", null]
+  }
+}

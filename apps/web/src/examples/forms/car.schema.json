@@ -1,5 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Car",
+  "description": "A JSON schema to validate car objects",
+  "type": "object",
   "properties": {
     "make": {
       "type": "string",
@@ -10,6 +13,11 @@
       "type": "string",
       "title": "Model",
       "description": "The model of the car (e.g. Mustang, Camry, X5)"
+    },
+    "year": {
+      "type": "integer",
+      "title": "Year",
+      "description": "The year the car was manufactured"
     },
     "fuelType": {
       "type": "string",
@@ -28,47 +36,61 @@
           "title": "Electric",
           "const": "ELECTRIC"
         }
-      ]
+      ],
+      "default": "GASOLINE"
     }
   },
-  "dependencies": {
-    "fuelType": {
-      "oneOf": [
-        {
-          "properties": {
-            "fuelType": {
-              "const": "GASOLINE"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/gasolineEngine"
-            }
-          }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "DIESEL"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/dieselEngine"
-            }
-          }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "ELECTRIC"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/electricEngine"
-            }
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fuelType": {
+            "const": "GASOLINE"
           }
         }
-      ]
+      },
+      "then": {
+        "properties": {
+          "gasolineEngine": {
+            "$ref": "#/definitions/gasolineEngine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fuelType": {
+            "const": "DIESEL"
+          }
+        }
+      },
+      "then": {
+        "dieselEngine": {
+          "$ref": "#/definitions/dieselEngine"
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fuelType": {
+            "const": "ELECTRIC"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "electricEngine": {
+            "$ref": "#/definitions/electricEngine"
+          }
+        }
+      }
     }
-  },
+  ],
   "definitions": {
     "gasolineEngine": {
+      "type": "object",
       "title": "Gasoline Engine",
       "description": "The specifications of the car's gasoline engine",
       "properties": {
@@ -82,9 +104,11 @@
           "title": "Displacement",
           "description": "The displacement (in liters) of the car's gasoline engine"
         }
-      }
+      },
+      "required": [ "cylinders", "displacement" ]
     },
     "dieselEngine": {
+      "type": "object",
       "title": "Diesel Engine",
       "description": "The specifications of the car's diesel engine",
       "properties": {
@@ -93,9 +117,11 @@
           "title": "Turbo",
           "description": "A flag indicating whether the car's diesel engine has a turbocharger"
         }
-      }
+      },
+      "required": [ "turbo" ]
     },
     "electricEngine": {
+      "type": "object",
       "title": "Electric Engine",
       "description": "The specifications of the car's electric engine",
       "properties": {
@@ -109,7 +135,8 @@
           "title": "Power",
           "description": "The power (in kW) of the car's electric engine"
         }
-      }
+      },
+      "required": [ "voltage", "power" ]
     }
   }
 }

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Identification",
+  "description": "Please provide your identification information so we can verify your identity",
+  "properties": {
+    "idType": {
+      "title": "ID Type",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Passport",
+          "const": "PASSPORT"
+        },
+        {
+          "title": "Driver License",
+          "const": "DRIVER_LICENSE"
+        },
+        {
+          "title": "National ID",
+          "const": "NATIONAL_ID"
+        }
+      ],
+      "default": "NATIONAL_ID"
+    },
+    "idScan": {
+      "title": "Choose ID Scan",
+      "type": "string",
+      "format": "data-url",
+      "contentMediaType": "application/pdf"
+    },
+    "selfieImage": {
+      "title": "Choose Selfie",
+      "type": "string",
+      "format": "data-url",
+      "contentMediaType": "image/*"
+    },
+    "comment": {
+      "title": "Comment",
+      "type": "string",
+      "contentMediaType": "text/plain"
+    }
+  }
+}

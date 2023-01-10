@@ -11,6 +11,11 @@
       "title": "Model",
       "description": "The model of the car (e.g. Mustang, Camry, X5)"
     },
+    "year": {
+      "type": "integer",
+      "title": "Year",
+      "description": "The year the car was manufactured"
+    },
     "fuelType": {
       "type": "string",
       "title": "Fuel Type",
@@ -91,7 +96,8 @@
         "turbo": {
           "type": "boolean",
           "title": "Turbo",
-          "description": "A flag indicating whether the car's diesel engine has a turbocharger"
+          "description": "A flag indicating whether the car's diesel engine has a turbocharger",
+          "default": false
         }
       }
     },
@@ -111,5 +117,10 @@
         }
       }
     }
+  },
+  "default": {
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 2020
   }
 }

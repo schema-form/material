@@ -3,20 +3,18 @@
   "title": "Payment method",
   "anyOf": [
     {
-      "title": "Card",
+      "title": "Credit or Debit Card",
       "description": "Your credit or debit card",
       "properties": {
         "cardNumber": {
-          "title": "Card number",
-          "type": "string"
-        },
-        "cardName": {
-          "title": "Name on card",
-          "type": "string"
-        },
-        "expiration": {
-          "title": "Expiration",
+          "title": "Card Number",
           "type": "string",
+          "pattern": "^[0-9]{16}$"
+        },
+        "expiryDate": {
+          "title": "Expiry Date",
+          "type": "string",
+          "pattern": "^(0[1-9]|1[0-2])/([0-9]{2})$",
           "examples": ["MM/YY"]
         },
         "securityCode": {
@@ -24,19 +22,34 @@
           "type": "string"
         }
       },
-      "required": ["cardNumber", "cardName", "expiration", "securityCode"]
+      "required": ["cardNumber", "cardName", "expiryDate", "securityCode"]
     },
     {
-      "title": "Mobile phone",
-      "description": "From your mobile phone balance",
+      "title": "Bank Transfer",
+      "description": "Details of the bank transfer being used",
       "properties": {
-        "phoneNumber": {
-          "title": "Phone number",
+        "bankName": {
           "type": "string",
-          "examples": ["+1 123-456-7890"]
+          "title": "Bank Name",
+          "description": "The name of the bank being used for the transfer"
+        },
+        "accountHolderName": {
+          "type": "string",
+          "title": "Account Holder Name",
+          "description": "The name of the account holder"
+        },
+        "accountNumber": {
+          "type": "string",
+          "title": "Account Number",
+          "description": "The number of the account being used for the transfer"
+        },
+        "transactionReference": {
+          "type": "string",
+          "title": "Transaction Reference",
+          "description": "The reference number for the bank transfer"
         }
       },
-      "required": ["phoneNumber"]
+      "required": ["bankName", "accountHolderName", "accountNumber"]
     }
   ]
 }

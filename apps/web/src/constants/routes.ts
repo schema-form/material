@@ -54,203 +54,35 @@ export const keywordsRoutes: AppRouteProps = {
         },
         '/contentEncoding': {
             title: 'contentEncoding',
-            children: {
-                '/main': {
-                    title: 'main',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding.schema.json'),
-                },
-                '/base64': {
-                    title: 'base64',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding[base64].schema.json'),
-                },
-                '/7bit': {
-                    title: '7bit',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding[7bit].schema.json'),
-                },
-                '/8bit': {
-                    title: '8bit',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding[8bit].schema.json'),
-                },
-                '/binary': {
-                    title: 'binary',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding[binary].schema.json'),
-                },
-                '/quoted-printable': {
-                    title: 'quoted-printable',
-                    fetchSchema: async () => import('../examples/keywords/contentEncoding/contentEncoding[quoted-printable].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/contentEncoding.schema.json'),
         },
         '/contentMediaType': {
             title: 'contentMediaType',
-            children: {
-                '/jpeg': {
-                    title: 'jpeg',
-                    fetchSchema: async () => import('../examples/keywords/contentMediaType/contentMediaType[jpeg].schema.json'),
-                },
-                '/json': {
-                    title: 'json',
-                    fetchSchema: async () => import('../examples/keywords/contentMediaType/contentMediaType[json].schema.json'),
-                },
-                '/pdf': {
-                    title: 'pdf',
-                    fetchSchema: async () => import('../examples/keywords/contentMediaType/contentMediaType[pdf].schema.json'),
-                },
-                '/xml': {
-                    title: 'xml',
-                    fetchSchema: async () => import('../examples/keywords/contentMediaType/contentMediaType[xml].schema.json'),
-                },
-                '/yaml': {
-                    title: 'yaml',
-                    fetchSchema: async () => import('../examples/keywords/contentMediaType/contentMediaType[yaml].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/contentMediaType.schema.json'),
         },
         '/default': {
             title: 'default',
-            children: {
-                '/checkbox': {
-                    title: 'checkbox',
-                    fetchSchema: async () => import('../examples/keywords/default/default[boolean].schema.json'),
-                },
-                '/select': {
-                    title: 'select',
-                    fetchSchema: async () => import('../examples/keywords/default/default[enum].schema.json'),
-                },
-                '/input': {
-                    title: 'input',
-                    fetchSchema: async () => import('../examples/keywords/default/default[integer].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/default.schema.json'),
         },
         '/definitions': {
             title: 'definitions',
-            children: {
-                '/properties': {
-                    title: 'properties',
-                    fetchSchema: async () => import('../examples/keywords/definitions/definitions[properties].schema.json'),
-                },
-                '/property': {
-                    title: 'property',
-                    fetchSchema: async () => import('../examples/keywords/definitions/definitions[property].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/definitions.schema.json'),
         },
         '/dependencies': {
             title: 'dependencies',
-            children: {
-                '/propertyNames': {
-                    title: 'propertyNames',
-                    fetchSchema: async () => import('../examples/keywords/dependencies/dependencies[propertyNames].schema.json'),
-                },
-                '/schema': {
-                    title: 'schema',
-                    fetchSchema: async () => import('../examples/keywords/dependencies/dependencies[schema].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/dependencies.schema.json'),
         },
         '/format': {
             title: 'format',
-            children: {
-                '/color': {
-                    title: 'color',
-                    fetchSchema: async () => import('../examples/keywords/format/format[color].schema.json'),
-                },
-                '/date': {
-                    title: 'date',
-                    fetchSchema: async () => import('../examples/keywords/format/format[date].schema.json'),
-                },
-                '/email': {
-                    title: 'email',
-                    fetchSchema: async () => import('../examples/keywords/format/format[email].schema.json'),
-                },
-                '/hostname': {
-                    title: 'hostname',
-                    fetchSchema: async () => import('../examples/keywords/format/format[hostname].schema.json'),
-                },
-                '/ipv4': {
-                    title: 'ipv4',
-                    fetchSchema: async () => import('../examples/keywords/format/format[ipv4].schema.json'),
-                },
-                '/data-url': {
-                    title: 'data-url',
-                    fetchSchema: async () => import('../examples/keywords/format/format[data-url].schema.json'),
-                },
-                '/date-time': {
-                    title: 'date-time',
-                    fetchSchema: async () => import('../examples/keywords/format/format[date-time].schema.json'),
-                },
-                '/ipv6': {
-                    title: 'ipv6',
-                    fetchSchema: async () => import('../examples/keywords/format/format[ipv6].schema.json'),
-                },
-                '/json-pointer': {
-                    title: 'json-pointer',
-                    fetchSchema: async () => import('../examples/keywords/format/format[json-pointer].schema.json'),
-                },
-                '/password': {
-                    title: 'password',
-                    fetchSchema: async () => import('../examples/keywords/format/format[password].schema.json'),
-                },
-                '/regex': {
-                    title: 'regex',
-                    fetchSchema: async () => import('../examples/keywords/format/format[regex].schema.json'),
-                },
-                '/uri': {
-                    title: 'uri',
-                    fetchSchema: async () => import('../examples/keywords/format/format[uri].schema.json'),
-                },
-                '/uuid': {
-                    title: 'uuid',
-                    fetchSchema: async () => import('../examples/keywords/format/format[uuid].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/format.schema.json'),
         },
         '/items': {
             title: 'items',
-            children: {
-                '/unique': {
-                    title: 'unique',
-                    fetchSchema: async () => import('../examples/keywords/items/items[array].schema.json'),
-                },
-                '/identical': {
-                    title: 'identical',
-                    fetchSchema: async () => import('../examples/keywords/items/items[schema].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/items.schema.json'),
         },
         '/type': {
             title: 'type',
-            children: {
-                '/array': {
-                    title: 'array',
-                    fetchSchema: async () => import('../examples/keywords/type/type[array].schema.json'),
-                },
-                '/boolean': {
-                    title: 'name',
-                    fetchSchema: async () => import('../examples/keywords/type/type[boolean].schema.json'),
-                },
-                '/integer': {
-                    title: 'integer',
-                    fetchSchema: async () => import('../examples/keywords/type/type[integer].schema.json'),
-                },
-                '/null': {
-                    title: 'null',
-                    fetchSchema: async () => import('../examples/keywords/type/type[null].schema.json'),
-                },
-                '/number': {
-                    title: 'number',
-                    fetchSchema: async () => import('../examples/keywords/type/type[number].schema.json'),
-                },
-                '/object': {
-                    title: 'object',
-                    fetchSchema: async () => import('../examples/keywords/type/type[object].schema.json'),
-                },
-                '/string': {
-                    title: 'string',
-                    fetchSchema: async () => import('../examples/keywords/type/type[string].schema.json'),
-                },
-            }
+            fetchSchema: async () => import('../examples/keywords/type.schema.json'),
         },
         '/$comment': {
             title: '$comment',

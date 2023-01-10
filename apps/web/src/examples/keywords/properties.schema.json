@@ -17,7 +17,7 @@
     },
     "zip": {
       "type": "number",
-      "title": "Zip/Postal code"
+      "title": "ZIP/Postal code"
     },
     "country": {
       "type": "string",
