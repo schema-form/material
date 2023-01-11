@@ -26,8 +26,8 @@ export type FormCardProps = PropsWithChildren<{
     helperText?: CardHeaderProps['subheader'];
     expandedActions?: ListItemProps['secondaryAction'];
     notExpandedActions?: ListItemProps['secondaryAction'];
-    secondaryActions?: ListItemProps['secondaryAction'];
-    actions?: ReactNode;
+    permanentActions?: ListItemProps['secondaryAction'];
+    footerActions?: ReactNode;
     CollapseProps?: CollapseProps;
     HeaderProps?: ListItemButtonProps;
     defaultExpanded?: boolean;
@@ -93,7 +93,7 @@ export function FormCard(props: FormCardProps) {
         disabled,
         bordered = true,
         children,
-        actions,
+        footerActions,
         CollapseProps,
         HeaderProps,
         defaultExpanded = true,
@@ -102,7 +102,7 @@ export function FormCard(props: FormCardProps) {
     const [isExpanded, setExpanded] = React.useState(defaultExpanded);
     const iconColor = hasError ? 'error' : undefined;
     const hasChildren = Boolean(children);
-    const hasSecondaryActions = Boolean(props.secondaryActions);
+    const hasSecondaryActions = Boolean(props.permanentActions);
     const hasExpandedActions = Boolean(props.expandedActions);
     const hasNotExpandedActions = Boolean(props.notExpandedActions);
     const hasActions = hasSecondaryActions || hasNotExpandedActions || hasExpandedActions;
@@ -172,7 +172,7 @@ export function FormCard(props: FormCardProps) {
 
     const secondaryActions = hasSecondaryActions && (
       <Box>
-        {props?.secondaryActions}
+        {props?.permanentActions}
       </Box>
     );
 
@@ -215,9 +215,9 @@ export function FormCard(props: FormCardProps) {
         </ListItem>
     ) : null;
 
-    const footer = actions ? (
+    const footer = footerActions ? (
         <CardActions>
-            {actions}
+            {footerActions}
         </CardActions>
     ) : null;
 

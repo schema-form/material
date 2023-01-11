@@ -4,7 +4,7 @@ import FormCard from "../components/FormCard";
 import FormControlReorder from "../components/FormControlReorder";
 import {ConfigProvider, useConfig} from "../providers/ConfigProvider";
 import OrderIcon from "../components/OrderIcon";
-import {Box, CardContent, Divider, styled, Tooltip} from "@mui/material";
+import {CardContent, styled, Tooltip} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import Reorder from "../components/Reoder";
@@ -83,7 +83,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
             icon={orderIcon}
             title={schema?.title}
             helperText={error ?? schema?.description}
-            expandedActions={headerActions}
+            permanentActions={headerActions}
         >
             <ConfigProvider value={{
                 ...config,
@@ -124,7 +124,12 @@ function ArrayFieldControlItemTemplate(props: ArrayFieldTemplateItemType) {
             variant="outlined"
             color={hasError ? 'error' : undefined}
             control={children}
-            sx={{m: 2}}
+            sx={{
+              p: 2,
+              '& + &': {
+                pt: 0
+              }
+            }}
         />
     )
 }

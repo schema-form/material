@@ -147,7 +147,7 @@ export function SchemaEditor(props: SchemaEditorProps) {
             title={label}
             helperText={helperText}
             expandedActions={expandedActions}
-            secondaryActions={copyIconButton}
+            permanentActions={copyIconButton}
         >
             <Stack direction="row">
                 {editor}

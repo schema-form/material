@@ -90,7 +90,7 @@ export function MonacoEditor(props: MonacoEditorProps) {
             title={label}
             helperText={errorMessage ?? helperText}
             expandedActions={editorThemeToggle}
-            secondaryActions={copyIconButton}
+            permanentActions={copyIconButton}
         >
             {editor}
         </FormCard>

@@ -59,7 +59,7 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
                 helperText={error ?? description}
                 error={hasError}
                 disabled={disabled}
-                actions={addButton}
+                footerActions={addButton}
             >
                 {body}
             </FormCard>

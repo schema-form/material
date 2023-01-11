@@ -225,7 +225,7 @@ export function MarkdownEditor(props: MarkdownEditorProps) {
             title={label}
             helperText={helperText}
             expandedActions={expandedActions}
-            secondaryActions={copyIconButton}
+            permanentActions={copyIconButton}
         >
             <Stack direction="row">
                 {editor}
