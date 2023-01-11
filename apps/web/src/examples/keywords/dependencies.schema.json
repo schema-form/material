@@ -1,126 +1,201 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "make": {
-      "type": "string",
-      "title": "Make",
-      "description": "The make of the car (e.g. Ford, Toyota, BMW)"
+  "title": "Order",
+  "description": "Add one or more products to order",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "title": "Product",
+    "properties": {
+      "productType": {
+        "title": "Type",
+        "type": "string",
+        "anyOf": [
+          {
+            "title": "Food",
+            "const": "FOOD"
+          },
+          {
+            "title": "Drinks",
+            "const": "DRINKS"
+          }
+        ]
+      }
     },
-    "model": {
-      "type": "string",
-      "title": "Model",
-      "description": "The model of the car (e.g. Mustang, Camry, X5)"
-    },
-    "year": {
-      "type": "integer",
-      "title": "Year",
-      "description": "The year the car was manufactured"
-    },
-    "fuelType": {
-      "type": "string",
-      "title": "Fuel Type",
-      "description": "The type of fuel the car uses",
-      "anyOf": [
-        {
-          "title": "Gasoline",
-          "const": "GASOLINE"
-        },
-        {
-          "title": "Diesel",
-          "const": "DIESEL"
-        },
-        {
-          "title": "Electric",
-          "const": "ELECTRIC"
-        }
-      ]
-    }
-  },
-  "dependencies": {
-    "fuelType": {
-      "oneOf": [
-        {
-          "properties": {
-            "fuelType": {
-              "const": "GASOLINE"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/gasolineEngine"
+    "required": ["productType", "category", "product"],
+    "dependencies": {
+      "productType": {
+        "oneOf": [
+          {
+            "properties": {
+              "productType": {
+                "const": "FOOD"
+              },
+              "category": {
+                "title": "Category",
+                "$ref": "#/definitions/foodCategory"
+              }
+            }
+          },
+          {
+            "properties": {
+              "productType": {
+                "const": "DRINKS"
+              },
+              "category": {
+                "title": "Category",
+                "$ref": "#/definitions/drinkCategory"
+              }
             }
           }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "DIESEL"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/dieselEngine"
+        ]
+      },
+      "category": {
+        "oneOf": [
+          {
+            "properties": {
+              "category": {
+                "const": "SNACKS"
+              },
+              "product": {
+                "title": "Product",
+                "$ref": "#/definitions/snacks"
+              }
+            }
+          },
+          {
+            "properties": {
+              "category": {
+                "const": "DESSERTS"
+              },
+              "product": {
+                "title": "Product",
+                "$ref": "#/definitions/desserts"
+              }
+            }
+          },
+          {
+            "properties": {
+              "category": {
+                "const": "ALCOHOLIC"
+              },
+              "product": {
+                "title": "Product",
+                "$ref": "#/definitions/alcoholicDrinks"
+              }
+            }
+          },
+          {
+            "properties": {
+              "category": {
+                "const": "SOFT"
+              },
+              "product": {
+                "title": "Product",
+                "$ref": "#/definitions/softDrinks"
+              }
             }
           }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "ELECTRIC"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/electricEngine"
-            }
-          }
-        }
-      ]
+        ]
+      }
     }
   },
   "definitions": {
-    "gasolineEngine": {
-      "title": "Gasoline Engine",
-      "description": "The specifications of the car's gasoline engine",
-      "properties": {
-        "cylinders": {
-          "type": "integer",
-          "title": "Cylinders",
-          "description": "The number of cylinders in the car's gasoline engine"
+    "drinkCategory": {
+      "title": "Drink Type",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Alcoholic",
+          "const": "ALCOHOLIC"
         },
-        "displacement": {
-          "type": "number",
-          "title": "Displacement",
-          "description": "The displacement (in liters) of the car's gasoline engine"
+        {
+          "title": "Soft",
+          "const": "SOFT"
         }
-      }
+      ]
     },
-    "dieselEngine": {
-      "title": "Diesel Engine",
-      "description": "The specifications of the car's diesel engine",
-      "properties": {
-        "turbo": {
-          "type": "boolean",
-          "title": "Turbo",
-          "description": "A flag indicating whether the car's diesel engine has a turbocharger",
-          "default": false
-        }
-      }
-    },
-    "electricEngine": {
-      "title": "Electric Engine",
-      "description": "The specifications of the car's electric engine",
-      "properties": {
-        "voltage": {
-          "type": "number",
-          "title": "Voltage",
-          "description": "The voltage of the car's electric engine"
+    "foodCategory": {
+      "title": "Category",
+      "type": "string",
+      "anyOf": [
+        {
+          "title": "Snacks",
+          "const": "SNACKS"
         },
-        "power": {
-          "type": "number",
-          "title": "Power",
-          "description": "The power (in kW) of the car's electric engine"
+        {
+          "title": "Desserts",
+          "const": "DESSERTS"
         }
-      }
+      ]
+    },
+    "snacks": {
+      "title": "Snacks",
+      "enum": [
+        "Potato chips",
+        "Popcorn",
+        "Pretzels",
+        "Nachos",
+        "French fries",
+        "Candy bars",
+        "Chocolate",
+        "Biscuits",
+        "Peanuts",
+        "Chewing gums",
+        "Energy bars",
+        "Trail mix"
+      ]
+    },
+    "desserts": {
+      "title": "Desserts",
+      "enum": [
+        "Cake",
+        "Ice Cream",
+        "Fruit salad",
+        "Pie",
+        "Pudding",
+        "Cookies",
+        "Cheesecake",
+        "Chocolate Mousse",
+        "Brownies",
+        "Tiramisu",
+        "Crepes",
+        "Donuts"
+      ]
+    },
+    "alcoholicDrinks": {
+      "title": "Alcoholic Drinks",
+      "enum": [
+        "Beer",
+        "Wine",
+        "Whiskey",
+        "Vodka",
+        "Tequila",
+        "Rum",
+        "Gin",
+        "Brandy",
+        "Cognac",
+        "Champagne",
+        "Cocktail",
+        "Liqueur"
+      ]
+    },
+    "softDrinks": {
+      "title": "Soft Drinks",
+      "enum": [
+        "Coca-Cola",
+        "Pepsi",
+        "Sprite",
+        "Fanta",
+        "Dr. Pepper",
+        "Mountain Dew",
+        "7-Up",
+        "Root beer",
+        "Lemonade",
+        "Iced Tea",
+        "Energy Drink",
+        "Soda Water"
+      ]
     }
-  },
-  "default": {
-    "make": "Ford",
-    "model": "Mustang",
-    "year": 2020
   }
 }

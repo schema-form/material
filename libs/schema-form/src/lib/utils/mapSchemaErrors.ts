@@ -14,13 +14,17 @@ const findSchemaMessage = (schema: any, error: RJSFValidationError) => {
 
 export function mapSchemaErrors(errors: RJSFValidationError[], rootSchema: FormProps['schema']) {
   return errors?.map((error) => {
-    const schemaRef = error.schemaPath?.split('/').slice(0, -1).join('/');
-    const schema = findSchemaDefinition(schemaRef, rootSchema);
-    const schemaMessage = findSchemaMessage(schema, error);
+    try {
+      const schemaRef = error.schemaPath?.split('/').slice(0, -1).join('/');
+      const schema = findSchemaDefinition(schemaRef, rootSchema);
+      const schemaMessage = findSchemaMessage(schema, error);
 
-    return {
-      ...error,
-      message: schemaMessage || error.message,
+      return {
+        ...error,
+        message: schemaMessage || error.message,
+      }
+    } catch (e) {
+      return error;
     }
   });
 }

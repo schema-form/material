@@ -1,114 +1,104 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema",
   "properties": {
-    "make": {
+    "contactType": {
+      "title": "Contact Type",
       "type": "string",
-      "title": "Make",
-      "description": "The make of the car (e.g. Ford, Toyota, BMW)"
-    },
-    "model": {
-      "type": "string",
-      "title": "Model",
-      "description": "The model of the car (e.g. Mustang, Camry, X5)"
-    },
-    "fuelType": {
-      "type": "string",
-      "title": "Fuel Type",
-      "description": "The type of fuel the car uses",
       "anyOf": [
         {
-          "title": "Gasoline",
-          "const": "GASOLINE"
+          "title": "Email",
+          "const": "EMAIL"
         },
         {
-          "title": "Diesel",
-          "const": "DIESEL"
+          "title": "Phone",
+          "const": "PHONE"
         },
         {
-          "title": "Electric",
-          "const": "ELECTRIC"
+          "title": "Telegram",
+          "const": "TELEGRAM"
         }
-      ]
+      ],
+      "default": "EMAIL"
+    },
+    "contact": {
+      "title": "Contact",
+      "type": "string"
     }
   },
-  "dependencies": {
-    "fuelType": {
-      "oneOf": [
-        {
-          "properties": {
-            "fuelType": {
-              "const": "GASOLINE"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/gasolineEngine"
-            }
-          }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "DIESEL"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/dieselEngine"
-            }
-          }
-        },
-        {
-          "properties": {
-            "fuelType": {
-              "const": "ELECTRIC"
-            },
-            "gasolineEngine": {
-              "$ref": "#/definitions/electricEngine"
-            }
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "contactType": {
+            "const": "EMAIL"
           }
         }
-      ]
+      },
+      "then": {
+        "properties": {
+          "contact": {
+            "$ref": "#/definitions/email"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "contactType": {
+            "const": "PHONE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contact": {
+            "$ref": "#/definitions/phoneNumber"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "contactType": {
+            "const": "TELEGRAM"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contact": {
+            "$ref": "#/definitions/telegram"
+          }
+        }
+      }
     }
-  },
+  ],
   "definitions": {
-    "gasolineEngine": {
-      "title": "Gasoline Engine",
-      "description": "The specifications of the car's gasoline engine",
-      "properties": {
-        "cylinders": {
-          "type": "integer",
-          "title": "Cylinders",
-          "description": "The number of cylinders in the car's gasoline engine"
-        },
-        "displacement": {
-          "type": "number",
-          "title": "Displacement",
-          "description": "The displacement (in liters) of the car's gasoline engine"
-        }
+    "email": {
+      "title": "Email",
+      "format": "email",
+      "examples": ["johndoe@email.com"],
+      "x-errorMessage": {
+        "pattern": "must be a valid email"
       }
     },
-    "dieselEngine": {
-      "title": "Diesel Engine",
-      "description": "The specifications of the car's diesel engine",
-      "properties": {
-        "turbo": {
-          "type": "boolean",
-          "title": "Turbo",
-          "description": "A flag indicating whether the car's diesel engine has a turbocharger"
-        }
+    "phoneNumber": {
+      "title": "Phone Number",
+      "pattern": "^\\+[0-9]{1,3} [0-9]{3}-[0-9]{3}-[0-9]{4}$",
+      "examples": ["+1 123-456-7890"],
+      "x-errorMessage": {
+        "pattern": "must be US phone number, example +1 123-456-7890"
       }
     },
-    "electricEngine": {
-      "title": "Electric Engine",
-      "description": "The specifications of the car's electric engine",
-      "properties": {
-        "voltage": {
-          "type": "number",
-          "title": "Voltage",
-          "description": "The voltage of the car's electric engine"
-        },
-        "power": {
-          "type": "number",
-          "title": "Power",
-          "description": "The power (in kW) of the car's electric engine"
-        }
+    "telegram": {
+      "title": "Telegram",
+      "minLength": 3,
+      "pattern": "^@",
+      "examples": ["@johndoe"],
+      "x-errorMessage": {
+        "pattern": "must be a valid account and start with @"
       }
     }
   }

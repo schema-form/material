@@ -7,6 +7,7 @@ import FormCard from "../components/FormCard";
 import AddIcon from "@mui/icons-material/Add";
 
 const ItemsList = styled('ul')(({ theme }) => ({
+    display: 'grid',
     listStyle: 'none',
     padding: 0,
     margin: 0,
