@@ -1,34 +1,25 @@
 import {WidgetProps} from '@rjsf/utils';
 import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
-import RadioListGroup, {RadioListGroupProps} from "../components/RadioListGroup";
-import {mapJSONOptions} from "../utils/mapJSONOptions";
+import RadioFormGroup, {RadioFormGroupProps} from "../components/RadioFormGroup";
+import {mapOptions} from "../utils/mapOptions";
 
-export function mapRadioListGroupProps(props: WidgetProps<any, any, SchemaFormContext>): RadioListGroupProps {
+export function mapRadioFormGroupProps(props: WidgetProps<any, any, SchemaFormContext>): RadioFormGroupProps {
     const commonProps = mapControlProps(props);
-    const options = mapJSONOptions(props);
-    const jsonValue = JSON.stringify(props.value);
+    const options = mapOptions(props.options.enumOptions);
     return {
         ...commonProps,
         options,
-        value: jsonValue,
-        onChange: (event) => {
-            const jsonValue = event.target?.value;
-            const hasJsonValue = Boolean(jsonValue);
-            const newValue = hasJsonValue
-                ? JSON.parse(jsonValue)
-                : jsonValue;
-            props.onChange?.(newValue);
-        }
+        onChange: (event, value) => props.onChange?.(value)
     }
 }
 
 export default function RadioGroupWidget(props: WidgetProps<any, any, SchemaFormContext>) {
-    const radioListGroupProps = mapRadioListGroupProps(props);
+    const radioFormGroupProps = mapRadioFormGroupProps(props);
     return (
-        <RadioListGroup
+        <RadioFormGroup
             data-testid="RadioGroupWidget"
-            {...radioListGroupProps}
+            {...radioFormGroupProps}
         />
     );
 }

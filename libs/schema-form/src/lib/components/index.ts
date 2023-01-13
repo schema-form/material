@@ -1,6 +1,6 @@
 export * from './Markdown';
 export * from './MonacoEditor';
-export * from './CheckboxGroup';
+export * from './CheckboxFormGroup';
 export * from './CheckboxListItem';
 export * from './ColorField';
 export * from './CopyIconButton';
@@ -13,7 +13,7 @@ export * from './FormControlReorder';
 export * from './FormHeader';
 export * from './OrderIcon';
 export * from './PasswordField';
-export * from './RadioListGroup';
+export * from './RadioFormGroup';
 export * from './RadioListItem';
 export * from './Reoder';
 export * from './SwitchListItem';

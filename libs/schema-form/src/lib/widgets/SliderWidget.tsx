@@ -3,23 +3,22 @@ import {WidgetProps} from '@rjsf/utils';
 import {SliderProps} from "@mui/material/Slider";
 import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
-import {EnumOption} from "../types/EnumOption";
 import {CustomSlider} from "../components/CustomSlider";
-import {mapJSONOptions} from "../utils/mapJSONOptions";
+import {mapOptions} from "../utils/mapOptions";
+import {Option} from "../types/Option";
 
 function mapSliderMarks(props: WidgetProps<any, any, SchemaFormContext>): SliderProps['marks'] {
-  const { enumOptions = [] } = props?.options || {};
-  const jsonOptions = mapJSONOptions(props);
+  const options = mapOptions(props?.options?.enumOptions);
 
-  const toMark = ({ value, label }: EnumOption) => {
+  const toMark = ({ value, label }: Option) => {
     return ({
       value: Number(value),
       label: label,
     })
   }
 
-  if (enumOptions?.length > 0) {
-    return jsonOptions.map(toMark);
+  if (options?.length > 0) {
+    return options.map(toMark);
   }
 
   return [];

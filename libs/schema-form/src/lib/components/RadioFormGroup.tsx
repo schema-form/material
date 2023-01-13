@@ -1,4 +1,3 @@
-import {JSONOption} from "../types/JSONOption";
 import {v4 as uuid} from "uuid";
 import isEqual from "lodash/isEqual";
 import {
@@ -8,17 +7,19 @@ import {
 import List from "@mui/material/List";
 import FormCard from "./FormCard";
 import RadioListItem from "./RadioListItem";
-import { useState } from "react";
+import {useMemo} from "react";
+import {toJSONOptions} from "../utils/toJSONOptions";
+import {Option} from "../types/Option";
 
-export type RadioListGroupProps = RadioGroupProps & {
-    options?: JSONOption[];
+export type RadioFormGroupProps = RadioGroupProps & {
+    options?: Option[];
     label?: TextFieldProps['label'];
     helperText?: TextFieldProps['helperText'];
     error?: TextFieldProps['error'];
     disabled?: TextFieldProps['disabled'];
 }
 
-export function RadioListGroup(props: RadioListGroupProps) {
+function SimpleRadioFormGroup(props: RadioFormGroupProps) {
     const {
         options = [],
         error: hasError,
@@ -26,10 +27,11 @@ export function RadioListGroup(props: RadioListGroupProps) {
         label,
         helperText,
         disabled,
+        onChange,
     } = props;
-    const [selectedOption, setSelectedOption] = useState<JSONOption>();
+    const selectedOption = useMemo(() => options.find(option => option.value === value), [options, value]);
 
-    const renderOption = (option: JSONOption) => {
+    const renderOption = (option: Option) => {
         const id = uuid();
         const disabled = props.disabled || option.disabled;
         const checked = isEqual(value, option?.value);
@@ -45,10 +47,7 @@ export function RadioListGroup(props: RadioListGroupProps) {
                 helperText={option?.helperText}
                 onChange={(event, checked) => {
                     if (checked) {
-                        setSelectedOption(option);
-                        props.onChange?.(event, option.value);
-                    } else {
-                        setSelectedOption(undefined);
+                        onChange?.(event, option.value);
                     }
                 }}
             />
@@ -71,4 +70,21 @@ export function RadioListGroup(props: RadioListGroupProps) {
     );
 }
 
-export default RadioListGroup;
+export function RadioFormGroup({ onChange, options, value, ...props }: RadioFormGroupProps) {
+  const jsonOptions = useMemo(() => toJSONOptions(options), [options]);
+  const jsonValue = useMemo(() => JSON.stringify(value), [value]);
+
+  return (
+    <SimpleRadioFormGroup
+      {...props}
+      options={jsonOptions}
+      value={jsonValue}
+      onChange={(event, value) => {
+        const newValue = JSON.parse(value);
+        onChange?.(event, newValue);
+      }}
+    />
+  )
+}
+
+export default RadioFormGroup;
