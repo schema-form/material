@@ -99,7 +99,7 @@ function SimpleAutocompleteField(props: AutocompleteFieldProps) {
 
   return (
     <Autocomplete
-      disabled={props.disabled}
+      {...props}
       multiple={multiple}
       options={filteredOptions}
       noOptionsText="No options"
@@ -131,7 +131,6 @@ export function AutocompleteField({ value, onChange, options, ...props }: Autoco
       value={jsonValues}
       onChange={(event, value, reason, details) => {
         if (value instanceof Array) {
-          console.log('!value', value);
           const newValue = value.map((x) => JSON.parse(x));
           onChange?.(event, newValue, reason, details);
         } else {

@@ -87,14 +87,18 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
           </ListItemIcon>
           <ListItemText
             primary={primaryText}
-            secondary={secondaryText}
+            secondary={isGroupOption ? secondaryText : null}
           />
         </ListItemButton>
       </ListItem>
     );
 
     return isGroupOption ? listItem : (
-      <FormCard isControl={true} error={hasError}>
+      <FormCard
+        isControl={true}
+        error={hasError}
+        helperText={helperText}
+      >
         {listItem}
       </FormCard>
     );
