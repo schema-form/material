@@ -6,7 +6,7 @@ import {SelectField, SelectFieldProps} from "../components/SelectField";
 
 export function mapSelectFieldProps(props: WidgetProps<any, any, SchemaFormContext>): SelectFieldProps {
     const controlProps = mapControlProps(props);
-    const options = mapOptions(props?.options?.enumOptions);
+    const options = mapOptions(props);
 
     return {
         ...controlProps,

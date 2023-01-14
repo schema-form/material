@@ -8,7 +8,7 @@ import {mapOptions} from "../utils/mapOptions";
 import {Option} from "../types/Option";
 
 function mapSliderMarks(props: WidgetProps<any, any, SchemaFormContext>): SliderProps['marks'] {
-  const options = mapOptions(props?.options?.enumOptions);
+  const options = mapOptions(props);
 
   const toMark = ({ value, label }: Option) => {
     return ({

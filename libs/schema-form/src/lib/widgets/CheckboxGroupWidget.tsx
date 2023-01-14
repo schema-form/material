@@ -6,7 +6,7 @@ import {mapOptions} from "../utils/mapOptions";
 
 export function mapCheckboxFormGroupProps(props: WidgetProps<any, any, SchemaFormContext>): CheckboxFormGroupProps {
     const controlProps = mapControlProps(props);
-    const options = mapOptions(props?.options?.enumOptions);
+    const options = mapOptions(props);
 
     return {
         label: controlProps.label,

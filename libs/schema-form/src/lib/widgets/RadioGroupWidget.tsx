@@ -6,7 +6,7 @@ import {mapOptions} from "../utils/mapOptions";
 
 export function mapRadioFormGroupProps(props: WidgetProps<any, any, SchemaFormContext>): RadioFormGroupProps {
     const commonProps = mapControlProps(props);
-    const options = mapOptions(props.options.enumOptions);
+    const options = mapOptions(props);
     return {
         ...commonProps,
         options,

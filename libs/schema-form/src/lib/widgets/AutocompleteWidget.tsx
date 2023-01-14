@@ -7,7 +7,7 @@ import AutocompleteField, {AutocompleteFieldProps} from "../components/Autocompl
 
 export function mapAutocompleteFieldProps(props: WidgetProps<any, any, SchemaFormContext>): AutocompleteFieldProps {
   const controlProps = mapControlProps(props);
-  const options = mapOptions(props?.options?.enumOptions);
+  const options = mapOptions(props);
 
   return {
     ...controlProps,

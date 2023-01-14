@@ -19,17 +19,21 @@ export type AutocompleteFieldProps = Omit<TypedAutocompleteProps, 'renderInput'>
 
 const findOption = (value: any, options: Option[]) => options?.find(option => option?.value === value);
 
+const filterOptions = (options: Option[], values: string[], multiple = false) => multiple
+  ? options?.filter((option: Option) => !values?.includes?.(option?.value))
+  : options;
+
 function SimpleAutocompleteField(props: AutocompleteFieldProps) {
   const { value, multiple, options, onChange } = props;
+  const filteredOptions = useMemo(() => filterOptions(options, value, multiple), [multiple, options, value]);
 
-  const renderOption: AutocompleteFieldProps['renderOption'] = (props, option) => {
-    console.log('option:', props, option);
+  const renderOption: AutocompleteFieldProps['renderOption'] = (props, option: Option) => {
     const selected = value instanceof Array
       ? value.includes(option.value)
       : (value === option.value);
     const hasHelper = Boolean(option?.helperText);
 
-    const helper = hasHelper && (
+    const helper = hasHelper ? (
       <Typography
         component="p"
         variant="caption"
@@ -37,14 +41,15 @@ function SimpleAutocompleteField(props: AutocompleteFieldProps) {
       >
         {option?.helperText}
       </Typography>
-    );
+    ) : null;
 
     return (
       <MenuItem
         dense={false}
+        {...props}
         disabled={option?.disabled}
         selected={selected}
-        {...props}
+        value={option?.value}
       >
         <ListItemText
           primary={option?.label}
@@ -54,95 +59,56 @@ function SimpleAutocompleteField(props: AutocompleteFieldProps) {
     )
   }
 
-  const renderInput: AutocompleteFieldProps['renderInput'] = (params) => {
-    return (
-      <TextField
-        InputLabelProps={params?.InputLabelProps}
-        InputProps={{
-          ...params?.InputProps,
-          endAdornment: (
-            <React.Fragment>
-              {params?.InputProps?.endAdornment}
-            </React.Fragment>
-          ),
-          startAdornment: (
-            <React.Fragment>
-              {params?.InputProps?.startAdornment}
-            </React.Fragment>
-          )
-        }}
-      />
-    )
-  }
+  const renderInput: AutocompleteFieldProps['renderInput'] = (params) => (
+    <TextField
+      {...params}
+      label={props?.label}
+      error={props?.error}
+      helperText={props?.helperText}
+    />
+  );
 
-  const renderTags: AutocompleteFieldProps['renderTags'] = (tagValues, getTagProps, ownerState) => {
-    const selectedOptions = tagValues.map(value => findOption(value, options));
-    return selectedOptions?.map((option, index) => {
-      const { value, disabled } = option || {};
+  const renderTags: AutocompleteFieldProps['renderTags'] = (selectedValues, getTagProps, ownerState) => {
+    const selectedOptions = selectedValues.map(x => findOption(x, options));
+    const renderTag = (option: Option | undefined, index: number) => {
       const tagProps = getTagProps({ index });
-      const label = option?.label || option?.value;
+      const label = option?.label || JSON.stringify(option?.value);
       return (
         <Chip
           {...tagProps}
-          key={value}
           label={label}
-          disabled={props?.disabled || disabled}
+          disabled={props?.disabled || option?.disabled}
         />
       )
-    })
+    };
+    return selectedOptions?.map(renderTag);
   }
 
-  const handleChange: AutocompleteFieldProps['onChange'] = (event, options, reason, details) => {
-    let newValue;
+  const handleMultipleChange: AutocompleteFieldProps['onChange'] = (event, value, reason, details) => {
+    const newValue = value instanceof Array
+      ? value.map((option: Option) => option?.value ?? option)
+      : []
 
-    const removeValue = (optionValue: any) => value instanceof Array
-      ? value.filter(x => x !== optionValue)
-      : undefined;
+    onChange?.(event, newValue, reason, details);
+  }
 
-    switch (reason) {
-      case 'selectOption': {
-        const selectedOption = details?.option;
-        const selectedOptionValue = selectedOption?.value as string;
-
-        if (multiple) {
-          const needRemove = value instanceof Array
-            ? value?.includes(selectedOptionValue)
-            : (value === selectedOptionValue);
-
-          if (needRemove) {
-            newValue = removeValue(selectedOptionValue);
-            break;
-          }
-
-          newValue = value instanceof Array
-            ? [...value, selectedOptionValue]
-            : [selectedOptionValue];
-        } else {
-          newValue = selectedOptionValue;
-        }
-        break;
-      }
-      case 'removeOption': {
-        const selectedOptionValue = details?.option as any;
-        newValue = removeValue(selectedOptionValue);
-        break;
-      }
-    }
-
+  const handleSingleChange: AutocompleteFieldProps['onChange'] = (event, option, reason, details) => {
+    const newValue = option?.value ?? option;
     onChange?.(event, newValue, reason, details);
   }
 
   return (
     <Autocomplete
+      disabled={props.disabled}
       multiple={multiple}
-      options={options}
+      options={filteredOptions}
       noOptionsText="No options"
-      getOptionLabel={option => (option as Option)?.label ?? 'Unknown'}
-      getOptionDisabled={option => props?.disabled || option?.disabled}
+      getOptionLabel={(option: string | Option) => (option as Option)?.label ?? 'Unknown'}
+      getOptionDisabled={(option: Option) => Boolean(option?.disabled)}
       renderOption={renderOption}
       renderInput={renderInput}
       renderTags={renderTags}
-      onChange={handleChange}
+      onChange={multiple ? handleMultipleChange : handleSingleChange}
       value={value}
     />
   );
@@ -165,6 +131,7 @@ export function AutocompleteField({ value, onChange, options, ...props }: Autoco
       value={jsonValues}
       onChange={(event, value, reason, details) => {
         if (value instanceof Array) {
+          console.log('!value', value);
           const newValue = value.map((x) => JSON.parse(x));
           onChange?.(event, newValue, reason, details);
         } else {
