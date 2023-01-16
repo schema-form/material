@@ -7,7 +7,7 @@ import MonacoEditorThemeProvider from "./components/MonacoEditor/MonacoEditorThe
 import ErrorBoundary from "./components/ErrorBoundary";
 import { StrictRJSFSchema } from "@rjsf/utils";
 // import localize from 'ajv-i18n/localize/en';
-import mapSchemaErrors from "./utils/mapSchemaErrors";
+import createTransformErrors from "./utils/createTransformErrors";
 
 export type SchemaFormContext = {
     FormControlProps?: {
@@ -53,7 +53,7 @@ export function SchemaForm(props: SchemaFormProps) {
                     showErrorList={ false }
                     liveValidate={true}
                     validator={ validator }
-                    transformErrors={(errors) => mapSchemaErrors(errors, props.schema)}
+                    transformErrors={(errors) => createTransformErrors(errors, props.schema)}
                     {...props}
                     formContext={{
                         ...FORM_CONTEXT,

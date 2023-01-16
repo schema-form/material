@@ -87,7 +87,7 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
           </ListItemIcon>
           <ListItemText
             primary={primaryText}
-            secondary={isGroupOption ? secondaryText : null}
+            secondary={secondaryText}
           />
         </ListItemButton>
       </ListItem>
@@ -97,7 +97,6 @@ export function CheckboxListItem(props: CheckboxListItemProps) {
       <FormCard
         isControl={true}
         error={hasError}
-        helperText={helperText}
       >
         {listItem}
       </FormCard>

@@ -19,12 +19,6 @@ const Root = styled('div')(({ theme }) => ({
 export function FieldTemplateHeader(props: FieldTemplateProps<any, any, SchemaFormContext>) {
     const { rawErrors, label, hidden, disabled, rawDescription } = props;
     const { displayHeader, displayErrorList } = useConfig();
-    const error = displayErrorList
-        ? rawErrors?.[0]
-        : null;
-    const hasError = displayErrorList
-        ? Boolean(rawErrors?.length)
-        : false;
     const hasLabel = Boolean(label);
     const hasDescription = Boolean(rawDescription);
     const needDisplayHeader = displayHeader && (hasLabel || hasDescription);
@@ -33,9 +27,9 @@ export function FieldTemplateHeader(props: FieldTemplateProps<any, any, SchemaFo
         <FormHeader
             hidden={hidden}
             label={label}
-            helperText={error ?? rawDescription}
-            error={hasError}
+            helperText={rawDescription}
             disabled={disabled}
+            errorMessages={displayErrorList ? rawErrors : undefined}
         />
     ) : null;
 }
@@ -60,17 +54,11 @@ export function FieldTemplate(props: FieldTemplateProps<any, any, SchemaFormCont
     const header = isObjectSchema
         ? FieldTemplateHeader(props)
         : null;
-    const hasHeaderWithError = Boolean(header);
-    const needDisplayErrorList = !hasHeaderWithError && isObjectSchema;
-    const errorList = needDisplayErrorList
-        ? FieldErrorList(props)
-        : null;
 
     return (
         <ErrorBoundary>
             <Root className={classNames}>
                 {header}
-                {errorList}
                 {children}
             </Root>
         </ErrorBoundary>

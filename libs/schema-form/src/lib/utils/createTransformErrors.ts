@@ -12,7 +12,7 @@ const findSchemaMessage = (schema: any, error: RJSFValidationError) => {
     : undefined;
 };
 
-export function mapSchemaErrors(errors: RJSFValidationError[], rootSchema: FormProps['schema']) {
+function createTransformErrors(errors: RJSFValidationError[], rootSchema: FormProps['schema']) {
   return errors?.map((error) => {
     try {
       const schemaRef = error.schemaPath?.split('/').slice(0, -1).join('/');
@@ -29,4 +29,4 @@ export function mapSchemaErrors(errors: RJSFValidationError[], rootSchema: FormP
   });
 }
 
-export default mapSchemaErrors;
+export default createTransformErrors;

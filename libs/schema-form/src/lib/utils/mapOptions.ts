@@ -17,6 +17,6 @@ const mapEnumOptionToOption = (option: EnumOptionsType): Option => {
 }
 
 export function mapOptions(props: WidgetProps<any, any, SchemaFormContext>): Option[] {
-    const options = props?.options?.enumOptions || optionsList(props.schema?.items);
+    const options = props?.options?.enumOptions || optionsList(props.schema?.items || []);
     return options?.map(mapEnumOptionToOption) || [];
 }

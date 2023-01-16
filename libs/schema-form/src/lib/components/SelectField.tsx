@@ -116,6 +116,7 @@ function SimpleSelectField(props: SelectFieldProps) {
       error={error}
       disabled={disabled}
       data-testid="SelectField"
+      fullWidth={selectProps?.fullWidth}
     >
       {inputLabel}
       {select}

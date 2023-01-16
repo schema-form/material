@@ -108,7 +108,7 @@ const DEFAULT_MULTIPLE_HELPER_TEXT = 'Файлы не выбраны';
 
 function SingleUpload(props: UploadProps) {
   const { error, ...inputProps } = props;
-  const value = props.value as string | undefined;
+  const value = props.value as string | null;
   const id = props.id || uuid();
   const fileName = value
     ? getFileName(value)
@@ -127,7 +127,7 @@ function SingleUpload(props: UploadProps) {
     const file = event.target?.files?.item(0);
     const fileAsDataURL = file
       ? await toDataURL(file)
-      : undefined;
+      : null;
 
     props.onChange?.(fileAsDataURL ? [fileAsDataURL] : []);
     setPending(false);
@@ -253,7 +253,7 @@ function MultipleUpload(props: UploadProps) {
   const [isPending, setPending] = useState(false);
   const id = useMemo(() => props.id || uuid(), [props.id]);
   const {error, ...inputProps} = props;
-  const value = props.value as string[] | undefined;
+  const value = props.value as string[] | [];
   const filesAsDataURLs = value?.filter?.(Boolean);
   const selectedFilesCount = Number(filesAsDataURLs?.length);
   const hasFiles = Boolean(selectedFilesCount);

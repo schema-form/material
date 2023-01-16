@@ -37,7 +37,7 @@ export function SchemaEditor(props: SchemaEditorProps) {
     const hasError = Boolean(error);
     const [showTestEditor, setShowTestEditor] = useState(false);
     const [schema, setSchema] = useState(value);
-    const [data, setData] = useState<string | undefined>();
+    const [data, setData] = useState<string | undefined>('');
     const { theme } = useMonacoEditorTheme();
     const schemaId = useMemo(uuid, [schema]);
     const togglePreview = () => setShowTestEditor(!showTestEditor);

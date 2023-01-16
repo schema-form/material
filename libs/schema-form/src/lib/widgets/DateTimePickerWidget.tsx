@@ -23,7 +23,7 @@ export function mapDateTimePickerProps(props: WidgetProps<any, any, SchemaFormCo
             const { value } = event?.target || {};
             const isEmptyString = value === '';
             const newValue = isEmptyString
-                ? undefined
+                ? null
                 : `${value}:00`;
             props?.onChange(newValue);
         }
