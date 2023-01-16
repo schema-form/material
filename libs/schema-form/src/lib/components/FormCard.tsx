@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import ExpandIcon from "./ExpandIcon";
+import AnimatedExpandIcon from "./AnimatedExpandIcon";
 
 export type FormCardProps = PropsWithChildren<{
     variant?: CardProps['variant'];
@@ -118,7 +118,7 @@ export function FormCard(props: FormCardProps) {
     };
 
     const expandIcon = (
-      <ExpandIcon
+      <AnimatedExpandIcon
         color={iconColor}
         isExpanded={isExpanded}
       />

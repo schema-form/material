@@ -1,4 +1,4 @@
-import {Avatar, AvatarProps, useTheme} from "@mui/material";
+import {Avatar, AvatarProps, Badge, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 export type OrderIconProps = {
@@ -9,6 +9,21 @@ export type OrderIconProps = {
 
 export function OrderIcon(props: OrderIconProps) {
     const theme = useTheme();
+
+    return (
+      <Badge
+        variant="standard"
+        color={props?.error ? 'error' : 'primary'}
+        badgeContent={props.order}
+        sx={{
+          '& > .MuiBadge-badge': {
+            position: 'static',
+            transform: 'none'
+          }
+        }}
+      />
+    );
+
     return (
         <Avatar
             variant={props.variant}

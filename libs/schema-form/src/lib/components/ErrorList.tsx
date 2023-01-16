@@ -1,7 +1,7 @@
 import React, {ReactNode, useState} from 'react';
 import {Alert, Box, Collapse} from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
-import ExpandIcon from "./ExpandIcon";
+import AnimatedExpandIcon from "./AnimatedExpandIcon";
 import IconButton from "@mui/material/IconButton";
 
 export type ErrorListProps = {
@@ -12,8 +12,7 @@ export type ErrorListProps = {
 
 export function ErrorList(props: ErrorListProps) {
     const { className, errors } = props;
-    const [isExpanded, setExpanded] = useState(true);
-    const errorsCount = Number(errors?.length);
+    const [isExpanded, setExpanded] = useState(false);
     const primaryError = errors?.[0];
     const secondaryErrors = errors?.slice(1);
     const hasSecondaryErrors = Boolean(secondaryErrors?.length);
@@ -37,19 +36,19 @@ export function ErrorList(props: ErrorListProps) {
       </AlertTitle>
     ) : null;
 
-    const toggleButton = hasSecondaryErrors && (
+    const toggleButton = hasSecondaryErrors ? (
       <IconButton
         size="small"
         color="error"
         onClick={toggleExpanded}
         sx={{mt: -.25}}
       >
-        <ExpandIcon
+        <AnimatedExpandIcon
           isExpanded={isExpanded}
           edge="end"
         />
       </IconButton>
-    );
+    ) : null;
 
     return (
       <Alert

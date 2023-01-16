@@ -20,7 +20,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
     const { key, index, children, className } = props;
     const config = useConfig();
     const orderNumber = index + 1;
-    const { schema } = children?.props || {};
+    const { schema, formData } = children?.props || {};
     const { __errors } = children?.props?.errorSchema || {};
     const error = __errors?.[0];
     const hasError = Boolean(error);
