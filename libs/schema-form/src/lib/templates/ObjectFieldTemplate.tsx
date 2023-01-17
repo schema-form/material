@@ -53,7 +53,8 @@ export function ObjectFieldTemplate(props: ObjectFieldTemplateProps<any, any, Sc
     return (
         <ConfigProvider value={{
             ...config,
-            displayHeader: true
+            displayHeader: true,
+            props
         }}>
             <Root className="object-field">
                 {propertyList}

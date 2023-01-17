@@ -4,6 +4,7 @@ export type Config = {
     displayHeader?: boolean;
     displayErrorList?: boolean;
     isStepper?: boolean;
+    props?: any;
 }
 
 const ConfigContext = createContext<Config>({

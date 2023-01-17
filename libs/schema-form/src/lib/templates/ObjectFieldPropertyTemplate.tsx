@@ -11,12 +11,6 @@ const ListItem = styled('li')(({ theme }) => ({
 
 export function ObjectFieldPropertyTemplate(property: ObjectFieldTemplatePropertyType) {
     const { name, content } = property || {};
-    const { onDropPropertyClick, schema } = content?.props || {};
-    const { __additional_property: isAdditional } = schema || {};
-
-    const onRemove = isAdditional
-        ? onDropPropertyClick(property.name)
-        : undefined;
 
     return (
         <ListItem
@@ -24,7 +18,6 @@ export function ObjectFieldPropertyTemplate(property: ObjectFieldTemplatePropert
             className="object-property"
         >
             <FormControlReorder
-                onRemove={onRemove}
                 control={content}
                 size="medium"
                 variant="outlined"

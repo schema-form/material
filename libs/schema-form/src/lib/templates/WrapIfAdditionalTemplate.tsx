@@ -1,78 +1,72 @@
-import {CSSProperties} from "react";
-import FormControl from "@mui/material/FormControl";
+import React from "react";
 import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import Input from "@mui/material/OutlinedInput";
 import {
     ADDITIONAL_PROPERTY_FLAG,
     WrapIfAdditionalTemplateProps,
 } from "@rjsf/utils";
+import FormControlReorder from "../components/FormControlReorder";
+import {SchemaForm} from "../SchemaForm";
+import {useConfig} from "../providers/ConfigProvider";
 
-const WrapIfAdditionalTemplate = ({
-    children,
-    classNames,
-    disabled,
-    id,
-    label,
-    onDropPropertyClick,
-    onKeyChange,
-    readonly,
-    required,
-    schema,
-    uiSchema,
-    registry,
-}: WrapIfAdditionalTemplateProps) => {
-    const { RemoveButton } = registry.templates.ButtonTemplates;
-    const keyLabel = `${label} Key`; // i18n ?
-    const additional = ADDITIONAL_PROPERTY_FLAG in schema;
-    const btnStyle: CSSProperties = {
-        flex: 1,
-        paddingLeft: 6,
-        paddingRight: 6,
-        fontWeight: "bold",
-    };
+const WrapIfAdditionalTemplate = (props: WrapIfAdditionalTemplateProps) => {
+    const {
+      children,
+      classNames,
+      id,
+      label,
+      onDropPropertyClick,
+      onKeyChange,
+      readonly,
+      schema,
+    } = props;
+    const isAdditional = ADDITIONAL_PROPERTY_FLAG in schema;
+    const config = useConfig();
+    const parentSchema = config?.props?.schema || {};
+    const propertyNamesSchema = parentSchema?.propertyNames || {};
 
-    if (!additional) {
+    if (!isAdditional) {
         return <div className={classNames}>{children}</div>;
     }
 
-    const handleBlur = ({ target }: React.FocusEvent<HTMLInputElement>) =>
-        onKeyChange(target.value);
+    const keyEditor = (
+      <SchemaForm
+        liveValidate={true}
+        schema={{
+          minLength: 1,
+          title: 'Key',
+          ...propertyNamesSchema,
+          type: 'string',
+        }}
+        formData={label}
+        disabled={readonly}
+        onBlur={(id, newKeyLabel) => onKeyChange(newKeyLabel)}
+      />
+    );
+
+    const propertyControls = (
+      <Grid
+        container
+        key={`${id}-key`}
+        alignItems="start"
+        spacing={2}
+        className={classNames}
+      >
+        <Grid item xs>
+          {keyEditor}
+        </Grid>
+        <Grid item={true} xs>
+          {children}
+        </Grid>
+      </Grid>
+    );
 
     return (
-        <Grid
-            container
-            key={`${id}-key`}
-            alignItems="center"
-            spacing={2}
-            className={classNames}
-        >
-            <Grid item xs>
-                <FormControl fullWidth={true} required={required}>
-                    <InputLabel>{keyLabel}</InputLabel>
-                    <Input
-                        defaultValue={label}
-                        disabled={disabled || readonly}
-                        id={`${id}-key`}
-                        name={`${id}-key`}
-                        onBlur={!readonly ? handleBlur : undefined}
-                        type="text"
-                    />
-                </FormControl>
-            </Grid>
-            <Grid item={true} xs>
-                {children}
-            </Grid>
-            <Grid item={true}>
-                <RemoveButton
-                    iconType="default"
-                    style={btnStyle}
-                    disabled={disabled || readonly}
-                    onClick={onDropPropertyClick(label)}
-                    uiSchema={uiSchema}
-                />
-            </Grid>
-        </Grid>
+      <FormControlReorder
+        control={propertyControls}
+        size="medium"
+        variant="outlined"
+        onRemove={() => onDropPropertyClick?.(label)}
+      />
     );
 };
 
