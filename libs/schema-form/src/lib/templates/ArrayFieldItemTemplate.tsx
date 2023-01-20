@@ -22,8 +22,8 @@ export function ArrayFieldGroupItemTemplate(props: ArrayFieldTemplateItemType) {
     const orderNumber = index + 1;
     const { schema, formData } = children?.props || {};
     const { __errors } = children?.props?.errorSchema || {};
-    const error = __errors?.[0];
-    const hasError = Boolean(error);
+    const rawError = __errors?.[0];
+    const hasError = Boolean(rawError);
     const onRemove = props.hasRemove
         ? props.onDropIndexClick(index)
         : undefined;
@@ -75,26 +75,26 @@ export function ArrayFieldGroupItemTemplate(props: ArrayFieldTemplateItemType) {
     )
 
     return (
-        <FormCard
-            key={key}
-            className={className}
-            error={hasError}
-            bordered={false}
-            icon={orderIcon}
-            title={schema?.title}
-            helperText={error ?? schema?.description}
-            permanentActions={headerActions}
-        >
-            <ConfigProvider value={{
-                ...config,
-                canDisplayHeader: false,
-                displayErrorList: false
-            }}>
-                <CardContent>
-                    {children}
-                </CardContent>
-            </ConfigProvider>
-        </FormCard>
+      <FormCard
+        key={key}
+        className={className}
+        error={hasError}
+        bordered={false}
+        icon={orderIcon}
+        title={schema?.title}
+        helperText={rawError ?? schema?.description}
+        permanentActions={headerActions}
+      >
+        <ConfigProvider value={{
+          ...config,
+          canDisplayHeader: false,
+          displayErrorList: false
+        }}>
+          <CardContent>
+            {children}
+          </CardContent>
+        </ConfigProvider>
+      </FormCard>
     );
 }
 

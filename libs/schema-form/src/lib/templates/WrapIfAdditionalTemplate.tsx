@@ -49,7 +49,6 @@ const WrapIfAdditionalTemplate = (props: WrapIfAdditionalTemplateProps) => {
         key={`${id}-key`}
         alignItems="start"
         spacing={2}
-        className={classNames}
       >
         <Grid item xs>
           {keyEditor}
@@ -62,10 +61,11 @@ const WrapIfAdditionalTemplate = (props: WrapIfAdditionalTemplateProps) => {
 
     return (
       <FormControlReorder
+        className={classNames}
         control={propertyControls}
         size="medium"
         variant="outlined"
-        onRemove={() => onDropPropertyClick?.(label)}
+        onRemove={onDropPropertyClick?.(label)}
       />
     );
 };
