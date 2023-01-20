@@ -27,12 +27,11 @@ export function ObjectFieldTemplate(props: ObjectFieldTemplateProps<any, any, Sc
     const config = useConfig();
     const propertyLimitExceeded = properties.length >= (schema.maxProperties || Number.MAX_SAFE_INTEGER);
     const hasAddButton = schema.additionalProperties && !propertyLimitExceeded;
-    const items = properties?.map(ObjectFieldPropertyTemplate);
-    const hasItems = Boolean(items?.length);
+    const hasProperties = Boolean(properties?.length);
 
-    const propertyList = hasItems ? (
+    const propertyList = hasProperties ? (
         <PropertyList className="object-field__properties">
-            {items}
+            {properties?.map(ObjectFieldPropertyTemplate)}
         </PropertyList>
     ) : null;
 
@@ -53,7 +52,7 @@ export function ObjectFieldTemplate(props: ObjectFieldTemplateProps<any, any, Sc
     return (
         <ConfigProvider value={{
             ...config,
-            displayHeader: true,
+            canDisplayHeader: true,
             props
         }}>
             <Root className="object-field">

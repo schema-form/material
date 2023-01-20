@@ -1,14 +1,14 @@
 import {createContext, useContext} from 'react';
 
 export type Config = {
-    displayHeader?: boolean;
+    canDisplayHeader?: boolean;
     displayErrorList?: boolean;
     isStepper?: boolean;
     props?: any;
 }
 
 const ConfigContext = createContext<Config>({
-    displayHeader: true,
+    canDisplayHeader: true,
     displayErrorList: true,
     isStepper: false
 });

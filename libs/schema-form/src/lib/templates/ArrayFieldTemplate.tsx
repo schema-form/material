@@ -51,7 +51,7 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
     return (
         <ConfigProvider value={{
             ...config,
-            displayHeader: true
+            canDisplayHeader: true
         }}>
             <FormCard
                 className={className}

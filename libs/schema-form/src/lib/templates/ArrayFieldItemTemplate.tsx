@@ -16,7 +16,7 @@ const HeaderActions = styled('div')(({ theme }) => ({
     alignItems: 'center'
 }))
 
-export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
+export function ArrayFieldGroupItemTemplate(props: ArrayFieldTemplateItemType) {
     const { key, index, children, className } = props;
     const config = useConfig();
     const orderNumber = index + 1;
@@ -87,7 +87,7 @@ export function ArrayFieldCardItemTemplate(props: ArrayFieldTemplateItemType) {
         >
             <ConfigProvider value={{
                 ...config,
-                displayHeader: false,
+                canDisplayHeader: false,
                 displayErrorList: false
             }}>
                 <CardContent>
@@ -139,7 +139,7 @@ export function ArrayFieldItemTemplate(props: ArrayFieldTemplateItemType) {
     const isGroupSchema = isGroup(childrenSchema);
 
     return isGroupSchema
-        ? ArrayFieldCardItemTemplate(props)
+        ? ArrayFieldGroupItemTemplate(props)
         : ArrayFieldControlItemTemplate(props);
 }
 
