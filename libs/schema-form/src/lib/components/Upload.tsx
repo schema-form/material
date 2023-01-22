@@ -64,7 +64,15 @@ type UploadItemProps = {
     onRemove?: IconButtonProps['onClick'];
 }
 
-const getFileName = (fileAsDataURL: string) => fileAsDataURL?.match(/name=(.+?);/)?.[1] || 'Файл без имени';
+const CLEAR_TEXT = 'Clear';
+const MULTIPLE_CLEAR_TEXT = 'Clear';
+const DEFAULT_LABEL = 'Chose file';
+const DEFAULT_MULTIPLE_LABEL = 'Chose files';
+const DEFAULT_HELPER_TEXT = 'No file chosen';
+const DEFAULT_MULTIPLE_HELPER_TEXT = 'No files chosen';
+const FILE_WITHOUT_NAME = 'File without a name';
+
+const getFileName = (fileAsDataURL: string) => fileAsDataURL?.match(/name=(.+?);/)?.[1] || FILE_WITHOUT_NAME;
 
 function UploadItem({ fileDataURL, isPending, onRemove }: UploadItemProps) {
     const fileName = getFileName(fileDataURL);
@@ -98,13 +106,6 @@ function UploadItem({ fileDataURL, isPending, onRemove }: UploadItemProps) {
         </ListItem>
     )
 }
-
-const CLEAR_TEXT = 'Отменить выбор';
-const MULTIPLE_CLEAR_TEXT = 'Отменить выбор';
-const DEFAULT_LABEL = 'Выберите файл';
-const DEFAULT_MULTIPLE_LABEL = 'Выберите файлы';
-const DEFAULT_HELPER_TEXT = 'Файл не выбран';
-const DEFAULT_MULTIPLE_HELPER_TEXT = 'Файлы не выбраны';
 
 function SingleUpload(props: UploadProps) {
   const { error, ...inputProps } = props;
@@ -244,8 +245,8 @@ function SingleUpload(props: UploadProps) {
 }
 
 const createSelectedFilesMessage = (filesCount: number) => {
-  const chooseWord = declension('Выбран', 'Выбрано', 'Выбрано', filesCount);
-  const filesWord = declension('файл', 'файлов', 'файла', filesCount);
+  const chooseWord = declension('Chosen', 'Chosen', 'Chosen', filesCount);
+  const filesWord = declension('file', 'files', 'files', filesCount);
   return `${chooseWord} ${filesCount} ${filesWord}`;
 }
 
