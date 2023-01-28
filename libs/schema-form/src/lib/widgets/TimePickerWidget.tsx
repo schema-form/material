@@ -1,35 +1,49 @@
 import React from 'react';
 import {WidgetProps} from '@rjsf/utils';
+import {DesktopTimePicker, DesktopTimePickerProps, LocalizationProvider} from "@mui/x-date-pickers";
+import dayjs, {Dayjs} from "dayjs";
+import {TextField} from "@mui/material";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {mapTextFieldProps} from "./TextFieldWidget";
-import {TextField, TextFieldProps} from "@mui/material";
-import {SchemaFormContext} from "../SchemaForm";
 import {mapControlProps} from "../utils/propsMaps/mapControlProps";
+import {SchemaFormContext} from "../SchemaForm";
 
-export function mapTimePickerProps(props: WidgetProps<any, any, SchemaFormContext>): TextFieldProps {
-    const commonProps = mapControlProps(props);
-    const textFieldProps = mapTextFieldProps(props);
-    const widgetProps = {
-      ...commonProps,
-      ...textFieldProps,
-    };
+const TIME_FORMAT = 'HH:mm:ssZ';
 
-    return {
-        ...widgetProps,
-        type: 'time',
-        InputLabelProps: {
-          ...widgetProps.InputLabelProps,
-          shrink: true,
-        },
-        onChange: (event) => {
-            const originValue = event.target.value;
-            const isValidTime = originValue.match(/[0-9]{2}:[0-9]{2}/);
-            const newValue = isValidTime ? `${originValue}:00` : originValue;
-            props.onChange?.(newValue);
-        }
+export function mapTimePickerProps(props: WidgetProps<any, any, SchemaFormContext>): DesktopTimePickerProps<Dayjs, Dayjs> {
+  const commonProps = mapControlProps(props);
+  const { value: _, onChange, ...textFieldProps } = mapTextFieldProps(props);
+  const timePickerValue = props?.value ? dayjs(props?.value, TIME_FORMAT) : null;
+
+  return {
+    ...commonProps,
+    value: timePickerValue,
+    // inputFormat: DATE_INPUT_FORMAT,
+    renderInput: (params) => (
+      <TextField
+        {...textFieldProps}
+        {...params}
+        error={textFieldProps?.error}
+        helperText={commonProps?.helperText}
+      />
+    ),
+    onChange: (dateValue, inputValue) => {
+      try {
+        const newValue = dateValue?.format(TIME_FORMAT) ?? null;
+        props.onChange(newValue);
+      } catch (e) {
+        props.onChange('Invalid Date');
+      }
     }
+  }
 }
 
 export default function TimePickerWidget(props: WidgetProps<any, any, SchemaFormContext>) {
-    const timePickerProps = mapTimePickerProps(props);
-    return <TextField {...timePickerProps} data-testid="TimePickerWidget" />
+  const widgetProps = mapTimePickerProps(props);
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DesktopTimePicker {...widgetProps} />
+    </LocalizationProvider>
+  );
 }

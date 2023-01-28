@@ -8,18 +8,16 @@ import dayjs, {Dayjs} from "dayjs";
 import {TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
-const DATE_INPUT_FORMAT = 'YYYY-MM-DD';
-const DATE_OUTPUT_FORMAT = 'YYYY-MM-DD';
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContext>): DesktopDatePickerProps<Dayjs, Dayjs> {
   const commonProps = mapControlProps(props);
   const { value: _, onChange, ...textFieldProps } = mapTextFieldProps(props);
-  const datePickerValue = props?.value ? dayjs(props?.value) : null;
+  const datePickerValue = props?.value ? dayjs(props?.value, DATE_FORMAT) : null;
 
   return {
     ...commonProps,
     value: datePickerValue,
-    // inputFormat: DATE_INPUT_FORMAT,
     renderInput: (params) => (
       <TextField
         {...textFieldProps}
@@ -30,7 +28,7 @@ export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContex
     ),
     onChange: (dateValue, inputValue) => {
       try {
-        const newValue = dateValue?.format(DATE_OUTPUT_FORMAT) ?? null;
+        const newValue = dateValue?.format(DATE_FORMAT) ?? null;
         props.onChange(newValue);
       } catch (e) {
         props.onChange('Invalid Date');
