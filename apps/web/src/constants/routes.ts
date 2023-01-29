@@ -13,7 +13,7 @@ export type AppRouteProps = {
     children?: AppRoutes;
 }
 
-export const DEFAULT_APP_ROUTE_PATH = '/keywords/$ref/properties';
+export const DEFAULT_APP_ROUTE_PATH = '/keywords/$ref';
 
 export const gettingStartedRoutes: AppRouteProps = {
     title: 'Getting started',

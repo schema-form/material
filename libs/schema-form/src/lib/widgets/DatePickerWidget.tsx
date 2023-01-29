@@ -3,14 +3,14 @@ import {WidgetProps} from '@rjsf/utils';
 import {mapTextFieldProps} from "./TextFieldWidget";
 import {mapControlProps} from "../utils/propsMaps/mapControlProps";
 import {SchemaFormContext} from "../SchemaForm";
-import {DesktopDatePicker, DesktopDatePickerProps, LocalizationProvider} from "@mui/x-date-pickers";
+import {DatePicker, DatePickerProps, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import {TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
-export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContext>): DesktopDatePickerProps<Dayjs, Dayjs> {
+export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContext>): DatePickerProps<Dayjs, Dayjs> {
   const commonProps = mapControlProps(props);
   const { value: _, onChange, ...textFieldProps } = mapTextFieldProps(props);
   const datePickerValue = props?.value ? dayjs(props?.value, DATE_FORMAT) : null;
@@ -22,6 +22,7 @@ export function mapDatePickerProps(props: WidgetProps<any, any, SchemaFormContex
       <TextField
         {...textFieldProps}
         {...params}
+        type="text"
         error={textFieldProps?.error}
         helperText={commonProps?.helperText}
       />
@@ -42,7 +43,7 @@ export default function DatePickerWidget(props: WidgetProps<any, any, SchemaForm
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DesktopDatePicker {...widgetProps} />
+      <DatePicker {...widgetProps} />
     </LocalizationProvider>
   );
 }
