@@ -231,7 +231,8 @@ export function FormCard(props: FormCardProps) {
     return (
         <FormControl
             error={hasError}
-            disabled={props.disabled}
+            disabled={props?.disabled}
+            fullWidth
         >
             <OutlinedCard
                 bordered={bordered}

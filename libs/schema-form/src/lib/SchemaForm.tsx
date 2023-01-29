@@ -5,7 +5,7 @@ import WIDGETS from "./widgets";
 import TEMPLATES from "./templates";
 import MonacoEditorThemeProvider from "./components/MonacoEditor/MonacoEditorThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { StrictRJSFSchema } from "@rjsf/utils";
+import {FormContextType, RJSFSchema, StrictRJSFSchema, UiSchema as OriginalUiSchema} from "@rjsf/utils";
 // import localize from 'ajv-i18n/localize/en';
 import createTransformErrors from "./utils/createTransformErrors";
 
@@ -22,8 +22,13 @@ export type SchemaFormContext = {
     }
 }
 
-export type SchemaFormProps<T = any, S extends StrictRJSFSchema = any, F extends SchemaFormContext = any> = Omit<FormProps<T, S, F>, 'validator'> & {
+export type UiSchema<T = any, S extends StrictRJSFSchema = RJSFSchema, F extends FormContextType = any> = OriginalUiSchema<T, S, F> & {
+  'ui:gridColumn'?: string;
+}
+
+export type SchemaFormProps<T = any, S extends StrictRJSFSchema = any, F extends SchemaFormContext = any> = Omit<FormProps<T, S, F>, 'validator' | 'uiSchema'> & {
     validator?: FormProps['validator'];
+    uiSchema?: UiSchema<T, S, F>;
 };
 
 export const FORM_CONTEXT: SchemaFormContext = {

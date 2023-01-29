@@ -5,12 +5,20 @@ import {JSONSchema7} from "json-schema";
 import {ConfigProvider, useConfig} from "../providers/ConfigProvider";
 import FormCard from "../components/FormCard";
 import AddIcon from "@mui/icons-material/Add";
+import {UiSchema} from "../SchemaForm";
 
-const ItemsList = styled('ul')(({ theme }) => ({
+const ItemsGrid = styled('ul')(({ theme }) => ({
     display: 'grid',
+    gridTemplateColumns: 'repeat(12,1fr)',
     listStyle: 'none',
     padding: 0,
     margin: 0,
+}))
+
+const ItemsGridItem = styled('li')(({ theme }) => ({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
 }))
 
 export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
@@ -38,14 +46,21 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
         </Button>
     );
 
-    const renderItem = (props: ArrayFieldTemplateItemType) => (
-        <ArrayFieldItemTemplate {...props} />
-    );
+    const renderItem = (props: ArrayFieldTemplateItemType) => {
+      const uiSchema = props?.uiSchema as UiSchema;
+      const gridColumn = uiSchema?.['ui:gridColumn'] ?? '1 / 13';
+
+      return (
+        <ItemsGridItem style={{ gridColumn }}>
+          <ArrayFieldItemTemplate {...props} />
+        </ItemsGridItem>
+      );
+    }
 
     const body = hasItems ? (
-        <ItemsList className="array-items">
+        <ItemsGrid className="array-items">
             {items.map(renderItem)}
-        </ItemsList>
+        </ItemsGrid>
     ) : null;
 
     return (
