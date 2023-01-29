@@ -6,6 +6,8 @@ import {ConfigProvider, useConfig} from "../providers/ConfigProvider";
 import FormCard from "../components/FormCard";
 import AddIcon from "@mui/icons-material/Add";
 import {UiSchema} from "../SchemaForm";
+import {isGroup} from "../utils/jsonSchema";
+import {ArrayFieldControlItemTemplate, ArrayFieldGroupItemTemplate} from "./ArrayFieldItemTemplate";
 
 const ItemsGrid = styled('ul')(({ theme }) => ({
     display: 'grid',
@@ -49,10 +51,18 @@ export function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
     const renderItem = (props: ArrayFieldTemplateItemType) => {
       const uiSchema = props?.uiSchema as UiSchema;
       const gridColumn = uiSchema?.['ui:gridColumn'] ?? '1 / 13';
+      const childrenSchema = props?.children?.props?.schema || {};
+      const isGroupSchema = isGroup(childrenSchema);
+      const arrayItemField = isGroupSchema
+        ? ArrayFieldGroupItemTemplate(props)
+        : ArrayFieldControlItemTemplate(props);
 
       return (
-        <ItemsGridItem style={{ gridColumn }}>
-          <ArrayFieldItemTemplate {...props} />
+        <ItemsGridItem
+          style={{ gridColumn }}
+          sx={isGroupSchema ? undefined : { p: 2, '& + &': { pt: 0 } }}
+        >
+          {arrayItemField}
         </ItemsGridItem>
       );
     }

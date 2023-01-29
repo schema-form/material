@@ -98,7 +98,7 @@ export function ArrayFieldGroupItemTemplate(props: ArrayFieldTemplateItemType) {
     );
 }
 
-function ArrayFieldControlItemTemplate(props: ArrayFieldTemplateItemType) {
+export function ArrayFieldControlItemTemplate(props: ArrayFieldTemplateItemType) {
     const { key, index, children, className } = props;
     const { __errors } = children?.props?.errorSchema || {};
     const error = __errors?.[0];
@@ -124,12 +124,6 @@ function ArrayFieldControlItemTemplate(props: ArrayFieldTemplateItemType) {
             variant="outlined"
             color={hasError ? 'error' : undefined}
             control={children}
-            sx={{
-              p: 2,
-              '& + &': {
-                pt: 0
-              }
-            }}
         />
     )
 }
